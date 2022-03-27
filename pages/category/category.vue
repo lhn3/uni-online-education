@@ -1,6 +1,6 @@
 <template>
-	<view class="content">
-		首页
+	<view>
+		菜单
 	</view>
 </template>
 
@@ -8,14 +8,8 @@
 	export default {
 		data() {
 			return {
-				title: 'Hello'
-			}
-		},
-		onLoad() {
-
-		},
-		methods: {
-
+				
+			};
 		}
 	}
 </script>

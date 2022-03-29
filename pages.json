@@ -3,7 +3,30 @@
 		{
 			"path": "pages/index/index",
 			"style": {
-				"navigationBarTitleText": "首页"
+				"app-plus":{
+					"scrollIndicator":"none",//不显示滚动条
+					"bounce":"none",		//关闭回弹
+					"titleNView":{//自定义导航栏App、H5
+						"type":"transparent",//
+						"buttons":[//按钮
+							{
+								"fontSrc":"/static/icon/iconfont.ttf",
+								"text":"\ue689",
+								"fontSize":"26",
+								"float": "right",
+								"background":"rgba(0,0,0,0)"
+							}
+						],
+						"searchInput":{//搜索
+							"align":"center",
+							"backgroundColor":"rgba(255,255,255,0.5)",
+							"disabled":true,
+							"placeholder":"请输入搜索内容",
+							"placeholderColor":"rgba(255,255,255,0.8)",
+							"borderRadius":"30rpx"
+						}
+					}
+				}
 			}
 		}
 		,{
@@ -42,9 +65,11 @@
 		"color":"#8a8a8a",			// 未选中的颜色
 		"selectedColor":"#A2CD5A",	// 选中的颜色
 		"backgroundColor":"#FFFFFF",// 背景色
+		// #ifndef MP
 		"borderStyle":"#6E8B3D",	// 上边框
 		"fontSize":"12px",
 		"height":"48px",
+		// #endif
 		// 小程序中可以将tab栏设置成顶部
 		// "position":"top",
 		"list":[

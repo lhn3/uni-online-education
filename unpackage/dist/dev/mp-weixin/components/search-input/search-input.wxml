@@ -1,0 +1,1 @@
+<view class="header"><input class="search" type="text" placeholder="请输入搜索内容" disabled="{{true}}"/></view>

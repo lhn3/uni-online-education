@@ -73,7 +73,7 @@ export default {
 		.swiper-item{
 			width: 100%;
 			height: 100%;
-			// padding: 0 30px;
+			padding: 0 30rpx;
 			.swiper-img{
 				width: 100%;
 				height: 100%;

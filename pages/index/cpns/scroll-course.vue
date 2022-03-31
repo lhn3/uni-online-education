@@ -1,11 +1,11 @@
 <template>
 	<!-- 带头部的插槽组件 -->
 	<list-box :title="title" :word="word" :all="all">
-		<swiper class="list-swiper" next-margin="20rpx" :style="{'height': `${200*row}rpx`}">
-			<swiper-item class="list-swiper-view" v-for="(col,index) in column" :key="col">
-				<course-item v-for="item in courseData.slice(index*row,(index+1)*row)" :item="item" :key="item.id"></course-item>
-			</swiper-item>
-		</swiper>
+		<scroll-view scroll-x class="list-scroll noScorll">
+			<view class="list-scroll-view" v-for="item in courseData.slice(0,6)" :key="item.id">
+				<course-item :isColumn="true" :item="item"></course-item>
+			</view>
+		</scroll-view>
 	</list-box>
 </template>
 
@@ -26,14 +26,6 @@ export default {
 			type:Boolean,
 			default:false
 		},
-		column:{
-			type:Number,
-			default:2 
-		},
-		row:{
-			type:Number,
-			default:4
-		},
 		courseData:{
 			type:Array,
 			default:()=>[]
@@ -46,12 +38,13 @@ export default {
 </script>
 
 <style lang="scss">
-.list-swiper {
-	// 不换行，一行显示
+.list-scroll {
 	white-space: nowrap;
-	.list-swiper-view {
-		display: inline-block;
+	height: 362rpx;
+	.list-scroll-view {
 		width: 310rpx;
+		overflow: hidden;
+		display: inline-block;
 		padding: 0 10rpx;
 		margin-right: 20rpx;
 		border-radius: 20rpx;

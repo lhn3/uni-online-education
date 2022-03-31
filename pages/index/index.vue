@@ -4,15 +4,30 @@
 		<!-- 小程序才显示的搜索框 -->
 		<search-input></search-input>
 		<!-- #endif -->
+		
 		<!-- 轮播图 -->
 		<my-swiper></my-swiper>
+		
+		<!-- 分类 -->
+		<category-box></category-box>
+		
+		<view class="">
+			<!-- 热门推荐 -->
+			<swiper-course></swiper-course>
+		</view>
 	</view>
 </template>
 
 <script>
 import {getCurrentInstance,ref} from "vue";
 import { onShow,onReady } from '@dcloudio/uni-app';
+import categoryBox from './cpns/category-box.vue'
+import swiperCourse from './cpns/swiper-course.vue'
 export default {
+	components:{
+		'category-box':categoryBox,
+		'swiper-course':swiperCourse
+	},
 	setup(){
 		const { proxy } = getCurrentInstance();
 		// APP端搜索提示内容
@@ -43,8 +58,4 @@ export default {
 </script>
 
 <style lang="scss">
-page{
-	// background-color: #009926;
-}
-
 </style>

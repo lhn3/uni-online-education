@@ -11,9 +11,9 @@
 		<!-- 分类 -->
 		<category-box></category-box>
 		
-		<view class="">
+		<view class="main">
 			<!-- 热门推荐 -->
-			<swiper-course></swiper-course>
+			<swiper-course title="热门推荐" word="HOT" :all="true" :courseData="courseData"></swiper-course>
 		</view>
 	</view>
 </template>
@@ -23,6 +23,7 @@ import {getCurrentInstance,ref} from "vue";
 import { onShow,onReady } from '@dcloudio/uni-app';
 import categoryBox from './cpns/category-box.vue'
 import swiperCourse from './cpns/swiper-course.vue'
+import courseData from '@/mock/courseData.js'
 export default {
 	components:{
 		'category-box':categoryBox,
@@ -44,8 +45,9 @@ export default {
 		// #endif
 		return{
 			// #ifdef APP-PLUS
-			resetSearchInfo
+			resetSearchInfo,
 			// #endif
+			courseData
 		}
 	},
 	onLoad(){
@@ -58,4 +60,7 @@ export default {
 </script>
 
 <style lang="scss">
+	.main{
+		// padding: 0 20rpx;
+	}
 </style>

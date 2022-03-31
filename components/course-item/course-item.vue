@@ -1,17 +1,19 @@
 <template>
-	<view class="course-item">
+	<view class="course-item" :class="{'column':isColumn}">
 		<view class="item-left">
-			<image class="course-img" src="../../static/images/banner1.jpg"></image>
-			<view class="course-time">{{formatCount(123456)}}</view>
+			<image class="course-img" :src="item.mainImage"></image>
+			<view class="course-time">{{item.totalTime}}</view>
 		</view>
 		<view class="item-right">
-			<view class="title">标题标题标题标题标题标题标题标题标题标题标题标题标题标题标题标题标题标题</view>
+			<view class="title">{{item.title}}</view>
 			<view class="info">
-				<view class="nickname iconfont icon-laoshi2">老师</view>
+				<view class="nickname iconfont icon-laoshi2">{{item.nickName}}</view>
 				<view class="count">
-					<view class="money" v-if="false">免费</view>
-					<view class="money iconfont icon-moneybag" v-else>199.9</view>
-					<view class="iconfont icon-video">10人在学</view>
+					<view class="money" v-if="item.isFree">免费</view>
+					<view class="money iconfont icon-moneybag" v-else>
+						{{item.priceDiscount || item.priceOriginal}}
+					</view>
+					<view class="iconfont icon-video">{{item.studyTotal}} 人在学</view>
 				</view>
 			</view>
 		</view>
@@ -21,17 +23,36 @@
 <script>
 import {getCurrentInstance} from "vue";
 import { onShow,onReady } from '@dcloudio/uni-app';
-import {formatCount} from '@/utils/format.js'
 export default {
-	setup(){
-		return{
-			formatCount	
+	props:{
+		isColumn:{
+			type:Boolean,
+			default:false
+		},
+		item:{
+			type:Object,
+			default:()=>({
+				id:1,
+				title:'默认标题',
+				mainImage:'../../static/images/banner1.jpg',
+				totalTime:123456,
+				nickName:'苍老师',
+				isFree:0,
+				priceDiscount:99,
+				priceOriginal:198,
+				studyTotal:100
+			})
 		}
+	},
+	setup(){
 	}
 }
 </script>
 
 <style lang="scss">
+.column{
+	flex-direction: column;
+}
 .course-item {
 	display: flex;
 	// 纵向排列
@@ -69,7 +90,7 @@ export default {
 		padding-top: 5rpx;
 		padding-left: 5rpx;
 		.title {
-			max-width: 290rpx;
+			max-width: 365rpx;
 			height: 70rpx;
 			line-height: 35rpx;
 			font-size: 28rpx;

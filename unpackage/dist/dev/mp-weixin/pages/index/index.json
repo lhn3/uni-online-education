@@ -1,5 +1,6 @@
 {
   "usingComponents": {
-    "search-input": "/components/search-input/search-input"
+    "search-input": "/components/search-input/search-input",
+    "my-swiper": "/components/my-swiper/my-swiper"
   }
 }

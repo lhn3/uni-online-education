@@ -106,6 +106,9 @@ try {
   components = {
     searchInput: function() {
       return __webpack_require__.e(/*! import() | components/search-input/search-input */ "components/search-input/search-input").then(__webpack_require__.bind(null, /*! @/components/search-input/search-input.vue */ 46))
+    },
+    mySwiper: function() {
+      return __webpack_require__.e(/*! import() | components/my-swiper/my-swiper */ "components/my-swiper/my-swiper").then(__webpack_require__.bind(null, /*! @/components/my-swiper/my-swiper.vue */ 56))
     }
   }
 } catch (e) {
@@ -171,6 +174,7 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
 
 
 
+
 var _vue = __webpack_require__(/*! vue */ 8);
 var _uniApp = __webpack_require__(/*! @dcloudio/uni-app */ 19); //
 //
@@ -182,8 +186,8 @@ var _uniApp = __webpack_require__(/*! @dcloudio/uni-app */ 19); //
 //
 //
 //
+//
 var _default = { setup: function setup() {var _getCurrentInstance = (0, _vue.getCurrentInstance)(),proxy = _getCurrentInstance.proxy; // APP端搜索提示内容
-
 
 
 

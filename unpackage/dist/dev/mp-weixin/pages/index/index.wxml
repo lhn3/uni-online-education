@@ -1,1 +1,1 @@
-<view class="content"><search-input vue-id="8dd740cc-1" bind:__l="__l"></search-input><block wx:for="{{100}}" wx:for-item="i" wx:for-index="__i0__" wx:key="*this"><view>{{''+i}}</view></block></view>
+<view class="content"><search-input vue-id="8dd740cc-1" bind:__l="__l"></search-input><my-swiper vue-id="8dd740cc-2" bind:__l="__l"></my-swiper></view>

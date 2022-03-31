@@ -4,7 +4,8 @@
 		<!-- 小程序才显示的搜索框 -->
 		<search-input></search-input>
 		<!-- #endif -->
-		<view v-for="i of 100" :key="i"> {{i}}</view>
+		<!-- 轮播图 -->
+		<my-swiper></my-swiper>
 	</view>
 </template>
 
@@ -43,7 +44,7 @@ export default {
 
 <style lang="scss">
 page{
-	background-color: #009926;
+	// background-color: #009926;
 }
 
 </style>

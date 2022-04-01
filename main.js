@@ -12,10 +12,13 @@ app.$mount()
 
 // #ifdef VUE3
 import { createSSRApp } from 'vue'
+import message from './utils/showMessage.js'
 export function createApp() {
   const app = createSSRApp(App)
+  app.config.globalProperties.$message = message;
   return {
     app
   }
 }
+
 // #endif

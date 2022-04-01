@@ -13,27 +13,28 @@
  */
 /* 颜色变量 */
 /*文本基本颜色*/
-.main {
+.main.data-v-3f833c78 {
   padding-top: 120rpx;
 }
-.main .sw-background {
+.main .sw-background.data-v-3f833c78 {
   position: absolute;
   top: 0;
   -webkit-transform: 0.5s;
           transform: 0.5s;
   height: 520rpx;
   width: 100%;
-  background-image: linear-gradient(red, #fff);
+  background-image: linear-gradient(v-bind(background) 50%, #fff);
 }
-.main .swiper {
+.main .swiper.data-v-3f833c78 {
   width: 750rpx;
   height: 400rpx;
 }
-.main .swiper .swiper-item {
+.main .swiper .swiper-item.data-v-3f833c78 {
   width: 100%;
   height: 100%;
+  padding: 0 30rpx;
 }
-.main .swiper .swiper-item .swiper-img {
+.main .swiper .swiper-item .swiper-img.data-v-3f833c78 {
   width: 100%;
   height: 100%;
   border-radius: 30rpx;

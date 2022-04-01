@@ -1,54 +1,54 @@
 {
-    "pages": [
-        "pages/index/index",
-        "pages/category/category",
-        "pages/article/article",
-        "pages/question/question",
-        "pages/my/my"
-    ],
-    "subPackages": [],
-    "window": {
-        "navigationBarBackgroundColor": "#A2CD5A",
-        "navigationBarTextStyle": "white",
-        "backgroundColor": "#6E8B3D"
-    },
-    "tabBar": {
-        "color": "#8a8a8a",
-        "selectedColor": "#A2CD5A",
-        "backgroundColor": "#FFFFFF",
-        "list": [
-            {
-                "text": "首页",
-                "pagePath": "pages/index/index",
-                "iconPath": "static/tab/index.png",
-                "selectedIconPath": "static/tab/index-active.png"
-            },
-            {
-                "text": "分类",
-                "pagePath": "pages/category/category",
-                "iconPath": "static/tab/category.png",
-                "selectedIconPath": "static/tab/category-active.png"
-            },
-            {
-                "text": "阅读",
-                "pagePath": "pages/article/article",
-                "iconPath": "static/tab/article.png",
-                "selectedIconPath": "static/tab/article-active.png"
-            },
-            {
-                "text": "问答",
-                "pagePath": "pages/question/question",
-                "iconPath": "static/tab/question.png",
-                "selectedIconPath": "static/tab/question-active.png"
-            },
-            {
-                "text": "我的",
-                "pagePath": "pages/my/my",
-                "iconPath": "static/tab/my.png",
-                "selectedIconPath": "static/tab/my-active.png"
-            }
-        ]
-    },
-    "usingComponents": {},
-    "sitemapLocation": "sitemap.json"
+  "pages": [
+    "pages/index/index",
+    "pages/category/category",
+    "pages/article/article",
+    "pages/question/question",
+    "pages/my/my",
+    "pages/public/public"
+  ],
+  "subPackages": [],
+  "window": {
+    "navigationBarBackgroundColor": "#A2CD5A",
+    "navigationBarTextStyle": "white",
+    "backgroundColor": "#6E8B3D"
+  },
+  "tabBar": {
+    "color": "#8a8a8a",
+    "selectedColor": "#A2CD5A",
+    "backgroundColor": "#FFFFFF",
+    "list": [
+      {
+        "text": "首页",
+        "pagePath": "pages/index/index",
+        "iconPath": "static/tab/index.png",
+        "selectedIconPath": "static/tab/index-active.png"
+      },
+      {
+        "text": "分类",
+        "pagePath": "pages/category/category",
+        "iconPath": "static/tab/category.png",
+        "selectedIconPath": "static/tab/category-active.png"
+      },
+      {
+        "text": "阅读",
+        "pagePath": "pages/article/article",
+        "iconPath": "static/tab/article.png",
+        "selectedIconPath": "static/tab/article-active.png"
+      },
+      {
+        "text": "问答",
+        "pagePath": "pages/question/question",
+        "iconPath": "static/tab/question.png",
+        "selectedIconPath": "static/tab/question-active.png"
+      },
+      {
+        "text": "我的",
+        "pagePath": "pages/my/my",
+        "iconPath": "static/tab/my.png",
+        "selectedIconPath": "static/tab/my-active.png"
+      }
+    ]
+  },
+  "usingComponents": {}
 }

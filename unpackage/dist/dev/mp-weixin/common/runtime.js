@@ -105,11 +105,11 @@
 /******/
 /******/
 /******/ 		// mini-css-extract-plugin CSS loading
-/******/ 		var cssChunks = {"components/my-swiper/my-swiper":1,"components/search-input/search-input":1};
+/******/ 		var cssChunks = {"components/my-swiper/my-swiper":1,"components/search-input/search-input":1,"pages/index/cpns/category-box":1,"pages/index/cpns/pay-course":1,"pages/index/cpns/scroll-course":1,"components/course-item/course-item":1,"components/list-box/list-box":1};
 /******/ 		if(installedCssChunks[chunkId]) promises.push(installedCssChunks[chunkId]);
 /******/ 		else if(installedCssChunks[chunkId] !== 0 && cssChunks[chunkId]) {
 /******/ 			promises.push(installedCssChunks[chunkId] = new Promise(function(resolve, reject) {
-/******/ 				var href = "" + ({"components/my-swiper/my-swiper":"components/my-swiper/my-swiper","components/search-input/search-input":"components/search-input/search-input"}[chunkId]||chunkId) + ".wxss";
+/******/ 				var href = "" + ({"components/my-swiper/my-swiper":"components/my-swiper/my-swiper","components/search-input/search-input":"components/search-input/search-input","pages/index/cpns/category-box":"pages/index/cpns/category-box","pages/index/cpns/pay-course":"pages/index/cpns/pay-course","pages/index/cpns/scroll-course":"pages/index/cpns/scroll-course","pages/index/cpns/swiper-course":"pages/index/cpns/swiper-course","components/course-item/course-item":"components/course-item/course-item","components/list-box/list-box":"components/list-box/list-box"}[chunkId]||chunkId) + ".wxss";
 /******/ 				var fullhref = __webpack_require__.p + href;
 /******/ 				var existingLinkTags = document.getElementsByTagName("link");
 /******/ 				for(var i = 0; i < existingLinkTags.length; i++) {

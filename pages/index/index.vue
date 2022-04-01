@@ -16,22 +16,25 @@
 			<swiper-course title="热门推荐" word="HOT" :all="true" :courseData="courseData"></swiper-course>
 			<scroll-course title="近期上新" word="NEW" :all="true" :courseData="courseData"></scroll-course>
 			<swiper-course title="免费精选" word="FREE" :all="true" :courseData="courseData"></swiper-course>
+			<pay-course title="付费精品" word="NICE" :all="true" :courseData="courseData"></pay-course>
 		</view>
 	</view>
 </template>
 
 <script>
 import {getCurrentInstance,ref} from "vue";
-import { onShow,onReady } from '@dcloudio/uni-app';
-import categoryBox from './cpns/category-box.vue'
-import swiperCourse from './cpns/swiper-course.vue'
-import scrollCourse from './cpns/scroll-course.vue'
-import courseData from '@/mock/courseData.js'
+import { onShow,onReady,onNavigationBarButtonTap } from '@dcloudio/uni-app';
+import categoryBox from './cpns/category-box.vue';
+import swiperCourse from './cpns/swiper-course.vue';
+import scrollCourse from './cpns/scroll-course.vue';
+import payCourse from './cpns/pay-course.vue';
+import courseData from '@/mock/courseData.js';
 export default {
 	components:{
 		'category-box':categoryBox,
 		'swiper-course':swiperCourse,
-		'scroll-course':scrollCourse
+		'scroll-course':scrollCourse,
+		'pay-course':payCourse
 	},
 	setup(){
 		const { proxy } = getCurrentInstance();
@@ -46,7 +49,24 @@ export default {
 				webView.setStyle({"titleNView":{"searchInput":{"placeholder":arr[i++]}}})
 			},3000)
 		}
+		// 监听nav按钮点击
+		onNavigationBarButtonTap((event)=>{
+			if(event.index === 0){//扫一扫
+				uni.scanCode({
+					success:(res)=>{
+						proxy.$message.toast('扫描成功','success')
+						uni.navigateTo({
+							url:`/pages/public/public?url=${res.result}`
+						})
+					},
+					fail: () => {
+						proxy.$message.toast('扫描失败','error')
+					}
+				})
+			}
+		})
 		// #endif
+		
 		return{
 			// #ifdef APP-PLUS
 			resetSearchInfo,

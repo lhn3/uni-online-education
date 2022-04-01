@@ -46,18 +46,4 @@ export default {
 </script>
 
 <style lang="scss">
-.list-swiper {
-	// 不换行，一行显示
-	white-space: nowrap;
-	.list-swiper-view {
-		display: inline-block;
-		width: 310rpx;
-		padding: 0 10rpx;
-		margin-right: 20rpx;
-		border-radius: 20rpx;
-		box-shadow: 1px 1px 3px rgba(0,0,0,0.1);
-		background-color: #fff;
-	}
-}
-
 </style>

@@ -53,7 +53,15 @@
 				"navigationBarTitleText": "我的"
 			}
 		}
-	],
+	    ,{
+            "path" : "pages/public/public",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "扫描结果"
+            }
+            
+        }
+    ],
 	"globalStyle": {
 		"navigationBarBackgroundColor": "#A2CD5A",
 		"navigationBarTextStyle": "white",

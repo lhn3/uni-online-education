@@ -13,7 +13,8 @@
  */
 /* 颜色变量 */
 /*文本基本颜色*/
-page {
-  background-color: #009926;
+.main-list.data-v-57280228 {
+  padding: 0 30rpx;
+  box-sizing: border-box;
 }
 

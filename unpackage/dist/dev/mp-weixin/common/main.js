@@ -21,10 +21,12 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.createApp 
 
 
 var _vue = __webpack_require__(/*! vue */ 8);
-var _showMessage = _interopRequireDefault(__webpack_require__(/*! ./utils/showMessage.js */ 13));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}
+var _showMessage = _interopRequireDefault(__webpack_require__(/*! ./utils/showMessage.js */ 13));
+var _request = _interopRequireDefault(__webpack_require__(/*! ./request/request.js */ 14));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}
 function createApp() {
   var app = (0, _vue.createSSRApp)(_App.default);
   app.config.globalProperties.$message = _showMessage.default;
+  app.config.globalProperties.$request = _request.default;
   return {
     app: app };
 

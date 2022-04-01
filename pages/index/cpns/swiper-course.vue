@@ -1,8 +1,8 @@
 <template>
 	<!-- 带头部的插槽组件 -->
 	<list-box :title="title" :word="word" :all="all">
-		<swiper class="list-swiper" next-margin="20rpx" :style="{'height': `${200*row}rpx`}">
-			<swiper-item class="list-swiper-view" v-for="(col,index) in column" :key="col">
+		<swiper next-margin="20rpx" :style="{'height': `${200*row}rpx`}">
+			<swiper-item v-for="(col,index) in column" :key="col">
 				<course-item v-for="item in courseData.slice(index*row,(index+1)*row)" :item="item" :key="item.id"></course-item>
 			</swiper-item>
 		</swiper>

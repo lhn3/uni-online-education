@@ -137,26 +137,26 @@ var _vue = __webpack_require__(/*! vue */ 8); //
 //
 //
 //
-var _default2 = { props: { banners: { type: Array, default: function _default() {return [{ id: 1, imageUrl: '/static/images/banner1.jpg', backgroud: '#45328c', adverUrl: '' },
-        {
-          id: 2,
-          imageUrl: '/static/images/banner2.jpg',
-          backgroud: '#006c00',
-          adverUrl: '' },
-
-        {
-          id: 3,
-          imageUrl: '/static/images/banner3.jpg',
-          backgroud: '#0072b7',
-          adverUrl: '' }];} } },
-
-
-
-
-  setup: function setup(props) {
-    var background = (0, _vue.ref)('#45328c');
-    var change = function change(e) {
-      background.value = props.banners[e.detail.current].backgroud;
+var _default2 = { props: { banners: { type: Array, default: function _default() {return [// {
+          // 	id:1,
+          // 	imageUrl:'/static/images/banner1.jpg',
+          // 	background:'#45328c',
+          // 	adverUrl:''
+          // },
+          // {
+          // 	id:2,
+          // 	imageUrl:'/static/images/banner2.jpg',
+          // 	background:'#006c00',
+          // 	adverUrl:''
+          // },
+          // {
+          // 	id:3,
+          // 	imageUrl:'/static/images/banner3.jpg',
+          // 	background:'#0072b7',
+          // 	adverUrl:''
+          // }
+        ];} } }, setup: function setup(props) {var background = (0, _vue.ref)('#45328c');var change = function change(e) {
+      background.value = props.banners[e.detail.current].background;
     };
     return {
       change: change,

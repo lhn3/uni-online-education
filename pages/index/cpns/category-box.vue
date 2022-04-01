@@ -15,14 +15,14 @@ export default {
 		categoryList:{
 			type:Array,
 			default:()=>[
-				{id:1,name:'java'},
-				{id:2,name:'运维'},
-				{id:3,name:'Python'},
-				{id:4,name:'UI设计'},
-				{id:5,name:'大数据'},
-				{id:6,name:'前端'},
-				{id:7,name:'PHP'},
-				{id:8,name:'Vue'}
+				// {id:1,name:'java'},
+				// {id:2,name:'运维'},
+				// {id:3,name:'Python'},
+				// {id:4,name:'UI设计'},
+				// {id:5,name:'大数据'},
+				// {id:6,name:'前端'},
+				// {id:7,name:'PHP'},
+				// {id:8,name:'Vue'}
 			]
 		}
 	},

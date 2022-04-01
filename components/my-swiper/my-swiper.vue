@@ -16,31 +16,31 @@ export default {
 		banners:{
 			type:Array,
 			default:()=>[
-				{
-					id:1,
-					imageUrl:'/static/images/banner1.jpg',
-					backgroud:'#45328c',
-					adverUrl:''
-				},
-				{
-					id:2,
-					imageUrl:'/static/images/banner2.jpg',
-					backgroud:'#006c00',
-					adverUrl:''
-				},
-				{
-					id:3,
-					imageUrl:'/static/images/banner3.jpg',
-					backgroud:'#0072b7',
-					adverUrl:''
-				}
+				// {
+				// 	id:1,
+				// 	imageUrl:'/static/images/banner1.jpg',
+				// 	background:'#45328c',
+				// 	adverUrl:''
+				// },
+				// {
+				// 	id:2,
+				// 	imageUrl:'/static/images/banner2.jpg',
+				// 	background:'#006c00',
+				// 	adverUrl:''
+				// },
+				// {
+				// 	id:3,
+				// 	imageUrl:'/static/images/banner3.jpg',
+				// 	background:'#0072b7',
+				// 	adverUrl:''
+				// }
 			]
 		}
 	},
 	setup(props){
 		let background = ref('#45328c')
 		const change = (e)=>{
-			background.value = props.banners[e.detail.current].backgroud
+			background.value = props.banners[e.detail.current].background
 		}
 		return{
 			change,

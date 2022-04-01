@@ -6,10 +6,10 @@
 		<!-- #endif -->
 		
 		<!-- 轮播图 -->
-		<my-swiper></my-swiper>
+		<my-swiper :banners="banners"></my-swiper>
 		
 		<!-- 分类 -->
-		<category-box></category-box>
+		<category-box :categoryList="category"></category-box>
 		
 		<view class="main-list">
 			<!-- 热门推荐 -->
@@ -22,13 +22,14 @@
 </template>
 
 <script>
-import {getCurrentInstance,ref} from "vue";
+import {getCurrentInstance,ref,onBeforeMount,reactive,toRefs} from "vue";
 import { onShow,onReady,onNavigationBarButtonTap } from '@dcloudio/uni-app';
 import categoryBox from './cpns/category-box.vue';
 import swiperCourse from './cpns/swiper-course.vue';
 import scrollCourse from './cpns/scroll-course.vue';
 import payCourse from './cpns/pay-course.vue';
 import courseData from '@/mock/courseData.js';
+import {getBanners,getCategory} from '@/request/article_api.js'
 export default {
 	components:{
 		'category-box':categoryBox,
@@ -38,6 +39,10 @@ export default {
 	},
 	setup(){
 		const { proxy } = getCurrentInstance();
+		const state = reactive({
+			banners:[],
+			category:[]
+		})
 		// APP端搜索提示内容
 		// #ifdef APP-PLUS
 		let arr = ['APP · 微信小程序', 'Java · SpringBoot ' , 'springCloud · SpringSecurity' , 'Vue · React']
@@ -66,20 +71,23 @@ export default {
 			}
 		})
 		// #endif
-		
 		return{
 			// #ifdef APP-PLUS
 			resetSearchInfo,
 			// #endif
-			courseData
+			courseData,
+			...toRefs(state)
 		}
 	},
-	onLoad(){
+	async onLoad(){
 		// #ifdef APP-PLUS
 		this.resetSearchInfo()
 		// #endif
+		let banners = await getBanners()
+		let category = await getCategory()
+		this.banners=banners
+		this.category=category
 	}
-	
 }
 </script>
 

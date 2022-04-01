@@ -1374,7 +1374,7 @@ function initData(vueOptions) {
       data = data.call(appConfig.globalProperties);
     }
     catch (e) {
-      if (Object({"VUE_APP_NAME":"uni-online-education","VUE_APP_PLATFORM":"mp-weixin","NODE_ENV":"development","BASE_URL":"/"}).VUE_APP_DEBUG) {
+      if (Object({"NODE_ENV":"development","VUE_APP_NAME":"uni-online-education","VUE_APP_PLATFORM":"mp-weixin","BASE_URL":"/"}).VUE_APP_DEBUG) {
         console.warn('根据 Vue 的 data 函数初始化小程序 data 失败，请尽量确保 data 函数中不访问 vm 对象，否则可能影响首次数据渲染速度。', data, e);
       }
     }
@@ -1891,90 +1891,7 @@ wx.createComponent = createComponent;
 
 /***/ }),
 
-/***/ 124:
-/*!*********************************************************************!*\
-  !*** D:/web学习/uniapp学习/uni-online-education/request/article_api.js ***!
-  \*********************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-Object.defineProperty(exports, "__esModule", { value: true });exports.getCategory = exports.getBanners = void 0;var _request = _interopRequireDefault(__webpack_require__(/*! ./request.js */ 14));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}
-
-//查询轮播图
-var getBanners = function getBanners() {var position = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 1;
-  return (0, _request.default)({
-    url: '/article/api/advert/show/' + position });
-
-};
-
-// 查询分类
-exports.getBanners = getBanners;var getCategory = function getCategory() {
-  return (0, _request.default)({
-    url: '/article/api/category/label/list' });
-
-};exports.getCategory = getCategory;
-
-/***/ }),
-
-/***/ 13:
-/*!*******************************************************************!*\
-  !*** D:/web学习/uniapp学习/uni-online-education/utils/showMessage.js ***!
-  \*******************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-/* WEBPACK VAR INJECTION */(function(uni) {Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;
-var message = {
-  toast: function toast(title) {var type = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 'text';
-    if (title.length > 15) {
-      console.error('toast长度超过15个字符,当前长度为' + title.length);
-      return;
-    }
-    var icon = 'none';
-    if (type) {
-      switch (type) {
-        case 'text':
-          icon = 'none';
-          break;
-        case 'success':
-          icon = 'success';
-          break;
-        case 'error':
-          icon = 'error';
-          break;}
-
-    }
-    uni.showToast({
-      title: title,
-      icon: icon });
-
-  },
-  confirm: function confirm(title) {
-    return new Promise(function (res, rej) {
-      uni.showModal({
-        title: title,
-        cancelColor: '#b6b6b6',
-        confirmColor: '#363636',
-        success: function success(result) {
-          if (result.cancel) {
-            rej(result);
-          } else if (result.confirm) {
-            res(result);
-          }
-        } });
-
-
-    });
-  } };var _default =
-
-message;exports.default = _default;
-/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! @dcloudio/uni-mp-weixin/dist/uni.api.esm.js */ 9)["default"]))
-
-/***/ }),
-
-/***/ 14:
+/***/ 120:
 /*!*****************************************************************!*\
   !*** D:/web学习/uniapp学习/uni-online-education/request/request.js ***!
   \*****************************************************************/
@@ -1988,13 +1905,12 @@ message;exports.default = _default;
 var BASE_URL = 'https://mock.mengxuegu.com/mock/6246a1929a111d2ee2cb4f92/education';
 
 var request = function request() {var options = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
-  // resolve 正常响应，reject异常响应
   return new Promise(function (resolve, reject) {
     uni.request({
       url: BASE_URL + options.url,
       method: options.method || 'GET',
       data: options.data || {},
-      timeout: 6000, // 8秒超时时间，单位ms
+      timeout: 6000,
       success: function success(res) {
         if (res.data.code == 200) {
           resolve(res.data.data);
@@ -2017,18 +1933,18 @@ var _default = request;exports.default = _default;
 
 /***/ }),
 
-/***/ 21:
+/***/ 121:
 /*!**********************************************************!*\
   !*** ./node_modules/@babel/runtime/regenerator/index.js ***!
   \**********************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! regenerator-runtime */ 22);
+module.exports = __webpack_require__(/*! regenerator-runtime */ 122);
 
 /***/ }),
 
-/***/ 22:
+/***/ 122:
 /*!************************************************************!*\
   !*** ./node_modules/regenerator-runtime/runtime-module.js ***!
   \************************************************************/
@@ -2059,7 +1975,7 @@ var oldRuntime = hadRuntime && g.regeneratorRuntime;
 // Force reevalutation of runtime.js.
 g.regeneratorRuntime = undefined;
 
-module.exports = __webpack_require__(/*! ./runtime */ 23);
+module.exports = __webpack_require__(/*! ./runtime */ 123);
 
 if (hadRuntime) {
   // Restore the original runtime.
@@ -2076,7 +1992,7 @@ if (hadRuntime) {
 
 /***/ }),
 
-/***/ 23:
+/***/ 123:
 /*!*****************************************************!*\
   !*** ./node_modules/regenerator-runtime/runtime.js ***!
   \*****************************************************/
@@ -2808,7 +2724,100 @@ if (hadRuntime) {
 
 /***/ }),
 
-/***/ 24:
+/***/ 124:
+/*!********************************************************************!*\
+  !*** D:/web学习/uniapp学习/uni-online-education/request/course-api.js ***!
+  \********************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });exports.getCourseList = exports.getCategory = exports.getBanners = void 0;var _request = _interopRequireDefault(__webpack_require__(/*! ./request.js */ 120));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}function ownKeys(object, enumerableOnly) {var keys = Object.keys(object);if (Object.getOwnPropertySymbols) {var symbols = Object.getOwnPropertySymbols(object);if (enumerableOnly) symbols = symbols.filter(function (sym) {return Object.getOwnPropertyDescriptor(object, sym).enumerable;});keys.push.apply(keys, symbols);}return keys;}function _objectSpread(target) {for (var i = 1; i < arguments.length; i++) {var source = arguments[i] != null ? arguments[i] : {};if (i % 2) {ownKeys(Object(source), true).forEach(function (key) {_defineProperty(target, key, source[key]);});} else if (Object.getOwnPropertyDescriptors) {Object.defineProperties(target, Object.getOwnPropertyDescriptors(source));} else {ownKeys(Object(source)).forEach(function (key) {Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key));});}}return target;}function _defineProperty(obj, key, value) {if (key in obj) {Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true });} else {obj[key] = value;}return obj;}
+
+//查询轮播图
+var getBanners = function getBanners() {var position = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 1;
+  return (0, _request.default)({
+    url: '/article/api/advert/show/' + position });
+
+};
+
+// 查询分类
+exports.getBanners = getBanners;var getCategory = function getCategory() {
+  return (0, _request.default)({
+    url: '/article/api/category/label/list' });
+
+};
+
+//查询课程
+//query条件 current页数，size每页数据
+exports.getCategory = getCategory;var getCourseList = function getCourseList(query) {var current = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 1;var size = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : 10;
+  return (0, _request.default)({
+    method: 'POST',
+    url: '/course/api/course/search',
+    data: _objectSpread(_objectSpread({}, query), {}, { current: current, size: size }) });
+
+};exports.getCourseList = getCourseList;
+
+/***/ }),
+
+/***/ 13:
+/*!*******************************************************************!*\
+  !*** D:/web学习/uniapp学习/uni-online-education/utils/showMessage.js ***!
+  \*******************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+/* WEBPACK VAR INJECTION */(function(uni) {Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;
+var message = {
+  toast: function toast(title) {var type = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 'text';
+    if (title.length > 15) {
+      console.error('toast长度超过15个字符,当前长度为' + title.length);
+      return;
+    }
+    var icon = 'none';
+    if (type) {
+      switch (type) {
+        case 'text':
+          icon = 'none';
+          break;
+        case 'success':
+          icon = 'success';
+          break;
+        case 'error':
+          icon = 'error';
+          break;}
+
+    }
+    uni.showToast({
+      title: title,
+      icon: icon });
+
+  },
+  confirm: function confirm(title) {
+    return new Promise(function (res, rej) {
+      uni.showModal({
+        title: title,
+        cancelColor: '#b6b6b6',
+        confirmColor: '#363636',
+        success: function success(result) {
+          if (result.cancel) {
+            rej(result);
+          } else if (result.confirm) {
+            res(result);
+          }
+        } });
+
+
+    });
+  } };var _default =
+
+message;exports.default = _default;
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! @dcloudio/uni-mp-weixin/dist/uni.api.esm.js */ 9)["default"]))
+
+/***/ }),
+
+/***/ 20:
 /*!****************************************************************************************!*\
   !*** ./node_modules/@dcloudio/vue-cli-plugin-uni/packages/uni-app/dist/uni-app.cjs.js ***!
   \****************************************************************************************/
@@ -2984,7 +2993,7 @@ exports.ssrRef = ssrRef;
 
 /***/ }),
 
-/***/ 25:
+/***/ 21:
 /*!*****************************************************************!*\
   !*** D:/web学习/uniapp学习/uni-online-education/mock/courseData.js ***!
   \*****************************************************************/
@@ -7818,7 +7827,7 @@ function flushCallbacks(instance) {
     const ctx = instance.ctx;
     const callbacks = ctx.__next_tick_callbacks;
     if (callbacks && callbacks.length) {
-        if (Object({"VUE_APP_NAME":"uni-online-education","VUE_APP_PLATFORM":"mp-weixin","NODE_ENV":"development","BASE_URL":"/"}).VUE_APP_DEBUG) {
+        if (Object({"NODE_ENV":"development","VUE_APP_NAME":"uni-online-education","VUE_APP_PLATFORM":"mp-weixin","BASE_URL":"/"}).VUE_APP_DEBUG) {
             const mpInstance = ctx.$scope;
             console.log('[' +
                 +new Date() +
@@ -7840,7 +7849,7 @@ function flushCallbacks(instance) {
 function nextTick$1(instance, fn) {
     const ctx = instance.ctx;
     if (!ctx.__next_tick_pending && !hasComponentEffect(instance)) {
-        if (Object({"VUE_APP_NAME":"uni-online-education","VUE_APP_PLATFORM":"mp-weixin","NODE_ENV":"development","BASE_URL":"/"}).VUE_APP_DEBUG) {
+        if (Object({"NODE_ENV":"development","VUE_APP_NAME":"uni-online-education","VUE_APP_PLATFORM":"mp-weixin","BASE_URL":"/"}).VUE_APP_DEBUG) {
             const mpInstance = ctx.$scope;
             console.log('[' +
                 +new Date() +
@@ -7852,7 +7861,7 @@ function nextTick$1(instance, fn) {
         }
         return nextTick(fn && fn.bind(instance.proxy));
     }
-    if (Object({"VUE_APP_NAME":"uni-online-education","VUE_APP_PLATFORM":"mp-weixin","NODE_ENV":"development","BASE_URL":"/"}).VUE_APP_DEBUG) {
+    if (Object({"NODE_ENV":"development","VUE_APP_NAME":"uni-online-education","VUE_APP_PLATFORM":"mp-weixin","BASE_URL":"/"}).VUE_APP_DEBUG) {
         const mpInstance = ctx.$scope;
         console.log('[' +
             +new Date() +
@@ -7932,7 +7941,7 @@ function patch(instance) {
         // data.__webviewId__ = mpInstance.data.__webviewId__
         const diffData = diff(data, getMPInstanceData(mpInstance, keys));
         if (Object.keys(diffData).length) {
-            if (Object({"VUE_APP_NAME":"uni-online-education","VUE_APP_PLATFORM":"mp-weixin","NODE_ENV":"development","BASE_URL":"/"}).VUE_APP_DEBUG) {
+            if (Object({"NODE_ENV":"development","VUE_APP_NAME":"uni-online-education","VUE_APP_PLATFORM":"mp-weixin","BASE_URL":"/"}).VUE_APP_DEBUG) {
                 console.log('[' +
                     +new Date() +
                     '][' +

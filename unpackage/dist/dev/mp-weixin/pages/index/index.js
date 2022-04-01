@@ -196,7 +196,7 @@ var _uniApp = __webpack_require__(/*! @dcloudio/uni-app */ 24);
 
 
 var _courseData = _interopRequireDefault(__webpack_require__(/*! @/mock/courseData.js */ 25));
-var _article_api = __webpack_require__(/*! @/request/article_api.js */ 124);function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) {try {var info = gen[key](arg);var value = info.value;} catch (error) {reject(error);return;}if (info.done) {resolve(value);} else {Promise.resolve(value).then(_next, _throw);}}function _asyncToGenerator(fn) {return function () {var self = this,args = arguments;return new Promise(function (resolve, reject) {var gen = fn.apply(self, args);function _next(value) {asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value);}function _throw(err) {asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err);}_next(undefined);});};}function ownKeys(object, enumerableOnly) {var keys = Object.keys(object);if (Object.getOwnPropertySymbols) {var symbols = Object.getOwnPropertySymbols(object);if (enumerableOnly) symbols = symbols.filter(function (sym) {return Object.getOwnPropertyDescriptor(object, sym).enumerable;});keys.push.apply(keys, symbols);}return keys;}function _objectSpread(target) {for (var i = 1; i < arguments.length; i++) {var source = arguments[i] != null ? arguments[i] : {};if (i % 2) {ownKeys(Object(source), true).forEach(function (key) {_defineProperty(target, key, source[key]);});} else if (Object.getOwnPropertyDescriptors) {Object.defineProperties(target, Object.getOwnPropertyDescriptors(source));} else {ownKeys(Object(source)).forEach(function (key) {Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key));});}}return target;}function _defineProperty(obj, key, value) {if (key in obj) {Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true });} else {obj[key] = value;}return obj;}var categoryBox = function categoryBox() {__webpack_require__.e(/*! require.ensure | pages/index/cpns/category-box */ "pages/index/cpns/category-box").then((function () {return resolve(__webpack_require__(/*! ./cpns/category-box.vue */ 74));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};var swiperCourse = function swiperCourse() {__webpack_require__.e(/*! require.ensure | pages/index/cpns/swiper-course */ "pages/index/cpns/swiper-course").then((function () {return resolve(__webpack_require__(/*! ./cpns/swiper-course.vue */ 81));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};var scrollCourse = function scrollCourse() {__webpack_require__.e(/*! require.ensure | pages/index/cpns/scroll-course */ "pages/index/cpns/scroll-course").then((function () {return resolve(__webpack_require__(/*! ./cpns/scroll-course.vue */ 86));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};var payCourse = function payCourse() {__webpack_require__.e(/*! require.ensure | pages/index/cpns/pay-course */ "pages/index/cpns/pay-course").then((function () {return resolve(__webpack_require__(/*! ./cpns/pay-course.vue */ 93));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};var _default =
+var _courseApi = __webpack_require__(/*! @/request/course-api.js */ 124);function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) {try {var info = gen[key](arg);var value = info.value;} catch (error) {reject(error);return;}if (info.done) {resolve(value);} else {Promise.resolve(value).then(_next, _throw);}}function _asyncToGenerator(fn) {return function () {var self = this,args = arguments;return new Promise(function (resolve, reject) {var gen = fn.apply(self, args);function _next(value) {asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value);}function _throw(err) {asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err);}_next(undefined);});};}function ownKeys(object, enumerableOnly) {var keys = Object.keys(object);if (Object.getOwnPropertySymbols) {var symbols = Object.getOwnPropertySymbols(object);if (enumerableOnly) symbols = symbols.filter(function (sym) {return Object.getOwnPropertyDescriptor(object, sym).enumerable;});keys.push.apply(keys, symbols);}return keys;}function _objectSpread(target) {for (var i = 1; i < arguments.length; i++) {var source = arguments[i] != null ? arguments[i] : {};if (i % 2) {ownKeys(Object(source), true).forEach(function (key) {_defineProperty(target, key, source[key]);});} else if (Object.getOwnPropertyDescriptors) {Object.defineProperties(target, Object.getOwnPropertyDescriptors(source));} else {ownKeys(Object(source)).forEach(function (key) {Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key));});}}return target;}function _defineProperty(obj, key, value) {if (key in obj) {Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true });} else {obj[key] = value;}return obj;}var categoryBox = function categoryBox() {__webpack_require__.e(/*! require.ensure | pages/index/cpns/category-box */ "pages/index/cpns/category-box").then((function () {return resolve(__webpack_require__(/*! ./cpns/category-box.vue */ 74));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};var swiperCourse = function swiperCourse() {__webpack_require__.e(/*! require.ensure | pages/index/cpns/swiper-course */ "pages/index/cpns/swiper-course").then((function () {return resolve(__webpack_require__(/*! ./cpns/swiper-course.vue */ 81));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};var scrollCourse = function scrollCourse() {__webpack_require__.e(/*! require.ensure | pages/index/cpns/scroll-course */ "pages/index/cpns/scroll-course").then((function () {return resolve(__webpack_require__(/*! ./cpns/scroll-course.vue */ 86));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};var payCourse = function payCourse() {__webpack_require__.e(/*! require.ensure | pages/index/cpns/pay-course */ "pages/index/cpns/pay-course").then((function () {return resolve(__webpack_require__(/*! ./cpns/pay-course.vue */ 93));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};var _default =
 {
   components: {
     'category-box': categoryBox,
@@ -208,7 +208,11 @@ var _article_api = __webpack_require__(/*! @/request/article_api.js */ 124);func
     (0, _vue.getCurrentInstance)(),proxy = _getCurrentInstance.proxy;
     var state = (0, _vue.reactive)({
       banners: [],
-      category: [] });
+      category: [],
+      hotCourse: [],
+      newCourse: [],
+      freeCourse: [],
+      payCourse: [] });
 
     // APP端搜索提示内容
 
@@ -246,14 +250,25 @@ var _article_api = __webpack_require__(/*! @/request/article_api.js */ 124);func
     (0, _vue.toRefs)(state));
 
   },
-  onLoad: function onLoad() {var _this = this;return _asyncToGenerator( /*#__PURE__*/_regenerator.default.mark(function _callee() {var banners, category;return _regenerator.default.wrap(function _callee$(_context) {while (1) {switch (_context.prev = _context.next) {case 0:_context.next = 2;return (
+  onLoad: function onLoad() {var _this = this;return _asyncToGenerator( /*#__PURE__*/_regenerator.default.mark(function _callee() {var banners, category, hotCourse, newCourse, freeCourse, payCourse;return _regenerator.default.wrap(function _callee$(_context) {while (1) {switch (_context.prev = _context.next) {case 0:_context.next = 2;return (
 
 
 
-                (0, _article_api.getBanners)());case 2:banners = _context.sent;_context.next = 5;return (
-                (0, _article_api.getCategory)());case 5:category = _context.sent;
+
+
+                (0, _courseApi.getBanners)());case 2:banners = _context.sent;_context.next = 5;return (
+                (0, _courseApi.getCategory)());case 5:category = _context.sent;_context.next = 8;return (
+                (0, _courseApi.getCourseList)({ sort: 'hot' }));case 8:hotCourse = _context.sent;_context.next = 11;return (
+                (0, _courseApi.getCourseList)({ sort: 'new' }));case 11:newCourse = _context.sent;_context.next = 14;return (
+                (0, _courseApi.getCourseList)({ isFree: 1 }));case 14:freeCourse = _context.sent;_context.next = 17;return (
+                (0, _courseApi.getCourseList)({ isFree: 0 }));case 17:payCourse = _context.sent; //付费课程
               _this.banners = banners;
-              _this.category = category;case 8:case "end":return _context.stop();}}}, _callee);}))();
+              _this.category = category;
+              _this.hotCourse = hotCourse.records;
+              _this.newCourse = newCourse.records;
+              _this.freeCourse = freeCourse.records;
+              _this.payCourse = payCourse.records;case 24:case "end":return _context.stop();}}}, _callee);}))();
+
   } };exports.default = _default;
 
 /***/ }),

@@ -13,10 +13,10 @@
 		
 		<view class="main-list">
 			<!-- 热门推荐 -->
-			<swiper-course title="热门推荐" word="HOT" :all="true" :courseData="courseData"></swiper-course>
-			<scroll-course title="近期上新" word="NEW" :all="true" :courseData="courseData"></scroll-course>
-			<swiper-course title="免费精选" word="FREE" :all="true" :courseData="courseData"></swiper-course>
-			<pay-course title="付费精品" word="NICE" :all="true" :courseData="courseData"></pay-course>
+			<swiper-course title="热门推荐" word="HOT" :all="true" :courseData="hotCourse"></swiper-course>
+			<scroll-course title="近期上新" word="NEW" :all="true" :courseData="newCourse"></scroll-course>
+			<swiper-course title="免费精选" word="FREE" :all="true" :courseData="freeCourse"></swiper-course>
+			<pay-course title="付费精品" word="NICE" :all="true" :courseData="payCourse"></pay-course>
 		</view>
 	</view>
 </template>
@@ -29,7 +29,7 @@ import swiperCourse from './cpns/swiper-course.vue';
 import scrollCourse from './cpns/scroll-course.vue';
 import payCourse from './cpns/pay-course.vue';
 import courseData from '@/mock/courseData.js';
-import {getBanners,getCategory} from '@/request/article_api.js'
+import {getBanners,getCategory,getCourseList} from '@/request/course-api.js'
 export default {
 	components:{
 		'category-box':categoryBox,
@@ -41,7 +41,11 @@ export default {
 		const { proxy } = getCurrentInstance();
 		const state = reactive({
 			banners:[],
-			category:[]
+			category:[],
+			hotCourse:[],
+			newCourse:[],
+			freeCourse:[],
+			payCourse:[]
 		})
 		// APP端搜索提示内容
 		// #ifdef APP-PLUS
@@ -83,10 +87,21 @@ export default {
 		// #ifdef APP-PLUS
 		this.resetSearchInfo()
 		// #endif
-		let banners = await getBanners()
-		let category = await getCategory()
+		
+		// 获取页面信息
+		let banners = await getBanners()	//轮播图数据
+		let category = await getCategory()	//分类数据
+		let hotCourse = await getCourseList({sort:'hot'})	//热门课程
+		let newCourse = await getCourseList({sort:'new'})	//近期上新
+		let freeCourse = await getCourseList({isFree:1})	//免费课程
+		let payCourse = await getCourseList({isFree:0})	//付费课程
 		this.banners=banners
 		this.category=category
+		this.hotCourse=hotCourse.records
+		this.newCourse=newCourse.records
+		this.freeCourse=freeCourse.records
+		this.payCourse=payCourse.records
+
 	}
 }
 </script>

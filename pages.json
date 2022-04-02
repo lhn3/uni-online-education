@@ -3,9 +3,10 @@
 		{
 			"path": "pages/index/index",
 			"style": {
+				// "enablePullDownRefresh":true,
 				"app-plus":{
 					"scrollIndicator":"none",//不显示滚动条
-					"bounce":"none",		//关闭回弹
+					// "bounce":"none",		//关闭回弹
 					"titleNView":{//自定义导航栏App、H5
 						"type":"transparent",//
 						"buttons":[//按钮
@@ -67,7 +68,7 @@
 		"navigationBarTextStyle": "white",
 		// "navigationBarTitleText": "uni-app",
 		// "enablePullDownRefresh":true,
-		"backgroundColor": "#6E8B3D"
+		"backgroundColor": "#6E8B3D"	//下拉的背景
 	},
 	"tabBar":{
 		"color":"#8a8a8a",			// 未选中的颜色

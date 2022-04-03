@@ -35,7 +35,7 @@ export default {
 		
 		onMounted(()=>{
 			//获取历史搜索
-			historyWords.value=uni.getStorageSync('historyWords')
+			historyWords.value=[...uni.getStorageSync('historyWords')]
 			console.log(uni.getStorageSync('historyWords'))
 		})
 		

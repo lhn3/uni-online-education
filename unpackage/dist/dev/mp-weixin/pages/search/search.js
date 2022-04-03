@@ -13,6 +13,7 @@ const _sfc_main = {
     let content = common_vendor.ref("");
     let focuse = common_vendor.ref(false);
     let historyWord = common_vendor.ref();
+    let showWords = common_vendor.ref(false);
     const doSearh = () => {
       if (content.value == "") {
         proxy.$message.toast("\u8BF7\u8F93\u5165\u641C\u7D22\u5185\u5BB9");
@@ -20,6 +21,7 @@ const _sfc_main = {
         console.log("\u641C\u7D22\u5185\u5BB9:" + content.value);
         common_vendor.index.showLoading();
         historyWord.value = content.value;
+        showWords.value = false;
         setTimeout(() => {
           common_vendor.index.hideLoading();
         }, 1e3);
@@ -43,6 +45,7 @@ const _sfc_main = {
       content,
       focuse,
       historyWord,
+      showWords,
       doSearh,
       inputChange,
       changeContent
@@ -60,12 +63,18 @@ const _sfc_main = {
   }
 };
 if (!Array) {
-  const _component_uni_search_bar = common_vendor.resolveComponent("uni-search-bar");
+  const _easycom_uni_search_bar2 = common_vendor.resolveComponent("uni-search-bar");
   const _component_keywords = common_vendor.resolveComponent("keywords");
-  (_component_uni_search_bar + _component_keywords)();
+  const _easycom_tab_bar2 = common_vendor.resolveComponent("tab-bar");
+  (_easycom_uni_search_bar2 + _component_keywords + _easycom_tab_bar2)();
+}
+const _easycom_uni_search_bar = () => "../../uni_modules/uni-search-bar/components/uni-search-bar/uni-search-bar.js";
+const _easycom_tab_bar = () => "../../components/tab-bar/tab-bar.js";
+if (!Math) {
+  (_easycom_uni_search_bar + _easycom_tab_bar)();
 }
 function _sfc_render(_ctx, _cache, $props, $setup, $data, $options) {
-  return {
+  return common_vendor.e({
     a: common_vendor.o($setup.doSearh),
     b: common_vendor.o($setup.inputChange),
     c: common_vendor.o(($event) => $setup.content = $event),
@@ -76,10 +85,12 @@ function _sfc_render(_ctx, _cache, $props, $setup, $data, $options) {
       modelValue: $setup.content
     }),
     e: common_vendor.o($setup.changeContent),
-    f: common_vendor.p({
+    f: $setup.showWords,
+    g: common_vendor.p({
       historyWord: $setup.historyWord
-    })
-  };
+    }),
+    h: !$setup.showWords
+  }, !$setup.showWords ? {} : {});
 }
 var MiniProgramPage = /* @__PURE__ */ common_vendor._export_sfc(_sfc_main, [["render", _sfc_render]]);
 wx.createPage(MiniProgramPage);

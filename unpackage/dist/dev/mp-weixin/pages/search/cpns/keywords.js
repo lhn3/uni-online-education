@@ -12,7 +12,7 @@ const _sfc_main = {
     let hotWords = common_vendor.ref(["Python", "Java", "Web\u524D\u7AEF", "\u5C0F\u7A0B\u5E8F", "uniapp", "js\u9AD8\u7EA7", "\u7B97\u6CD5"]);
     let historyWords = common_vendor.ref([]);
     common_vendor.onMounted(() => {
-      historyWords.value = common_vendor.index.getStorageSync("historyWords");
+      historyWords.value = [...common_vendor.index.getStorageSync("historyWords")];
       console.log(common_vendor.index.getStorageSync("historyWords"));
     });
     common_vendor.watch(() => props.historyWord, (newValue) => {

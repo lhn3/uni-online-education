@@ -1,0 +1,1 @@
+<view class="tab-bar"><scroll-view class="noScorll bar-view" scroll-x scroll-with-animation scroll-left="{{a}}"> 123 </scroll-view></view>

@@ -1,7 +1,7 @@
 <template>
 	<view>
 		<!-- #ifdef MP -->
-		<uni-search-bar @confirm="doSearh" :focus="focuse" v-model="content" @input="inputChange" :radius="100" placeholder="请输入搜索内容" >
+		<uni-search-bar @confirm="doSearch" :focus="focuse" v-model="content" @input="inputChange" :radius="100" placeholder="请输入搜索内容" >
 			<template v-slot:searchIcon>
 				<text class="iconfont icon-search"></text>
 			</template>
@@ -10,7 +10,12 @@
 			</template>
 		</uni-search-bar>
 		<!-- #endif -->
-		<keywords @changeContent="changeContent" :historyWord="historyWord"></keywords>
+		
+		<!-- 关键字 -->
+		<keywords @changeContent="changeContent" :historyWord="historyWord" v-show="showWords"></keywords>
+		
+		<!-- 搜索结果 -->
+		<tab-bar v-if="!showWords" :itemWidth="100" :tabs="tabs" @changeTab="changeTab"></tab-bar>
 	</view>
 </template>
 
@@ -32,9 +37,15 @@ export default {
 		let content = ref('')
 		let focuse = ref(false)
 		let historyWord = ref()
+		let showWords = ref(false)
+		let tabs = ref([
+			{id:1,name:'课程'},
+			{id:2,name:'文章'},
+			{id:3,name:'问答'},
+		])
 		
 		//搜索
-		const doSearh = ()=>{
+		const doSearch = ()=>{
 			if(content.value == ""){
 				proxy.$message.toast('请输入搜索内容')
 			}else{
@@ -42,6 +53,7 @@ export default {
 				uni.showLoading()
 				// 存储历史搜索内容
 				historyWord.value=content.value
+				showWords.value=false
 				setTimeout(()=>{
 					uni.hideLoading()
 				},1000)
@@ -50,7 +62,7 @@ export default {
 		
 		// 监听搜索按钮点击
 		onNavigationBarButtonTap((e)=>{	
-			doSearh()
+			doSearch()
 		})
 		
 		//监听输入框改变
@@ -68,7 +80,7 @@ export default {
 		onNavigationBarSearchInputConfirmed((e)=>{
 			//失去焦点关闭键盘
 			webView.setTitleNViewSearchInputFocus(false)
-			doSearh()
+			doSearch()
 		})
 		// #endif
 		
@@ -84,17 +96,25 @@ export default {
 			inp.value=value
 			// #endif
 			content.value = value
-			doSearh()
+			doSearch()
+		}
+		
+		//监听搜索到的数据切换tab
+		let changeTab=(id)=>{
+			console.log('点击了'+id)
 		}
 		return{
 			params,
 			content,
 			focuse,
 			historyWord,
+			showWords,
+			tabs,
 			
-			doSearh,
+			doSearch,
 			inputChange,
-			changeContent
+			changeContent,
+			changeTab
 		}
 	},	
 	onLoad(option) {
@@ -106,7 +126,7 @@ export default {
 			this.params = data
 			this.focuse = false
 			//执行搜索
-			this.doSearh()
+			this.doSearch()
 			
 		}else{
 			//自动获取焦点

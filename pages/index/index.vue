@@ -133,7 +133,8 @@ export default {
 			}else{
 				let res = await getCourseList({isFree:0},page.num,page.size)
 				state.payCourse = [...state.payCourse,...res.records]
-				proxy.mescroll.endBySize(state.payCourse.length,res.total)//判断数组长度有没有大于会等于总长度
+				//判断数组长度有没有大于会等于总长度
+				proxy.mescroll.endBySize(state.payCourse.length,res.total)
 			}
 			proxy.mescroll.endErr()
 		}

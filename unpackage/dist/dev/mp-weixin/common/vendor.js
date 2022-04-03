@@ -5954,3 +5954,4 @@ exports.sr = sr;
 exports.t = t;
 exports.toRefs = toRefs;
 exports.useCssVars = useCssVars;
+exports.watch = watch;

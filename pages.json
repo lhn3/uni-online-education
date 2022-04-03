@@ -1,7 +1,7 @@
 {
 	"pages": [ //pages数组中第一项表示应用启动页，参考：https://uniapp.dcloud.io/collocation/pages
 		{
-			"path": "pages/index/index",
+			"path": "pages/tab-index/index",
 			"style": {
 				// "enablePullDownRefresh":true,
 				"app-plus":{
@@ -31,7 +31,7 @@
 			}
 		}
 		,{
-			"path": "pages/category/category",
+			"path": "pages/tab-category/category",
 			"style": {
 				"navigationBarTitleText": "分类",
 				"app-plus":{
@@ -52,19 +52,19 @@
 			}
 		}
 		,{
-			"path": "pages/article/article",
+			"path": "pages/tab-article/article",
 			"style": {
 				"navigationBarTitleText": "阅读"
 			}
 		}
 		,{
-			"path": "pages/question/question",
+			"path": "pages/tab-question/question",
 			"style": {
 				"navigationBarTitleText": "问答"
 			}
 		}
 		,{
-			"path": "pages/my/my",
+			"path": "pages/tab-my/my",
 			"style": {
 				"navigationBarTitleText": "我的"
 			}
@@ -74,6 +74,36 @@
             "style" :                                                                                    
             {
                 "navigationBarTitleText": "扫描结果"
+            }
+            
+        }
+        ,{
+            "path" : "pages/search/search",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "搜索",
+				"app-plus":{
+					"scrollIndicator":"none",//不显示滚动条
+					"bounce":"none",		//关闭回弹
+					"titleNView":{//自定义导航栏App、H5
+						// "autoBackButton":false,//返回按钮
+						"searchInput":{//搜索
+							"align":"center",
+							"backgroundColor":"rgba(255,255,255,0.5)",
+							"placeholder":"请输入搜索内容",
+							"placeholderColor":"rgba(255,255,255,0.8)",
+							"borderRadius":"30rpx"
+						},
+						"buttons":[
+							{
+								"float":"right",
+								"text":"搜索",
+								"fontSize":"16",
+								"color":"#fff"
+							}
+						]
+					}
+				}
             }
             
         }
@@ -99,7 +129,7 @@
 		"list":[
 			{
 				"text":"首页",
-				"pagePath":"pages/index/index",
+				"pagePath":"pages/tab-index/index",
 				// 未选中的图标
 				"iconPath":"static/tab/index.png",
 				// 选中时的图标
@@ -107,25 +137,25 @@
 			},
 			{
 				"text":"分类",
-				"pagePath":"pages/category/category",
+				"pagePath":"pages/tab-category/category",
 				"iconPath":"static/tab/category.png",
 				"selectedIconPath":"static/tab/category-active.png"
 			},
 			{
 				"text":"阅读",
-				"pagePath":"pages/article/article",
+				"pagePath":"pages/tab-article/article",
 				"iconPath":"static/tab/article.png",
 				"selectedIconPath":"static/tab/article-active.png"
 			},
 			{
 				"text":"问答",
-				"pagePath":"pages/question/question",
+				"pagePath":"pages/tab-question/question",
 				"iconPath":"static/tab/question.png",
 				"selectedIconPath":"static/tab/question-active.png"
 			},
 			{
 				"text":"我的",
-				"pagePath":"pages/my/my",
+				"pagePath":"pages/tab-my/my",
 				"iconPath":"static/tab/my.png",
 				"selectedIconPath":"static/tab/my-active.png"
 			}

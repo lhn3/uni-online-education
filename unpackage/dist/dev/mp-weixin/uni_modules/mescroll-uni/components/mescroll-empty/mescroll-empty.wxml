@@ -1,0 +1,1 @@
+<view class="{{['mescroll-empty', h && 'empty-fixed']}}" style="{{'z-index:' + i + ';' + ('top:' + j)}}"><view><image wx:if="{{a}}" class="empty-icon" src="{{b}}" mode="widthFix"/></view><view wx:if="{{c}}" class="empty-tip">{{d}}</view><view wx:if="{{e}}" class="empty-btn" bindtap="{{g}}">{{f}}</view></view>

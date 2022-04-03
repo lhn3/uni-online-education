@@ -5,21 +5,19 @@
 </template>
 
 <script>
-	export default {
-		name:"search-input",
-		data() {
-			return {
-				
-			};
-		}
+export default {
+	setup(){
+		
 	}
+}
 </script>
 
 <style lang="scss">
-	.header{
-		position:fixed;
-		margin: 10rpx;
-	}
+.header{
+	position:fixed;
+	padding: 10rpx;
+	z-index: 1;
+	background-color: $mxg-color-primary;
 	.search{
 		text-align: center;
 		width: 730rpx;
@@ -27,5 +25,7 @@
 		background-color: rgba(255,255,255,0.5);
 		border-radius: 30rpx;
 	}
+}
+
 
 </style>

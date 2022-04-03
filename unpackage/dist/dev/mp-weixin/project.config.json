@@ -1,7 +1,8 @@
 {
-    "description": "项目配置文件。",
+    "description": "项目配置文件，详见文档：https://developers.weixin.qq.com/miniprogram/dev/devtools/projectconfig.html",
     "packOptions": {
-        "ignore": []
+        "ignore": [],
+        "include": []
     },
     "setting": {
         "urlCheck": false,
@@ -10,52 +11,53 @@
         "postcss": true,
         "preloadBackgroundData": false,
         "minified": true,
-        "newFeature": false,
         "coverView": true,
-        "nodeModules": false,
         "autoAudits": false,
         "showShadowRootInWxmlPanel": true,
-        "scopeDataCheck": false,
         "uglifyFileName": false,
         "checkInvalidKey": true,
-        "checkSiteMap": true,
         "uploadWithSourceMap": true,
         "compileHotReLoad": false,
         "lazyloadPlaceholderEnable": false,
         "useMultiFrameRuntime": true,
-        "useApiHook": true,
-        "useApiHostProcess": true,
         "babelSetting": {
             "ignore": [],
             "disablePlugins": [],
             "outputPath": ""
         },
-        "useIsolateContext": true,
-        "userConfirmedBundleSwitch": false,
         "packNpmManually": false,
         "packNpmRelationList": [],
         "minifyWXSS": true,
         "disableUseStrict": false,
         "showES6CompileOption": false,
         "useCompilerPlugins": false,
-        "ignoreUploadUnusedFiles": true
+        "ignoreUploadUnusedFiles": true,
+        "useStaticServer": true
     },
     "compileType": "miniprogram",
-    "libVersion": "",
+    "libVersion": "2.23.0",
     "appid": "wx69bef75a88236b3b",
     "projectname": "uni-online-education",
     "condition": {
         "search": {
+            "current": -1,
             "list": []
         },
         "conversation": {
+            "current": -1,
             "list": []
         },
         "game": {
+            "current": -1,
             "list": []
         },
         "miniprogram": {
+            "current": -1,
             "list": []
         }
+    },
+    "editorSetting": {
+        "tabIndent": "insertSpaces",
+        "tabSize": 4
     }
 }

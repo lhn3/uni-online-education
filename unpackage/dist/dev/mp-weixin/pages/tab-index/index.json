@@ -1,0 +1,11 @@
+{
+  "usingComponents": {
+    "category-box": "./cpns/category-box",
+    "swiper-course": "./cpns/swiper-course",
+    "scroll-course": "./cpns/scroll-course",
+    "pay-course": "./cpns/pay-course",
+    "mescroll-body": "../../uni_modules/mescroll-uni/components/mescroll-body/mescroll-body",
+    "search-input": "../../components/search-input/search-input",
+    "my-swiper": "../../components/my-swiper/my-swiper"
+  }
+}

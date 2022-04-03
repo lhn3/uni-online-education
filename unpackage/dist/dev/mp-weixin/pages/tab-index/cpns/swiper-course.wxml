@@ -1,0 +1,1 @@
+<list-box wx:if="{{c}}" u-s="{{['d']}}" u-i="67a96d22-0" bind:__l="__l" u-p="{{c}}"><swiper next-margin="20rpx" style="{{'height:' + b}}"><swiper-item wx:for="{{a}}" wx:for-item="col" wx:key="b"><course-item wx:for="{{col.a}}" wx:for-item="item" wx:key="a" u-i="{{item.b}}" bind:__l="__l" u-p="{{item.c}}"></course-item></swiper-item></swiper></list-box>

@@ -1,0 +1,1 @@
+<view><uni-search-bar wx:if="{{d}}" u-s="{{['searchIcon','clearIcon']}}" bindconfirm="{{a}}" bindinput="{{b}}" u-i="1c2fb258-0" bind:__l="__l" bindupdateModelValue="{{c}}" u-p="{{d}}"><text class="iconfont icon-search" slot="searchIcon"></text><text class="iconfont icon-close" slot="clearIcon"></text></uni-search-bar></view>

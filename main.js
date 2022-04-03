@@ -14,10 +14,12 @@ app.$mount()
 import { createSSRApp } from 'vue'
 import message from './utils/showMessage.js'
 import request from './request/request.js'
+import mixin from '@/common/mixin/mixin.js'
 export function createApp() {
   const app = createSSRApp(App)
   app.config.globalProperties.$message = message;
   app.config.globalProperties.$request = request;
+  app.mixin(mixin)
   return {
     app
   }

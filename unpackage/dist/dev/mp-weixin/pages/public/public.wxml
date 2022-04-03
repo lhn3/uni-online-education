@@ -1,1 +1,1 @@
-<view><block wx:if="{{$root.m0}}"><web-view src="{{url}}"></web-view></block><block wx:else><view class="tip column"><text>请复制链接并打开浏览器访问</text><text selectable="{{true}}">{{url}}</text></view></block></view>
+<view><web-view wx:if="{{a}}" src="{{b}}"></web-view><view wx:else class="tip column"><text>请复制链接并打开浏览器访问</text><text selectable>{{c}}</text></view></view>

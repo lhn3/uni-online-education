@@ -1,4 +1,3 @@
-@charset "UTF-8";
 /**
  * 这里是uni-app内置的常用样式变量
  *
@@ -19,11 +18,10 @@
 .main .sw-background.data-v-3f833c78 {
   position: absolute;
   top: 0;
-  -webkit-transform: 0.5s;
-          transform: 0.5s;
+  transform: 0.5s;
   height: 520rpx;
   width: 100%;
-  background-image: linear-gradient(v-bind(background) 50%, #fff);
+  background-image: linear-gradient(var(--3f833c78-background) 50%, #fff);
 }
 .main .swiper.data-v-3f833c78 {
   width: 750rpx;
@@ -39,4 +37,3 @@
   height: 100%;
   border-radius: 30rpx;
 }
-

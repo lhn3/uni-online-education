@@ -21,7 +21,7 @@ export default {
 		},
 		itemWidth:{
 			type:Number,
-			default:50
+			default:100
 		}
 	},
 	emits:['changeTab'],

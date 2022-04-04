@@ -4,4 +4,4 @@ require("../../common/vendor.js");
 require("../../request/course-api.js");
 require("../../request/request.js");
 require("../../utils/showMessage.js");
-wx.createPage(category.Component);
+wx.createComponent(category.Component);

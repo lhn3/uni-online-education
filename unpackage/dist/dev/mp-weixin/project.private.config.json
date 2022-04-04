@@ -5,13 +5,6 @@
                 {
                     "name": "",
                     "pathName": "pages/search/search",
-                    "query": "data=123",
-                    "launchMode": "default",
-                    "scene": null
-                },
-                {
-                    "name": "",
-                    "pathName": "pages/search/search",
                     "query": "",
                     "launchMode": "default",
                     "scene": null

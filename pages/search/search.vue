@@ -15,7 +15,13 @@
 		<keywords @changeContent="changeContent" :historyWord="historyWord" v-show="showWords"></keywords>
 		
 		<!-- 搜索结果 -->
-		<tab-bar v-if="!showWords" :itemWidth="100" :tabs="tabs" @changeTab="changeTab"></tab-bar>
+		<view v-if="!showWords">
+			<!-- 分类标签 -->
+			<tab-bar :tabs="tabs" @changeTab="changeTab"></tab-bar>
+			<!-- 下拉过滤 -->
+			<down-bar></down-bar>
+			<view v-for="i in 100">{{i}}</view>
+		</view>
 	</view>
 </template>
 
@@ -24,21 +30,22 @@ import {getCurrentInstance,ref,onBeforeMount,reactive,toRefs,onMounted} from "vu
 import { onNavigationBarButtonTap,onNavigationBarSearchInputChanged,onNavigationBarSearchInputConfirmed } from '@dcloudio/uni-app';
 import uniSearchBar from "@/uni_modules/uni-search-bar/components/uni-search-bar/uni-search-bar.vue"
 import keywords from "./cpns/keywords.vue"
+import downBar from "./cpns/down-bar.vue"
 let webView = null
 export default {
 	components:{
 		'uni-search-bar':uniSearchBar,
-		'keywords':keywords
+		'keywords':keywords,
+		'down-bar':downBar
 	},
 	setup(){
 		const { proxy } = getCurrentInstance();
-		//页面跳转传参
-		let params = ref({})
-		let content = ref('')
-		let focuse = ref(false)
-		let historyWord = ref()
-		let showWords = ref(false)
-		let tabs = ref([
+		let params = ref({})//页面跳转传参
+		let content = ref('')//输入框内容
+		let focuse = ref(false)//是否获取焦点，仅小程序
+		let historyWord = ref()//上次搜索内容
+		let showWords = ref(false)//是否显示搜索关键词
+		let tabs = ref([		//搜索结果tab栏标签
 			{id:1,name:'课程'},
 			{id:2,name:'文章'},
 			{id:3,name:'问答'},
@@ -123,7 +130,8 @@ export default {
 		// #endif
 		if (option.data){
 			let data = JSON.parse(option.data)
-			this.params = data
+			// this.params = data
+			this.content = data.name
 			this.focuse = false
 			//执行搜索
 			this.doSearch()

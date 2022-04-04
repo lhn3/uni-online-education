@@ -12,41 +12,43 @@
  */
 /* 颜色变量 */
 /*文本基本颜色*/
-.tab-bar {
-  width: 100%;
-  height: 80rpx;
+.down-bar {
+  z-index: 100;
   background-color: #FFFFFF;
-  border-bottom: 1px solid #efeff4;
-}
-.tab-bar .bar-view {
-  width: 100%;
-  text-align: center;
-  /* +++ */
-  white-space: nowrap;
-}
-.tab-bar .bar-view .bar-item {
-  /* flex: 1; */
-  display: inline-block;
-  width: 150rpx;
   font-size: 30rpx;
   line-height: 80rpx;
-  position: relative;
 }
-.tab-bar .bar-view .bar-item:after {
+.item-list {
+  z-index: 100;
+  background-color: #FFFFFF;
   position: absolute;
-  content: "";
-  width: 0;
-  height: 0;
-  border-bottom: 6rpx solid #A2CD5A;
-  border-radius: 20rpx;
-  left: 50%;
-  bottom: 6rpx;
-  transform: translateX(-50%);
-  transition: 0.3s;
+  left: 0;
+  right: 0;
 }
-.tab-bar .bar-view .current {
+.item-list .name {
+  padding-left: 115rpx;
+}
+.item-list .category {
+  height: 580rpx !important;
+}
+.active {
   color: #A2CD5A;
 }
-.tab-bar .bar-view .current:after {
-  width: 60rpx;
+.sticky-box {
+  position: -webkit-sticky;
+  position: sticky;
+  /* 其他浏览器 */
+  top: var(--window-top);
+}
+
+/*蒙层*/
+.cover {
+  z-index: 99;
+  position: fixed;
+  left: 0;
+  right: 0;
+  width: 100%;
+  height: 100%;
+  background-color: black;
+  opacity: 0.2 !important;
 }

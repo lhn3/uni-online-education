@@ -7,7 +7,7 @@
 				<text class="iconfont icon-up" v-if="!item.active"></text>
 			</view>
 			<view class="item-list" v-if="item.active">
-				<category class="category" v-if="item.isAllCategory"></category>
+				<category class="category" v-if="item.isAllCategory" :value="param" @searchCate="searchCate"></category>
 				<view class="name" :class="{'active':i.name == tabName}" v-else v-for="i in item.list" :key="i.id" @click="changeCild(item,i)">
 				{{i.name}}
 				</view>
@@ -19,43 +19,29 @@
 </template>
 
 <script>
-import {getCurrentInstance,ref,onBeforeMount,reactive,toRefs,onMounted} from "vue";
+import {getCurrentInstance,ref,onBeforeMount,reactive,toRefs,onMounted,watch,nextTick} from "vue";
 import category from '@/pages/tab-category/category.vue'
 export default {
 	components: { category },
 	props:{
-		info:{
+		params:{
+			type:Object,
+			default:()=>({})
+		},
+		downCategoty:{
 			type:Array,
-			default:()=>[
-				{
-					type:'sort',
-					isAllCategory:false,
-					name:'综合排序',
-					active:false,		//是否被选择了,展示下拉框
-					list:[
-						{id:null,name:'综合排序'},
-						{id:'new',name:'热门排序'},
-						{id:'hot',name:'最新排序'}
-					]
-				},
-				{
-					type:'label',
-					isAllCategory:true,
-					name:'全部排序',
-					active:false,
-					list:[]
-				}
-			]
+			default:()=>[]
 		}
 	},
 	setup(props,{emit}){
 		let tabName=ref()	//选中的标签
 		let infos = ref()
+		let param = ref()
 		onMounted(()=>{
-			infos.value=JSON.parse(JSON.stringify(props.info))
+			infos.value=JSON.parse(JSON.stringify(props.downCategoty))
 			tabName.value=infos.value[0].name
 		})
-		
+
 		//选择大标签
 		let changeTab = (item) =>{
 			tabName.value = item.name
@@ -80,13 +66,47 @@ export default {
 				i.active=false
 			})
 		}
+		//全部分类点击标签
+		let searchCate=(item)=>{
+			infos.value.forEach(i=>{
+				i.active=false
+			})
+			if(item.id==0){
+				infos.value[infos.value.length-1].name=item.cName
+				tabName.value=item.cName
+				emit('changeCategory',{label:item.cName})
+			}else{
+				infos.value[infos.value.length-1].name=item.name
+				tabName.value=item.name
+				emit('changeCategory',{label:item.name})
+			}
+			param.value={labelId:item.id,name:item.name,parentId:item.parentId}
+		}
 		return{
 			infos,
 			tabName,
+			param,
 			
 			changeTab,
 			changeCild,
-			closeCategory
+			closeCategory,
+			searchCate
+		}
+	},
+	// 监听点击标签进入搜索页面，全部分类名称改变
+	watch:{
+		params:{
+			handler:function(newValue){
+				if(Object.keys(newValue).length>0){
+					nextTick(()=>{
+						this.infos[this.infos.length-1].name=newValue.name
+						this.tabName=newValue.name
+						this.param=newValue
+					})
+				}
+			},
+			immediate:true,
+			deep:true
 		}
 	}
 }

@@ -9,7 +9,7 @@
 		</scroll-view>
 		<scroll-view class="right" scroll-y >
 			<view class="tag">
-				<view :class="{'activeLabel':activeLabel == item.id}" v-for="item in labelList" :key="item.id" @click="selectLabel(item.id,item.name)">
+				<view :class="{'activeLabel':activeLabel == item.id}" v-for="item in labelList" :key="item.id" @click="selectLabel(item)">
 					{{item.name}}
 				</view>
 			</view>
@@ -22,7 +22,13 @@ import {getCurrentInstance,ref,onBeforeMount,reactive,toRefs,onMounted} from "vu
 import { onShow,onReady,onNavigationBarButtonTap } from '@dcloudio/uni-app';
 import {getCategory} from '@/request/course-api.js'
 export default {
-	setup(){
+	props:{
+		value:{	//当分类作为子组件使用并被传递参数时
+			type:Object,
+			default:()=>({})
+		}
+	},
+	setup(props,{emit}){
 		const {proxy} = getCurrentInstance()
 		const state = ref([])
 		let activeTitle = ref()
@@ -32,8 +38,27 @@ export default {
 		onMounted(async ()=>{
 			let res = await getCategory()
 			state.value = res
-			activeTitle.value = res[0].id
-			labelList.value = res[0].labelList
+			//作为子组件传入在标签前加一个不限
+			if(props.value){
+				state.value.forEach(item=>{
+					item.labelList.unshift({id:0,name:'不限',cName:item.name,cId:item.id})
+				})
+				if(Object.keys(props.value).length>0){
+					// 保持选择
+					res.forEach(item=>{
+						if(item.id == props.value.parentId) {
+							activeTitle.value = item.id
+							labelList.value = item.labelList
+						}
+					})
+				}else{
+					activeTitle.value = res[0].id
+					labelList.value = res[0].labelList
+				}
+			}else{
+				activeTitle.value = res[0].id
+				labelList.value = res[0].labelList
+			}
 		})
 		
 		//选择了某个标题
@@ -42,10 +67,16 @@ export default {
 			labelList.value = List
 		}
 		//选择了某个标签
-		const selectLabel=(id,name)=>{
-			activeLabel.value = id
-			let params = JSON.stringify({labelId:id,name,activeIndex:activeTitle.value}) 
-			proxy.navTo('/pages/search/search?data='+params)
+		const selectLabel=(item)=>{
+			if (activeLabel.value == item.id) return;
+			activeLabel.value = item.id
+			if(props.value){	//搜索页点击标签不跳转页面只发送事件
+				item.parentId=activeTitle.value	//强行加一个父级id
+				emit('searchCate',item)
+			}else{
+				let params = JSON.stringify({labelId:item.id,name:item.name,parentId:activeTitle.value}) 
+				proxy.navTo('/pages/search/search?data='+params)
+			}
 		}
 
 		onNavigationBarButtonTap(()=>{

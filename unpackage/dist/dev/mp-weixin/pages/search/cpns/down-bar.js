@@ -1,62 +1,49 @@
 "use strict";
-var __defProp = Object.defineProperty;
-var __defProps = Object.defineProperties;
-var __getOwnPropDescs = Object.getOwnPropertyDescriptors;
-var __getOwnPropSymbols = Object.getOwnPropertySymbols;
-var __hasOwnProp = Object.prototype.hasOwnProperty;
-var __propIsEnum = Object.prototype.propertyIsEnumerable;
-var __defNormalProp = (obj, key, value) => key in obj ? __defProp(obj, key, { enumerable: true, configurable: true, writable: true, value }) : obj[key] = value;
-var __spreadValues = (a, b) => {
-  for (var prop in b || (b = {}))
-    if (__hasOwnProp.call(b, prop))
-      __defNormalProp(a, prop, b[prop]);
-  if (__getOwnPropSymbols)
-    for (var prop of __getOwnPropSymbols(b)) {
-      if (__propIsEnum.call(b, prop))
-        __defNormalProp(a, prop, b[prop]);
-    }
-  return a;
-};
-var __spreadProps = (a, b) => __defProps(a, __getOwnPropDescs(b));
 var common_vendor = require("../../../common/vendor.js");
 const category = () => "../../tab-category/category2.js";
 const _sfc_main = {
   components: { category },
   props: {
-    info: {
+    downCategoty: {
       type: Array,
-      default: () => [
-        {
-          type: "sort",
-          isAllCategory: false,
-          name: "\u7EFC\u5408\u6392\u5E8F",
-          active: true,
-          list: [
-            { id: null, name: "\u7EFC\u5408\u6392\u5E8F" },
-            { id: "new", name: "\u70ED\u95E8\u6392\u5E8F" },
-            { id: "hot", name: "\u6700\u65B0\u6392\u5E8F" }
-          ]
-        },
-        {
-          type: "label",
-          isAllCategory: false,
-          name: "\u5168\u90E8\u6392\u5E8F",
-          active: false,
-          list: []
-        }
-      ]
+      default: () => []
     }
   },
   setup(props, { emit }) {
-    let state = common_vendor.reactive({
-      tabId: null,
-      childId: null
+    let tabName = common_vendor.ref();
+    let infos = common_vendor.ref();
+    common_vendor.onMounted(() => {
+      infos.value = JSON.parse(JSON.stringify(props.downCategoty));
+      tabName.value = infos.value[0].name;
     });
-    let changeTab = (tabId) => {
+    let changeTab = (item) => {
+      tabName.value = item.name;
+      let act = item.active;
+      infos.value.forEach((i) => {
+        i.active = false;
+      });
+      item.active = !act;
     };
-    return __spreadProps(__spreadValues({}, common_vendor.toRefs(state)), {
-      changeTab
-    });
+    let changeCild = (item, itemChild) => {
+      item.active = false;
+      if (tabName.value == itemChild.name)
+        return;
+      tabName.value = itemChild.name;
+      item.name = itemChild.name;
+      emit("changeCategory", { [item.type]: itemChild.id });
+    };
+    let closeCategory = () => {
+      infos.value.forEach((i) => {
+        i.active = false;
+      });
+    };
+    return {
+      infos,
+      tabName,
+      changeTab,
+      changeCild,
+      closeCategory
+    };
   }
 };
 if (!Array) {
@@ -64,31 +51,41 @@ if (!Array) {
   _component_category();
 }
 function _sfc_render(_ctx, _cache, $props, $setup, $data, $options) {
-  return common_vendor.e({
-    a: common_vendor.f($props.info, (item, k0, i0) => {
+  return {
+    a: common_vendor.f($setup.infos, (item, k0, i0) => {
       return common_vendor.e({
         a: common_vendor.t(item.name),
-        b: common_vendor.o(($event) => $setup.changeTab(item.id)),
-        c: item.active
+        b: item.active
+      }, item.active ? {} : {}, {
+        c: !item.active
+      }, !item.active ? {} : {}, {
+        d: common_vendor.o(($event) => $setup.changeTab(item)),
+        e: item.name == $setup.tabName ? 1 : "",
+        f: item.active
       }, item.active ? common_vendor.e({
-        d: _ctx.isAllCategory
-      }, _ctx.isAllCategory ? {
-        e: "561051e5-0-" + i0
+        g: item.isAllCategory
+      }, item.isAllCategory ? {
+        h: "561051e5-0-" + i0
       } : {
-        f: common_vendor.f(item.list, (i, k1, i1) => {
+        i: common_vendor.f(item.list, (i, k1, i1) => {
           return {
             a: common_vendor.t(i.name),
-            b: i.id,
-            c: common_vendor.o(($event) => _ctx.changeCild(i), i.id)
+            b: i.name == $setup.tabName ? 1 : "",
+            c: i.id,
+            d: common_vendor.o(($event) => $setup.changeCild(item, i), i.id)
           };
         })
       }) : {}, {
-        g: item.active
-      }, item.active ? {} : {}, {
-        h: item.type
+        j: item.active
+      }, item.active ? {
+        k: common_vendor.o((...args) => $setup.closeCategory && $setup.closeCategory(...args))
+      } : {}, {
+        l: item.type
       });
+    }),
+    b: common_vendor.o(() => {
     })
-  }, {}, {});
+  };
 }
 var Component = /* @__PURE__ */ common_vendor._export_sfc(_sfc_main, [["render", _sfc_render]]);
 wx.createComponent(Component);

@@ -21,6 +21,26 @@ const _sfc_main = {
       { id: 2, name: "\u6587\u7AE0" },
       { id: 3, name: "\u95EE\u7B54" }
     ]);
+    let downCategoty = common_vendor.ref([
+      {
+        type: "sort",
+        isAllCategory: false,
+        name: "\u7EFC\u5408\u6392\u5E8F",
+        active: false,
+        list: [
+          { id: null, name: "\u7EFC\u5408\u6392\u5E8F" },
+          { id: "new", name: "\u70ED\u95E8\u6392\u5E8F" },
+          { id: "hot", name: "\u6700\u65B0\u6392\u5E8F" }
+        ]
+      },
+      {
+        type: "label",
+        isAllCategory: true,
+        name: "\u5168\u90E8\u6392\u5E8F",
+        active: false,
+        list: []
+      }
+    ]);
     const doSearch = () => {
       if (content.value == "") {
         proxy.$message.toast("\u8BF7\u8F93\u5165\u641C\u7D22\u5185\u5BB9");
@@ -48,7 +68,10 @@ const _sfc_main = {
       doSearch();
     };
     let changeTab = (id) => {
-      console.log("\u70B9\u51FB\u4E86" + id);
+      console.log("\u70B9\u51FB\u4E86\u6807\u7B7E\uFF1A" + id);
+    };
+    let changeCategory = (id) => {
+      console.log("\u70B9\u51FB\u4E86\u5206\u7C7B\uFF1A", id);
     };
     return {
       params,
@@ -57,10 +80,12 @@ const _sfc_main = {
       historyWord,
       showWords,
       tabs,
+      downCategoty,
       doSearch,
       inputChange,
       changeContent,
-      changeTab
+      changeTab,
+      changeCategory
     };
   },
   onLoad(option) {
@@ -68,6 +93,7 @@ const _sfc_main = {
       let data = JSON.parse(option.data);
       this.content = data.name;
       this.focuse = false;
+      this.downCategoty[1].name = data.name;
       this.doSearch();
     } else {
       this.focuse = true;
@@ -108,7 +134,11 @@ function _sfc_render(_ctx, _cache, $props, $setup, $data, $options) {
     j: common_vendor.p({
       tabs: $setup.tabs
     }),
-    k: common_vendor.f(100, (i, k0, i0) => {
+    k: common_vendor.o($setup.changeCategory),
+    l: common_vendor.p({
+      downCategoty: $setup.downCategoty
+    }),
+    m: common_vendor.f(100, (i, k0, i0) => {
       return {
         a: common_vendor.t(i)
       };

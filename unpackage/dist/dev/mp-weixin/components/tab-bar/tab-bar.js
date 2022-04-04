@@ -40,7 +40,9 @@ function _sfc_render(_ctx, _cache, $props, $setup, $data, $options) {
       };
     }),
     b: `${$props.itemWidth}px`,
-    c: _ctx.scrollLeft
+    c: _ctx.scrollLeft,
+    d: common_vendor.o(() => {
+    })
   };
 }
 var Component = /* @__PURE__ */ common_vendor._export_sfc(_sfc_main, [["render", _sfc_render]]);

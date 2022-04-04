@@ -19,7 +19,7 @@
 			<!-- 分类标签 -->
 			<tab-bar :tabs="tabs" @changeTab="changeTab"></tab-bar>
 			<!-- 下拉过滤 -->
-			<down-bar @changeCategory="changeCategory"></down-bar>
+			<down-bar :params="params" :downCategoty="downCategoty" @changeCategory="changeCategory"></down-bar>
 			<view v-for="i in 100">{{i}}</view>
 		</view>
 	</view>
@@ -50,6 +50,26 @@ export default {
 			{id:2,name:'文章'},
 			{id:3,name:'问答'},
 		])
+		let downCategoty = ref([
+				{
+					type:'sort',
+					isAllCategory:false,
+					name:'综合排序',
+					active:false,		//是否被选择了,展示下拉框
+					list:[
+						{id:null,name:'综合排序'},
+						{id:'new',name:'热门排序'},
+						{id:'hot',name:'最新排序'}
+					]
+				},
+				{
+					type:'label',
+					isAllCategory:true,
+					name:'全部排序',
+					active:false,
+					list:[]
+				}
+			])
 		
 		//搜索
 		const doSearch = ()=>{
@@ -121,6 +141,7 @@ export default {
 			historyWord,
 			showWords,
 			tabs,
+			downCategoty,
 			
 			doSearch,
 			inputChange,
@@ -135,9 +156,9 @@ export default {
 		// #endif
 		if (option.data){
 			let data = JSON.parse(option.data)
-			// this.params = data
 			this.content = data.name
 			this.focuse = false
+			this.params = data
 			//执行搜索
 			this.doSearch()
 			

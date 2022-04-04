@@ -1,5 +1,5 @@
 <template>
-	<view class="tab-bar">
+	<view class="tab-bar" @touchmove.stop.prevent="()=>{}">
 		<scroll-view class="noScorll bar-view" scroll-x scroll-with-animation :scroll-left="scrollLeft">
 			<view class="bar-item" :style="{width: `${itemWidth}px`}" :class="{current: item.id == tabId}"
 				v-for="item in tabs" :key="item.id"

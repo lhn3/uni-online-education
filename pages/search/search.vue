@@ -19,7 +19,7 @@
 			<!-- 分类标签 -->
 			<tab-bar :tabs="tabs" @changeTab="changeTab"></tab-bar>
 			<!-- 下拉过滤 -->
-			<down-bar></down-bar>
+			<down-bar @changeCategory="changeCategory"></down-bar>
 			<view v-for="i in 100">{{i}}</view>
 		</view>
 	</view>
@@ -108,7 +108,11 @@ export default {
 		
 		//监听搜索到的数据切换tab
 		let changeTab=(id)=>{
-			console.log('点击了'+id)
+			console.log('点击了标签：'+id)
+		}
+		//监听分类切换
+		let changeCategory=(id)=>{
+			console.log('点击了分类：',id)
 		}
 		return{
 			params,
@@ -121,7 +125,8 @@ export default {
 			doSearch,
 			inputChange,
 			changeContent,
-			changeTab
+			changeTab,
+			changeCategory
 		}
 	},	
 	onLoad(option) {

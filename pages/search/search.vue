@@ -19,25 +19,27 @@
 			<!-- 分类标签 -->
 			<tab-bar :tabs="tabs" @changeTab="changeTab"></tab-bar>
 			<!-- 下拉过滤 -->
-			<course-list v-show="tabId == 1" :params="params" :content="content"></course-list>
-			<article-list v-show="tabId == 2" :params="params" :content="content"></article-list>
-			<question-list v-show="tabId == 3" :params="params" :content="content"></question-list>
+			<course-list ref="mescrollItem1" :i="1" :index="tabId" :params="params" :content="content"></course-list>
+			<article-list ref="mescrollItem2" :i="2" :index="tabId" :params="params" :content="content"></article-list>
+			<question-list ref="mescrollItem3" :i="3" :index="tabId" :params="params" :content="content"></question-list>
 			<!-- <down-bar :params="params" :downCategoty="downCategoty" @changeCategory="changeCategory"></down-bar> -->
-			<view v-for="i in 100">{{i}}</view>
 		</view>
 	</view>
 </template>
 
 <script>
-import {getCurrentInstance,ref,onBeforeMount,reactive,toRefs,onMounted} from "vue";
+import {getCurrentInstance,ref,onBeforeMount,reactive,toRefs,onMounted,nextTick} from "vue";
 import { onNavigationBarButtonTap,onNavigationBarSearchInputChanged,onNavigationBarSearchInputConfirmed } from '@dcloudio/uni-app';
 import uniSearchBar from "@/uni_modules/uni-search-bar/components/uni-search-bar/uni-search-bar.vue"
 import keywords from "./cpns/keywords.vue"
 import courseList from "./cpns/course-list.vue"
 import articleList from "./cpns/article-list.vue"
 import questionList from "./cpns/question-list.vue"
+import MescrollMoreMixin from "@/uni_modules/mescroll-uni/components/mescroll-uni/mixins/mescroll-more.js";
+	
 let webView = null
 export default {
+	mixins: [MescrollMoreMixin], // 多个mescroll-body写在子组件时, 则使用mescroll-more.js补充子组件的页面生命周期
 	components:{
 		'uni-search-bar':uniSearchBar,
 		'keywords':keywords,
@@ -58,21 +60,29 @@ export default {
 			{id:2,name:'文章'},
 			{id:3,name:'问答'},
 		])
-		
+		let mescrollItem1=ref()
+		let mescrollItem2=ref()
+		let mescrollItem3=ref()
 		//搜索
 		const doSearch = ()=>{
-			if(content.value == ""){
-				proxy.$message.toast('请输入搜索内容')
-			}else{
-				console.log('搜索内容:'+content.value)
-				uni.showLoading()
-				// 存储历史搜索内容
-				historyWord.value=content.value
-				showWords.value=false
-				setTimeout(()=>{
-					uni.hideLoading()
-				},1000)
-			}
+			//节流
+			proxy.$utils.throttle(()=>{
+				if(content.value == ""){
+					proxy.$message.toast('请输入搜索内容')
+				}else{
+					console.log('搜索内容:'+content.value)
+					uni.showLoading()
+					// 存储历史搜索内容
+					historyWord.value=content.value
+					showWords.value=false
+					nextTick(()=>{
+						proxy.$refs[`mescrollItem${tabId.value}`].changeCategory()
+					})
+					setTimeout(()=>{
+						uni.hideLoading()
+					},1000)
+				}
+			})
 		}
 		
 		// 监听搜索按钮点击
@@ -127,6 +137,9 @@ export default {
 			showWords,
 			tabs,
 			tabId,
+			mescrollItem1,
+			mescrollItem2,
+			mescrollItem3,
 			
 			doSearch,
 			inputChange,

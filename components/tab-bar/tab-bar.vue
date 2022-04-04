@@ -1,6 +1,6 @@
 <template>
 	<view class="tab-bar" @touchmove.stop.prevent="()=>{}">
-		<scroll-view class="noScorll bar-view" scroll-x scroll-with-animation :scroll-left="scrollLeft">
+		<scroll-view class="noScorll bar-view" scroll-x scroll-with-animation>
 			<view class="bar-item" :style="{width: `${itemWidth}px`}" :class="{current: item.id == tabId}"
 				v-for="item in tabs" :key="item.id"
 				@click="changeTabs(item.id)"

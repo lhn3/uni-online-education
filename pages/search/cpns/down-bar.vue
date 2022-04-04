@@ -37,6 +37,7 @@ export default {
 		let tabName=ref()	//选中的标签
 		let infos = ref()
 		let param = ref()
+		// 初始化深拷贝props数据
 		onMounted(()=>{
 			infos.value=JSON.parse(JSON.stringify(props.downCategoty))
 			tabName.value=infos.value[0].name
@@ -74,11 +75,11 @@ export default {
 			if(item.id==0){
 				infos.value[infos.value.length-1].name=item.cName
 				tabName.value=item.cName
-				emit('changeCategory',{label:item.cName})
+				emit('changeCategory',{labelId:null,categoryId:item.parentId})
 			}else{
 				infos.value[infos.value.length-1].name=item.name
 				tabName.value=item.name
-				emit('changeCategory',{label:item.name})
+				emit('changeCategory',{labelId:item.id,categoryId:item.parentId})
 			}
 			param.value={labelId:item.id,name:item.name,parentId:item.parentId}
 		}

@@ -19,7 +19,10 @@
 			<!-- 分类标签 -->
 			<tab-bar :tabs="tabs" @changeTab="changeTab"></tab-bar>
 			<!-- 下拉过滤 -->
-			<down-bar :params="params" :downCategoty="downCategoty" @changeCategory="changeCategory"></down-bar>
+			<course-list v-show="tabId == 1" :params="params" :content="content"></course-list>
+			<article-list v-show="tabId == 2" :params="params" :content="content"></article-list>
+			<question-list v-show="tabId == 3" :params="params" :content="content"></question-list>
+			<!-- <down-bar :params="params" :downCategoty="downCategoty" @changeCategory="changeCategory"></down-bar> -->
 			<view v-for="i in 100">{{i}}</view>
 		</view>
 	</view>
@@ -30,13 +33,17 @@ import {getCurrentInstance,ref,onBeforeMount,reactive,toRefs,onMounted} from "vu
 import { onNavigationBarButtonTap,onNavigationBarSearchInputChanged,onNavigationBarSearchInputConfirmed } from '@dcloudio/uni-app';
 import uniSearchBar from "@/uni_modules/uni-search-bar/components/uni-search-bar/uni-search-bar.vue"
 import keywords from "./cpns/keywords.vue"
-import downBar from "./cpns/down-bar.vue"
+import courseList from "./cpns/course-list.vue"
+import articleList from "./cpns/article-list.vue"
+import questionList from "./cpns/question-list.vue"
 let webView = null
 export default {
 	components:{
 		'uni-search-bar':uniSearchBar,
 		'keywords':keywords,
-		'down-bar':downBar
+		'course-list':courseList,
+		'article-list':articleList,
+		'question-list':questionList
 	},
 	setup(){
 		const { proxy } = getCurrentInstance();
@@ -44,32 +51,13 @@ export default {
 		let content = ref('')//输入框内容
 		let focuse = ref(false)//是否获取焦点，仅小程序
 		let historyWord = ref()//上次搜索内容
-		let showWords = ref(false)//是否显示搜索关键词
+		let showWords = ref(true)//是否显示搜索关键词
+		let tabId = ref(1)
 		let tabs = ref([		//搜索结果tab栏标签
 			{id:1,name:'课程'},
 			{id:2,name:'文章'},
 			{id:3,name:'问答'},
 		])
-		let downCategoty = ref([
-				{
-					type:'sort',
-					isAllCategory:false,
-					name:'综合排序',
-					active:false,		//是否被选择了,展示下拉框
-					list:[
-						{id:null,name:'综合排序'},
-						{id:'new',name:'热门排序'},
-						{id:'hot',name:'最新排序'}
-					]
-				},
-				{
-					type:'label',
-					isAllCategory:true,
-					name:'全部排序',
-					active:false,
-					list:[]
-				}
-			])
 		
 		//搜索
 		const doSearch = ()=>{
@@ -129,10 +117,7 @@ export default {
 		//监听搜索到的数据切换tab
 		let changeTab=(id)=>{
 			console.log('点击了标签：'+id)
-		}
-		//监听分类切换
-		let changeCategory=(id)=>{
-			console.log('点击了分类：',id)
+			tabId.value=id
 		}
 		return{
 			params,
@@ -141,13 +126,12 @@ export default {
 			historyWord,
 			showWords,
 			tabs,
-			downCategoty,
+			tabId,
 			
 			doSearch,
 			inputChange,
 			changeContent,
-			changeTab,
-			changeCategory
+			changeTab
 		}
 	},	
 	onLoad(option) {

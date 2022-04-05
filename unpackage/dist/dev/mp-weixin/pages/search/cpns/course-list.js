@@ -59,8 +59,8 @@ const _sfc_main = {
         active: false,
         list: [
           { id: null, name: "\u7EFC\u5408\u6392\u5E8F" },
-          { id: "new", name: "\u70ED\u95E8\u6392\u5E8F" },
-          { id: "hot", name: "\u6700\u65B0\u6392\u5E8F" }
+          { id: "hot", name: "\u70ED\u95E8\u6392\u5E8F" },
+          { id: "new", name: "\u6700\u65B0\u6392\u5E8F" }
         ]
       },
       {
@@ -93,15 +93,19 @@ const _sfc_main = {
     common_vendor.onMounted(() => {
       if (props.content)
         searchDate.content = props.content;
-      if (Object.keys(props.params).length > 0) {
-        searchDate.labelId = props.params.labelId;
-        searchDate.categoryId = props.params.parentId;
+      let paramsKeys = Object.keys(props.params);
+      let searchDateKeys = Object.keys(searchDate);
+      if (paramsKeys.length > 0) {
+        paramsKeys.forEach((item) => {
+          if (searchDateKeys.indexOf(item) != -1) {
+            searchDate[item] = props.params[item];
+          }
+        });
       }
     });
     let changeCategory = (data) => {
       let content = props.content;
       searchDate = __spreadProps(__spreadValues(__spreadValues({}, searchDate), data), { content });
-      console.log("\u6574\u5408\u641C\u7D22\u8BFE\u7A0B\u5185\u5BB9-----", searchDate);
       proxy.mescroll.resetUpScroll();
     };
     let upOption = common_vendor.ref({
@@ -111,6 +115,7 @@ const _sfc_main = {
     let upCallback = async (page) => {
       page.num;
       page.size;
+      console.log("\u6574\u5408\u641C\u7D22\u8BFE\u7A0B\u5185\u5BB9-----", searchDate);
       console.log(`\u641C\u7D22\u8BFE\u7A0B\u5F53\u524D\u7B2C${page.num}\u9875`, page.size);
       let res = await request_courseApi.getCourseList(searchDate, page.num, page.size);
       if (page.num == 1) {

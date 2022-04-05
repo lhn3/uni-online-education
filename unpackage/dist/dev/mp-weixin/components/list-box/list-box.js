@@ -15,8 +15,13 @@ const _sfc_main = {
       default: false
     }
   },
-  setup() {
-    return {};
+  setup(props, { emit }) {
+    let handleClick = () => {
+      emit("clickAll");
+    };
+    return {
+      handleClick
+    };
   }
 };
 function _sfc_render(_ctx, _cache, $props, $setup, $data, $options) {
@@ -27,7 +32,9 @@ function _sfc_render(_ctx, _cache, $props, $setup, $data, $options) {
     c: common_vendor.t($props.word)
   } : {}, {
     d: $props.all
-  }, $props.all ? {} : {});
+  }, $props.all ? {
+    e: common_vendor.o((...args) => $setup.handleClick && $setup.handleClick(...args))
+  } : {});
 }
 var Component = /* @__PURE__ */ common_vendor._export_sfc(_sfc_main, [["render", _sfc_render]]);
 wx.createComponent(Component);

@@ -46,7 +46,7 @@ export default {
 				if(Object.keys(props.value).length>0){
 					// 保持选择
 					res.forEach(item=>{
-						if(item.id == props.value.parentId) {
+						if(item.id == props.value.categoryId) {
 							activeTitle.value = item.id
 							labelList.value = item.labelList
 						}
@@ -71,10 +71,10 @@ export default {
 			if (activeLabel.value == item.id) return;
 			activeLabel.value = item.id
 			if(props.value){	//搜索页点击标签不跳转页面只发送事件
-				item.parentId=activeTitle.value	//强行加一个父级id
+				item.categoryId=activeTitle.value	//强行加一个父级id
 				emit('searchCate',item)
 			}else{
-				let params = JSON.stringify({labelId:item.id,name:item.name,parentId:activeTitle.value}) 
+				let params = JSON.stringify({labelId:item.id,name:item.name,categoryId:activeTitle.value}) 
 				proxy.navTo('/pages/search/search?data='+params)
 			}
 		}

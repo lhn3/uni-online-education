@@ -20,10 +20,10 @@
 			
 			<view class="main-list">
 				<!-- 热门推荐 -->
-				<swiper-course title="热门推荐" word="HOT" :all="true" :courseData="hotCourse"></swiper-course>
-				<scroll-course title="近期上新" word="NEW" :all="true" :courseData="newCourse"></scroll-course>
-				<swiper-course title="免费精选" word="FREE" :all="true" :courseData="freeCourse"></swiper-course>
-				<pay-course title="付费精品" word="NICE" :all="true" :courseData="payCourse"></pay-course>
+				<swiper-course title="热门推荐" word="HOT" :all="true" :courseData="hotCourse" :params="{sort:'hot'}"></swiper-course>
+				<scroll-course title="近期上新" word="NEW" :all="true" :courseData="newCourse" :params="{sort:'new'}"></scroll-course>
+				<swiper-course title="免费精选" word="FREE" :all="true" :courseData="freeCourse" :params="{isFree:1}"></swiper-course>
+				<pay-course title="付费精品" word="NICE" :all="true" :courseData="payCourse" :params="{isFree:0}"></pay-course>
 			</view>
 		</mescroll-body>
 	</view>

@@ -1,1 +1,1 @@
-<list-box wx:if="{{b}}" u-s="{{['d']}}" u-i="2bf44911-0" bind:__l="__l" u-p="{{b}}"><view wx:for="{{a}}" wx:for-item="item" wx:key="c" class="list-view"><course-item wx:if="{{item.b}}" u-i="{{item.a}}" bind:__l="__l" u-p="{{item.b}}"></course-item></view></list-box>
+<list-box wx:if="{{c}}" u-s="{{['d']}}" bindclickAll="{{b}}" u-i="2bf44911-0" bind:__l="__l" u-p="{{c}}"><view wx:for="{{a}}" wx:for-item="item" wx:key="c" class="list-view"><course-item wx:if="{{item.b}}" u-i="{{item.a}}" bind:__l="__l" u-p="{{item.b}}"></course-item></view></list-box>

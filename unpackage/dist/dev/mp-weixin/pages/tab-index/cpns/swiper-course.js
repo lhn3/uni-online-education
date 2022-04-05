@@ -25,10 +25,21 @@ const _sfc_main = {
     courseData: {
       type: Array,
       default: () => []
+    },
+    params: {
+      type: Object,
+      default: () => ({})
     }
   },
-  setup() {
-    return {};
+  setup(props) {
+    let { proxy } = common_vendor.getCurrentInstance();
+    let clickAll = () => {
+      let params = JSON.stringify(props.params);
+      proxy.navTo("/pages/search/search?data=" + params);
+    };
+    return {
+      clickAll
+    };
   }
 };
 if (!Array) {
@@ -58,7 +69,8 @@ function _sfc_render(_ctx, _cache, $props, $setup, $data, $options) {
       };
     }),
     b: `${200 * $props.row}rpx`,
-    c: common_vendor.p({
+    c: common_vendor.o($setup.clickAll),
+    d: common_vendor.p({
       title: $props.title,
       word: $props.word,
       all: $props.all

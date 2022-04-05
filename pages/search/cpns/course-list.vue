@@ -58,8 +58,8 @@ export default{
 					active:false,		//是否被选择了,展示下拉框
 					list:[
 						{id:null,name:'综合排序'},
-						{id:'new',name:'热门排序'},
-						{id:'hot',name:'最新排序'}
+						{id:'hot',name:'热门排序'},
+						{id:'new',name:'最新排序'}
 					]
 				},
 				{
@@ -94,9 +94,16 @@ export default{
 			// 初始化搜索内容
 			onMounted(()=>{
 				if(props.content) searchDate.content=props.content;
-				if(Object.keys(props.params).length>0){
-					searchDate.labelId=props.params.labelId
-					searchDate.categoryId=props.params.parentId
+				
+				let paramsKeys=Object.keys(props.params)
+				let searchDateKeys=Object.keys(searchDate)
+				if(paramsKeys.length>0){
+					//遍历params中的键与searchDate中的是否相同相同则searchDate中的数据被覆盖
+					paramsKeys.forEach(item=>{
+						if(searchDateKeys.indexOf(item) != -1){
+							searchDate[item]=props.params[item]
+						}
+					})
 				}
 			})
 			
@@ -105,7 +112,6 @@ export default{
 				//重新整合搜索内容发送请求
 				let content=props.content
 				searchDate={...searchDate,...data,content}
-				console.log('整合搜索课程内容-----',searchDate)
 				// 调用重新加载第一页，会自动调用下拉刷新，
 				//下拉刷新在调用上拉加载更多时，会将page.num设置为1，page.size设置为10
 				proxy.mescroll.resetUpScroll()
@@ -120,6 +126,7 @@ export default{
 				let pageNum = page.num; // 页码, 默认从1开始
 				let pageSize = page.size; // 页长, 默认每页10条
 				
+				console.log('整合搜索课程内容-----',searchDate)
 				console.log(`搜索课程当前第${page.num}页`,page.size)
 				let res = await getCourseList(searchDate,page.num,page.size)	//按照搜索内容搜索
 				if(page.num==1){

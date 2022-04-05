@@ -128,25 +128,37 @@ function _sfc_render(_ctx, _cache, $props, $setup, $data, $options) {
       title: "\u70ED\u95E8\u63A8\u8350",
       word: "HOT",
       all: true,
-      courseData: _ctx.hotCourse
+      courseData: _ctx.hotCourse,
+      params: {
+        sort: "hot"
+      }
     }),
     e: common_vendor.p({
       title: "\u8FD1\u671F\u4E0A\u65B0",
       word: "NEW",
       all: true,
-      courseData: _ctx.newCourse
+      courseData: _ctx.newCourse,
+      params: {
+        sort: "new"
+      }
     }),
     f: common_vendor.p({
       title: "\u514D\u8D39\u7CBE\u9009",
       word: "FREE",
       all: true,
-      courseData: _ctx.freeCourse
+      courseData: _ctx.freeCourse,
+      params: {
+        isFree: 1
+      }
     }),
     g: common_vendor.p({
       title: "\u4ED8\u8D39\u7CBE\u54C1",
       word: "NICE",
       all: true,
-      courseData: _ctx.payCourse
+      courseData: _ctx.payCourse,
+      params: {
+        isFree: 0
+      }
     }),
     h: common_vendor.sr("mescrollRef", "f5bdc598-2"),
     i: common_vendor.o(_ctx.mescrollInit),

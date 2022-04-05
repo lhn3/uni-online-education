@@ -1,9 +1,9 @@
 <template>
 	<view class="category-box">
-		<view v-for="item in categoryList.slice(0,7)" :key="item.id">
+		<view v-for="item in categoryList.slice(0,7)" :key="item.id" @click="toSearch(item.id,item.name)">
 			{{item.name}}
 		</view>
-		<view>全部分类</view>
+		<view @click="toAllCategory">全部分类</view>
 	</view>
 </template>
 
@@ -27,7 +27,21 @@ export default {
 		}
 	},
 	setup(){
-		
+		let {proxy}=getCurrentInstance()
+		// 前往搜索页
+		let toSearch=(id,name)=>{
+				let params = JSON.stringify({labelId:null,name,categoryId:id}) 
+				proxy.navTo('/pages/search/search?data='+params)
+		}
+		//前往全部分类tab页
+		let toAllCategory=()=>{
+				let params = JSON.stringify({labelId:null,name:'全部分类',categoryId:null}) 
+				proxy.navTo('/pages/search/search?data='+params)
+		}
+		return{
+			toSearch,
+			toAllCategory
+		}
 	}
 }
 </script>

@@ -75,13 +75,13 @@ export default {
 			if(item.id==0){
 				infos.value[infos.value.length-1].name=item.cName
 				tabName.value=item.cName
-				emit('changeCategory',{labelId:null,categoryId:item.parentId})
+				emit('changeCategory',{labelId:null,categoryId:item.categoryId})
 			}else{
 				infos.value[infos.value.length-1].name=item.name
 				tabName.value=item.name
-				emit('changeCategory',{labelId:item.id,categoryId:item.parentId})
+				emit('changeCategory',{labelId:item.id,categoryId:item.categoryId})
 			}
-			param.value={labelId:item.id,name:item.name,parentId:item.parentId}
+			param.value={labelId:item.id,name:item.name,categoryId:item.categoryId}
 		}
 		return{
 			infos,
@@ -100,9 +100,21 @@ export default {
 			handler:function(newValue){
 				if(Object.keys(newValue).length>0){
 					nextTick(()=>{
-						this.infos[this.infos.length-1].name=newValue.name
-						this.tabName=newValue.name
-						this.param=newValue
+						let keys=Object.keys(newValue)				//拿到传递的params参数都多的键
+						if(keys.length == 1){						//如果键只有一个
+							this.infos.forEach(item=>{
+								if(item.type == keys[0]){			//找到传递过来标签参数中type为这个键的
+									item.name = item.list.find(i=>{	//将这个对象被选择的标签名，
+										return i.id == newValue[keys[0]]//换成list中id与传递过来对象的值相等的这个对象的name
+									}).name
+									this.tabName=item.name			//选择的标签也改变
+								}
+							})
+						}else{
+							this.infos[this.infos.length-1].name=newValue.name
+							this.tabName=newValue.name
+							this.param=newValue
+						}
 					})
 				}
 			},

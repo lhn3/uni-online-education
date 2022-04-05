@@ -1,7 +1,7 @@
 <template>
 	<!-- 带头部的插槽组件 -->
 	<!-- 触底加载更多 -->
-	<list-box :title="title" :word="word" :all="all">
+	<list-box :title="title" :word="word" :all="all" @clickAll="clickAll">
 		<view class="list-view" v-for="item in courseData" :key="item.id">
 			<course-item :item="item"></course-item>
 		</view>
@@ -28,10 +28,21 @@ export default {
 		courseData:{
 			type:Array,
 			default:()=>[]
+		},
+		params:{
+			type:Object,
+			default:()=>({})
 		}
 	},
-	setup(){
-		return{}
+	setup(props){
+		let {proxy}=getCurrentInstance()
+		let clickAll=()=>{
+			let params = JSON.stringify(props.params)
+			proxy.navTo('/pages/search/search?data='+params)
+		}
+		return{
+			clickAll
+		}
 	}
 }
 </script>

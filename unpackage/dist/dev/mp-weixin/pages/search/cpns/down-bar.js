@@ -49,13 +49,13 @@ const _sfc_main = {
       if (item.id == 0) {
         infos.value[infos.value.length - 1].name = item.cName;
         tabName.value = item.cName;
-        emit("changeCategory", { labelId: null, categoryId: item.parentId });
+        emit("changeCategory", { labelId: null, categoryId: item.categoryId });
       } else {
         infos.value[infos.value.length - 1].name = item.name;
         tabName.value = item.name;
-        emit("changeCategory", { labelId: item.id, categoryId: item.parentId });
+        emit("changeCategory", { labelId: item.id, categoryId: item.categoryId });
       }
-      param.value = { labelId: item.id, name: item.name, parentId: item.parentId };
+      param.value = { labelId: item.id, name: item.name, categoryId: item.categoryId };
     };
     return {
       infos,
@@ -72,9 +72,21 @@ const _sfc_main = {
       handler: function(newValue) {
         if (Object.keys(newValue).length > 0) {
           common_vendor.nextTick(() => {
-            this.infos[this.infos.length - 1].name = newValue.name;
-            this.tabName = newValue.name;
-            this.param = newValue;
+            let keys = Object.keys(newValue);
+            if (keys.length == 1) {
+              this.infos.forEach((item) => {
+                if (item.type == keys[0]) {
+                  item.name = item.list.find((i) => {
+                    return i.id == newValue[keys[0]];
+                  }).name;
+                  this.tabName = item.name;
+                }
+              });
+            } else {
+              this.infos[this.infos.length - 1].name = newValue.name;
+              this.tabName = newValue.name;
+              this.param = newValue;
+            }
           });
         }
       },

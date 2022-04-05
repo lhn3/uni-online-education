@@ -5,8 +5,8 @@
 				<text class="name">{{title}}</text>
 				<text class="word" v-if="word">{{word}}</text>
 			</view>
-			<view class="all" v-if="all">
-				<text>全部</text>
+			<view class="all" v-if="all" @click="handleClick">
+				<text >全部</text>
 				<text class="iconfont icon-right"></text>
 			</view>
 		</view>
@@ -32,8 +32,13 @@ export default {
 			default:false
 		},
 	},
-	setup(){
-		return{}
+	setup(props,{emit}){
+		let handleClick=()=>{
+			emit('clickAll')
+		}
+		return{
+			handleClick
+		}
 	}
 }
 </script>

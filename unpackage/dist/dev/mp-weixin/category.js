@@ -23,7 +23,7 @@ const _sfc_main = {
         });
         if (Object.keys(props.value).length > 0) {
           res.forEach((item) => {
-            if (item.id == props.value.parentId) {
+            if (item.id == props.value.categoryId) {
               activeTitle.value = item.id;
               labelList.value = item.labelList;
             }
@@ -46,10 +46,10 @@ const _sfc_main = {
         return;
       activeLabel.value = item.id;
       if (props.value) {
-        item.parentId = activeTitle.value;
+        item.categoryId = activeTitle.value;
         emit("searchCate", item);
       } else {
-        let params = JSON.stringify({ labelId: item.id, name: item.name, parentId: activeTitle.value });
+        let params = JSON.stringify({ labelId: item.id, name: item.name, categoryId: activeTitle.value });
         proxy.navTo("/pages/search/search?data=" + params);
       }
     };

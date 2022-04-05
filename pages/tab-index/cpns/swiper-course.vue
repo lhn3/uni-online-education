@@ -1,6 +1,6 @@
 <template>
 	<!-- 带头部的插槽组件 -->
-	<list-box :title="title" :word="word" :all="all">
+	<list-box :title="title" :word="word" :all="all" @clickAll="clickAll">
 		<swiper next-margin="20rpx" :style="{'height': `${200*row}rpx`}">
 			<swiper-item v-for="(col,index) in column" :key="col">
 				<course-item v-for="item in courseData.slice(index*row,(index+1)*row)" :item="item" :key="item.id"></course-item>
@@ -37,10 +37,21 @@ export default {
 		courseData:{
 			type:Array,
 			default:()=>[]
+		},
+		params:{
+			type:Object,
+			default:()=>({})
 		}
 	},
-	setup(){
-		return{}
+	setup(props){
+		let {proxy}=getCurrentInstance()
+		let clickAll=()=>{
+			let params = JSON.stringify(props.params)
+			proxy.navTo('/pages/search/search?data='+params)
+		}
+		return{
+			clickAll
+		}
 	}
 }
 </script>

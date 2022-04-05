@@ -67,14 +67,16 @@ export default{
 			])
 			//监听分类切换
 			let changeCategory=(id)=>{
-				console.log('点击了分类：',id)
+				console.log('问答点击了分类：',id)
+				proxy.mescroll.resetUpScroll()
 			}
 			
 			/*上拉加载的回调: 其中page.num:当前页 从1开始, page.size:每页数据条数,默认10 */
 			let upCallback=(page)=> {
 				// this.i: 每个tab页的专属下标
 				// this.index: 当前tab的下标
-				console.log('上拉加载',page.num,page.size,props.content)
+				console.log('问答上拉加载',page.num,page.size,props.content)
+				proxy.mescroll.endSuccess(0)
 			}
 		return{
 			downCategoty,

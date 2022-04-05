@@ -3,7 +3,9 @@
   "usingComponents": {
     "uni-search-bar": "../../uni_modules/uni-search-bar/components/uni-search-bar/uni-search-bar",
     "keywords": "./cpns/keywords",
-    "down-bar": "./cpns/down-bar",
+    "course-list": "./cpns/course-list",
+    "article-list": "./cpns/article-list",
+    "question-list": "./cpns/question-list",
     "tab-bar": "../../components/tab-bar/tab-bar"
   }
 }

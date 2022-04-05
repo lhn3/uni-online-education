@@ -13,7 +13,6 @@ const _sfc_main = {
     let historyWords = common_vendor.ref([]);
     common_vendor.onMounted(() => {
       historyWords.value = [...common_vendor.index.getStorageSync("historyWords")];
-      console.log(common_vendor.index.getStorageSync("historyWords"));
     });
     common_vendor.watch(() => props.historyWord, (newValue) => {
       if (historyWords.value.indexOf(newValue) != -1) {

@@ -132,7 +132,7 @@ export default {
 			let pageSize = page.size; // 页长, 默认每页10条
 			console.log(`当前第${page.num}页`)
 			// 如果是第一页就是下拉刷新
-			//此组件默认会调用一次下拉刷新，onload就不用调用了
+			//此组件默认会调用一次下拉刷新(onload就不用调用了)
 			if(page.num==1){
 				await getPageInfo()
 			}else{

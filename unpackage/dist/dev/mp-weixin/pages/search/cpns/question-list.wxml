@@ -1,0 +1,1 @@
+<view hidden="{{!j}}"><down-bar wx:if="{{b}}" bindchangeCategory="{{a}}" u-i="4578d310-0" bind:__l="__l" u-p="{{b}}"></down-bar><mescroll-body wx:if="{{i}}" class="r" u-s="{{['d']}}" u-r="{{e}}" bindinit="{{f}}" binddown="{{g}}" bindup="{{h}}" u-i="4578d310-1" bind:__l="__l" u-p="{{i}}"><view wx:for="{{c}}" wx:for-item="i">{{i.a}}</view></mescroll-body></view>

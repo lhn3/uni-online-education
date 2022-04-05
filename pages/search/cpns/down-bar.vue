@@ -129,7 +129,7 @@ export default {
 		left: 0;
 		right: 0;
 		.name {
-			padding-left: 115rpx;
+			padding-left: 40rpx;
 		}
 		.category {
 			height: 580rpx!important;

@@ -84,7 +84,7 @@
                 "navigationBarTitleText": "搜索",
 				"app-plus":{
 					"scrollIndicator":"none",//不显示滚动条
-					"bounce":"none",		//关闭回弹
+					// "bounce":"none",		//关闭回弹
 					"titleNView":{//自定义导航栏App、H5
 						// "autoBackButton":false,//返回按钮
 						"searchInput":{//搜索

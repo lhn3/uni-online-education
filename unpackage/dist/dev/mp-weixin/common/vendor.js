@@ -5941,6 +5941,7 @@ exports.getCurrentInstance = getCurrentInstance;
 exports.index = index;
 exports.initVueI18n = initVueI18n;
 exports.n = n;
+exports.nextTick = nextTick;
 exports.o = o;
 exports.onMounted = onMounted;
 exports.onNavigationBarButtonTap = onNavigationBarButtonTap;

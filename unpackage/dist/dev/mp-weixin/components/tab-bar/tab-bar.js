@@ -40,8 +40,7 @@ function _sfc_render(_ctx, _cache, $props, $setup, $data, $options) {
       };
     }),
     b: `${$props.itemWidth}px`,
-    c: _ctx.scrollLeft,
-    d: common_vendor.o(() => {
+    c: common_vendor.o(() => {
     })
   };
 }

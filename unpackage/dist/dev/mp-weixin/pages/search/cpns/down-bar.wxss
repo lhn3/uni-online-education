@@ -26,7 +26,7 @@
   right: 0;
 }
 .item-list .name {
-  padding-left: 115rpx;
+  padding-left: 40rpx;
 }
 .item-list .category {
   height: 580rpx !important;

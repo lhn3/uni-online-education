@@ -50,9 +50,9 @@ export default {
 	setup(){
 		const { proxy } = getCurrentInstance();
 		let params = ref({})//页面跳转传参
-		let content = ref('')//输入框内容
+		let content = ref(null)//输入框内容
 		let focuse = ref(false)//是否获取焦点，仅小程序
-		let historyWord = ref()//上次搜索内容
+		let historyWord = ref(null)//上次搜索内容
 		let showWords = ref(true)//是否显示搜索关键词
 		let tabId = ref(1)
 		let tabs = ref([		//搜索结果tab栏标签
@@ -63,24 +63,24 @@ export default {
 		let mescrollItem1=ref()
 		let mescrollItem2=ref()
 		let mescrollItem3=ref()
-		//搜索
+		//假装搜索的一整个大动作
 		const doSearch = ()=>{
 			//节流
 			proxy.$utils.throttle(()=>{
-				if(content.value == ""){
+				if((content.value == "" || content.value == null) && Object.keys(params.value).length==0){
 					proxy.$message.toast('请输入搜索内容')
 				}else{
 					console.log('搜索内容:'+content.value)
-					uni.showLoading()
+					// uni.showLoading()
 					// 存储历史搜索内容
 					historyWord.value=content.value
 					showWords.value=false
 					nextTick(()=>{
 						proxy.$refs[`mescrollItem${tabId.value}`].changeCategory()
 					})
-					setTimeout(()=>{
-						uni.hideLoading()
-					},1000)
+					// setTimeout(()=>{
+						// uni.hideLoading()
+					// },1000)
 				}
 			})
 		}
@@ -153,12 +153,11 @@ export default {
 		// #endif
 		if (option.data){
 			let data = JSON.parse(option.data)
-			this.content = data.name
+			// this.content = data.name
 			this.focuse = false
 			this.params = data
 			//执行搜索
 			this.doSearch()
-			
 		}else{
 			//自动获取焦点
 			this.focuse = true

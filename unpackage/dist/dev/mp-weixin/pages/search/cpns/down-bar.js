@@ -4,6 +4,10 @@ const category = () => "../../tab-category/category2.js";
 const _sfc_main = {
   components: { category },
   props: {
+    params: {
+      type: Object,
+      default: () => ({})
+    },
     downCategoty: {
       type: Array,
       default: () => []
@@ -12,6 +16,7 @@ const _sfc_main = {
   setup(props, { emit }) {
     let tabName = common_vendor.ref();
     let infos = common_vendor.ref();
+    let param = common_vendor.ref();
     common_vendor.onMounted(() => {
       infos.value = JSON.parse(JSON.stringify(props.downCategoty));
       tabName.value = infos.value[0].name;
@@ -37,13 +42,45 @@ const _sfc_main = {
         i.active = false;
       });
     };
+    let searchCate = (item) => {
+      infos.value.forEach((i) => {
+        i.active = false;
+      });
+      if (item.id == 0) {
+        infos.value[infos.value.length - 1].name = item.cName;
+        tabName.value = item.cName;
+        emit("changeCategory", { labelId: null, categoryId: item.parentId });
+      } else {
+        infos.value[infos.value.length - 1].name = item.name;
+        tabName.value = item.name;
+        emit("changeCategory", { labelId: item.id, categoryId: item.parentId });
+      }
+      param.value = { labelId: item.id, name: item.name, parentId: item.parentId };
+    };
     return {
       infos,
       tabName,
+      param,
       changeTab,
       changeCild,
-      closeCategory
+      closeCategory,
+      searchCate
     };
+  },
+  watch: {
+    params: {
+      handler: function(newValue) {
+        if (Object.keys(newValue).length > 0) {
+          common_vendor.nextTick(() => {
+            this.infos[this.infos.length - 1].name = newValue.name;
+            this.tabName = newValue.name;
+            this.param = newValue;
+          });
+        }
+      },
+      immediate: true,
+      deep: true
+    }
   }
 };
 if (!Array) {
@@ -65,9 +102,13 @@ function _sfc_render(_ctx, _cache, $props, $setup, $data, $options) {
       }, item.active ? common_vendor.e({
         g: item.isAllCategory
       }, item.isAllCategory ? {
-        h: "561051e5-0-" + i0
+        h: common_vendor.o($setup.searchCate),
+        i: "561051e5-0-" + i0,
+        j: common_vendor.p({
+          value: $setup.param
+        })
       } : {
-        i: common_vendor.f(item.list, (i, k1, i1) => {
+        k: common_vendor.f(item.list, (i, k1, i1) => {
           return {
             a: common_vendor.t(i.name),
             b: i.name == $setup.tabName ? 1 : "",
@@ -76,11 +117,11 @@ function _sfc_render(_ctx, _cache, $props, $setup, $data, $options) {
           };
         })
       }) : {}, {
-        j: item.active
+        l: item.active
       }, item.active ? {
-        k: common_vendor.o((...args) => $setup.closeCategory && $setup.closeCategory(...args))
+        m: common_vendor.o((...args) => $setup.closeCategory && $setup.closeCategory(...args))
       } : {}, {
-        l: item.type
+        n: item.type
       });
     }),
     b: common_vendor.o(() => {

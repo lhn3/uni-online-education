@@ -5,6 +5,7 @@ var common_vendor = require("./common/vendor.js");
 var utils_showMessage = require("./utils/showMessage.js");
 var request_request = require("./request/request.js");
 var common_mixin_mixin = require("./common/mixin/mixin.js");
+var utils_util = require("./utils/util.js");
 if (!Math) {
   "./pages/tab-index/index.js";
   "./pages/tab-category/category.js";
@@ -29,6 +30,7 @@ function createApp() {
   const app = common_vendor.createSSRApp(_sfc_main);
   app.config.globalProperties.$message = utils_showMessage.message;
   app.config.globalProperties.$request = request_request.request;
+  app.config.globalProperties.$utils = utils_util.utils;
   app.mixin(common_mixin_mixin.mixin);
   return {
     app

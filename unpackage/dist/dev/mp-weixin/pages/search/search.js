@@ -1,58 +1,49 @@
 "use strict";
 var common_vendor = require("../../common/vendor.js");
+var uni_modules_mescrollUni_components_mescrollUni_mixins_mescrollMore = require("../../uni_modules/mescroll-uni/components/mescroll-uni/mixins/mescroll-more.js");
 const uniSearchBar = () => "../../uni_modules/uni-search-bar/components/uni-search-bar/uni-search-bar.js";
 const keywords = () => "./cpns/keywords.js";
-const downBar = () => "./cpns/down-bar.js";
+const courseList = () => "./cpns/course-list.js";
+const articleList = () => "./cpns/article-list.js";
+const questionList = () => "./cpns/question-list.js";
 const _sfc_main = {
+  mixins: [uni_modules_mescrollUni_components_mescrollUni_mixins_mescrollMore.MescrollMoreMixin],
   components: {
     "uni-search-bar": uniSearchBar,
     "keywords": keywords,
-    "down-bar": downBar
+    "course-list": courseList,
+    "article-list": articleList,
+    "question-list": questionList
   },
   setup() {
     const { proxy } = common_vendor.getCurrentInstance();
     let params = common_vendor.ref({});
-    let content = common_vendor.ref("");
+    let content = common_vendor.ref(null);
     let focuse = common_vendor.ref(false);
-    let historyWord = common_vendor.ref();
-    let showWords = common_vendor.ref(false);
+    let historyWord = common_vendor.ref(null);
+    let showWords = common_vendor.ref(true);
+    let tabId = common_vendor.ref(1);
     let tabs = common_vendor.ref([
       { id: 1, name: "\u8BFE\u7A0B" },
       { id: 2, name: "\u6587\u7AE0" },
       { id: 3, name: "\u95EE\u7B54" }
     ]);
-    let downCategoty = common_vendor.ref([
-      {
-        type: "sort",
-        isAllCategory: false,
-        name: "\u7EFC\u5408\u6392\u5E8F",
-        active: false,
-        list: [
-          { id: null, name: "\u7EFC\u5408\u6392\u5E8F" },
-          { id: "new", name: "\u70ED\u95E8\u6392\u5E8F" },
-          { id: "hot", name: "\u6700\u65B0\u6392\u5E8F" }
-        ]
-      },
-      {
-        type: "label",
-        isAllCategory: true,
-        name: "\u5168\u90E8\u6392\u5E8F",
-        active: false,
-        list: []
-      }
-    ]);
+    let mescrollItem1 = common_vendor.ref();
+    let mescrollItem2 = common_vendor.ref();
+    let mescrollItem3 = common_vendor.ref();
     const doSearch = () => {
-      if (content.value == "") {
-        proxy.$message.toast("\u8BF7\u8F93\u5165\u641C\u7D22\u5185\u5BB9");
-      } else {
-        console.log("\u641C\u7D22\u5185\u5BB9:" + content.value);
-        common_vendor.index.showLoading();
-        historyWord.value = content.value;
-        showWords.value = false;
-        setTimeout(() => {
-          common_vendor.index.hideLoading();
-        }, 1e3);
-      }
+      proxy.$utils.throttle(() => {
+        if ((content.value == "" || content.value == null) && Object.keys(params.value).length == 0) {
+          proxy.$message.toast("\u8BF7\u8F93\u5165\u641C\u7D22\u5185\u5BB9");
+        } else {
+          console.log("\u641C\u7D22\u5185\u5BB9:" + content.value);
+          historyWord.value = content.value;
+          showWords.value = false;
+          common_vendor.nextTick(() => {
+            proxy.$refs[`mescrollItem${tabId.value}`].changeCategory();
+          });
+        }
+      });
     };
     common_vendor.onNavigationBarButtonTap((e) => {
       doSearch();
@@ -69,9 +60,7 @@ const _sfc_main = {
     };
     let changeTab = (id) => {
       console.log("\u70B9\u51FB\u4E86\u6807\u7B7E\uFF1A" + id);
-    };
-    let changeCategory = (id) => {
-      console.log("\u70B9\u51FB\u4E86\u5206\u7C7B\uFF1A", id);
+      tabId.value = id;
     };
     return {
       params,
@@ -80,20 +69,21 @@ const _sfc_main = {
       historyWord,
       showWords,
       tabs,
-      downCategoty,
+      tabId,
+      mescrollItem1,
+      mescrollItem2,
+      mescrollItem3,
       doSearch,
       inputChange,
       changeContent,
-      changeTab,
-      changeCategory
+      changeTab
     };
   },
   onLoad(option) {
     if (option.data) {
       let data = JSON.parse(option.data);
-      this.content = data.name;
       this.focuse = false;
-      this.downCategoty[1].name = data.name;
+      this.params = data;
       this.doSearch();
     } else {
       this.focuse = true;
@@ -104,8 +94,10 @@ if (!Array) {
   const _easycom_uni_search_bar2 = common_vendor.resolveComponent("uni-search-bar");
   const _component_keywords = common_vendor.resolveComponent("keywords");
   const _easycom_tab_bar2 = common_vendor.resolveComponent("tab-bar");
-  const _component_down_bar = common_vendor.resolveComponent("down-bar");
-  (_easycom_uni_search_bar2 + _component_keywords + _easycom_tab_bar2 + _component_down_bar)();
+  const _component_course_list = common_vendor.resolveComponent("course-list");
+  const _component_article_list = common_vendor.resolveComponent("article-list");
+  const _component_question_list = common_vendor.resolveComponent("question-list");
+  (_easycom_uni_search_bar2 + _component_keywords + _easycom_tab_bar2 + _component_course_list + _component_article_list + _component_question_list)();
 }
 const _easycom_uni_search_bar = () => "../../uni_modules/uni-search-bar/components/uni-search-bar/uni-search-bar.js";
 const _easycom_tab_bar = () => "../../components/tab-bar/tab-bar.js";
@@ -134,14 +126,26 @@ function _sfc_render(_ctx, _cache, $props, $setup, $data, $options) {
     j: common_vendor.p({
       tabs: $setup.tabs
     }),
-    k: common_vendor.o($setup.changeCategory),
+    k: common_vendor.sr("mescrollItem1", "1c2fb258-3"),
     l: common_vendor.p({
-      downCategoty: $setup.downCategoty
+      i: 1,
+      index: $setup.tabId,
+      params: $setup.params,
+      content: $setup.content
     }),
-    m: common_vendor.f(100, (i, k0, i0) => {
-      return {
-        a: common_vendor.t(i)
-      };
+    m: common_vendor.sr("mescrollItem2", "1c2fb258-4"),
+    n: common_vendor.p({
+      i: 2,
+      index: $setup.tabId,
+      params: $setup.params,
+      content: $setup.content
+    }),
+    o: common_vendor.sr("mescrollItem3", "1c2fb258-5"),
+    p: common_vendor.p({
+      i: 3,
+      index: $setup.tabId,
+      params: $setup.params,
+      content: $setup.content
     })
   } : {});
 }

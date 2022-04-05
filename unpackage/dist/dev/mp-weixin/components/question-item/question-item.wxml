@@ -1,0 +1,1 @@
+<view class="question-item" bindtap="{{f}}"><text class="title text-ellipsis">{{a}}</text><view class="foot space-between"><view class="info-left"><text>{{b}} 回答 · </text><text>{{c}} 浏览 </text></view><view class="info-right"><text>{{d}} · </text><text>{{e}}</text></view></view></view>

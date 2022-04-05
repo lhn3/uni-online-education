@@ -105,18 +105,22 @@ export default{
 				//重新整合搜索内容发送请求
 				let content=props.content
 				searchDate={...searchDate,...data,content}
-				console.log('整合搜索内容-----',searchDate)
+				console.log('整合搜索课程内容-----',searchDate)
 				// 调用重新加载第一页，会自动调用下拉刷新，
 				//下拉刷新在调用上拉加载更多时，会将page.num设置为1，page.size设置为10
 				proxy.mescroll.resetUpScroll()
 			}
+			let upOption=ref({
+				auto:false,//不自动加载
+				noMoreSize:4//列表已无数据可设置显示内容
+			})
 
 			/*上拉加载的回调: 其中page.num:当前页 从1开始, page.size:每页数据条数,默认10 */
 			let upCallback=async (page)=> {
 				let pageNum = page.num; // 页码, 默认从1开始
 				let pageSize = page.size; // 页长, 默认每页10条
 				
-				console.log(`搜索当前第${page.num}页`,page.size)
+				console.log(`搜索课程当前第${page.num}页`,page.size)
 				let res = await getCourseList(searchDate,page.num,page.size)	//按照搜索内容搜索
 				if(page.num==1){
 					courseList.value = []
@@ -133,6 +137,7 @@ export default{
 		return{
 			downCategoty,
 			courseList,
+			upOption,
 			
 			changeCategory,
 			upCallback

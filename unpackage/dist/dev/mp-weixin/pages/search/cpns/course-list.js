@@ -101,13 +101,17 @@ const _sfc_main = {
     let changeCategory = (data) => {
       let content = props.content;
       searchDate = __spreadProps(__spreadValues(__spreadValues({}, searchDate), data), { content });
-      console.log("\u6574\u5408\u641C\u7D22\u5185\u5BB9-----", searchDate);
+      console.log("\u6574\u5408\u641C\u7D22\u8BFE\u7A0B\u5185\u5BB9-----", searchDate);
       proxy.mescroll.resetUpScroll();
     };
+    let upOption = common_vendor.ref({
+      auto: false,
+      noMoreSize: 4
+    });
     let upCallback = async (page) => {
       page.num;
       page.size;
-      console.log(`\u641C\u7D22\u5F53\u524D\u7B2C${page.num}\u9875`, page.size);
+      console.log(`\u641C\u7D22\u8BFE\u7A0B\u5F53\u524D\u7B2C${page.num}\u9875`, page.size);
       let res = await request_courseApi.getCourseList(searchDate, page.num, page.size);
       if (page.num == 1) {
         courseList.value = [];
@@ -120,6 +124,7 @@ const _sfc_main = {
     return {
       downCategoty,
       courseList,
+      upOption,
       changeCategory,
       upCallback
     };
@@ -159,7 +164,7 @@ function _sfc_render(_ctx, _cache, $props, $setup, $data, $options) {
     h: common_vendor.o($setup.upCallback),
     i: common_vendor.p({
       down: _ctx.downOption,
-      up: _ctx.upOption
+      up: $setup.upOption
     }),
     j: $props.i === $props.index
   };

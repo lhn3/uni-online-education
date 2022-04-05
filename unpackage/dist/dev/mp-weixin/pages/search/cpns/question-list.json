@@ -2,6 +2,7 @@
   "component": true,
   "usingComponents": {
     "down-bar": "./down-bar",
-    "mescroll-body": "../../../uni_modules/mescroll-uni/components/mescroll-body/mescroll-body"
+    "mescroll-body": "../../../uni_modules/mescroll-uni/components/mescroll-body/mescroll-body",
+    "question-item": "../../../components/question-item/question-item"
   }
 }

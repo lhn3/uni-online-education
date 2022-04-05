@@ -11,7 +11,7 @@
 			:up="upOption" 
 			@up="upCallback">
 			<!-- 数据列表 -->
-			<view v-for="i in 100">{{i}}</view>
+			<question-item v-for="item in questionList" :key="item.id" :item="item">{{i}}</question-item>
 		</mescroll-body>
 	</view>
 </template>
@@ -19,12 +19,15 @@
 <script>
 import {getCurrentInstance,ref,onBeforeMount,reactive,toRefs,onMounted} from "vue";
 import downBar from "./down-bar.vue"
+import mescrollBody from "@/uni_modules/mescroll-uni/components/mescroll-body/mescroll-body.vue";
 import MescrollMixin from "@/uni_modules/mescroll-uni/components/mescroll-uni/mescroll-mixins.js";
 import MescrollMoreItemMixin from "@/uni_modules/mescroll-uni/components/mescroll-uni/mixins/mescroll-more-item.js";
+import {getQuestionList} from '@/request/question-api.js'
 export default{
 	mixins: [MescrollMixin,MescrollMoreItemMixin], // 注意此处还需使用MescrollMoreItemMixin (必须写在MescrollMixin后面)
 	components:{
-		'down-bar':downBar
+		'down-bar':downBar,
+		'mescroll-body':mescrollBody
 	},
 	props:{
 		i: Number, // 每个tab页的专属id (除了支付宝小程序必须在这里定义, 其他平台都可不用写, 因为已在MescrollMoreItemMixin定义)
@@ -65,26 +68,68 @@ export default{
 					list:[]
 				}
 			])
+			//搜索到的问答列表
+			let questionList = ref([])
+			//搜索条件对象
+			let searchDate = reactive({
+				content:null,
+				sort:null,
+				isFree:null,
+				labelId:null,
+				categoryId:null
+			})
+			// 初始化搜索内容
+			onMounted(()=>{
+				if(props.content) searchDate.content=props.content;
+				if(Object.keys(props.params).length>0){
+					searchDate.labelId=props.params.labelId
+					searchDate.categoryId=props.params.parentId
+				}
+			})
+			
 			//监听分类切换
-			let changeCategory=(id)=>{
-				console.log('问答点击了分类：',id)
+			let changeCategory=(data)=>{
+				//重新整合搜索内容发送请求
+				let content=props.content
+				searchDate={...searchDate,...data,content}
+				console.log('整合搜索问答内容-----',searchDate)
+				// 调用重新加载第一页，会自动调用下拉刷新，
+				//下拉刷新在调用上拉加载更多时，会将page.num设置为1，page.size设置为10
 				proxy.mescroll.resetUpScroll()
 			}
 			
+			let upOption=ref({
+				auto:false,//不自动加载
+				noMoreSize:4//列表已无数据可设置显示内容
+			})
+			
 			/*上拉加载的回调: 其中page.num:当前页 从1开始, page.size:每页数据条数,默认10 */
-			let upCallback=(page)=> {
-				// this.i: 每个tab页的专属下标
-				// this.index: 当前tab的下标
-				console.log('问答上拉加载',page.num,page.size,props.content)
-				proxy.mescroll.endSuccess(0)
+			let upCallback=async (page)=> {
+				let pageNum = page.num; // 页码, 默认从1开始
+				let pageSize = page.size; // 页长, 默认每页10条
+				
+				console.log(`搜索问答当前第${page.num}页`,page.size)
+				let res = await getQuestionList(searchDate,page.num,page.size)	//按照搜索内容搜索
+				if(page.num==1){
+					questionList.value = []
+					// 回到顶部
+					proxy.mescroll.scrollTo(0,100)
+				}
+				questionList.value = [...questionList.value,...res.records]
+				//判断数组长度有没有大于会等于总长度
+				proxy.mescroll.endBySize(questionList.value.length,res.total)
+				proxy.mescroll.endErr()
+				//搜索成功的条数
+				// proxy.mescroll.endSuccess(1)
 			}
 		return{
 			downCategoty,
+			questionList,
+			upOption,
 			
 			changeCategory,
 			upCallback
 		}
-		
 	}
 }
 </script>

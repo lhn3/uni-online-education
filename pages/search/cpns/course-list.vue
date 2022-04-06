@@ -116,6 +116,7 @@ export default{
 				//下拉刷新在调用上拉加载更多时，会将page.num设置为1，page.size设置为10
 				proxy.mescroll.resetUpScroll()
 			}
+			
 			let upOption=ref({
 				auto:false,//不自动加载
 				noMoreSize:4//列表已无数据可设置显示内容

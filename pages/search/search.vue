@@ -71,16 +71,12 @@ export default {
 					proxy.$message.toast('请输入搜索内容')
 				}else{
 					console.log('搜索内容:'+content.value)
-					// uni.showLoading()
 					// 存储历史搜索内容
 					historyWord.value=content.value
 					showWords.value=false
 					nextTick(()=>{
 						proxy.$refs[`mescrollItem${tabId.value}`].changeCategory()
 					})
-					// setTimeout(()=>{
-						// uni.hideLoading()
-					// },1000)
 				}
 			})
 		}

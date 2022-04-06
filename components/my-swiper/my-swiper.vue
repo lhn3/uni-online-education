@@ -2,7 +2,7 @@
 	<view class="main">
 		<view class="sw-background" ></view>
 		<swiper :indicator-dots="true" :circular="true" :autoplay="true" :interval="3000" :duration="1000" class="swiper" @change="change">
-			<swiper-item class="swiper-item" v-for="item in banners" :key="item.id">
+			<swiper-item class="swiper-item" v-for="item in banners" :key="item.id" @click="navTo(item.advertUrl)">
 				<image :src="item.imageUrl" class="swiper-img"></image>
 			</swiper-item>
 		</swiper>
@@ -18,27 +18,27 @@ export default {
 			default:()=>[
 				// {
 				// 	id:1,
-				// 	imageUrl:'/static/images/banner1.jpg',
-				// 	background:'#45328c',
+				// 	imageUrl:'/static/images/banner6.jpg',
+				// 	background:'#00c0ff',
 				// 	adverUrl:''
 				// },
 				// {
 				// 	id:2,
-				// 	imageUrl:'/static/images/banner2.jpg',
-				// 	background:'#006c00',
+				// 	imageUrl:'/static/images/banner5.jpg',
+				// 	background:'#254284',
 				// 	adverUrl:''
 				// },
 				// {
 				// 	id:3,
-				// 	imageUrl:'/static/images/banner3.jpg',
-				// 	background:'#0072b7',
+				// 	imageUrl:'/static/images/banner7.jpg',
+				// 	background:'#0d4277',
 				// 	adverUrl:''
 				// }
 			]
 		}
 	},
 	setup(props){
-		let background = ref('#45328c')
+		let background = ref('#254284')
 		const change = (e)=>{
 			background.value = props.banners[e.detail.current].background
 		}

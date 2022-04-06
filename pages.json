@@ -75,7 +75,6 @@
             {
                 "navigationBarTitleText": "扫描结果"
             }
-            
         }
         ,{
             "path" : "pages/search/search",
@@ -105,8 +104,29 @@
 					}
 				}
             }
-            
         }
+		,{
+		    "path" : "pages/course/course-details",
+		    "style" : {
+		        // "navigationBarTitleText": "课程详情",
+				"app-plus":{
+					"scrollIndicator":"none",//不显示滚动条
+					"bounce":"none",		//关闭回弹
+					"titleNView":{//自定义导航栏App、H5
+						"type":"transparent",//
+						"titleText":"课程详情"
+						,"buttons":[//按钮
+							{
+								"type":"share",
+								"fontSize":"28",
+								"float": "right",
+								"background":"rgba(0,0,0,0)"
+							}
+						]
+					}
+				}
+			}
+		}
     ],
 	"globalStyle": {
 		"navigationBarBackgroundColor": "#A2CD5A",

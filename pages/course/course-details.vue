@@ -56,7 +56,6 @@ export default {
 		
 		//页面触底事件--------------------------------------------
 		onReachBottom(()=>{
-			console.log('触底事件')
 			isScroll.value=true
 		})
 		// 滚动区滚动到顶部事件
@@ -66,9 +65,8 @@ export default {
 				scrollTop:0
 			})
 		}
-		//页面滚动实时监听事件
+		//页面滚动实时监听事件(头部页面展示出时也禁用分类区滚动)
 		onPageScroll((event)=>{
-			console.log(event.scrollTop,detailToTop.value-statusNavHeight.value)
 			if(event.scrollTop < detailToTop.value-statusNavHeight.value){
 				isScroll.value = false
 			}else{

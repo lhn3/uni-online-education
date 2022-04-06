@@ -109,6 +109,7 @@
 		    "path" : "pages/course/course-details",
 		    "style" : {
 		        // "navigationBarTitleText": "课程详情",
+				"onReachBottomDistance":0,
 				"app-plus":{
 					"scrollIndicator":"none",//不显示滚动条
 					"bounce":"none",		//关闭回弹

@@ -24,7 +24,8 @@ export default {
 	props: {
 		groupList: {
 			type: Array,
-			default: () => groupData
+			// default: () => groupData
+			default: () => []
 		}
 	},
 	setup(){

@@ -23,27 +23,27 @@
 <script>
 export default {
 	props: {
-		isBuy: Boolean, // 是否购买
+		// isBuy: Boolean, // 是否购买
 		chapterList: {
 			type: Array,
 			default: () => [
-				{
-					id: 1,
-					name: '项目内容介绍',
-					sectionList: [ //课节信息
-						{id: 1,name: '什么是uniapp框架',isFree: 1}, // 是否付费（0付费，1免费）
-						{id: 2,name: '安装开发工具和插件',isFree: 1},
-						{id: 3,name: '开发第一个helloworld项目',isFree: 0}
-					]
-				},
-				{
-					id: 2,
-					name: '初始化梦学谷在线教育项目',
-					sectionList: [ //课节信息
-						{id: 3,name: '创建项目和完善配置',isFree: 0},
-						{id: 4,name: '导入静态文件内容',isFree: 0}
-					]
-				}
+				// {
+				// 	id: 1,
+				// 	name: '项目内容介绍',
+				// 	sectionList: [ //课节信息
+				// 		{id: 1,name: '什么是uniapp框架',isFree: 1}, // 是否付费（0付费，1免费）
+				// 		{id: 2,name: '安装开发工具和插件',isFree: 1},
+				// 		{id: 3,name: '开发第一个helloworld项目',isFree: 0}
+				// 	]
+				// },
+				// {
+				// 	id: 2,
+				// 	name: '初始化梦学谷在线教育项目',
+				// 	sectionList: [ //课节信息
+				// 		{id: 3,name: '创建项目和完善配置',isFree: 0},
+				// 		{id: 4,name: '导入静态文件内容',isFree: 0}
+				// 	]
+				// }
 			]
 		}
 	}

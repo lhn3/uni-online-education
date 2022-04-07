@@ -32,14 +32,14 @@ export default {
 		course: {
 			type: Object, 
 			default: ()=>({
-				"id": 10,
-				"title": "uni-app兼容多端在线教育视频教程",
-				"studyTotal": 580,
-				"goodRate": '100%', 
-				"mainImage": '/static/images/banner5.jpg',
-				"isFree": 0, // 0 付费，1免费
-				"priceOriginal": 699.99, //原价
-				"priceDiscount": 599.99, //优惠价
+				// "id": 10,
+				// "title": "uni-app兼容多端在线教育视频教程",
+				// "studyTotal": 580,
+				// "goodRate": '100%', 
+				// "mainImage": '/static/images/banner5.jpg',
+				// "isFree": 0, // 0 付费，1免费
+				// "priceOriginal": 699.99, //原价
+				// "priceDiscount": 599.99, //优惠价
 			})
 		}
 	},

@@ -29,30 +29,30 @@ export default {
 		commentList: {
 			type: Array,
 			default: ()=> [
-				{
-					"id": 1,
-					"nickName": "梦小员",
-					"userImage": null,
-					"isGood": 1, // 1好评，0差评
-					"content": "梦老师的课程内容好详细，值得学习！",
-					"createDate": Date.now(), // 为了兼容小程序，不能使用 new Date()
-					"children": null // 回复
-				},
-				{
-					"id": 2,
-					"nickName": "小黄",
-					"userImage": "https://gimg2.baidu.com/image_search/src=http%3A%2F%2Fc-ssl.duitang.com%2Fuploads%2Fblog%2F202106%2F29%2F20210629134249_42bc8.jpg&refer=http%3A%2F%2Fc-ssl.duitang.com&app=2002",
-					"isGood": 0, // 1好评，0差评
-					"content": "加油梦老师！",
-					"createDate": '2008-12-12 09:09:09',
-					"children": {// 回复
-						"id": 3,
-						"nickName": "苍老师",
-						"userImage": null,
-						"content": "谢谢支持，梦学谷-陪你学习，伴你梦想。",
-						"createDate": '2008-12-13 08:09:09',
-					} 
-				}
+				// {
+				// 	"id": 1,
+				// 	"nickName": "梦小员",
+				// 	"userImage": null,
+				// 	"isGood": 1, // 1好评，0差评
+				// 	"content": "梦老师的课程内容好详细，值得学习！",
+				// 	"createDate": Date.now(), // 为了兼容小程序，不能使用 new Date()
+				// 	"children": null // 回复
+				// },
+				// {
+				// 	"id": 2,
+				// 	"nickName": "小黄",
+				// 	"userImage": "https://gimg2.baidu.com/image_search/src=http%3A%2F%2Fc-ssl.duitang.com%2Fuploads%2Fblog%2F202106%2F29%2F20210629134249_42bc8.jpg&refer=http%3A%2F%2Fc-ssl.duitang.com&app=2002",
+				// 	"isGood": 0, // 1好评，0差评
+				// 	"content": "加油梦老师！",
+				// 	"createDate": '2008-12-12 09:09:09',
+				// 	"children": {// 回复
+				// 		"id": 3,
+				// 		"nickName": "苍老师",
+				// 		"userImage": null,
+				// 		"content": "谢谢支持，梦学谷-陪你学习，伴你梦想。",
+				// 		"createDate": '2008-12-13 08:09:09',
+				// 	} 
+				// }
 			]
 		}
 	}

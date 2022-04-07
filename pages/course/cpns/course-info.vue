@@ -14,8 +14,8 @@ export default {
 		detailUrls: {
 			type: Array,
 			default: () => [
-				'/static/images/banner1.jpg',
-				'https://img.alicdn.com/imgextra/i2/3603079088/O1CN01V8VO2y2H0M5Bx33L3_!!3603079088.jpg'
+				// '/static/images/banner1.jpg',
+				// 'https://img.alicdn.com/imgextra/i2/3603079088/O1CN01V8VO2y2H0M5Bx33L3_!!3603079088.jpg'
 			]
 		}
 	},

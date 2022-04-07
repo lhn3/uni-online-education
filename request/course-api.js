@@ -24,8 +24,40 @@ const getCourseList=(query,current = 1,size = 10)=>{
 	})
 }
 
+//根据id查询课程详细信息
+const getCourseDetail=(id)=>{
+	return request({
+		url:'/course/api/course/'+id,
+	})
+}
+
+//通过id查询课程章节信息
+const getCourseSection=(id)=>{
+	return request({
+		url:'/course/api/chapter/section/list/'+id,
+	})
+}
+
+//通过id查询评论列表
+const getCourseComment=(id)=>{
+	return request({
+		url:'/course/api/commont/ist/'+id,
+	})
+}
+
+//通过id查询套餐
+const getCoursePackage=(id)=>{
+	return request({
+		url:'/course/api/group/list/'+id,
+	})
+}
+
 export {
 	getBanners,
 	getCategory,
-	getCourseList
+	getCourseList,
+	getCourseDetail,
+	getCourseSection,
+	getCourseComment,
+	getCoursePackage
 }

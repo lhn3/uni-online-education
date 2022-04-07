@@ -17,6 +17,9 @@ export default {
 		const clickHandler=()=>{
 			emit('clickBottom')
 		}
+		return{
+			clickHandler
+		}
 	}
 }
 </script>
@@ -34,7 +37,7 @@ export default {
 
 .bottom-btn {
 	width: 700rpx;
-	background-color: #345DC2;
+	background-color: $mxg-color-primary;
 	text-align: center;
 	font-size: 35rpx;
 	color: #FFFFFF;

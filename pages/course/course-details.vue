@@ -12,12 +12,12 @@
 							<course-section v-if="tabId == 2"></course-section>
 							<course-comment v-if="tabId == 3"></course-comment>
 							<course-package v-if="tabId == 4"></course-package>
-							<view v-for="i in 100">{{i}}</view>
 						</view>
 					</scroll-view>
 				</swiper-item>
 			</swiper>
 		</view>
+		<bottom-btn :btnText="立即购买" @clickBottom="clickBottom"></bottom-btn>
 	</view>
 </template>
 
@@ -29,13 +29,15 @@ import courseInfo from './cpns/course-info.vue'
 import courseSection from './cpns/course-section.vue'
 import courseComment from './cpns/course-comment.vue'
 import coursePackage from './cpns/course-package.vue'
+import bottomBtn from './cpns/bottom-btn.vue'
 export default {
 	components:{
 		'course-detail-header':courseDetailHeader,
 		'course-info':courseInfo,
 		'course-section':courseSection,
 		'course-comment':courseComment,
-		'course-package':coursePackage
+		'course-package':coursePackage,
+		'bottom-btn':bottomBtn
 	},
 	setup(){
 		let {proxy} = getCurrentInstance()
@@ -88,6 +90,11 @@ export default {
 			tabId.value=event.detail.current+1
 			tabBar.value.tabId=event.detail.current+1
 		}
+		
+		//立即购买按钮
+		let clickBottom=()=>{
+			console.log('立即购买')
+		}
 		return{
 			id,
 			tabs,
@@ -101,7 +108,8 @@ export default {
 			
 			changeTab,
 			changeSwiper,
-			toupper
+			toupper,
+			clickBottom
 		}
 	},	
 	methods:{
@@ -150,7 +158,7 @@ export default {
 	}
 	.details-info {
 		// 被隐藏的80rpx（标签选项卡高度）
-		padding-bottom: 100rpx;
+		padding-bottom: 200rpx;
 	}
 }
 

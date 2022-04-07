@@ -2,7 +2,7 @@ export default [
 	{
 		id: 1, //套餐id
 		title: 'SpringBoot+SpringSecurity组合套餐',
-		groupPrice: 800.00,
+		groupPrice: 930.00,
 		totalPrice: 1100.00,
 		list: [
 			{

@@ -1,0 +1,1 @@
+<view class="center column"><image wx:for="{{a}}" wx:for-item="url" wx:key="a" mode="widthFix" bindload="{{b}}" lazy-load src="{{url.b}}"></image><image wx:if="{{c}}" class="loading" src="/static/images/loading.gif"></image><text wx:else class="footer-text">已经到达底部，没有更多内容了</text></view>

@@ -1,5 +1,6 @@
 // h5端主机 名（域名）前缀
-let HOST_H5 = 'https://www.mengxuegu.com/#/'
+// let HOST_H5 = 'https://www.mengxuegu.com/#/'
+let HOST_H5 = 'http://localhost:3000/#/'
 
 if(process.env.NODE_ENV === 'development'){
     console.log('开发环境')

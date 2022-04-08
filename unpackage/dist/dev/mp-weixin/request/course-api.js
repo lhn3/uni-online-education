@@ -36,6 +36,30 @@ const getCourseList = (query, current = 1, size = 10) => {
     data: __spreadProps(__spreadValues({}, query), { current, size })
   });
 };
+const getCourseDetail = (id) => {
+  return request_request.request({
+    url: "/course/api/course/" + id
+  });
+};
+const getCourseSection = (id) => {
+  return request_request.request({
+    url: "/course/api/chapter/section/list/" + id
+  });
+};
+const getCourseComment = (id) => {
+  return request_request.request({
+    url: "/course/api/commont/ist/" + id
+  });
+};
+const getCoursePackage = (id) => {
+  return request_request.request({
+    url: "/course/api/group/list/" + id
+  });
+};
 exports.getBanners = getBanners;
 exports.getCategory = getCategory;
+exports.getCourseComment = getCourseComment;
+exports.getCourseDetail = getCourseDetail;
 exports.getCourseList = getCourseList;
+exports.getCoursePackage = getCoursePackage;
+exports.getCourseSection = getCourseSection;

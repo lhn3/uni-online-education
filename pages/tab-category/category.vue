@@ -25,7 +25,7 @@ export default {
 	props:{
 		value:{	//当分类作为子组件使用并被传递参数时
 			type:Object,
-			default:()=>({})
+			default:()=>null
 		}
 	},
 	setup(props,{emit}){
@@ -39,7 +39,7 @@ export default {
 			let res = await getCategory()
 			state.value = res
 			//作为子组件传入在标签前加一个不限
-			if(props.value){
+			if(props.value != null){
 				state.value.forEach(item=>{
 					item.labelList.unshift({id:0,name:'不限',cName:item.name,cId:item.id})
 				})
@@ -70,7 +70,7 @@ export default {
 		const selectLabel=(item)=>{
 			if (activeLabel.value == item.id) return;
 			activeLabel.value = item.id
-			if(props.value){	//搜索页点击标签不跳转页面只发送事件
+			if(props.value != null){	//搜索页点击标签不跳转页面只发送事件
 				item.categoryId=activeTitle.value	//强行加一个父级id
 				emit('searchCate',item)
 			}else{

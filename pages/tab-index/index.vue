@@ -2,7 +2,7 @@
 	<view class="content">
 		<!-- 小程序才显示的搜索框 -->
 		<!-- #ifdef MP -->
-		<search-input @click.native="navTo('/pages/search/search')"></search-input>
+		<search-input @toSearch="toSearch"></search-input>
 		<!-- #endif -->
 		
 		<!-- 轮播图 -->
@@ -127,6 +127,7 @@ export default {
 				size:10
 			}
 		})
+		// 上拉加载更多
 		const upCallback=async (page)=> {
 			let pageNum = page.num; // 页码, 默认从1开始
 			let pageSize = page.size; // 页长, 默认每页10条
@@ -143,6 +144,10 @@ export default {
 			}
 			proxy.mescroll.endErr()
 		}
+		//小程序点击搜索框前往搜索页面
+		const toSearch=()=>{
+			proxy.navTo("/pages/search/search")
+		}
 		return{
 			// #ifdef APP-PLUS
 			resetSearchInfo,
@@ -153,7 +158,8 @@ export default {
 			// downCallback,
 			downOption,
 			upCallback,
-			upOption
+			upOption,
+			toSearch
 		}
 	},
 	onLoad(){

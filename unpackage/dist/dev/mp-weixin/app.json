@@ -6,7 +6,8 @@
         "pages/tab-question/question",
         "pages/tab-my/my",
         "pages/public/public",
-        "pages/search/search"
+        "pages/search/search",
+        "pages/course/course-details"
     ],
     "window": {
         "navigationBarBackgroundColor": "#A2CD5A",

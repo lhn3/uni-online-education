@@ -35,7 +35,8 @@ function _sfc_render(_ctx, _cache, $props, $setup, $data, $options) {
     f: common_vendor.t($props.item.priceDiscount || $props.item.priceOriginal)
   }, {
     g: common_vendor.t($props.item.studyTotal),
-    h: $props.isColumn ? 1 : ""
+    h: $props.isColumn ? 1 : "",
+    i: common_vendor.o(($event) => _ctx.navTo(`/pages/course/course-details?id=${$props.item.id}`))
   });
 }
 var Component = /* @__PURE__ */ common_vendor._export_sfc(_sfc_main, [["render", _sfc_render]]);

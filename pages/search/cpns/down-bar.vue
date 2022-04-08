@@ -7,7 +7,7 @@
 				<text class="iconfont icon-up" v-if="!item.active"></text>
 			</view>
 			<view class="item-list" v-if="item.active">
-				<category class="category" v-if="item.isAllCategory" :value="param" @searchCate="searchCate"></category>
+				<category class="category" v-if="item.isAllCategory" :value="{...param}" @searchCate="searchCate"></category>
 				<view class="name" :class="{'active':i.name == tabName}" v-else v-for="i in item.list" :key="i.id" @click="changeCild(item,i)">
 				{{i.name}}
 				</view>
@@ -35,7 +35,7 @@ export default {
 	},
 	setup(props,{emit}){
 		let tabName=ref()	//选中的标签
-		let infos = ref()
+		let infos = ref([])
 		let param = ref()
 		// 初始化深拷贝props数据
 		onMounted(()=>{
@@ -101,8 +101,16 @@ export default {
 				if(Object.keys(newValue).length>0){
 					nextTick(()=>{
 						let keys=Object.keys(newValue)				//拿到传递的params参数都多的键
+						
+						// #ifdef MP
+						let lis=this.downCategoty					//这里数据有问题，分程序获取
+						// #endif
+						// #ifndef MP
+						let lis=this.infos
+						// #endif
+						
 						if(keys.length == 1){						//如果键只有一个
-							this.infos.forEach(item=>{
+							lis.forEach(item=>{
 								if(item.type == keys[0]){			//找到传递过来标签参数中type为这个键的
 									item.name = item.list.find(i=>{	//将这个对象被选择的标签名，
 										return i.id == newValue[keys[0]]//换成list中id与传递过来对象的值相等的这个对象的name
@@ -111,7 +119,7 @@ export default {
 								}
 							})
 						}else{
-							this.infos[this.infos.length-1].name=newValue.name
+							lis[lis.length-1].name=newValue.name
 							this.tabName=newValue.name
 							this.param=newValue
 						}

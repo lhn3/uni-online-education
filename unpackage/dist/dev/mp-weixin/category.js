@@ -5,7 +5,7 @@ const _sfc_main = {
   props: {
     value: {
       type: Object,
-      default: () => ({})
+      default: () => null
     }
   },
   setup(props, { emit }) {
@@ -17,7 +17,7 @@ const _sfc_main = {
     common_vendor.onMounted(async () => {
       let res = await request_courseApi.getCategory();
       state.value = res;
-      if (props.value) {
+      if (props.value != null) {
         state.value.forEach((item) => {
           item.labelList.unshift({ id: 0, name: "\u4E0D\u9650", cName: item.name, cId: item.id });
         });
@@ -45,7 +45,7 @@ const _sfc_main = {
       if (activeLabel.value == item.id)
         return;
       activeLabel.value = item.id;
-      if (props.value) {
+      if (props.value != null) {
         item.categoryId = activeTitle.value;
         emit("searchCate", item);
       } else {

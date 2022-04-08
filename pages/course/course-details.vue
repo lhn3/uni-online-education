@@ -18,6 +18,12 @@
 			</swiper>
 		</view>
 		<bottom-btn btnText="立即购买" @clickBottom="clickBottom"></bottom-btn>
+		<!-- #ifdef APP-PLUS -->
+		<my-share ref="myShare"></my-share>
+		<!-- #endif -->
+		<!-- #ifndef APP-PLUS -->
+		<my-share ref="myShare" :providerList="providerList" :shareDate="courseDetail"></my-share>
+		<!-- #endif -->
 	</view>
 </template>
 
@@ -49,6 +55,14 @@ export default {
 			{id:4,name:'套餐'}
 		])
 		let tabBar = ref(null)		//标签组件
+		let myShare = ref(null)		//分享组件
+		let providerList = ref([//分享页面数据
+			{id: 'weixin',name: '微信好友',sort:0,icon: '/static/share/weixin.png'},
+			{id: 'weixin',name: '朋友圈',type:'WXSenceTimeline',sort:1,icon: '/static/share/pengyouquan.png'},
+			{id: 'sinaweibo',name: '新浪微博',sort:2,icon: '/static/share/weibo.png'},
+			{id: 'qq',name: 'QQ好友',sort:3,icon: '/static/share/qq.png'},
+			{id: 'copy',name: '复制链接',sort: 4,icon: '/static/share/link.png'}
+		])
 		let state = reactive({
 			id:0,
 			pageHeight:0,		//页面视口可使用的高度
@@ -98,7 +112,12 @@ export default {
 			state.tabId = event.detail.current + 1
 			tabBar.value.tabId = event.detail.current + 1
 		}
-		
+		//监听导航栏按钮点击
+		onNavigationBarButtonTap((e)=>{
+			if(e.type="share"){
+				myShare.value.isShow=!myShare.value.isShow
+			}
+		})
 		//立即购买按钮
 		let clickBottom = () => {
 			console.log('立即购买')
@@ -106,6 +125,8 @@ export default {
 		return{
 			tabs,
 			tabBar,
+			myShare,
+			providerList,
 			...toRefs(state),
 			
 			changeTab,
@@ -128,18 +149,18 @@ export default {
 			this.pageHeight = res.screenHeight - this.statusNavHeight
 		},
 		// 获取页面数据
-		async getPageInfo(){
-			this.courseDetail = await getCourseDetail(this.id)
-			this.courseSection = await getCourseSection(this.id)
-			this.courseComment = await getCourseComment(this.id)
-			this.coursePackage = await getCoursePackage(this.id)
+		async getPageInfo(id){
+			this.courseDetail = await getCourseDetail(id)
+			this.courseSection = await getCourseSection(id)
+			this.courseComment = await getCourseComment(id)
+			this.coursePackage = await getCoursePackage(id)
 		}
 	},
 	onLoad(option) {
 		if(option.id){
 			this.id=option.id
 			// 获取页面信息
-			this.getPageInfo()
+			this.getPageInfo(this.id)
 		}
 		//获取当前页面可使用高度
 		this.getHeight()
@@ -158,6 +179,13 @@ export default {
 		},data=>{
 			this.detailToTop=data.top
 		}).exec()
+	},
+	// 小程序分享
+	onShareAppMessage(res){
+		return{
+			title:this.courseDetail.title,
+			path:this.$utils.routePath()
+		}
 	}
 }
 </script>
@@ -198,6 +226,5 @@ export default {
 		left: 50%;
 		transform: translate(-50%, -50%);
 	}
-	
 }
 </style>

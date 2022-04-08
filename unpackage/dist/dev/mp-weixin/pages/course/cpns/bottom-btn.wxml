@@ -1,0 +1,1 @@
+<view class="bottom center" bindtap="{{b}}"><text class="bottom-btn">{{a}}</text></view>

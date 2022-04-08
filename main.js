@@ -16,11 +16,13 @@ import message from './utils/showMessage.js'
 import request from './request/request.js'
 import mixin from '@/common/mixin/mixin.js'
 import * as utils from '@/utils/util.js'
+import * as env from '@/config/env.js'
 export function createApp() {
   const app = createSSRApp(App)
   app.config.globalProperties.$message = message;
   app.config.globalProperties.$request = request;
   app.config.globalProperties.$utils = utils;
+  app.config.globalProperties.$env = env;
   app.mixin(mixin)
   return {
     app

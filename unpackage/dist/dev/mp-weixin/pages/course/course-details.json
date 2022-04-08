@@ -1,0 +1,13 @@
+{
+  "onReachBottomDistance": 0,
+  "usingComponents": {
+    "course-detail-header": "./cpns/course-detail-header",
+    "course-info": "./cpns/course-info",
+    "course-section": "./cpns/course-section",
+    "course-comment": "./cpns/course-comment",
+    "course-package": "./cpns/course-package",
+    "bottom-btn": "./cpns/bottom-btn",
+    "tab-bar": "../../components/tab-bar/tab-bar",
+    "my-share": "../../components/my-share/my-share"
+  }
+}

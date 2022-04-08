@@ -1,13 +1,18 @@
 <template>
 	<view class="header">
-		<input class="search" type="text" placeholder="请输入搜索内容" disabled>
+		<input class="search" type="text" placeholder="请输入搜索内容" disabled @click="handelClick">
 	</view>
 </template>
 
 <script>
 export default {
-	setup(){
-		
+	setup(props,{emit}){
+		let handelClick = () => {
+			emit('toSearch')
+		}
+		return{
+			handelClick
+		}
 	}
 }
 </script>

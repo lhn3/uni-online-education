@@ -19,7 +19,7 @@
 </template>
 
 <script>
-import {getCurrentInstance,ref,onBeforeMount,reactive,toRefs,onMounted} from "vue";
+import {getCurrentInstance,ref,onBeforeMount,reactive,toRefs,onMounted,nextTick} from "vue";
 import downBar from "./down-bar.vue"
 import mescrollBody from "@/uni_modules/mescroll-uni/components/mescroll-body/mescroll-body.vue";
 import MescrollMixin from "@/uni_modules/mescroll-uni/components/mescroll-uni/mescroll-mixins.js";

@@ -87,13 +87,17 @@ const _sfc_main = {
       }
       proxy.mescroll.endErr();
     };
+    const toSearch = () => {
+      proxy.navTo("/pages/search/search");
+    };
     return __spreadProps(__spreadValues({
       courseData: mock_courseData.courseData,
       getPageInfo
     }, common_vendor.toRefs(state)), {
       downOption,
       upCallback,
-      upOption
+      upOption,
+      toSearch
     });
   },
   onLoad() {
@@ -117,7 +121,7 @@ if (!Math) {
 }
 function _sfc_render(_ctx, _cache, $props, $setup, $data, $options) {
   return {
-    a: common_vendor.o(($event) => _ctx.navTo("/pages/search/search")),
+    a: common_vendor.o($setup.toSearch),
     b: common_vendor.p({
       banners: _ctx.banners
     }),

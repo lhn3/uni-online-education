@@ -6,6 +6,7 @@ var utils_showMessage = require("./utils/showMessage.js");
 var request_request = require("./request/request.js");
 var common_mixin_mixin = require("./common/mixin/mixin.js");
 var utils_util = require("./utils/util.js");
+var config_env = require("./config/env.js");
 if (!Math) {
   "./pages/tab-index/index.js";
   "./pages/tab-category/category.js";
@@ -14,6 +15,7 @@ if (!Math) {
   "./pages/tab-my/my.js";
   "./pages/public/public.js";
   "./pages/search/search.js";
+  "./pages/course/course-details.js";
 }
 const _sfc_main = {
   onLaunch: function() {
@@ -31,6 +33,7 @@ function createApp() {
   app.config.globalProperties.$message = utils_showMessage.message;
   app.config.globalProperties.$request = request_request.request;
   app.config.globalProperties.$utils = utils_util.utils;
+  app.config.globalProperties.$env = config_env.env;
   app.mixin(common_mixin_mixin.mixin);
   return {
     app

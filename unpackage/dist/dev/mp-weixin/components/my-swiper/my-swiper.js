@@ -8,7 +8,7 @@ const __default__ = {
     }
   },
   setup(props) {
-    let background = common_vendor.ref("#45328c");
+    let background = common_vendor.ref("#254284");
     const change = (e) => {
       background.value = props.banners[e.detail.current].background;
     };
@@ -34,7 +34,8 @@ function _sfc_render(_ctx, _cache, $props, $setup, $data, $options) {
     a: common_vendor.f($props.banners, (item, k0, i0) => {
       return {
         a: item.imageUrl,
-        b: item.id
+        b: item.id,
+        c: common_vendor.o(($event) => _ctx.navTo(item.advertUrl), item.id)
       };
     }),
     b: common_vendor.o((...args) => $setup.change && $setup.change(...args))

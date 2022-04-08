@@ -9,7 +9,7 @@
 					<scroll-view :scroll-y="isScroll" class="scroll-box" :upper-threshold="0" @scrolltoupper="toupper">
 						<view class="details-info">
 							<course-info v-if="tabId == 1" :detailUrls="courseDetail.detailUrls"></course-info>
-							<course-section v-if="tabId == 2" :chapterList="courseSection" @openVideo="openVideo"></course-section>
+							<course-section v-if="tabId == 2" :chapterList="courseSection" @openVideo="openVideo" :isBuy="isBuy" :isFree="courseDetail.isFree"></course-section>
 							<course-comment v-if="tabId == 3" :commentList="courseComment"></course-comment>
 							<course-package v-if="tabId == 4" :groupList="coursePackage"></course-package>
 						</view>
@@ -34,7 +34,7 @@
 				<text>{{videoText}}</text>
 				<text class="iconfont icon-close" @click="closeVideo"></text>
 			</view>
-			<video class="video" autoplay :src="videoUrl"></video>
+			<video id="playVideo" class="video" :src="videoUrl"></video>
 		</view>
 	</view>
 </template>
@@ -76,7 +76,7 @@ export default {
 			{id: 'copy',name: '复制链接',sort: 4,icon: '/static/share/link.png'}
 		])
 		let state = reactive({
-			id:0,
+			id:null,
 			pageHeight:0,		//页面视口可使用的高度
 			statusNavHeight:0,	//状态栏+导航栏的高度
 			detailToTop:0,		//详情区距离顶部距离
@@ -87,6 +87,7 @@ export default {
 			freeVideo:false,	//试看组件是否展示
 			videoUrl:null,		//试看视频地址
 			videoText:"",		//试看视频标题
+			videoContext:null,	//播放实例
 			
 			courseDetail:{},	//课程详情
 			courseSection:{},	//章节
@@ -142,15 +143,30 @@ export default {
 				console.log('立即购买')
 			}
 		}
-		// 打开试看组件
-		let openVideo = (setion) => {
-			state.videoUrl = setion.videoUrl
-			state.videoText = setion.name
-			state.freeVideo = true
+		// 点击视频
+		let openVideo = (section) => {
+			// 判断单个视频是否免费，判断此课程是否免费,并且没买的情况下
+			if((section.isFree || state.courseDetail.isFree) && !state.isBuy){
+				state.videoUrl = section.videoUrl	//设置播放url
+				state.videoText = section.name		//播放标题
+				state.freeVideo = true				//弹出框
+				nextTick(()=>{
+					state.videoContext.play()			//手动播放
+				})
+			}else if(state.isBuy){
+				//判断是否购买课程，
+				proxy.navTo('/pages/course/course-play?id='+state.id)
+			}else{
+				proxy.$message.toast('课程尚未购买，无法观看')
+			}
+
 		}
 		// 关闭试看组件
 		let closeVideo = () => {
+			state.videoContext.stop()
 			state.freeVideo = false
+			state.videoUrl = ''
+			state.videoText = ''
 		}
 		return{
 			tabs,
@@ -219,6 +235,8 @@ export default {
 		},data=>{
 			this.detailToTop=data.top
 		}).exec()
+		//获取播放实例
+		this.videoContext=uni.createVideoContext('playVideo',this)
 	},
 	// 小程序分享
 	onShareAppMessage(res){

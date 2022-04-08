@@ -8,22 +8,25 @@
 				:class="{active: index=== activeObj.chapterIndex&& index2 === activeObj.sectionIndex}"
 				@click="playVideo(index, index2, section)"
 				v-for="(section, index2) in chapter.sectionList" :key="index2"> -->
-			<view class="sections row" v-for="(section, index2) in chapter.sectionList" :key="index2">
+			<view class="sections row" :class="{active:actSect == section.name }" v-for="(section, index2) in chapter.sectionList" :key="index2"  @click="handleClick(section)">
 				<text class="iconfont icon-roundrightfill"></text>
 				<view class="row">
 					<text>{{index+1}}-{{index2+1}}</text>
 					<text class="title text-ellipsis">{{section.name}}</text>
 				</view>
-				<text v-if="section.isFree" class="see" @click="handleClick(section)">试看</text>
+				<text v-if="(section.isFree || isFree) && !isBuy" class="see">试看</text>
+				<text v-else-if="isBuy" class="see iconfont icon-play"></text>
 			</view>
 		</view>
 	</view>
 </template>
 
 <script>
+import {ref} from 'vue'
 export default {
 	props: {
-		// isBuy: Boolean, // 是否购买
+		isBuy: Boolean, // 是否购买
+		isFree: Number,//是否是免费课程
 		chapterList: {
 			type: Array,
 			default: () => [
@@ -48,10 +51,15 @@ export default {
 		}
 	},
 	setup(props,{emit}){
-		let handleClick = (setion) => {
-			emit('openVideo',setion)
+		let actSect=ref("")
+		let handleClick = (section) => {
+			if((section.isFree || props.isFree) && !props.isBuy){
+				actSect.value=section.name
+			}
+			emit('openVideo',section)
 		}
 		return{
+			actSect,
 			handleClick
 		}
 		

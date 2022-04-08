@@ -61,6 +61,10 @@ const _sfc_main = {
       tabId: 0,
       current: 0,
       isScroll: false,
+      isBuy: false,
+      freeVideo: false,
+      videoUrl: null,
+      videoText: "",
       courseDetail: {},
       courseSection: {},
       courseComment: {},
@@ -98,7 +102,19 @@ const _sfc_main = {
       }
     });
     let clickBottom = () => {
-      console.log("\u7ACB\u5373\u8D2D\u4E70");
+      if (state.isBuy || state.courseDetail.isFree == 1) {
+        console.log("\u7ACB\u5373\u89C2\u770B");
+      } else {
+        console.log("\u7ACB\u5373\u8D2D\u4E70");
+      }
+    };
+    let openVideo = (setion) => {
+      state.videoUrl = setion.videoUrl;
+      state.videoText = setion.name;
+      state.freeVideo = true;
+    };
+    let closeVideo = () => {
+      state.freeVideo = false;
     };
     return __spreadProps(__spreadValues({
       tabs,
@@ -109,7 +125,9 @@ const _sfc_main = {
       changeTab,
       changeSwiper,
       toupper,
-      clickBottom
+      clickBottom,
+      openVideo,
+      closeVideo
     });
   },
   methods: {
@@ -125,9 +143,15 @@ const _sfc_main = {
     },
     async getPageInfo(id) {
       this.courseDetail = await request_courseApi.getCourseDetail(id);
+      common_vendor.index.setNavigationBarTitle({
+        title: this.courseDetail.title
+      });
       this.courseSection = await request_courseApi.getCourseSection(id);
       this.courseComment = await request_courseApi.getCourseComment(id);
       this.coursePackage = await request_courseApi.getCoursePackage(id);
+      if (this.$utils.isLogin({ nav: false })) {
+        this.isBuy = (await request_courseApi.getCourseIsBuy(id)).isBuy;
+      }
     }
   },
   onLoad(option) {
@@ -169,7 +193,7 @@ if (!Math) {
   (_easycom_tab_bar + _easycom_my_share)();
 }
 function _sfc_render(_ctx, _cache, $props, $setup, $data, $options) {
-  return {
+  return common_vendor.e({
     a: common_vendor.p({
       course: _ctx.courseDetail
     }),
@@ -186,22 +210,23 @@ function _sfc_render(_ctx, _cache, $props, $setup, $data, $options) {
           detailUrls: _ctx.courseDetail.detailUrls
         })
       } : {}, _ctx.tabId == 2 ? {
-        c: "05d1fded-3-" + i0,
-        d: common_vendor.p({
+        c: common_vendor.o($setup.openVideo),
+        d: "05d1fded-3-" + i0,
+        e: common_vendor.p({
           chapterList: _ctx.courseSection
         })
       } : {}, _ctx.tabId == 3 ? {
-        e: "05d1fded-4-" + i0,
-        f: common_vendor.p({
+        f: "05d1fded-4-" + i0,
+        g: common_vendor.p({
           commentList: _ctx.courseComment
         })
       } : {}, _ctx.tabId == 4 ? {
-        g: "05d1fded-5-" + i0,
-        h: common_vendor.p({
+        h: "05d1fded-5-" + i0,
+        i: common_vendor.p({
           groupList: _ctx.coursePackage
         })
       } : {}, {
-        i: item.id
+        j: item.id
       });
     }),
     f: _ctx.tabId == 1,
@@ -215,14 +240,21 @@ function _sfc_render(_ctx, _cache, $props, $setup, $data, $options) {
     n: `${_ctx.pageHeight}px`,
     o: common_vendor.o($setup.clickBottom),
     p: common_vendor.p({
-      btnText: "\u7ACB\u5373\u8D2D\u4E70"
+      btnText: _ctx.isBuy || _ctx.courseDetail.isFree == 1 ? "\u7ACB\u5373\u89C2\u770B" : "\u7ACB\u5373\u8D2D\u4E70"
     }),
     q: common_vendor.sr("myShare", "05d1fded-7"),
     r: common_vendor.p({
       providerList: $setup.providerList,
       shareDate: _ctx.courseDetail
+    }),
+    s: _ctx.freeVideo
+  }, _ctx.freeVideo ? {
+    t: common_vendor.t(_ctx.videoText),
+    v: common_vendor.o((...args) => $setup.closeVideo && $setup.closeVideo(...args)),
+    w: _ctx.videoUrl,
+    x: common_vendor.o(() => {
     })
-  };
+  } : {});
 }
 var MiniProgramPage = /* @__PURE__ */ common_vendor._export_sfc(_sfc_main, [["render", _sfc_render]]);
 _sfc_main.__runtimeHooks = 3;

@@ -9,7 +9,7 @@
 					<scroll-view :scroll-y="isScroll" class="scroll-box" :upper-threshold="0" @scrolltoupper="toupper">
 						<view class="details-info">
 							<course-info v-if="tabId == 1" :detailUrls="courseDetail.detailUrls"></course-info>
-							<course-section v-if="tabId == 2" :chapterList="courseSection"></course-section>
+							<course-section v-if="tabId == 2" :chapterList="courseSection" @openVideo="openVideo"></course-section>
 							<course-comment v-if="tabId == 3" :commentList="courseComment"></course-comment>
 							<course-package v-if="tabId == 4" :groupList="coursePackage"></course-package>
 						</view>
@@ -17,13 +17,25 @@
 				</swiper-item>
 			</swiper>
 		</view>
-		<bottom-btn btnText="立即购买" @clickBottom="clickBottom"></bottom-btn>
+		<!-- 购买/观看按钮 -->
+		<bottom-btn :btnText="isBuy || courseDetail.isFree == 1?'立即观看':'立即购买'" @clickBottom="clickBottom"></bottom-btn>
+		
+		<!-- 分享组件 -->
 		<!-- #ifdef APP-PLUS -->
 		<my-share ref="myShare"></my-share>
 		<!-- #endif -->
 		<!-- #ifndef APP-PLUS -->
 		<my-share ref="myShare" :providerList="providerList" :shareDate="courseDetail"></my-share>
 		<!-- #endif -->
+		
+		<!-- 试看组件 -->
+		<view class="video-box mask" @touchmove.stop.prevent="()=>{}" v-if="freeVideo">
+			<view class="name">
+				<text>{{videoText}}</text>
+				<text class="iconfont icon-close" @click="closeVideo"></text>
+			</view>
+			<video class="video" autoplay :src="videoUrl"></video>
+		</view>
 	</view>
 </template>
 
@@ -36,7 +48,7 @@ import courseSection from './cpns/course-section.vue'
 import courseComment from './cpns/course-comment.vue'
 import coursePackage from './cpns/course-package.vue'
 import bottomBtn from './cpns/bottom-btn.vue'
-import {getCourseDetail,getCourseSection,getCourseComment,getCoursePackage} from '@/request/course-api.js'
+import {getCourseDetail,getCourseSection,getCourseComment,getCoursePackage,getCourseIsBuy} from '@/request/course-api.js'
 export default {
 	components:{
 		'course-detail-header':courseDetailHeader,
@@ -70,7 +82,11 @@ export default {
 			detailToTop:0,		//详情区距离顶部距离
 			tabId:0,			//选择的标签id
 			current:0,			//轮播图索引
-			isScroll:false,			//滚动区是否可以滚动
+			isScroll:false,		//滚动区是否可以滚动
+			isBuy:false,		//是否已经购买此课程
+			freeVideo:false,	//试看组件是否展示
+			videoUrl:null,		//试看视频地址
+			videoText:"",		//试看视频标题
 			
 			courseDetail:{},	//课程详情
 			courseSection:{},	//章节
@@ -120,7 +136,21 @@ export default {
 		})
 		//立即购买按钮
 		let clickBottom = () => {
-			console.log('立即购买')
+			if(state.isBuy || state.courseDetail.isFree == 1){
+				console.log('立即观看')
+			}else{
+				console.log('立即购买')
+			}
+		}
+		// 打开试看组件
+		let openVideo = (setion) => {
+			state.videoUrl = setion.videoUrl
+			state.videoText = setion.name
+			state.freeVideo = true
+		}
+		// 关闭试看组件
+		let closeVideo = () => {
+			state.freeVideo = false
 		}
 		return{
 			tabs,
@@ -132,7 +162,9 @@ export default {
 			changeTab,
 			changeSwiper,
 			toupper,
-			clickBottom
+			clickBottom,
+			openVideo,
+			closeVideo
 		}
 	},	
 	methods:{
@@ -151,9 +183,17 @@ export default {
 		// 获取页面数据
 		async getPageInfo(id){
 			this.courseDetail = await getCourseDetail(id)
+			// 修改页面标题
+			uni.setNavigationBarTitle({
+				title:this.courseDetail.title
+			})
 			this.courseSection = await getCourseSection(id)
 			this.courseComment = await getCourseComment(id)
 			this.coursePackage = await getCoursePackage(id)
+			// 判断是否登录了
+			if(this.$utils.isLogin({nav:false})){
+				this.isBuy = (await getCourseIsBuy(id)).isBuy
+			}
 		}
 	},
 	onLoad(option) {

@@ -183,9 +183,9 @@ export default {
 			}
 			
 			if(shareOPtions.type === 0 && plus.os.name === 'iOS'){//如果是图文分享，且是ios平台，则压缩图片 
-				proxy.compress().then(res=>{
-					shareOPtions.imageUrl = res
-				});
+				// proxy.compress().then(res=>{
+				// 	shareOPtions.imageUrl = res
+				// });
 			}
 			if(shareOPtions.type === 1 && shareOPtions.provider === 'qq'){//如果是分享文字到qq，则必须加上href和title
 				shareOPtions.href = state.href;
@@ -199,7 +199,7 @@ export default {
 		return{
 			isShow,
 			// #ifdef APP-PLUS
-			...toRefs(state)
+			...toRefs(state),
 			// #endif
 			
 			showHandler,

@@ -56,10 +56,17 @@ const getCoursePackage = (id) => {
     url: "/course/api/group/list/" + id
   });
 };
+const getCourseIsBuy = (id) => {
+  return request_request.request({
+    method: "POST",
+    url: "/course/course/is-buy/" + id
+  });
+};
 exports.getBanners = getBanners;
 exports.getCategory = getCategory;
 exports.getCourseComment = getCourseComment;
 exports.getCourseDetail = getCourseDetail;
+exports.getCourseIsBuy = getCourseIsBuy;
 exports.getCourseList = getCourseList;
 exports.getCoursePackage = getCoursePackage;
 exports.getCourseSection = getCourseSection;

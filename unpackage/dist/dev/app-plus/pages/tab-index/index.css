@@ -1,0 +1,448 @@
+/**
+ * 这里是uni-app内置的常用样式变量
+ *
+ * uni-app 官方扩展插件及插件市场（https://ext.dcloud.net.cn）上很多三方插件均使用了这些样式变量
+ * 如果你是插件开发者，建议你使用scss预处理，并在插件代码中直接使用这些变量（无需 import 这个文件），方便用户通过搭积木的方式开发整体风格一致的App
+ *
+ */
+/**
+ * 如果你是App开发者（插件使用者），你可以通过修改这些变量来定制自己的插件主题，实现自定义主题功能
+ *
+ * 如果你的项目同样使用了scss预处理，你也可以直接在你的 scss 代码中使用如下变量，同时无需 import 这个文件
+ */
+/* 颜色变量 */
+/*文本基本颜色*/
+.main[data-v-3f833c78] {
+  padding-top: 3.75rem;
+  padding-top: calc(var(--status-bar-height) + 3.75rem);
+}
+.main .sw-background[data-v-3f833c78] {
+  position: absolute;
+  top: 0;
+  transform: 0.5s;
+  height: 16.25rem;
+  height: calc(var(--status-bar-height) + 16.25rem);
+  width: 100%;
+  background-image: linear-gradient(var(--3f833c78-background) 50%, #fff);
+}
+.main .swiper[data-v-3f833c78] {
+  width: 23.4375rem;
+  height: 12.5rem;
+}
+.main .swiper .swiper-item[data-v-3f833c78] {
+  width: 100%;
+  height: 100%;
+  padding: 0 0.9375rem;
+}
+.main .swiper .swiper-item .swiper-img[data-v-3f833c78] {
+  width: 100%;
+  height: 100%;
+  border-radius: 0.9375rem;
+}
+
+/* 无任何数据的空布局 */
+.mescroll-empty[data-v-79c5cef0] {
+	box-sizing: border-box;
+	width: 100%;
+	padding: 3.125rem 1.5625rem;
+	text-align: center;
+}
+.mescroll-empty.empty-fixed[data-v-79c5cef0] {
+	z-index: 99;
+	position: absolute; /*transform会使fixed失效,最终会降级为absolute */
+	top: 3.125rem;
+	left: 0;
+}
+.mescroll-empty .empty-icon[data-v-79c5cef0] {
+	width: 8.75rem;
+	height: 8.75rem;
+}
+.mescroll-empty .empty-tip[data-v-79c5cef0] {
+	margin-top: 0.625rem;
+	font-size: 0.75rem;
+	color: gray;
+}
+.mescroll-empty .empty-btn[data-v-79c5cef0] {
+	display: inline-block;
+	margin-top: 1.25rem;
+	min-width: 6.25rem;
+	padding: 0.5625rem;
+	font-size: 0.875rem;
+	border: 0.03125rem solid #e04b28;
+	border-radius: 1.875rem;
+	color: #e04b28;
+}
+.mescroll-empty .empty-btn[data-v-79c5cef0]:active {
+	opacity: 0.75;
+}
+
+
+/* 回到顶部的按钮 */
+.mescroll-totop[data-v-49b47e96] {
+	z-index: 9990;
+	position: fixed !important; /* 加上important避免编译到H5,在多mescroll中定位失效 */
+	right: 0.625rem;
+	bottom: 3.75rem;
+	width: 2.25rem;
+	height: auto;
+	border-radius: 50%;
+	opacity: 0;
+	transition: opacity 0.5s; /* 过渡 */
+	margin-bottom: var(--window-bottom); /* css变量 */
+}
+
+/* 适配 iPhoneX */
+@supports (bottom: constant(safe-area-inset-bottom)) or (bottom: env(safe-area-inset-bottom)) {
+.mescroll-totop-safearea[data-v-49b47e96] {
+		margin-bottom: calc(var(--window-bottom) + constant(safe-area-inset-bottom)); /* window-bottom + 适配 iPhoneX */
+		margin-bottom: calc(var(--window-bottom) + env(safe-area-inset-bottom));
+}
+}
+
+/* 显示 -- 淡入 */
+.mescroll-totop-in[data-v-49b47e96] {
+	opacity: 1;
+}
+
+/* 隐藏 -- 淡出且不接收事件*/
+.mescroll-totop-out[data-v-49b47e96] {
+	opacity: 0;
+	pointer-events: none;
+}
+
+.mescroll-body[data-v-07e5713e] {
+	position: relative; /* 下拉刷新区域相对自身定位 */
+	height: auto; /* 不可固定高度,否则overflow:hidden导致无法滑动; 同时使设置的最小高生效,实现列表不满屏仍可下拉*/
+	overflow: hidden; /* 当有元素写在mescroll-body标签前面时,可遮住下拉刷新区域 */
+	box-sizing: border-box; /* 避免设置padding出现双滚动条的问题 */
+}
+
+/* 使sticky生效: 父元素不能overflow:hidden或者overflow:auto属性 */
+.mescroll-body.mescorll-sticky[data-v-07e5713e]{
+	overflow: unset !important
+}
+
+/* 适配 iPhoneX */
+@supports (bottom: constant(safe-area-inset-bottom)) or (bottom: env(safe-area-inset-bottom)) {
+.mescroll-safearea[data-v-07e5713e] {
+		padding-bottom: constant(safe-area-inset-bottom);
+		padding-bottom: env(safe-area-inset-bottom);
+}
+}
+
+/* 下拉刷新区域 */
+.mescroll-downwarp[data-v-07e5713e] {
+	position: absolute;
+	top: -100%;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	text-align: center;
+}
+
+/* 下拉刷新--内容区,定位于区域底部 */
+.mescroll-downwarp .downwarp-content[data-v-07e5713e] {
+	position: absolute;
+	left: 0;
+	bottom: 0;
+	width: 100%;
+	min-height: 1.875rem;
+	padding: 0.625rem 0;
+	text-align: center;
+}
+
+/* 下拉刷新--提示文本 */
+.mescroll-downwarp .downwarp-tip[data-v-07e5713e] {
+	display: inline-block;
+	font-size: 0.875rem;
+	vertical-align: middle;
+	margin-left: 0.5rem;
+	/* color: gray; 已在style设置color,此处删去*/
+}
+
+/* 下拉刷新--旋转进度条 */
+.mescroll-downwarp .downwarp-progress[data-v-07e5713e] {
+	display: inline-block;
+	width: 1rem;
+	height: 1rem;
+	border-radius: 50%;
+	border: 0.0625rem solid gray;
+	border-bottom-color: transparent !important; /*已在style设置border-color,此处需加 !important*/
+	vertical-align: middle;
+}
+
+/* 旋转动画 */
+.mescroll-downwarp .mescroll-rotate[data-v-07e5713e] {
+	animation: mescrollDownRotate-07e5713e 0.6s linear infinite;
+}
+@keyframes mescrollDownRotate-07e5713e {
+0% {
+		transform: rotate(0deg);
+}
+100% {
+		transform: rotate(360deg);
+}
+}
+
+/* 上拉加载区域 */
+.mescroll-upwarp[data-v-07e5713e] {
+	box-sizing: border-box;
+	min-height: 3.4375rem;
+	padding: 0.9375rem 0;
+	text-align: center;
+	clear: both;
+}
+
+/*提示文本 */
+.mescroll-upwarp .upwarp-tip[data-v-07e5713e],
+.mescroll-upwarp .upwarp-nodata[data-v-07e5713e] {
+	display: inline-block;
+	font-size: 0.875rem;
+	vertical-align: middle;
+	/* color: gray; 已在style设置color,此处删去*/
+}
+.mescroll-upwarp .upwarp-tip[data-v-07e5713e] {
+	margin-left: 0.5rem;
+}
+
+/*旋转进度条 */
+.mescroll-upwarp .upwarp-progress[data-v-07e5713e] {
+	display: inline-block;
+	width: 1rem;
+	height: 1rem;
+	border-radius: 50%;
+	border: 0.0625rem solid gray;
+	border-bottom-color: transparent !important; /*已在style设置border-color,此处需加 !important*/
+	vertical-align: middle;
+}
+
+/* 旋转动画 */
+.mescroll-upwarp .mescroll-rotate[data-v-07e5713e] {
+	animation: mescrollUpRotate-07e5713e 0.6s linear infinite;
+}
+@keyframes mescrollUpRotate-07e5713e {
+0% {
+		transform: rotate(0deg);
+}
+100% {
+		transform: rotate(360deg);
+}
+}
+
+/**
+ * 这里是uni-app内置的常用样式变量
+ *
+ * uni-app 官方扩展插件及插件市场（https://ext.dcloud.net.cn）上很多三方插件均使用了这些样式变量
+ * 如果你是插件开发者，建议你使用scss预处理，并在插件代码中直接使用这些变量（无需 import 这个文件），方便用户通过搭积木的方式开发整体风格一致的App
+ *
+ */
+/**
+ * 如果你是App开发者（插件使用者），你可以通过修改这些变量来定制自己的插件主题，实现自定义主题功能
+ *
+ * 如果你的项目同样使用了scss预处理，你也可以直接在你的 scss 代码中使用如下变量，同时无需 import 这个文件
+ */
+/* 颜色变量 */
+/*文本基本颜色*/
+.category-box[data-v-a0997b4a] {
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: wrap;
+  padding: 0.625rem 0.9375rem 0 0.9375rem;
+}
+.category-box > uni-view[data-v-a0997b4a] {
+  width: 5rem;
+  height: 2.1875rem;
+  background-color: #F8F9FB;
+  text-align: center;
+  line-height: 2.1875rem;
+  font-size: 0.8125rem;
+  border-radius: 0.625rem;
+  overflow: hidden;
+  margin-top: 0.46875rem;
+}
+/**
+ * 这里是uni-app内置的常用样式变量
+ *
+ * uni-app 官方扩展插件及插件市场（https://ext.dcloud.net.cn）上很多三方插件均使用了这些样式变量
+ * 如果你是插件开发者，建议你使用scss预处理，并在插件代码中直接使用这些变量（无需 import 这个文件），方便用户通过搭积木的方式开发整体风格一致的App
+ *
+ */
+/**
+ * 如果你是App开发者（插件使用者），你可以通过修改这些变量来定制自己的插件主题，实现自定义主题功能
+ *
+ * 如果你的项目同样使用了scss预处理，你也可以直接在你的 scss 代码中使用如下变量，同时无需 import 这个文件
+ */
+/* 颜色变量 */
+/*文本基本颜色*/
+.column[data-v-1990ede0] {
+  flex-direction: column;
+}
+.course-item[data-v-1990ede0] {
+  display: flex;
+  width: 100%;
+  padding: 0.625rem 0;
+  border-bottom: 0.03125rem solid #f1f1f1;
+}
+.course-item .item-left[data-v-1990ede0] {
+  position: relative;
+  width: 9.0625rem;
+  height: 5rem;
+  margin-right: 0.625rem;
+}
+.course-item .item-left .course-img[data-v-1990ede0] {
+  width: 9.0625rem;
+  height: 5rem;
+  border-radius: 0.3125rem;
+}
+.course-item .item-left .course-time[data-v-1990ede0] {
+  position: absolute;
+  bottom: 0.15625rem;
+  right: 0.15625rem;
+  font-size: 0.6875rem;
+  color: #fff;
+  background: rgba(51, 51, 51, 0.4);
+  border-radius: 0.625rem;
+  padding: 0 0.25rem;
+}
+.course-item .item-right[data-v-1990ede0] {
+  justify-content: space-between;
+  height: 5rem;
+  padding-top: 0.15625rem;
+  padding-left: 0.15625rem;
+}
+.course-item .item-right .title[data-v-1990ede0] {
+  max-width: 11.40625rem;
+  height: 2.1875rem;
+  line-height: 1.09375rem;
+  font-size: 0.875rem;
+  font-weight: bold;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  -webkit-line-clamp: 2;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  white-space: normal;
+}
+.course-item .item-right .info .nickname[data-v-1990ede0] {
+  font-size: 0.71875rem;
+  color: #999;
+}
+.course-item .item-right .info .count[data-v-1990ede0] {
+  display: flex;
+  align-items: center;
+}
+.course-item .item-right .info .count .iconfont[data-v-1990ede0] {
+  font-size: 0.71875rem;
+  color: #222222;
+}
+.course-item .item-right .info .count .money[data-v-1990ede0] {
+  color: #FB6932;
+  width: 4.0625rem;
+  font-size: 0.875rem;
+}
+/**
+ * 这里是uni-app内置的常用样式变量
+ *
+ * uni-app 官方扩展插件及插件市场（https://ext.dcloud.net.cn）上很多三方插件均使用了这些样式变量
+ * 如果你是插件开发者，建议你使用scss预处理，并在插件代码中直接使用这些变量（无需 import 这个文件），方便用户通过搭积木的方式开发整体风格一致的App
+ *
+ */
+/**
+ * 如果你是App开发者（插件使用者），你可以通过修改这些变量来定制自己的插件主题，实现自定义主题功能
+ *
+ * 如果你的项目同样使用了scss预处理，你也可以直接在你的 scss 代码中使用如下变量，同时无需 import 这个文件
+ */
+/* 颜色变量 */
+/*文本基本颜色*/
+.list-box[data-v-0993e984] {
+  margin-top: 1.875rem;
+}
+.list-box .name[data-v-0993e984] {
+  font-size: 1.1875rem;
+  font-weight: 500;
+  color: #303133;
+  margin-right: 0.3125rem;
+}
+.list-box .word[data-v-0993e984] {
+  font-size: 0.625rem;
+  background-image: linear-gradient(to right, #FB6932, #FA140E);
+  color: #fff;
+  padding: 0 0.3125rem;
+  border-radius: 0.9375rem 0.9375rem 0.9375rem 0;
+}
+.list-box .all[data-v-0993e984] {
+  font-weight: normal;
+  color: #959DA5;
+  font-size: 0.875rem;
+}
+.list-box .all .iconfont[data-v-0993e984] {
+  font-size: 0.78125rem;
+}
+/**
+ * 这里是uni-app内置的常用样式变量
+ *
+ * uni-app 官方扩展插件及插件市场（https://ext.dcloud.net.cn）上很多三方插件均使用了这些样式变量
+ * 如果你是插件开发者，建议你使用scss预处理，并在插件代码中直接使用这些变量（无需 import 这个文件），方便用户通过搭积木的方式开发整体风格一致的App
+ *
+ */
+/**
+ * 如果你是App开发者（插件使用者），你可以通过修改这些变量来定制自己的插件主题，实现自定义主题功能
+ *
+ * 如果你的项目同样使用了scss预处理，你也可以直接在你的 scss 代码中使用如下变量，同时无需 import 这个文件
+ */
+/* 颜色变量 */
+/*文本基本颜色*/
+.list-scroll[data-v-2d5bbbcc] {
+  white-space: nowrap;
+  height: 11.3125rem;
+}
+.list-scroll .list-scroll-view[data-v-2d5bbbcc] {
+  width: 9.6875rem;
+  overflow: hidden;
+  display: inline-block;
+  padding: 0 0.3125rem;
+  margin-right: 0.625rem;
+  border-radius: 0.625rem;
+  box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.1);
+  background-color: #fff;
+}
+/**
+ * 这里是uni-app内置的常用样式变量
+ *
+ * uni-app 官方扩展插件及插件市场（https://ext.dcloud.net.cn）上很多三方插件均使用了这些样式变量
+ * 如果你是插件开发者，建议你使用scss预处理，并在插件代码中直接使用这些变量（无需 import 这个文件），方便用户通过搭积木的方式开发整体风格一致的App
+ *
+ */
+/**
+ * 如果你是App开发者（插件使用者），你可以通过修改这些变量来定制自己的插件主题，实现自定义主题功能
+ *
+ * 如果你的项目同样使用了scss预处理，你也可以直接在你的 scss 代码中使用如下变量，同时无需 import 这个文件
+ */
+/* 颜色变量 */
+/*文本基本颜色*/
+.list-view[data-v-534bbb02] {
+  width: 100%;
+  padding: 0 0.3125rem;
+  margin-right: 0.625rem;
+  border-radius: 0.625rem;
+  box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.1);
+  background-color: #fff;
+}
+/**
+ * 这里是uni-app内置的常用样式变量
+ *
+ * uni-app 官方扩展插件及插件市场（https://ext.dcloud.net.cn）上很多三方插件均使用了这些样式变量
+ * 如果你是插件开发者，建议你使用scss预处理，并在插件代码中直接使用这些变量（无需 import 这个文件），方便用户通过搭积木的方式开发整体风格一致的App
+ *
+ */
+/**
+ * 如果你是App开发者（插件使用者），你可以通过修改这些变量来定制自己的插件主题，实现自定义主题功能
+ *
+ * 如果你的项目同样使用了scss预处理，你也可以直接在你的 scss 代码中使用如下变量，同时无需 import 这个文件
+ */
+/* 颜色变量 */
+/*文本基本颜色*/
+.main-list[data-v-f5bdc598] {
+  padding: 0 0.9375rem;
+  box-sizing: border-box;
+}

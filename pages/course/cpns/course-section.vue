@@ -14,7 +14,7 @@
 					<text>{{index+1}}-{{index2+1}}</text>
 					<text class="title text-ellipsis">{{section.name}}</text>
 				</view>
-				<text v-if="section.isFree" class="see">试看</text>
+				<text v-if="section.isFree" class="see" @click="handleClick(section)">试看</text>
 			</view>
 		</view>
 	</view>
@@ -46,6 +46,15 @@ export default {
 				// }
 			]
 		}
+	},
+	setup(props,{emit}){
+		let handleClick = (setion) => {
+			emit('openVideo',setion)
+		}
+		return{
+			handleClick
+		}
+		
 	}
 }
 </script>

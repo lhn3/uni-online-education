@@ -52,6 +52,14 @@ const getCoursePackage=(id)=>{
 	})
 }
 
+//通过用户id查询课程是否已经购买
+const getCourseIsBuy=(id)=>{
+	return request({
+		method:'POST',
+		url:'/course/course/is-buy/'+id,
+	})
+}
+
 export {
 	getBanners,
 	getCategory,
@@ -59,5 +67,6 @@ export {
 	getCourseDetail,
 	getCourseSection,
 	getCourseComment,
-	getCoursePackage
+	getCoursePackage,
+	getCourseIsBuy
 }

@@ -1,0 +1,514 @@
+/**
+ * 这里是uni-app内置的常用样式变量
+ *
+ * uni-app 官方扩展插件及插件市场（https://ext.dcloud.net.cn）上很多三方插件均使用了这些样式变量
+ * 如果你是插件开发者，建议你使用scss预处理，并在插件代码中直接使用这些变量（无需 import 这个文件），方便用户通过搭积木的方式开发整体风格一致的App
+ *
+ */
+/**
+ * 如果你是App开发者（插件使用者），你可以通过修改这些变量来定制自己的插件主题，实现自定义主题功能
+ *
+ * 如果你的项目同样使用了scss预处理，你也可以直接在你的 scss 代码中使用如下变量，同时无需 import 这个文件
+ */
+/* 颜色变量 */
+/*文本基本颜色*/
+.tab-bar[data-v-6dc8a5bc] {
+  width: 100%;
+  height: 2.5rem;
+  background-color: #FFFFFF;
+  border-bottom: 1px solid #efeff4;
+}
+.tab-bar .bar-view[data-v-6dc8a5bc] {
+  width: 100%;
+  text-align: center;
+  /* +++ */
+  white-space: nowrap;
+}
+.tab-bar .bar-view .bar-item[data-v-6dc8a5bc] {
+  /* flex: 1; */
+  display: inline-block;
+  width: 4.6875rem;
+  font-size: 0.9375rem;
+  line-height: 2.5rem;
+  position: relative;
+}
+.tab-bar .bar-view .bar-item[data-v-6dc8a5bc]:after {
+  position: absolute;
+  content: "";
+  width: 0;
+  height: 0;
+  border-bottom: 0.1875rem solid #A2CD5A;
+  border-radius: 0.625rem;
+  left: 50%;
+  bottom: 0.1875rem;
+  transform: translateX(-50%);
+  transition: 0.3s;
+}
+.tab-bar .bar-view .current[data-v-6dc8a5bc] {
+  color: #A2CD5A;
+}
+.tab-bar .bar-view .current[data-v-6dc8a5bc]:after {
+  width: 1.875rem;
+}
+/**
+ * 这里是uni-app内置的常用样式变量
+ *
+ * uni-app 官方扩展插件及插件市场（https://ext.dcloud.net.cn）上很多三方插件均使用了这些样式变量
+ * 如果你是插件开发者，建议你使用scss预处理，并在插件代码中直接使用这些变量（无需 import 这个文件），方便用户通过搭积木的方式开发整体风格一致的App
+ *
+ */
+/**
+ * 如果你是App开发者（插件使用者），你可以通过修改这些变量来定制自己的插件主题，实现自定义主题功能
+ *
+ * 如果你的项目同样使用了scss预处理，你也可以直接在你的 scss 代码中使用如下变量，同时无需 import 这个文件
+ */
+/* 颜色变量 */
+/*文本基本颜色*/
+.mask[data-v-448797c4] {
+  z-index: 99;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.6);
+}
+.share-body[data-v-448797c4] {
+  z-index: 100;
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+}
+.share-body .share-scroll[data-v-448797c4] {
+  border-radius: 0.9375rem 0.9375rem 0 0;
+  background-color: #f7f7f7;
+  width: 100%;
+  height: 6.25rem;
+  display: flex;
+  white-space: nowrap;
+  padding-top: 1.40625rem;
+}
+.share-body .share-scroll .share-item[data-v-448797c4] {
+  display: inline-flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 25%;
+}
+.share-body .share-scroll .share-item uni-image[data-v-448797c4] {
+  width: 1.875rem;
+  height: 1.875rem;
+}
+.share-body .share-scroll .share-item uni-view[data-v-448797c4] {
+  color: #959DA5;
+  font-size: 0.78125rem;
+  padding-top: 0.3125rem;
+}
+.share-body .share-cancel[data-v-448797c4] {
+  background-color: #fff;
+  text-align: center;
+  width: 100%;
+  padding: 0.78125rem 0;
+}
+/**
+ * 这里是uni-app内置的常用样式变量
+ *
+ * uni-app 官方扩展插件及插件市场（https://ext.dcloud.net.cn）上很多三方插件均使用了这些样式变量
+ * 如果你是插件开发者，建议你使用scss预处理，并在插件代码中直接使用这些变量（无需 import 这个文件），方便用户通过搭积木的方式开发整体风格一致的App
+ *
+ */
+/**
+ * 如果你是App开发者（插件使用者），你可以通过修改这些变量来定制自己的插件主题，实现自定义主题功能
+ *
+ * 如果你的项目同样使用了scss预处理，你也可以直接在你的 scss 代码中使用如下变量，同时无需 import 这个文件
+ */
+/* 颜色变量 */
+/*文本基本颜色*/
+.course-header .img[data-v-21516c4e] {
+  width: 23.4375rem;
+  height: 13.125rem;
+}
+.course-header .header-info[data-v-21516c4e] {
+  padding: 0.78125rem;
+  background-color: #fff;
+  border: 0.78125rem solid #F8F9FB;
+  border-left: 0;
+  border-right: 0;
+}
+.course-header .price-info uni-text[data-v-21516c4e] {
+  margin-right: 0.46875rem;
+}
+.course-header .price-info uni-text[data-v-21516c4e]:first-child {
+  color: #FA140E;
+  font-size: 1.4375rem;
+  font-weight: bold;
+}
+.course-header .price-info .price[data-v-21516c4e] {
+  color: #b6bbbf;
+  font-size: 0.9375rem;
+  text-decoration: line-through;
+}
+.course-header .price-info .youhui[data-v-21516c4e] {
+  font-size: 0.625rem;
+  color: #FA140E;
+  border: 1px solid #FA140E;
+  border-radius: 0.3125rem;
+  padding: 0 0.09375rem;
+}
+.course-header .title[data-v-21516c4e] {
+  font-size: 1.09375rem;
+  font-weight: bold;
+  color: #1d1d1f;
+  padding-left: 0.25rem;
+}
+.course-header .count[data-v-21516c4e] {
+  padding: 0.46875rem 0;
+}
+.course-header .count uni-text[data-v-21516c4e] {
+  margin-right: 0.46875rem;
+  font-size: 0.625rem;
+  color: #7d828f;
+  background-color: #F8F9FB;
+  padding: 0.46875rem;
+  border-radius: 0.9375rem;
+}
+/**
+ * 这里是uni-app内置的常用样式变量
+ *
+ * uni-app 官方扩展插件及插件市场（https://ext.dcloud.net.cn）上很多三方插件均使用了这些样式变量
+ * 如果你是插件开发者，建议你使用scss预处理，并在插件代码中直接使用这些变量（无需 import 这个文件），方便用户通过搭积木的方式开发整体风格一致的App
+ *
+ */
+/**
+ * 如果你是App开发者（插件使用者），你可以通过修改这些变量来定制自己的插件主题，实现自定义主题功能
+ *
+ * 如果你的项目同样使用了scss预处理，你也可以直接在你的 scss 代码中使用如下变量，同时无需 import 这个文件
+ */
+/* 颜色变量 */
+/*文本基本颜色*/
+uni-image[data-v-617cd50e] {
+  width: 100%;
+}
+.loading[data-v-617cd50e] {
+  height: 2.8125rem;
+  width: 2.8125rem;
+  margin-top: 1.5625rem;
+}
+.footer-text[data-v-617cd50e] {
+  font-size: 0.9375rem;
+  color: #777;
+  margin: 0.625rem 0;
+}
+/**
+ * 这里是uni-app内置的常用样式变量
+ *
+ * uni-app 官方扩展插件及插件市场（https://ext.dcloud.net.cn）上很多三方插件均使用了这些样式变量
+ * 如果你是插件开发者，建议你使用scss预处理，并在插件代码中直接使用这些变量（无需 import 这个文件），方便用户通过搭积木的方式开发整体风格一致的App
+ *
+ */
+/**
+ * 如果你是App开发者（插件使用者），你可以通过修改这些变量来定制自己的插件主题，实现自定义主题功能
+ *
+ * 如果你的项目同样使用了scss预处理，你也可以直接在你的 scss 代码中使用如下变量，同时无需 import 这个文件
+ */
+/* 颜色变量 */
+/*文本基本颜色*/
+.course-dir[data-v-6773dd35] {
+  padding: 0 1.125rem;
+}
+.course-dir .chapters[data-v-6773dd35] {
+  margin-top: 0.9375rem;
+  margin-bottom: 0.3125rem;
+  color: #333333;
+  font-size: 1.09375rem;
+  font-weight: bold;
+}
+.course-dir .sections[data-v-6773dd35] {
+  padding: 0.625rem 0;
+  font-size: 0.9375rem;
+  border-bottom: 0.5px solid #efeff4;
+  line-height: 1.25rem;
+  color: #3d3c40;
+}
+.course-dir .sections uni-text[data-v-6773dd35] {
+  margin-right: 0.3125rem;
+}
+.course-dir .sections .title[data-v-6773dd35] {
+  width: 14.6875rem;
+}
+.course-dir .sections .see[data-v-6773dd35] {
+  color: #A2CD5A;
+  font-size: 0.78125rem;
+  flex: 1;
+  text-align: right;
+}
+.course-dir .active[data-v-6773dd35] {
+  color: #A2CD5A;
+}
+
+.title[data-v-1a4b7c72] {
+	color: #999;
+	font-size: 0.9375rem;
+	margin-top: 0.9375rem;
+}
+
+/**
+ * 这里是uni-app内置的常用样式变量
+ *
+ * uni-app 官方扩展插件及插件市场（https://ext.dcloud.net.cn）上很多三方插件均使用了这些样式变量
+ * 如果你是插件开发者，建议你使用scss预处理，并在插件代码中直接使用这些变量（无需 import 这个文件），方便用户通过搭积木的方式开发整体风格一致的App
+ *
+ */
+/**
+ * 如果你是App开发者（插件使用者），你可以通过修改这些变量来定制自己的插件主题，实现自定义主题功能
+ *
+ * 如果你的项目同样使用了scss预处理，你也可以直接在你的 scss 代码中使用如下变量，同时无需 import 这个文件
+ */
+/* 颜色变量 */
+/*文本基本颜色*/
+.comment[data-v-7adc00a2] {
+  font-size: 0.9375rem;
+  padding: 0 1.125rem;
+  background-color: #fff;
+}
+.comment .comment-item[data-v-7adc00a2] {
+  margin-top: 1.125rem;
+  border-bottom: 0.5px solid #efeff4;
+}
+.comment .comment-item .info[data-v-7adc00a2] {
+  display: flex;
+  align-items: center;
+}
+.comment .comment-item .info uni-image[data-v-7adc00a2] {
+  width: 2.1875rem;
+  height: 2.1875rem;
+  border-radius: 1.5625rem;
+  margin-right: 0.625rem;
+}
+.comment .comment-item .info .user[data-v-7adc00a2] {
+  font-weight: bold;
+  line-height: 1.03125rem;
+}
+.comment .comment-item .info .user[data-v-7adc00a2] :last-child {
+  color: #999;
+  font-size: 0.78125rem;
+  font-weight: normal;
+}
+.comment .comment-item .info[data-v-7adc00a2] :last-child {
+  margin-left: auto;
+  font-size: 1.09375rem;
+  color: #ff001b;
+}
+.comment .comment-item .info .grey[data-v-7adc00a2] {
+  color: #959DA5;
+}
+.comment .comment-item .content[data-v-7adc00a2] {
+  margin: 0.78125rem 0;
+}
+.comment .comment-item .replay[data-v-7adc00a2] {
+  background-color: #F8F9FB;
+  padding: 0.46875rem;
+  border-radius: 0.3125rem;
+  margin-bottom: 0.9375rem;
+  color: #7d828f;
+}
+/**
+ * 这里是uni-app内置的常用样式变量
+ *
+ * uni-app 官方扩展插件及插件市场（https://ext.dcloud.net.cn）上很多三方插件均使用了这些样式变量
+ * 如果你是插件开发者，建议你使用scss预处理，并在插件代码中直接使用这些变量（无需 import 这个文件），方便用户通过搭积木的方式开发整体风格一致的App
+ *
+ */
+/**
+ * 如果你是App开发者（插件使用者），你可以通过修改这些变量来定制自己的插件主题，实现自定义主题功能
+ *
+ * 如果你的项目同样使用了scss预处理，你也可以直接在你的 scss 代码中使用如下变量，同时无需 import 这个文件
+ */
+/* 颜色变量 */
+/*文本基本颜色*/
+.column[data-v-1990ede0] {
+  flex-direction: column;
+}
+.course-item[data-v-1990ede0] {
+  display: flex;
+  width: 100%;
+  padding: 0.625rem 0;
+  border-bottom: 0.03125rem solid #f1f1f1;
+}
+.course-item .item-left[data-v-1990ede0] {
+  position: relative;
+  width: 9.0625rem;
+  height: 5rem;
+  margin-right: 0.625rem;
+}
+.course-item .item-left .course-img[data-v-1990ede0] {
+  width: 9.0625rem;
+  height: 5rem;
+  border-radius: 0.3125rem;
+}
+.course-item .item-left .course-time[data-v-1990ede0] {
+  position: absolute;
+  bottom: 0.15625rem;
+  right: 0.15625rem;
+  font-size: 0.6875rem;
+  color: #fff;
+  background: rgba(51, 51, 51, 0.4);
+  border-radius: 0.625rem;
+  padding: 0 0.25rem;
+}
+.course-item .item-right[data-v-1990ede0] {
+  justify-content: space-between;
+  height: 5rem;
+  padding-top: 0.15625rem;
+  padding-left: 0.15625rem;
+}
+.course-item .item-right .title[data-v-1990ede0] {
+  max-width: 11.40625rem;
+  height: 2.1875rem;
+  line-height: 1.09375rem;
+  font-size: 0.875rem;
+  font-weight: bold;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  -webkit-line-clamp: 2;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  white-space: normal;
+}
+.course-item .item-right .info .nickname[data-v-1990ede0] {
+  font-size: 0.71875rem;
+  color: #999;
+}
+.course-item .item-right .info .count[data-v-1990ede0] {
+  display: flex;
+  align-items: center;
+}
+.course-item .item-right .info .count .iconfont[data-v-1990ede0] {
+  font-size: 0.71875rem;
+  color: #222222;
+}
+.course-item .item-right .info .count .money[data-v-1990ede0] {
+  color: #FB6932;
+  width: 4.0625rem;
+  font-size: 0.875rem;
+}
+/**
+ * 这里是uni-app内置的常用样式变量
+ *
+ * uni-app 官方扩展插件及插件市场（https://ext.dcloud.net.cn）上很多三方插件均使用了这些样式变量
+ * 如果你是插件开发者，建议你使用scss预处理，并在插件代码中直接使用这些变量（无需 import 这个文件），方便用户通过搭积木的方式开发整体风格一致的App
+ *
+ */
+/**
+ * 如果你是App开发者（插件使用者），你可以通过修改这些变量来定制自己的插件主题，实现自定义主题功能
+ *
+ * 如果你的项目同样使用了scss预处理，你也可以直接在你的 scss 代码中使用如下变量，同时无需 import 这个文件
+ */
+/* 颜色变量 */
+/*文本基本颜色*/
+.group-item[data-v-7b5dfa16] {
+  margin: 0.9375rem;
+  background-color: #fff;
+  border-radius: 0.625rem;
+  box-shadow: 2px 0 10px 0 rgba(0, 0, 0, 0.1);
+  padding: 0 0.625rem;
+}
+.group-item .title[data-v-7b5dfa16] {
+  font-size: 1.09375rem;
+  font-weight: 500;
+  line-height: 2.1875rem;
+  font-weight: 700;
+}
+.group-item .price-box[data-v-7b5dfa16] {
+  color: #FA140E;
+  font-size: 0.9375rem;
+  line-height: 2.5rem;
+  font-weight: bold;
+}
+.group-item .price-box .group-price[data-v-7b5dfa16] {
+  font-size: 1.15625rem;
+  margin-right: 0.3125rem;
+}
+.group-item .price-box .total-price[data-v-7b5dfa16] {
+  color: #999;
+  font-weight: normal;
+  text-decoration: line-through;
+}
+/**
+ * 这里是uni-app内置的常用样式变量
+ *
+ * uni-app 官方扩展插件及插件市场（https://ext.dcloud.net.cn）上很多三方插件均使用了这些样式变量
+ * 如果你是插件开发者，建议你使用scss预处理，并在插件代码中直接使用这些变量（无需 import 这个文件），方便用户通过搭积木的方式开发整体风格一致的App
+ *
+ */
+/**
+ * 如果你是App开发者（插件使用者），你可以通过修改这些变量来定制自己的插件主题，实现自定义主题功能
+ *
+ * 如果你的项目同样使用了scss预处理，你也可以直接在你的 scss 代码中使用如下变量，同时无需 import 这个文件
+ */
+/* 颜色变量 */
+/*文本基本颜色*/
+.bottom[data-v-43a26188] {
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #FFFFFF;
+  height: 3.125rem;
+  border-top: 0.5px solid #efeff4;
+}
+.bottom-btn[data-v-43a26188] {
+  width: 21.875rem;
+  background-color: #A2CD5A;
+  text-align: center;
+  font-size: 1.09375rem;
+  color: #FFFFFF;
+  border-radius: 1.5625rem;
+  line-height: 2.5rem;
+}
+/**
+ * 这里是uni-app内置的常用样式变量
+ *
+ * uni-app 官方扩展插件及插件市场（https://ext.dcloud.net.cn）上很多三方插件均使用了这些样式变量
+ * 如果你是插件开发者，建议你使用scss预处理，并在插件代码中直接使用这些变量（无需 import 这个文件），方便用户通过搭积木的方式开发整体风格一致的App
+ *
+ */
+/**
+ * 如果你是App开发者（插件使用者），你可以通过修改这些变量来定制自己的插件主题，实现自定义主题功能
+ *
+ * 如果你的项目同样使用了scss预处理，你也可以直接在你的 scss 代码中使用如下变量，同时无需 import 这个文件
+ */
+/* 颜色变量 */
+/*文本基本颜色*/
+.course-details {
+  overflow: hidden;
+}
+.course-details .swiper-box, .course-details .scroll-box {
+  height: 100%;
+}
+.course-details .details-info {
+  padding-bottom: 6.25rem;
+}
+.video-box {
+  z-index: 100;
+  text-align: center;
+}
+.video-box .name {
+  color: #FFFFFF;
+  position: relative;
+  top: 11.875rem;
+  font-size: 1.1875rem;
+  font-weight: bold;
+}
+.video-box .icon-close {
+  margin-left: 0.625rem;
+}
+.video-box .video {
+  width: 23.4375rem;
+  height: 13.125rem;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}

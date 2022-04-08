@@ -6,6 +6,14 @@ const _sfc_main = {
       type: Array,
       default: () => []
     }
+  },
+  setup(props, { emit }) {
+    let handleClick = (setion) => {
+      emit("openVideo", setion);
+    };
+    return {
+      handleClick
+    };
   }
 };
 function _sfc_render(_ctx, _cache, $props, $setup, $data, $options) {
@@ -19,8 +27,10 @@ function _sfc_render(_ctx, _cache, $props, $setup, $data, $options) {
             a: common_vendor.t(index2 + 1),
             b: common_vendor.t(section.name),
             c: section.isFree
-          }, section.isFree ? {} : {}, {
-            d: index2
+          }, section.isFree ? {
+            d: common_vendor.o(($event) => $setup.handleClick(section))
+          } : {}, {
+            e: index2
           });
         }),
         d: common_vendor.t(index + 1),

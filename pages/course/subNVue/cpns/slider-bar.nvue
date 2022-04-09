@@ -1,0 +1,119 @@
+<template>
+	<view>
+		<view class="slider row center" :style="{ width: `${sliderWidth}px`}"
+			@touchstart="blockTouchStart" @touchend="blockTouchEnd"  @touchmove.stop="blockTouchMove"
+		>
+			<!-- 圆点左侧已播放进度条 -->
+			<view class="slider-left" :style="{ width: `${leftWidth}px` }" ></view>
+			<!-- 圆点右侧未播放进度条 -->
+			<view class="slider-right" :style="{ width: `${sliderWidth-leftWidth}px` }"></view>
+			<!-- 圆点 -->
+			<view class="block-inner" :style="{left: `${leftWidth-5}px`}"></view>
+		</view>
+	</view>
+</template>
+
+<script>
+	export default{
+		props:{
+			duration:{ //总时长
+				type: Number,
+				default: 60
+			},
+			
+			current: { // 当前播放时长
+				type:Number,
+				default: 0
+			},
+			
+			sliderWidth: { //进度条宽度
+				type:Number,
+				default: 100
+			},
+			
+			rate: { //倍速
+				type: Number,
+				default: 1
+			},
+			
+			direction:{ //判断屏幕方向，非全屏screenX，全屏screenY，用于计算滑动长度
+				type:String,
+				default: 'screenX'
+			},
+			
+		},
+		
+		data(){
+			return{
+				oldToucesX: 0,
+				leftWidth: 0,
+				oldLeftWidth: 0,
+				touch: false
+			}
+		},
+		methods:{
+			// 触摸开始，记录原坐标
+			blockTouchStart(e) {
+				this.touch = true
+				this.oldLeftWidth = this.leftWidth
+				// screenX 点击点相对于屏幕左侧边缘的 X 轴坐标, screenY 点击点相对于屏幕顶部边缘的 Y 轴坐标
+				this.oldToucesX = e.changedTouches[0][this.direction];
+			},
+			// 计算方向
+			blockTouchMove(e) {
+				let newToucesX = e.changedTouches[0][this.direction];
+				this.leftWidth = (newToucesX - this.oldToucesX) * this.rate + this.oldLeftWidth
+				// 起出宽度，则移动进度条到右边缘，
+				this.leftWidth = this.leftWidth > this.sliderWidth ? this.sliderWidth : this.leftWidth
+				// 小于0，则移动进度条到左边缘，
+				this.leftWidth = this.leftWidth < 0 ? 0 : this.leftWidth
+			},
+			
+			// 结束触摸
+			blockTouchEnd(e) {
+				// 计算结束点，触发父组件，进行结束点位置播放
+				let currentSecond = this.leftWidth / this.sliderWidth * this.duration
+				this.$emit('change', currentSecond)
+				this.touch = false
+			},
+		},
+		
+		watch:{
+			// 监听播放时间变化，移动滚动点
+			current:{
+				immediate:true,
+				handler(newVal, oldVal){
+					if(this.touch) return
+					this.leftWidth = newVal/this.duration * this.sliderWidth
+					this.leftWidth = this.leftWidth > this.sliderWidth? this.sliderWidth : this.leftWidth
+				}
+			}
+		}
+	}
+</script>
+
+<style >
+	.slider {
+		height: 90rpx;
+	}
+	.slider-left{
+		/* flex: 1; */
+		height: 3px;
+		border-radius: 10rpx;
+		background-color: #A2CD5A;
+	}
+	.slider-right{
+		height: 3px;
+		background-color: rgba(175, 175, 175, 1);
+		border-radius: 10rpx;
+	}
+
+	.block-inner{
+		position: absolute;
+		background-color: #fff;
+		height: 20rpx;
+		width: 20rpx;
+		border-radius: 100%;
+		z-index: 10;
+	}
+</style>

@@ -1,8 +1,8 @@
 <template>
-	<div>
-		<div class="status" :style="{height:statusHeight +'px'}"></div>
-		<video class="video" 
-		src="" 
+	<view>
+		<view class="status" :style="{height:statusHeight +'px'}"></view>
+		<video ref="videoRef" class="video" 
+		:src="videoMidea.videoUrl" 
 		:controls="false"
 		:poster="videoMidea.mainImage"
 		:show-fullscreen-btn="false"
@@ -10,23 +10,79 @@
 		:show-progress="false"	
 		@ended="nextVideo"
 		@timeupdate="timeupdate"
-		></video>
-	</div>
+		@click="clikcVideo"
+		>
+			<!-- 覆盖组件 -->
+			<cover-view class="cover-top row" v-if="showControls">
+				<!-- 后退 -->
+				<text class="btn icon" @click.stop="back">&#xe679;</text>
+				<text class="title">{{videoMidea.title}}</text>
+			</cover-view>
+			
+			<cover-view class="cover-center center" v-if="first">
+				<!-- 开始 -->
+				<text class="icon iconBig" @click="playFirst">&#xe625;</text> 
+			</cover-view>
+			
+			<cover-view class="cover-bottom row center" v-if="showControls">
+				<view class="row">
+				<!-- 暂停或开始 -->
+					<text class="btn icon" v-if="!isPlay" @click="playOrpause">&#xe625;</text>
+					<text class="btn icon" v-else @click="playOrpause">&#xe62c;</text>
+				<!-- 下一个 -->
+					<text class="btn icon">&#xe61b;</text>
+				</view>
+				<text class="time">00:00</text>
+				<view class="bottom-slider">
+					<slider-bar :sliderWidth="160"></slider-bar>
+				</view>	
+				<text class="time">03:45</text>
+				<view class="row">
+					<!-- 倍数 -->
+					<text class="btn x">x1.0</text>
+					<!-- 全屏 -->
+					<text class="btn icon">&#xe623;</text>
+				</view>
+			</cover-view>
+		</video>
+	</view>
 </template>
 
 <script>
+import sliderBar from './cpns/slider-bar.nvue'
 export default {
+	components:{
+		"slider-bar":sliderBar
+	},
 	data(){
 		return{
 			statusHeight:0,
+			videoContext:null,
+			first:true,			//中间播放按钮
+			isPlay:false,		//播放暂停
+			showControls:false,	//控件显示隐藏
+			timmer:null,		//计时器
 			videoMidea:{
+				title:'标题标题标题标题标题标题标题标题标题标题标题标题标题标题标题标题标题标题标题标题标题标题标题标题',
 				mainImage:"/static/images/banner3.jpg",
-				videoUrl:''
+				videoUrl:'http://baobab.kaiyanapp.com/api/v1/playUrl?vid=164016&resourceType=video&editionType=low&source=aliyun&playUrlType=url_oss'
 			}
 		}
 	},
 	onLoad() {
+		// 获取状态栏高度
 		this.statusHeight = uni.getSystemInfoSync().statusBarHeight
+	},
+	//nvue文件使用字体图标
+	beforeCreate() {
+		const domModule = uni.requireNativePlugin('dom')
+		domModule.addRule('fontFace', {
+			'fontFamily': "iconfont",
+			'src': "url('~@/static/icon/iconfont.ttf')"
+		});
+	},
+	mounted() {
+		this.videoContext = this.$refs.videoRef
 	},
 	methods:{
 		//视频播放到末尾播放下一个
@@ -36,6 +92,38 @@ export default {
 		// 获取播放进度变化，视频总时长duration，播放当前时长等
 		timeupdate(){
 			
+		},
+		//定时隐藏控件
+		useTimer(){
+			if(this.timmer) clearTimeout(this.timmer);
+			this.timmer=setTimeout(()=>{
+				this.showControls = false
+				this.timmer = null
+			},3000) 
+		},
+		//点击视频组件
+		clikcVideo(){
+			this.showControls = !this.showControls
+			if(this.showControls) this.useTimer();	//显示控件，定时隐藏控件
+		},
+		// 第一次播放视频
+		playFirst(){
+			this.first = false
+			this.isPlay = true
+			this.videoContext.play()
+			this.useTimer()
+		},
+		//播放或暂停
+		playOrpause(){
+			if(this.isPlay){
+				this.videoContext.pause()
+			}else{
+				this.videoContext.play()
+			}
+			this.isPlay = !this.isPlay
+			this.useTimer()					//无论暂停播放，控件都定时隐藏
+			if(!this.first) return;
+			this.first = false
 		}
 		
 	}
@@ -50,5 +138,108 @@ export default {
 .video{
 	width: 750rpx;
 	height: 225px;
+}
+.icon{
+	font-family:iconfont;
+	font-size:50rpx;
+	color: #fff;
+}
+.iconBig{
+	font-size:60rpx;
+	width: 100rpx;
+	height: 100rpx;
+	text-align: center;
+	line-height: 100rpx;
+	border-radius: 50rpx;
+	background-color: rgba(0,0,0,0.5);
+}
+.cover-top{
+	height: 90rpx;
+	padding: 10rpx;
+	align-items: center;
+	/* 渐变 */
+	background-image: linear-gradient(to top,rgba(0,0,0,0),rgba(0,0,0,0.8));
+}
+.title{
+	color: #fff;
+	font-size: 30rpx;
+	width: 500rpx;
+	/* 一行显示 */
+	lines: 1;
+	text-overflow: ellipsis;
+}
+.cover-center{
+	position: absolute;
+	top: 90rpx;
+	left: 0;
+	right: 0;
+	bottom: 90rpx;
+	background-color: rgba(0,0,0,0);
+}
+/* 底部区域 */
+.cover-bottom{
+	position: absolute;
+	bottom: 0;
+	height: 90rpx;
+	width: 750rpx;
+	background-image: linear-gradient(to bottom, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.8));;
+}
+.btn {
+	width: 60rpx;
+	line-height: 90rpx;
+	text-align: center;
+	color: #FFFFFF;
+	font-size: 40rpx;
+}
+.x{
+	font-size: 28rpx;
+}
+.time {
+	font-size: 24rpx;
+	color: #FFFFFF;
+	width: 110rpx;
+	text-align: center;
+}
+.bottom-slider {
+	flex-direction: row;
+	align-items: center;
+	height: 90rpx;
+	/* 减去固定的宽度，就是此进度条宽度 */
+	flex: 1; 
+	text-align: center;
+}
+
+
+/* 非全屏倍速样式 */
+.rate-list{
+	position: absolute;
+	bottom: 70rpx;
+	right: 65rpx;
+	background-color: rgba(0,0,0, 0.7);
+	width: 110rpx;
+	border-radius: 10rpx;
+}
+.rate-item{
+	color: #FFFFFF;
+	font-size: 35rpx;
+	line-height: 60rpx;
+}
+.active {
+	color: #345dc2;
+}
+
+/* 全屏倍速样式 */
+.rate-list-full {
+	width: 400rpx;
+	background-color: rgba(0,0,0, 0.7);
+	position: absolute;
+	right: 0;
+	top: 0;
+	bottom: 0;
+}
+.rate-item-full {
+	color: #FFFFFF;
+	font-size: 50rpx;
+	line-height: 130rpx;
 }
 </style>

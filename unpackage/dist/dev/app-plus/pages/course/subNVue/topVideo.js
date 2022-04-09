@@ -1386,6 +1386,112 @@ module.exports = {
 
 /***/ }),
 
+/***/ 268:
+/*!**************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/@dcloudio/uni-cli-nvue/dist/webpack/loader/style.js!./node_modules/@dcloudio/uni-cli-nvue/dist/webpack/loader/preprocess.js??clonedRuleSet-5[0].rules[0].use[1]!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-5[0].rules[0].use[2]!./node_modules/@dcloudio/uni-cli-nvue/lib/vue-loader/lib/index.js??vue-loader-options!./node_modules/@dcloudio/uni-cli-nvue/dist/webpack/loader/preprocess.js??ruleSet[0].rules[0].use[1]!../../../web学习/uniapp学习/uni-online-education/pages/course/subNVue/cpns/slider-bar.nvue?vue&type=style&index=0&lang=css& ***!
+  \**************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************/
+/***/ ((module) => {
+
+module.exports = {
+  ".slider": {
+    "": {
+      "height": [
+        "90rpx",
+        0,
+        0,
+        0
+      ]
+    }
+  },
+  ".slider-left": {
+    "": {
+      "height": [
+        "3",
+        0,
+        0,
+        1
+      ],
+      "borderRadius": [
+        "10rpx",
+        0,
+        0,
+        1
+      ],
+      "backgroundColor": [
+        "#A2CD5A",
+        0,
+        0,
+        1
+      ]
+    }
+  },
+  ".slider-right": {
+    "": {
+      "height": [
+        "3",
+        0,
+        0,
+        2
+      ],
+      "backgroundColor": [
+        "rgba(175,175,175,1)",
+        0,
+        0,
+        2
+      ],
+      "borderRadius": [
+        "10rpx",
+        0,
+        0,
+        2
+      ]
+    }
+  },
+  ".block-inner": {
+    "": {
+      "position": [
+        "absolute",
+        0,
+        0,
+        3
+      ],
+      "backgroundColor": [
+        "#ffffff",
+        0,
+        0,
+        3
+      ],
+      "height": [
+        "20rpx",
+        0,
+        0,
+        3
+      ],
+      "width": [
+        "20rpx",
+        0,
+        0,
+        3
+      ],
+      "borderRadius": [
+        100,
+        0,
+        0,
+        3
+      ],
+      "zIndex": [
+        10,
+        0,
+        0,
+        3
+      ]
+    }
+  },
+  "@VERSION": 2
+}
+
+/***/ }),
+
 /***/ 748:
 /*!******************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
   !*** ./node_modules/@dcloudio/uni-cli-nvue/dist/webpack/loader/style.js!./node_modules/@dcloudio/uni-cli-nvue/dist/webpack/loader/preprocess.js??clonedRuleSet-5[0].rules[0].use[1]!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-5[0].rules[0].use[2]!./node_modules/@dcloudio/uni-cli-nvue/lib/vue-loader/lib/index.js??vue-loader-options!./node_modules/@dcloudio/uni-cli-nvue/dist/webpack/loader/preprocess.js??ruleSet[0].rules[0].use[1]!../../../web学习/uniapp学习/uni-online-education/pages/course/subNVue/topVideo.nvue?vue&type=style&index=0&lang=css&mpType=page ***!
@@ -1425,8 +1531,512 @@ module.exports = {
       ]
     }
   },
+  ".icon": {
+    "": {
+      "fontFamily": [
+        "iconfont",
+        0,
+        0,
+        2
+      ],
+      "fontSize": [
+        "50rpx",
+        0,
+        0,
+        2
+      ],
+      "color": [
+        "#ffffff",
+        0,
+        0,
+        2
+      ]
+    }
+  },
+  ".iconBig": {
+    "": {
+      "fontSize": [
+        "60rpx",
+        0,
+        0,
+        3
+      ],
+      "width": [
+        "100rpx",
+        0,
+        0,
+        3
+      ],
+      "height": [
+        "100rpx",
+        0,
+        0,
+        3
+      ],
+      "textAlign": [
+        "center",
+        0,
+        0,
+        3
+      ],
+      "lineHeight": [
+        "100rpx",
+        0,
+        0,
+        3
+      ],
+      "borderRadius": [
+        "50rpx",
+        0,
+        0,
+        3
+      ],
+      "backgroundColor": [
+        "rgba(0,0,0,0.5)",
+        0,
+        0,
+        3
+      ]
+    }
+  },
+  ".cover-top": {
+    "": {
+      "height": [
+        "90rpx",
+        0,
+        0,
+        4
+      ],
+      "paddingTop": [
+        "10rpx",
+        0,
+        0,
+        4
+      ],
+      "paddingRight": [
+        "10rpx",
+        0,
+        0,
+        4
+      ],
+      "paddingBottom": [
+        "10rpx",
+        0,
+        0,
+        4
+      ],
+      "paddingLeft": [
+        "10rpx",
+        0,
+        0,
+        4
+      ],
+      "alignItems": [
+        "center",
+        0,
+        0,
+        4
+      ],
+      "backgroundImage": [
+        "linear-gradient(to top,rgba(0,0,0,0),rgba(0,0,0,0.8))",
+        0,
+        0,
+        4
+      ]
+    }
+  },
+  ".title": {
+    "": {
+      "color": [
+        "#ffffff",
+        0,
+        0,
+        5
+      ],
+      "fontSize": [
+        "30rpx",
+        0,
+        0,
+        5
+      ],
+      "width": [
+        "500rpx",
+        0,
+        0,
+        5
+      ],
+      "lines": [
+        1,
+        0,
+        0,
+        5
+      ],
+      "textOverflow": [
+        "ellipsis",
+        0,
+        0,
+        5
+      ]
+    }
+  },
+  ".cover-center": {
+    "": {
+      "position": [
+        "absolute",
+        0,
+        0,
+        6
+      ],
+      "top": [
+        "90rpx",
+        0,
+        0,
+        6
+      ],
+      "left": [
+        0,
+        0,
+        0,
+        6
+      ],
+      "right": [
+        0,
+        0,
+        0,
+        6
+      ],
+      "bottom": [
+        "90rpx",
+        0,
+        0,
+        6
+      ],
+      "backgroundColor": [
+        "rgba(0,0,0,0)",
+        0,
+        0,
+        6
+      ]
+    }
+  },
+  ".cover-bottom": {
+    "": {
+      "position": [
+        "absolute",
+        0,
+        0,
+        8
+      ],
+      "bottom": [
+        0,
+        0,
+        0,
+        8
+      ],
+      "height": [
+        "90rpx",
+        0,
+        0,
+        8
+      ],
+      "width": [
+        "750rpx",
+        0,
+        0,
+        8
+      ],
+      "backgroundImage": [
+        "linear-gradient(to bottom, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.8))",
+        0,
+        0,
+        8
+      ]
+    }
+  },
+  ".btn": {
+    "": {
+      "width": [
+        "60rpx",
+        0,
+        0,
+        9
+      ],
+      "lineHeight": [
+        "90rpx",
+        0,
+        0,
+        9
+      ],
+      "textAlign": [
+        "center",
+        0,
+        0,
+        9
+      ],
+      "color": [
+        "#FFFFFF",
+        0,
+        0,
+        9
+      ],
+      "fontSize": [
+        "40rpx",
+        0,
+        0,
+        9
+      ]
+    }
+  },
+  ".x": {
+    "": {
+      "fontSize": [
+        "28rpx",
+        0,
+        0,
+        10
+      ]
+    }
+  },
+  ".time": {
+    "": {
+      "fontSize": [
+        "24rpx",
+        0,
+        0,
+        11
+      ],
+      "color": [
+        "#FFFFFF",
+        0,
+        0,
+        11
+      ],
+      "width": [
+        "110rpx",
+        0,
+        0,
+        11
+      ],
+      "textAlign": [
+        "center",
+        0,
+        0,
+        11
+      ]
+    }
+  },
+  ".bottom-slider": {
+    "": {
+      "flexDirection": [
+        "row",
+        0,
+        0,
+        12
+      ],
+      "alignItems": [
+        "center",
+        0,
+        0,
+        12
+      ],
+      "height": [
+        "90rpx",
+        0,
+        0,
+        12
+      ],
+      "flex": [
+        1,
+        0,
+        0,
+        12
+      ],
+      "textAlign": [
+        "center",
+        0,
+        0,
+        12
+      ]
+    }
+  },
+  ".rate-list": {
+    "": {
+      "position": [
+        "absolute",
+        0,
+        0,
+        14
+      ],
+      "bottom": [
+        "70rpx",
+        0,
+        0,
+        14
+      ],
+      "right": [
+        "65rpx",
+        0,
+        0,
+        14
+      ],
+      "backgroundColor": [
+        "rgba(0,0,0,0.7)",
+        0,
+        0,
+        14
+      ],
+      "width": [
+        "110rpx",
+        0,
+        0,
+        14
+      ],
+      "borderRadius": [
+        "10rpx",
+        0,
+        0,
+        14
+      ]
+    }
+  },
+  ".rate-item": {
+    "": {
+      "color": [
+        "#FFFFFF",
+        0,
+        0,
+        15
+      ],
+      "fontSize": [
+        "35rpx",
+        0,
+        0,
+        15
+      ],
+      "lineHeight": [
+        "60rpx",
+        0,
+        0,
+        15
+      ]
+    }
+  },
+  ".active": {
+    "": {
+      "color": [
+        "#345dc2",
+        0,
+        0,
+        16
+      ]
+    }
+  },
+  ".rate-list-full": {
+    "": {
+      "width": [
+        "400rpx",
+        0,
+        0,
+        18
+      ],
+      "backgroundColor": [
+        "rgba(0,0,0,0.7)",
+        0,
+        0,
+        18
+      ],
+      "position": [
+        "absolute",
+        0,
+        0,
+        18
+      ],
+      "right": [
+        0,
+        0,
+        0,
+        18
+      ],
+      "top": [
+        0,
+        0,
+        0,
+        18
+      ],
+      "bottom": [
+        0,
+        0,
+        0,
+        18
+      ]
+    }
+  },
+  ".rate-item-full": {
+    "": {
+      "color": [
+        "#FFFFFF",
+        0,
+        0,
+        19
+      ],
+      "fontSize": [
+        "50rpx",
+        0,
+        0,
+        19
+      ],
+      "lineHeight": [
+        "130rpx",
+        0,
+        0,
+        19
+      ]
+    }
+  },
   "@VERSION": 2
 }
+
+/***/ }),
+
+/***/ 614:
+/*!**********************************************************************************************!*\
+  !*** ../../../web学习/uniapp学习/uni-online-education/pages/course/subNVue/cpns/slider-bar.nvue ***!
+  \**********************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _slider_bar_nvue_vue_type_template_id_dbb3522a___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./slider-bar.nvue?vue&type=template&id=dbb3522a& */ 535);
+/* harmony import */ var _slider_bar_nvue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./slider-bar.nvue?vue&type=script&lang=js& */ 734);
+/* harmony import */ var _HBuilderX_plugins_uniapp_cli_vite_node_modules_dcloudio_uni_cli_nvue_lib_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! !../../../../../../../HBuilderX/plugins/uniapp-cli-vite/node_modules/@dcloudio/uni-cli-nvue/lib/vue-loader/lib/runtime/componentNormalizer.js */ 509);
+
+
+
+function injectStyles (context) {
+  
+  if(!this.options.style){this.options.style = {}}
+Vue.prototype.__merge_style(Vue.prototype.__$appStyle__, this.options.style)
+  Vue.prototype.__merge_style((__webpack_require__(/*! ./slider-bar.nvue?vue&type=style&index=0&lang=css& */ 846)["default"]), this.options.style)
+
+}
+
+/* normalize component */
+
+var component = (0,_HBuilderX_plugins_uniapp_cli_vite_node_modules_dcloudio_uni_cli_nvue_lib_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
+  _slider_bar_nvue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _slider_bar_nvue_vue_type_template_id_dbb3522a___WEBPACK_IMPORTED_MODULE_0__.render,
+  _slider_bar_nvue_vue_type_template_id_dbb3522a___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns,
+  false,
+  null,
+  null,
+  null,
+  false,
+  _slider_bar_nvue_vue_type_template_id_dbb3522a___WEBPACK_IMPORTED_MODULE_0__.components
+)
+
+injectStyles.call(component)
+component.options.__file = "web学习/uniapp学习/uni-online-education/pages/course/subNVue/cpns/slider-bar.nvue"
+/* harmony default export */ __webpack_exports__["default"] = (component.exports);
 
 /***/ }),
 
@@ -1472,6 +2082,25 @@ component.options.__file = "web学习/uniapp学习/uni-online-education/pages/co
 
 /***/ }),
 
+/***/ 535:
+/*!*****************************************************************************************************************************!*\
+  !*** ../../../web学习/uniapp学习/uni-online-education/pages/course/subNVue/cpns/slider-bar.nvue?vue&type=template&id=dbb3522a& ***!
+  \*****************************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "components": () => (/* reexport safe */ _HBuilderX_plugins_uniapp_cli_vite_node_modules_dcloudio_uni_cli_nvue_lib_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_HBuilderX_plugins_uniapp_cli_vite_node_modules_dcloudio_uni_cli_nvue_dist_webpack_loader_recyclable_js_HBuilderX_plugins_uniapp_cli_vite_node_modules_dcloudio_uni_cli_nvue_lib_vue_loader_lib_index_js_vue_loader_options_HBuilderX_plugins_uniapp_cli_vite_node_modules_dcloudio_uni_cli_nvue_dist_webpack_loader_preprocess_js_ruleSet_0_rules_0_use_1_slider_bar_nvue_vue_type_template_id_dbb3522a___WEBPACK_IMPORTED_MODULE_0__.components),
+/* harmony export */   "recyclableRender": () => (/* reexport safe */ _HBuilderX_plugins_uniapp_cli_vite_node_modules_dcloudio_uni_cli_nvue_lib_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_HBuilderX_plugins_uniapp_cli_vite_node_modules_dcloudio_uni_cli_nvue_dist_webpack_loader_recyclable_js_HBuilderX_plugins_uniapp_cli_vite_node_modules_dcloudio_uni_cli_nvue_lib_vue_loader_lib_index_js_vue_loader_options_HBuilderX_plugins_uniapp_cli_vite_node_modules_dcloudio_uni_cli_nvue_dist_webpack_loader_preprocess_js_ruleSet_0_rules_0_use_1_slider_bar_nvue_vue_type_template_id_dbb3522a___WEBPACK_IMPORTED_MODULE_0__.recyclableRender),
+/* harmony export */   "render": () => (/* reexport safe */ _HBuilderX_plugins_uniapp_cli_vite_node_modules_dcloudio_uni_cli_nvue_lib_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_HBuilderX_plugins_uniapp_cli_vite_node_modules_dcloudio_uni_cli_nvue_dist_webpack_loader_recyclable_js_HBuilderX_plugins_uniapp_cli_vite_node_modules_dcloudio_uni_cli_nvue_lib_vue_loader_lib_index_js_vue_loader_options_HBuilderX_plugins_uniapp_cli_vite_node_modules_dcloudio_uni_cli_nvue_dist_webpack_loader_preprocess_js_ruleSet_0_rules_0_use_1_slider_bar_nvue_vue_type_template_id_dbb3522a___WEBPACK_IMPORTED_MODULE_0__.render),
+/* harmony export */   "staticRenderFns": () => (/* reexport safe */ _HBuilderX_plugins_uniapp_cli_vite_node_modules_dcloudio_uni_cli_nvue_lib_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_HBuilderX_plugins_uniapp_cli_vite_node_modules_dcloudio_uni_cli_nvue_dist_webpack_loader_recyclable_js_HBuilderX_plugins_uniapp_cli_vite_node_modules_dcloudio_uni_cli_nvue_lib_vue_loader_lib_index_js_vue_loader_options_HBuilderX_plugins_uniapp_cli_vite_node_modules_dcloudio_uni_cli_nvue_dist_webpack_loader_preprocess_js_ruleSet_0_rules_0_use_1_slider_bar_nvue_vue_type_template_id_dbb3522a___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns)
+/* harmony export */ });
+/* harmony import */ var _HBuilderX_plugins_uniapp_cli_vite_node_modules_dcloudio_uni_cli_nvue_lib_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_HBuilderX_plugins_uniapp_cli_vite_node_modules_dcloudio_uni_cli_nvue_dist_webpack_loader_recyclable_js_HBuilderX_plugins_uniapp_cli_vite_node_modules_dcloudio_uni_cli_nvue_lib_vue_loader_lib_index_js_vue_loader_options_HBuilderX_plugins_uniapp_cli_vite_node_modules_dcloudio_uni_cli_nvue_dist_webpack_loader_preprocess_js_ruleSet_0_rules_0_use_1_slider_bar_nvue_vue_type_template_id_dbb3522a___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../../../HBuilderX/plugins/uniapp-cli-vite/node_modules/@dcloudio/uni-cli-nvue/lib/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../../../../HBuilderX/plugins/uniapp-cli-vite/node_modules/@dcloudio/uni-cli-nvue/dist/webpack/loader/recyclable.js!../../../../../../../HBuilderX/plugins/uniapp-cli-vite/node_modules/@dcloudio/uni-cli-nvue/lib/vue-loader/lib/index.js??vue-loader-options!../../../../../../../HBuilderX/plugins/uniapp-cli-vite/node_modules/@dcloudio/uni-cli-nvue/dist/webpack/loader/preprocess.js??ruleSet[0].rules[0].use[1]!./slider-bar.nvue?vue&type=template&id=dbb3522a& */ 888);
+
+
+/***/ }),
+
 /***/ 222:
 /*!*********************************************************************************************************************************!*\
   !*** ../../../web学习/uniapp学习/uni-online-education/pages/course/subNVue/topVideo.nvue?vue&type=template&id=6205c4c7&mpType=page ***!
@@ -1508,6 +2137,23 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ 846:
+/*!*******************************************************************************************************************************!*\
+  !*** ../../../web学习/uniapp学习/uni-online-education/pages/course/subNVue/cpns/slider-bar.nvue?vue&type=style&index=0&lang=css& ***!
+  \*******************************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _HBuilderX_plugins_uniapp_cli_vite_node_modules_dcloudio_uni_cli_nvue_dist_webpack_loader_style_js_HBuilderX_plugins_uniapp_cli_vite_node_modules_dcloudio_uni_cli_nvue_dist_webpack_loader_preprocess_js_clonedRuleSet_5_0_rules_0_use_1_HBuilderX_plugins_uniapp_cli_vite_node_modules_postcss_loader_dist_cjs_js_clonedRuleSet_5_0_rules_0_use_2_HBuilderX_plugins_uniapp_cli_vite_node_modules_dcloudio_uni_cli_nvue_lib_vue_loader_lib_index_js_vue_loader_options_HBuilderX_plugins_uniapp_cli_vite_node_modules_dcloudio_uni_cli_nvue_dist_webpack_loader_preprocess_js_ruleSet_0_rules_0_use_1_slider_bar_nvue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../../../HBuilderX/plugins/uniapp-cli-vite/node_modules/@dcloudio/uni-cli-nvue/dist/webpack/loader/style.js!../../../../../../../HBuilderX/plugins/uniapp-cli-vite/node_modules/@dcloudio/uni-cli-nvue/dist/webpack/loader/preprocess.js??clonedRuleSet-5[0].rules[0].use[1]!../../../../../../../HBuilderX/plugins/uniapp-cli-vite/node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-5[0].rules[0].use[2]!../../../../../../../HBuilderX/plugins/uniapp-cli-vite/node_modules/@dcloudio/uni-cli-nvue/lib/vue-loader/lib/index.js??vue-loader-options!../../../../../../../HBuilderX/plugins/uniapp-cli-vite/node_modules/@dcloudio/uni-cli-nvue/dist/webpack/loader/preprocess.js??ruleSet[0].rules[0].use[1]!./slider-bar.nvue?vue&type=style&index=0&lang=css& */ 268);
+/* harmony import */ var _HBuilderX_plugins_uniapp_cli_vite_node_modules_dcloudio_uni_cli_nvue_dist_webpack_loader_style_js_HBuilderX_plugins_uniapp_cli_vite_node_modules_dcloudio_uni_cli_nvue_dist_webpack_loader_preprocess_js_clonedRuleSet_5_0_rules_0_use_1_HBuilderX_plugins_uniapp_cli_vite_node_modules_postcss_loader_dist_cjs_js_clonedRuleSet_5_0_rules_0_use_2_HBuilderX_plugins_uniapp_cli_vite_node_modules_dcloudio_uni_cli_nvue_lib_vue_loader_lib_index_js_vue_loader_options_HBuilderX_plugins_uniapp_cli_vite_node_modules_dcloudio_uni_cli_nvue_dist_webpack_loader_preprocess_js_ruleSet_0_rules_0_use_1_slider_bar_nvue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_HBuilderX_plugins_uniapp_cli_vite_node_modules_dcloudio_uni_cli_nvue_dist_webpack_loader_style_js_HBuilderX_plugins_uniapp_cli_vite_node_modules_dcloudio_uni_cli_nvue_dist_webpack_loader_preprocess_js_clonedRuleSet_5_0_rules_0_use_1_HBuilderX_plugins_uniapp_cli_vite_node_modules_postcss_loader_dist_cjs_js_clonedRuleSet_5_0_rules_0_use_2_HBuilderX_plugins_uniapp_cli_vite_node_modules_dcloudio_uni_cli_nvue_lib_vue_loader_lib_index_js_vue_loader_options_HBuilderX_plugins_uniapp_cli_vite_node_modules_dcloudio_uni_cli_nvue_dist_webpack_loader_preprocess_js_ruleSet_0_rules_0_use_1_slider_bar_nvue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0__);
+/* harmony reexport (unknown) */ var __WEBPACK_REEXPORT_OBJECT__ = {};
+/* harmony reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in _HBuilderX_plugins_uniapp_cli_vite_node_modules_dcloudio_uni_cli_nvue_dist_webpack_loader_style_js_HBuilderX_plugins_uniapp_cli_vite_node_modules_dcloudio_uni_cli_nvue_dist_webpack_loader_preprocess_js_clonedRuleSet_5_0_rules_0_use_1_HBuilderX_plugins_uniapp_cli_vite_node_modules_postcss_loader_dist_cjs_js_clonedRuleSet_5_0_rules_0_use_2_HBuilderX_plugins_uniapp_cli_vite_node_modules_dcloudio_uni_cli_nvue_lib_vue_loader_lib_index_js_vue_loader_options_HBuilderX_plugins_uniapp_cli_vite_node_modules_dcloudio_uni_cli_nvue_dist_webpack_loader_preprocess_js_ruleSet_0_rules_0_use_1_slider_bar_nvue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0__) if(__WEBPACK_IMPORT_KEY__ !== "default") __WEBPACK_REEXPORT_OBJECT__[__WEBPACK_IMPORT_KEY__] = function(key) { return _HBuilderX_plugins_uniapp_cli_vite_node_modules_dcloudio_uni_cli_nvue_dist_webpack_loader_style_js_HBuilderX_plugins_uniapp_cli_vite_node_modules_dcloudio_uni_cli_nvue_dist_webpack_loader_preprocess_js_clonedRuleSet_5_0_rules_0_use_1_HBuilderX_plugins_uniapp_cli_vite_node_modules_postcss_loader_dist_cjs_js_clonedRuleSet_5_0_rules_0_use_2_HBuilderX_plugins_uniapp_cli_vite_node_modules_dcloudio_uni_cli_nvue_lib_vue_loader_lib_index_js_vue_loader_options_HBuilderX_plugins_uniapp_cli_vite_node_modules_dcloudio_uni_cli_nvue_dist_webpack_loader_preprocess_js_ruleSet_0_rules_0_use_1_slider_bar_nvue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0__[key]; }.bind(0, __WEBPACK_IMPORT_KEY__)
+/* harmony reexport (unknown) */ __webpack_require__.d(__webpack_exports__, __WEBPACK_REEXPORT_OBJECT__);
+ /* harmony default export */ __webpack_exports__["default"] = ((_HBuilderX_plugins_uniapp_cli_vite_node_modules_dcloudio_uni_cli_nvue_dist_webpack_loader_style_js_HBuilderX_plugins_uniapp_cli_vite_node_modules_dcloudio_uni_cli_nvue_dist_webpack_loader_preprocess_js_clonedRuleSet_5_0_rules_0_use_1_HBuilderX_plugins_uniapp_cli_vite_node_modules_postcss_loader_dist_cjs_js_clonedRuleSet_5_0_rules_0_use_2_HBuilderX_plugins_uniapp_cli_vite_node_modules_dcloudio_uni_cli_nvue_lib_vue_loader_lib_index_js_vue_loader_options_HBuilderX_plugins_uniapp_cli_vite_node_modules_dcloudio_uni_cli_nvue_dist_webpack_loader_preprocess_js_ruleSet_0_rules_0_use_1_slider_bar_nvue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0___default())); 
+
+/***/ }),
+
 /***/ 142:
 /*!***********************************************************************************************************************************!*\
   !*** ../../../web学习/uniapp学习/uni-online-education/pages/course/subNVue/topVideo.nvue?vue&type=style&index=0&lang=css&mpType=page ***!
@@ -1525,6 +2171,19 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ 734:
+/*!***********************************************************************************************************************!*\
+  !*** ../../../web学习/uniapp学习/uni-online-education/pages/course/subNVue/cpns/slider-bar.nvue?vue&type=script&lang=js& ***!
+  \***********************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _HBuilderX_plugins_uniapp_cli_vite_node_modules_babel_loader_lib_index_js_clonedRuleSet_2_0_rules_0_use_0_HBuilderX_plugins_uniapp_cli_vite_node_modules_dcloudio_uni_cli_nvue_dist_webpack_loader_preprocess_js_clonedRuleSet_2_0_rules_0_use_1_HBuilderX_plugins_uniapp_cli_vite_node_modules_dcloudio_uni_cli_nvue_lib_vue_loader_lib_index_js_vue_loader_options_HBuilderX_plugins_uniapp_cli_vite_node_modules_dcloudio_uni_cli_nvue_dist_webpack_loader_preprocess_js_ruleSet_0_rules_0_use_1_slider_bar_nvue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../../../HBuilderX/plugins/uniapp-cli-vite/node_modules/babel-loader/lib/index.js??clonedRuleSet-2[0].rules[0].use[0]!../../../../../../../HBuilderX/plugins/uniapp-cli-vite/node_modules/@dcloudio/uni-cli-nvue/dist/webpack/loader/preprocess.js??clonedRuleSet-2[0].rules[0].use[1]!../../../../../../../HBuilderX/plugins/uniapp-cli-vite/node_modules/@dcloudio/uni-cli-nvue/lib/vue-loader/lib/index.js??vue-loader-options!../../../../../../../HBuilderX/plugins/uniapp-cli-vite/node_modules/@dcloudio/uni-cli-nvue/dist/webpack/loader/preprocess.js??ruleSet[0].rules[0].use[1]!./slider-bar.nvue?vue&type=script&lang=js& */ 248);
+ /* harmony default export */ __webpack_exports__["default"] = (_HBuilderX_plugins_uniapp_cli_vite_node_modules_babel_loader_lib_index_js_clonedRuleSet_2_0_rules_0_use_0_HBuilderX_plugins_uniapp_cli_vite_node_modules_dcloudio_uni_cli_nvue_dist_webpack_loader_preprocess_js_clonedRuleSet_2_0_rules_0_use_1_HBuilderX_plugins_uniapp_cli_vite_node_modules_dcloudio_uni_cli_nvue_lib_vue_loader_lib_index_js_vue_loader_options_HBuilderX_plugins_uniapp_cli_vite_node_modules_dcloudio_uni_cli_nvue_dist_webpack_loader_preprocess_js_ruleSet_0_rules_0_use_1_slider_bar_nvue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+
+/***/ }),
+
 /***/ 933:
 /*!***************************************************************************************************************************!*\
   !*** ../../../web学习/uniapp学习/uni-online-education/pages/course/subNVue/topVideo.nvue?vue&type=script&lang=js&mpType=page ***!
@@ -1535,6 +2194,81 @@ __webpack_require__.r(__webpack_exports__);
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _HBuilderX_plugins_uniapp_cli_vite_node_modules_babel_loader_lib_index_js_clonedRuleSet_2_0_rules_0_use_0_HBuilderX_plugins_uniapp_cli_vite_node_modules_dcloudio_uni_cli_nvue_dist_webpack_loader_preprocess_js_clonedRuleSet_2_0_rules_0_use_1_HBuilderX_plugins_uniapp_cli_vite_node_modules_dcloudio_uni_cli_nvue_lib_vue_loader_lib_index_js_vue_loader_options_HBuilderX_plugins_uniapp_cli_vite_node_modules_dcloudio_uni_cli_nvue_dist_webpack_loader_preprocess_js_ruleSet_0_rules_0_use_1_topVideo_nvue_vue_type_script_lang_js_mpType_page__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../../HBuilderX/plugins/uniapp-cli-vite/node_modules/babel-loader/lib/index.js??clonedRuleSet-2[0].rules[0].use[0]!../../../../../../HBuilderX/plugins/uniapp-cli-vite/node_modules/@dcloudio/uni-cli-nvue/dist/webpack/loader/preprocess.js??clonedRuleSet-2[0].rules[0].use[1]!../../../../../../HBuilderX/plugins/uniapp-cli-vite/node_modules/@dcloudio/uni-cli-nvue/lib/vue-loader/lib/index.js??vue-loader-options!../../../../../../HBuilderX/plugins/uniapp-cli-vite/node_modules/@dcloudio/uni-cli-nvue/dist/webpack/loader/preprocess.js??ruleSet[0].rules[0].use[1]!./topVideo.nvue?vue&type=script&lang=js&mpType=page */ 692);
  /* harmony default export */ __webpack_exports__["default"] = (_HBuilderX_plugins_uniapp_cli_vite_node_modules_babel_loader_lib_index_js_clonedRuleSet_2_0_rules_0_use_0_HBuilderX_plugins_uniapp_cli_vite_node_modules_dcloudio_uni_cli_nvue_dist_webpack_loader_preprocess_js_clonedRuleSet_2_0_rules_0_use_1_HBuilderX_plugins_uniapp_cli_vite_node_modules_dcloudio_uni_cli_nvue_lib_vue_loader_lib_index_js_vue_loader_options_HBuilderX_plugins_uniapp_cli_vite_node_modules_dcloudio_uni_cli_nvue_dist_webpack_loader_preprocess_js_ruleSet_0_rules_0_use_1_topVideo_nvue_vue_type_script_lang_js_mpType_page__WEBPACK_IMPORTED_MODULE_0__["default"]); 
+
+/***/ }),
+
+/***/ 888:
+/*!******************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/@dcloudio/uni-cli-nvue/lib/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/@dcloudio/uni-cli-nvue/dist/webpack/loader/recyclable.js!./node_modules/@dcloudio/uni-cli-nvue/lib/vue-loader/lib/index.js??vue-loader-options!./node_modules/@dcloudio/uni-cli-nvue/dist/webpack/loader/preprocess.js??ruleSet[0].rules[0].use[1]!../../../web学习/uniapp学习/uni-online-education/pages/course/subNVue/cpns/slider-bar.nvue?vue&type=template&id=dbb3522a& ***!
+  \******************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "render": () => (/* binding */ render),
+/* harmony export */   "staticRenderFns": () => (/* binding */ staticRenderFns),
+/* harmony export */   "recyclableRender": () => (/* binding */ recyclableRender),
+/* harmony export */   "components": () => (/* binding */ components)
+/* harmony export */ });
+var components
+try {
+  components = {}
+} catch (e) {
+  if (
+    e.message.indexOf("Cannot find module") !== -1 &&
+    e.message.indexOf(".vue") !== -1
+  ) {
+    console.error(e.message)
+    console.error("1. 排查组件名称拼写是否正确")
+    console.error(
+      "2. 排查组件是否符合 easycom 规范，文档：https://uniapp.dcloud.net.cn/collocation/pages?id=easycom"
+    )
+    console.error(
+      "3. 若组件不符合 easycom 规范，需手动引入，并在 components 中注册该组件"
+    )
+  } else {
+    throw e
+  }
+}
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("view", [
+    _c(
+      "view",
+      {
+        staticClass: ["slider", "row", "center"],
+        style: { width: _vm.sliderWidth + "px" },
+        on: {
+          touchstart: _vm.blockTouchStart,
+          touchend: _vm.blockTouchEnd,
+          touchmove: _vm.blockTouchMove
+        }
+      },
+      [
+        _c("view", {
+          staticClass: ["slider-left"],
+          style: { width: _vm.leftWidth + "px" }
+        }),
+        _c("view", {
+          staticClass: ["slider-right"],
+          style: { width: _vm.sliderWidth - _vm.leftWidth + "px" }
+        }),
+        _c("view", {
+          staticClass: ["block-inner"],
+          style: { left: _vm.leftWidth - 5 + "px" }
+        })
+      ]
+    )
+  ])
+}
+var recyclableRender = false
+var staticRenderFns = []
+render._withStripped = true
+
+
 
 /***/ }),
 
@@ -1577,24 +2311,175 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c(
-    "div",
+    "view",
     [
-      _c("div", {
+      _c("view", {
         staticClass: ["status"],
         style: { height: _vm.statusHeight + "px" }
       }),
-      _c("u-video", {
-        staticClass: ["video"],
-        attrs: {
-          src: "",
-          controls: false,
-          poster: _vm.videoMidea.mainImage,
-          showFullscreenBtn: false,
-          showCenterPlayBtn: false,
-          showProgress: false
+      _c(
+        "u-video",
+        {
+          ref: "videoRef",
+          staticClass: ["video"],
+          attrs: {
+            src: _vm.videoMidea.videoUrl,
+            controls: false,
+            poster: _vm.videoMidea.mainImage,
+            showFullscreenBtn: false,
+            showCenterPlayBtn: false,
+            showProgress: false
+          },
+          on: {
+            ended: _vm.nextVideo,
+            timeupdate: _vm.timeupdate,
+            click: _vm.clikcVideo
+          }
         },
-        on: { ended: _vm.nextVideo, timeupdate: _vm.timeupdate }
-      })
+        [
+          _c(
+            "u-scalable",
+            {
+              staticStyle: {
+                position: "absolute",
+                left: "0",
+                right: "0",
+                top: "0",
+                bottom: "0"
+              }
+            },
+            [
+              _vm.showControls
+                ? _c("cover-view", { staticClass: ["cover-top", "row"] }, [
+                    _c(
+                      "u-text",
+                      {
+                        staticClass: ["btn", "icon"],
+                        appendAsTree: true,
+                        attrs: { append: "tree" },
+                        on: { click: _vm.back }
+                      },
+                      [_vm._v("")]
+                    ),
+                    _c(
+                      "u-text",
+                      {
+                        staticClass: ["title"],
+                        appendAsTree: true,
+                        attrs: { append: "tree" }
+                      },
+                      [_vm._v(_vm._s(_vm.videoMidea.title))]
+                    )
+                  ])
+                : _vm._e(),
+              _vm.first
+                ? _c(
+                    "cover-view",
+                    { staticClass: ["cover-center", "center"] },
+                    [
+                      _c(
+                        "u-text",
+                        {
+                          staticClass: ["icon", "iconBig"],
+                          appendAsTree: true,
+                          attrs: { append: "tree" },
+                          on: { click: _vm.playFirst }
+                        },
+                        [_vm._v("")]
+                      )
+                    ]
+                  )
+                : _vm._e(),
+              _vm.showControls
+                ? _c(
+                    "cover-view",
+                    { staticClass: ["cover-bottom", "row", "center"] },
+                    [
+                      _c("view", { staticClass: ["row"] }, [
+                        !_vm.isPlay
+                          ? _c(
+                              "u-text",
+                              {
+                                staticClass: ["btn", "icon"],
+                                appendAsTree: true,
+                                attrs: { append: "tree" },
+                                on: { click: _vm.playOrpause }
+                              },
+                              [_vm._v("")]
+                            )
+                          : _c(
+                              "u-text",
+                              {
+                                staticClass: ["btn", "icon"],
+                                appendAsTree: true,
+                                attrs: { append: "tree" },
+                                on: { click: _vm.playOrpause }
+                              },
+                              [_vm._v("")]
+                            ),
+                        _c(
+                          "u-text",
+                          {
+                            staticClass: ["btn", "icon"],
+                            appendAsTree: true,
+                            attrs: { append: "tree" }
+                          },
+                          [_vm._v("")]
+                        )
+                      ]),
+                      _c(
+                        "u-text",
+                        {
+                          staticClass: ["time"],
+                          appendAsTree: true,
+                          attrs: { append: "tree" }
+                        },
+                        [_vm._v("00:00")]
+                      ),
+                      _c(
+                        "view",
+                        { staticClass: ["bottom-slider"] },
+                        [_c("slider-bar", { attrs: { sliderWidth: 160 } })],
+                        1
+                      ),
+                      _c(
+                        "u-text",
+                        {
+                          staticClass: ["time"],
+                          appendAsTree: true,
+                          attrs: { append: "tree" }
+                        },
+                        [_vm._v("03:45")]
+                      ),
+                      _c("view", { staticClass: ["row"] }, [
+                        _c(
+                          "u-text",
+                          {
+                            staticClass: ["btn", "x"],
+                            appendAsTree: true,
+                            attrs: { append: "tree" }
+                          },
+                          [_vm._v("x1.0")]
+                        ),
+                        _c(
+                          "u-text",
+                          {
+                            staticClass: ["btn", "icon"],
+                            appendAsTree: true,
+                            attrs: { append: "tree" }
+                          },
+                          [_vm._v("")]
+                        )
+                      ])
+                    ]
+                  )
+                : _vm._e()
+            ],
+            1
+          )
+        ],
+        1
+      )
     ],
     1
   )
@@ -1733,10 +2618,27 @@ function normalizeComponent (
 
 /***/ }),
 
-/***/ 692:
-/*!**************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/babel-loader/lib/index.js??clonedRuleSet-2[0].rules[0].use[0]!./node_modules/@dcloudio/uni-cli-nvue/dist/webpack/loader/preprocess.js??clonedRuleSet-2[0].rules[0].use[1]!./node_modules/@dcloudio/uni-cli-nvue/lib/vue-loader/lib/index.js??vue-loader-options!./node_modules/@dcloudio/uni-cli-nvue/dist/webpack/loader/preprocess.js??ruleSet[0].rules[0].use[1]!../../../web学习/uniapp学习/uni-online-education/pages/course/subNVue/topVideo.nvue?vue&type=script&lang=js&mpType=page ***!
-  \**************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************/
+/***/ 21:
+/*!**************************************************************************!*\
+  !*** ./node_modules/@dcloudio/uni-cli-nvue/lib/require-native-plugin.js ***!
+  \**************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (/* binding */ requireNativePlugin)
+/* harmony export */ });
+function requireNativePlugin(name) {
+  return weex.requireModule(name);
+}
+
+/***/ }),
+
+/***/ 248:
+/*!**********************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib/index.js??clonedRuleSet-2[0].rules[0].use[0]!./node_modules/@dcloudio/uni-cli-nvue/dist/webpack/loader/preprocess.js??clonedRuleSet-2[0].rules[0].use[1]!./node_modules/@dcloudio/uni-cli-nvue/lib/vue-loader/lib/index.js??vue-loader-options!./node_modules/@dcloudio/uni-cli-nvue/dist/webpack/loader/preprocess.js??ruleSet[0].rules[0].use[1]!../../../web学习/uniapp学习/uni-online-education/pages/course/subNVue/cpns/slider-bar.nvue?vue&type=script&lang=js& ***!
+  \**********************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
@@ -1756,20 +2658,191 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
 /* harmony default export */ __webpack_exports__["default"] = ({
+  props: {
+    duration: {
+      //总时长
+      type: Number,
+      default: 60
+    },
+    current: {
+      // 当前播放时长
+      type: Number,
+      default: 0
+    },
+    sliderWidth: {
+      //进度条宽度
+      type: Number,
+      default: 100
+    },
+    rate: {
+      //倍速
+      type: Number,
+      default: 1
+    },
+    direction: {
+      //判断屏幕方向，非全屏screenX，全屏screenY，用于计算滑动长度
+      type: String,
+      default: 'screenX'
+    }
+  },
+
+  data() {
+    return {
+      oldToucesX: 0,
+      leftWidth: 0,
+      oldLeftWidth: 0,
+      touch: false
+    };
+  },
+
+  methods: {
+    // 触摸开始，记录原坐标
+    blockTouchStart(e) {
+      this.touch = true;
+      this.oldLeftWidth = this.leftWidth; // screenX 点击点相对于屏幕左侧边缘的 X 轴坐标, screenY 点击点相对于屏幕顶部边缘的 Y 轴坐标
+
+      this.oldToucesX = e.changedTouches[0][this.direction];
+    },
+
+    // 计算方向
+    blockTouchMove(e) {
+      let newToucesX = e.changedTouches[0][this.direction];
+      this.leftWidth = (newToucesX - this.oldToucesX) * this.rate + this.oldLeftWidth; // 起出宽度，则移动进度条到右边缘，
+
+      this.leftWidth = this.leftWidth > this.sliderWidth ? this.sliderWidth : this.leftWidth; // 小于0，则移动进度条到左边缘，
+
+      this.leftWidth = this.leftWidth < 0 ? 0 : this.leftWidth;
+    },
+
+    // 结束触摸
+    blockTouchEnd(e) {
+      // 计算结束点，触发父组件，进行结束点位置播放
+      let currentSecond = this.leftWidth / this.sliderWidth * this.duration;
+      this.$emit('change', currentSecond);
+      this.touch = false;
+    }
+
+  },
+  watch: {
+    // 监听播放时间变化，移动滚动点
+    current: {
+      immediate: true,
+
+      handler(newVal, oldVal) {
+        if (this.touch) return;
+        this.leftWidth = newVal / this.duration * this.sliderWidth;
+        this.leftWidth = this.leftWidth > this.sliderWidth ? this.sliderWidth : this.leftWidth;
+      }
+
+    }
+  }
+});
+
+/***/ }),
+
+/***/ 692:
+/*!**************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib/index.js??clonedRuleSet-2[0].rules[0].use[0]!./node_modules/@dcloudio/uni-cli-nvue/dist/webpack/loader/preprocess.js??clonedRuleSet-2[0].rules[0].use[1]!./node_modules/@dcloudio/uni-cli-nvue/lib/vue-loader/lib/index.js??vue-loader-options!./node_modules/@dcloudio/uni-cli-nvue/dist/webpack/loader/preprocess.js??ruleSet[0].rules[0].use[1]!../../../web学习/uniapp学习/uni-online-education/pages/course/subNVue/topVideo.nvue?vue&type=script&lang=js&mpType=page ***!
+  \**************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _cpns_slider_bar_nvue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./cpns/slider-bar.nvue */ 614);
+/* provided dependency */ var __webpack_provided_uni_dot_requireNativePlugin = __webpack_require__(/*! ./node_modules/@dcloudio/uni-cli-nvue/lib/require-native-plugin.js */ 21)["default"];
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+  components: {
+    "slider-bar": _cpns_slider_bar_nvue__WEBPACK_IMPORTED_MODULE_0__["default"]
+  },
+
   data() {
     return {
       statusHeight: 0,
+      videoContext: null,
+      first: true,
+      //中间播放按钮
+      isPlay: false,
+      //播放暂停
+      showControls: false,
+      //控件显示隐藏
+      timmer: null,
+      //计时器
       videoMidea: {
+        title: '标题标题标题标题标题标题标题标题标题标题标题标题标题标题标题标题标题标题标题标题标题标题标题标题',
         mainImage: "/static/images/banner3.jpg",
-        videoUrl: ''
+        videoUrl: 'http://baobab.kaiyanapp.com/api/v1/playUrl?vid=164016&resourceType=video&editionType=low&source=aliyun&playUrlType=url_oss'
       }
     };
   },
 
   onLoad() {
+    // 获取状态栏高度
     this.statusHeight = uni.getSystemInfoSync().statusBarHeight;
+  },
+
+  //nvue文件使用字体图标
+  beforeCreate() {
+    const domModule = __webpack_provided_uni_dot_requireNativePlugin('dom');
+    domModule.addRule('fontFace', {
+      'fontFamily': "iconfont",
+      'src': "url('~@/static/icon/iconfont.ttf')"
+    });
+  },
+
+  mounted() {
+    this.videoContext = this.$refs.videoRef;
   },
 
   methods: {
@@ -1779,7 +2852,45 @@ __webpack_require__.r(__webpack_exports__);
     },
 
     // 获取播放进度变化，视频总时长duration，播放当前时长等
-    timeupdate() {}
+    timeupdate() {},
+
+    //定时隐藏控件
+    useTimer() {
+      if (this.timmer) clearTimeout(this.timmer);
+      this.timmer = setTimeout(() => {
+        this.showControls = false;
+        this.timmer = null;
+      }, 3000);
+    },
+
+    //点击视频组件
+    clikcVideo() {
+      this.showControls = !this.showControls;
+      if (this.showControls) this.useTimer(); //显示控件，定时隐藏控件
+    },
+
+    // 第一次播放视频
+    playFirst() {
+      this.first = false;
+      this.isPlay = true;
+      this.videoContext.play();
+      this.useTimer();
+    },
+
+    //播放或暂停
+    playOrpause() {
+      if (this.isPlay) {
+        this.videoContext.pause();
+      } else {
+        this.videoContext.play();
+      }
+
+      this.isPlay = !this.isPlay;
+      this.useTimer(); //无论暂停播放，控件都定时隐藏
+
+      if (!this.first) return;
+      this.first = false;
+    }
 
   }
 });

@@ -20,18 +20,18 @@
 <script>
 import {getCurrentInstance,ref,reactive,toRefs,onMounted,nextTick,watch} from "vue";
 export default {
-	// #ifndef APP-PLUS
 	props:{
+		// #ifndef APP-PLUS
 		providerList:{
 			type:Array,
 			default:()=>[]
 		},
+		// #endif
 		shareDate:{
 			type:Object,
 			default:()=>({})
 		}
 	},
-	// #endif
 	setup(props){
 		let {proxy} = getCurrentInstance()
 		let isShow = ref(false)
@@ -48,11 +48,11 @@ export default {
 			if(Object.keys(newValue).length>0){
 				state.title = newValue.title
 				state.image = newValue.mainImage
-				state.href = proxy.$env.HOST_H5 + proxy.$utils.routePath()
+				// state.href = proxy.$env.HOST_H5 + proxy.$utils.routePath()
 			}
 		})
+		// #ifdef APP-PLUS
 		onMounted(()=>{
-			// #ifdef APP-PLUS
 			uni.getProvider({
 				service: 'share',
 				success: (e) => {
@@ -61,7 +61,7 @@ export default {
 						switch (e.provider[i]) {
 							case 'weixin':
 								data.push({name: '微信好友',id: 'weixin',sort:0,icon: '/static/share/weixin.png'})
-								data.push({name: '朋友圈',id: 'weixin',type:'WXSenceTimeline',sort:1,icon: '/static/share/pengyouquan.png'})
+								data.push({name: '朋友圈',id: 'weixin',type:'WXSceneTimeline',sort:1,icon: '/static/share/pengyouquan.png'})
 								break;
 							case 'sinaweibo':
 								data.push({name: '新浪微博',id: 'sinaweibo',sort:2,icon: '/static/share/weibo.png'})
@@ -85,8 +85,8 @@ export default {
 					})
 				}
 			});
-			// #endif
 		})
+		// #endif
 		
 		//关闭分享弹窗
 		const showHandler=()=>{
@@ -134,7 +134,7 @@ export default {
 			
 			let shareOPtions = {
 				provider: e.id,
-				scene: e.type && e.type === 'WXSenceTimeline' ? 'WXSenceTimeline' : 'WXSceneSession', //WXSceneSession”分享到聊天界面，“WXSenceTimeline”分享到朋友圈，“WXSceneFavorite”分享到微信收藏     
+				scene: e.type && e.type === 'WXSceneTimeline' ? 'WXSceneTimeline' : 'WXSceneSession', //WXSceneSession”分享到聊天界面，“WXSenceTimeline”分享到朋友圈，“WXSceneFavorite”分享到微信收藏     
 				type: state.shareType,
 				success: (e) => {
 					console.log('success', e);

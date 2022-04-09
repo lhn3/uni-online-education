@@ -128,6 +128,30 @@
 				}
 			}
 		}
+        ,{
+            "path" : "pages/course/course-play",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "视频播放",
+				"app-plus":{
+					"titleNView":false,
+					"bounce":"none",		//关闭回弹
+					"subNVues":[
+						{
+							"id":"topVideo",
+							"path":"pages/course/subNVue/topVideo",
+							"style":{
+								"position":"dock",
+								"dock":"top",
+								"width":"100%",
+								"height":"269px"
+							}
+						}
+					]
+				}
+            }
+            
+        }
     ],
 	"globalStyle": {
 		"navigationBarBackgroundColor": "#A2CD5A",

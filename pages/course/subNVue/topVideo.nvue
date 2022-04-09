@@ -1,0 +1,54 @@
+<template>
+	<div>
+		<div class="status" :style="{height:statusHeight +'px'}"></div>
+		<video class="video" 
+		src="" 
+		:controls="false"
+		:poster="videoMidea.mainImage"
+		:show-fullscreen-btn="false"
+		:show-center-play-btn="false"
+		:show-progress="false"	
+		@ended="nextVideo"
+		@timeupdate="timeupdate"
+		></video>
+	</div>
+</template>
+
+<script>
+export default {
+	data(){
+		return{
+			statusHeight:0,
+			videoMidea:{
+				mainImage:"/static/images/banner3.jpg",
+				videoUrl:''
+			}
+		}
+	},
+	onLoad() {
+		this.statusHeight = uni.getSystemInfoSync().statusBarHeight
+	},
+	methods:{
+		//视频播放到末尾播放下一个
+		nextVideo(){
+			console.log('next')
+		},
+		// 获取播放进度变化，视频总时长duration，播放当前时长等
+		timeupdate(){
+			
+		}
+		
+	}
+}
+</script>
+
+<style>
+.status{
+	width: 750rpx;
+	background-color: #000000;
+}
+.video{
+	width: 750rpx;
+	height: 225px;
+}
+</style>

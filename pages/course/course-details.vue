@@ -22,7 +22,7 @@
 		
 		<!-- 分享组件 -->
 		<!-- #ifdef APP-PLUS -->
-		<my-share ref="myShare"></my-share>
+		<my-share ref="myShare" :shareDate="courseDetail"></my-share>
 		<!-- #endif -->
 		<!-- #ifndef APP-PLUS -->
 		<my-share ref="myShare" :providerList="providerList" :shareDate="courseDetail"></my-share>
@@ -135,10 +135,13 @@ export default {
 				myShare.value.isShow=!myShare.value.isShow
 			}
 		})
+		
+		// 点击视频或立即观看进入试看组件或观看页面---------------------------------------------
 		//立即购买按钮
 		let clickBottom = () => {
 			if(state.isBuy || state.courseDetail.isFree == 1){
 				console.log('立即观看')
+				proxy.navTo('/pages/course/course-play?id='+state.id)
 			}else{
 				console.log('立即购买')
 			}
@@ -154,7 +157,7 @@ export default {
 					state.videoContext.play()			//手动播放
 				})
 			}else if(state.isBuy){
-				//判断是否购买课程，
+				//判断是否购买课程，购买了课程就进入观看页面(非试看组件)
 				proxy.navTo('/pages/course/course-play?id='+state.id)
 			}else{
 				proxy.$message.toast('课程尚未购买，无法观看')
@@ -163,8 +166,8 @@ export default {
 		}
 		// 关闭试看组件
 		let closeVideo = () => {
-			state.videoContext.stop()
 			state.freeVideo = false
+			state.videoContext.stop()
 			state.videoUrl = ''
 			state.videoText = ''
 		}
@@ -194,7 +197,8 @@ export default {
 			}else if(sys = 'ios'){
 				this.statusNavHeight = res.statusBarHeight + 44
 			}
-			this.pageHeight = res.screenHeight - this.statusNavHeight
+			// -40手机原因
+			this.pageHeight = res.screenHeight - this.statusNavHeight-40
 		},
 		// 获取页面数据
 		async getPageInfo(id){

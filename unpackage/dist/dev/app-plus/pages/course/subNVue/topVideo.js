@@ -2393,7 +2393,10 @@ var render = function() {
               _vm.showControls
                 ? _c(
                     "cover-view",
-                    { staticClass: ["cover-bottom", "row", "center"] },
+                    {
+                      staticClass: ["cover-bottom", "row", "center"],
+                      style: { width: _vm.len + "px" }
+                    },
                     [
                       _c("view", { staticClass: ["row"] }, [
                         !_vm.isPlay
@@ -2434,12 +2437,20 @@ var render = function() {
                           appendAsTree: true,
                           attrs: { append: "tree" }
                         },
-                        [_vm._v("00:00")]
+                        [_vm._v(_vm._s(_vm.filterCurrent))]
                       ),
                       _c(
                         "view",
                         { staticClass: ["bottom-slider"] },
-                        [_c("slider-bar", { attrs: { sliderWidth: 160 } })],
+                        [
+                          _c("slider-bar", {
+                            attrs: {
+                              current: _vm.currentTime,
+                              direction: _vm.fullScreen ? "screenY" : "screenX",
+                              duration: _vm.duration
+                            }
+                          })
+                        ],
                         1
                       ),
                       _c(
@@ -2449,7 +2460,7 @@ var render = function() {
                           appendAsTree: true,
                           attrs: { append: "tree" }
                         },
-                        [_vm._v("03:45")]
+                        [_vm._v(_vm._s(_vm.filterDuration))]
                       ),
                       _c("view", { staticClass: ["row"] }, [
                         _c(
@@ -2461,15 +2472,27 @@ var render = function() {
                           },
                           [_vm._v("x1.0")]
                         ),
-                        _c(
-                          "u-text",
-                          {
-                            staticClass: ["btn", "icon"],
-                            appendAsTree: true,
-                            attrs: { append: "tree" }
-                          },
-                          [_vm._v("")]
-                        )
+                        _vm.fullScreen
+                          ? _c(
+                              "u-text",
+                              {
+                                staticClass: ["btn", "icon"],
+                                appendAsTree: true,
+                                attrs: { append: "tree" },
+                                on: { click: _vm.changeDirection }
+                              },
+                              [_vm._v("")]
+                            )
+                          : _c(
+                              "u-text",
+                              {
+                                staticClass: ["btn", "icon"],
+                                appendAsTree: true,
+                                attrs: { append: "tree" },
+                                on: { click: _vm.changeDirection }
+                              },
+                              [_vm._v("")]
+                            )
                       ])
                     ]
                   )
@@ -2801,6 +2824,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   components: {
@@ -2819,6 +2843,18 @@ __webpack_require__.r(__webpack_exports__);
       //控件显示隐藏
       timmer: null,
       //计时器
+      duration: 0,
+      //视频总时长
+      currentTime: 0,
+      //播放的当前时长
+      fullScreen: false,
+      //是否全屏
+      len: 0,
+      //底部控件长度
+      unFullScreenLen: 0,
+      //非全屏时长度
+      fullScreenLen: 0,
+      //全屏时长度
       videoMidea: {
         title: '标题标题标题标题标题标题标题标题标题标题标题标题标题标题标题标题标题标题标题标题标题标题标题标题',
         mainImage: "/static/images/banner3.jpg",
@@ -2828,8 +2864,13 @@ __webpack_require__.r(__webpack_exports__);
   },
 
   onLoad() {
-    // 获取状态栏高度
-    this.statusHeight = uni.getSystemInfoSync().statusBarHeight;
+    let res = uni.getSystemInfoSync(); // 获取状态栏高度
+
+    this.statusHeight = res.statusBarHeight; // 获取屏幕宽高设置控件长度
+
+    this.unFullScreenLen = res.screenWidth;
+    this.fullScreenLen = res.screenHeight;
+    this.len = this.unFullScreenLen;
   },
 
   //nvue文件使用字体图标
@@ -2852,7 +2893,10 @@ __webpack_require__.r(__webpack_exports__);
     },
 
     // 获取播放进度变化，视频总时长duration，播放当前时长等
-    timeupdate() {},
+    timeupdate(event) {
+      this.duration = event.detail.duration;
+      this.currentTime = event.detail.currentTime;
+    },
 
     //定时隐藏控件
     useTimer() {
@@ -2890,6 +2934,59 @@ __webpack_require__.r(__webpack_exports__);
 
       if (!this.first) return;
       this.first = false;
+    },
+
+    // 是否全屏
+    changeDirection() {
+      if (this.fullScreen) {
+        this.videoContext.exitFullScreen();
+        this.len = this.unFullScreenLen;
+      } else {
+        this.videoContext.requestFullScreen();
+        this.len = this.fullScreenLen;
+      }
+
+      this.fullScreen = !this.fullScreen;
+    },
+
+    //后退,如果是全屏就退出全屏，不是则后退
+    back() {
+      if (this.fullScreen) {
+        this.changeDirection();
+      } else {
+        uni.navigateBack();
+      }
+    },
+
+    // 时间过滤
+    leftZero(num) {
+      if (0 <= num && num < 10) {
+        return '0' + num;
+      } else {
+        return num;
+      }
+    },
+
+    formatTime(time) {
+      let second = Math.ceil(parseInt(time));
+
+      if (second >= 3600) {
+        return this.leftZero(Math.floor(second / 3600)) + ':' + this.leftZero(Math.floor(second % 3600 / 60)) + ':' + this.leftZero(second % 3600 % 60);
+      } else if (second >= 60) {
+        return this.leftZero(Math.floor(second / 60)) + ':' + this.leftZero(second % 60);
+      } else {
+        return '00' + ':' + this.leftZero(second % 60);
+      }
+    }
+
+  },
+  computed: {
+    filterDuration() {
+      return this.formatTime(this.duration);
+    },
+
+    filterCurrent() {
+      return this.formatTime(this.currentTime);
     }
 
   }

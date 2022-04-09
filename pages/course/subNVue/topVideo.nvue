@@ -24,7 +24,7 @@
 				<text class="icon iconBig" @click="playFirst">&#xe625;</text> 
 			</cover-view>
 			
-			<cover-view class="cover-bottom row center" v-if="showControls">
+			<cover-view class="cover-bottom row center" :style="{width:len+'px'}" v-if="showControls">
 				<view class="row">
 				<!-- 暂停或开始 -->
 					<text class="btn icon" v-if="!isPlay" @click="playOrpause">&#xe625;</text>
@@ -32,16 +32,17 @@
 				<!-- 下一个 -->
 					<text class="btn icon">&#xe61b;</text>
 				</view>
-				<text class="time">00:00</text>
+				<text class="time">{{filterCurrent}}</text>
 				<view class="bottom-slider">
-					<slider-bar :sliderWidth="160"></slider-bar>
+					<slider-bar :current="currentTime" :direction="fullScreen?'screenY':'screenX'" :duration="duration"></slider-bar>
 				</view>	
-				<text class="time">03:45</text>
+				<text class="time">{{filterDuration}}</text>
 				<view class="row">
 					<!-- 倍数 -->
 					<text class="btn x">x1.0</text>
 					<!-- 全屏 -->
-					<text class="btn icon">&#xe623;</text>
+					<text class="btn icon" v-if="fullScreen" @click="changeDirection">&#xe61e;</text>
+					<text class="btn icon" v-else @click="changeDirection">&#xe623;</text>
 				</view>
 			</cover-view>
 		</video>
@@ -62,6 +63,12 @@ export default {
 			isPlay:false,		//播放暂停
 			showControls:false,	//控件显示隐藏
 			timmer:null,		//计时器
+			duration:0,			//视频总时长
+			currentTime:0,		//播放的当前时长
+			fullScreen:false,	//是否全屏
+			len:0,				//底部控件长度
+			unFullScreenLen:0,	//非全屏时长度
+			fullScreenLen:0,	//全屏时长度
 			videoMidea:{
 				title:'标题标题标题标题标题标题标题标题标题标题标题标题标题标题标题标题标题标题标题标题标题标题标题标题',
 				mainImage:"/static/images/banner3.jpg",
@@ -70,8 +77,13 @@ export default {
 		}
 	},
 	onLoad() {
+		let res = uni.getSystemInfoSync()
 		// 获取状态栏高度
-		this.statusHeight = uni.getSystemInfoSync().statusBarHeight
+		this.statusHeight = res.statusBarHeight
+		// 获取屏幕宽高设置控件长度
+		this.unFullScreenLen = res.screenWidth
+		this.fullScreenLen = res.screenHeight
+		this.len = this.unFullScreenLen
 	},
 	//nvue文件使用字体图标
 	beforeCreate() {
@@ -90,8 +102,9 @@ export default {
 			console.log('next')
 		},
 		// 获取播放进度变化，视频总时长duration，播放当前时长等
-		timeupdate(){
-			
+		timeupdate(event){
+			this.duration = event.detail.duration
+			this.currentTime = event.detail.currentTime
 		},
 		//定时隐藏控件
 		useTimer(){
@@ -124,8 +137,54 @@ export default {
 			this.useTimer()					//无论暂停播放，控件都定时隐藏
 			if(!this.first) return;
 			this.first = false
+		},
+		// 是否全屏
+		changeDirection(){
+			if(this.fullScreen){
+				this.videoContext.exitFullScreen()
+				this.len=this.unFullScreenLen
+			}else{
+				this.videoContext.requestFullScreen()
+				this.len=this.fullScreenLen
+			}
+			this.fullScreen=!this.fullScreen
+		},
+		//后退,如果是全屏就退出全屏，不是则后退
+		back(){
+			if(this.fullScreen){
+				this.changeDirection()
+			}else{
+				uni.navigateBack()
+			}
+		},
+		// 时间过滤
+		leftZero(num){
+		    if(0<=num && num<10){
+		        return '0'+num
+		    }else{
+		        return num
+		    }
+		},
+		formatTime(time){
+		    let second=Math.ceil(parseInt(time))
+		    if(second>=3600){
+		        return this.leftZero(Math.floor(second/3600)) +':'+
+		        this.leftZero(Math.floor((second%3600)/60))+':'+
+		        this.leftZero((second%3600)%60)
+		    }else if(second>=60){
+		        return this.leftZero(Math.floor(second/60))+':'+this.leftZero(second%60)
+		    }else{
+		        return '00'+':'+this.leftZero(second%60)
+		    } 
 		}
-		
+	},
+	computed:{
+		filterDuration(){
+			return this.formatTime(this.duration)
+		},
+		filterCurrent(){
+			return this.formatTime(this.currentTime)
+		}
 	}
 }
 </script>

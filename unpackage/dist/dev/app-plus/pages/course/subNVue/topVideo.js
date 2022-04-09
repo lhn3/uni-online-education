@@ -1789,6 +1789,12 @@ module.exports = {
   },
   ".x": {
     "": {
+      "width": [
+        "70rpx",
+        0,
+        0,
+        10
+      ],
       "fontSize": [
         "28rpx",
         0,
@@ -1874,7 +1880,7 @@ module.exports = {
         14
       ],
       "right": [
-        "65rpx",
+        "45rpx",
         0,
         0,
         14
@@ -1886,7 +1892,7 @@ module.exports = {
         14
       ],
       "width": [
-        "110rpx",
+        "80rpx",
         0,
         0,
         14
@@ -1908,13 +1914,19 @@ module.exports = {
         15
       ],
       "fontSize": [
-        "35rpx",
+        "28rpx",
         0,
         0,
         15
       ],
       "lineHeight": [
-        "60rpx",
+        "40rpx",
+        0,
+        0,
+        15
+      ],
+      "textAlign": [
+        "center",
         0,
         0,
         15
@@ -1924,7 +1936,7 @@ module.exports = {
   ".active": {
     "": {
       "color": [
-        "#345dc2",
+        "#A2CD5A",
         0,
         0,
         16
@@ -1987,6 +1999,12 @@ module.exports = {
       ],
       "lineHeight": [
         "130rpx",
+        0,
+        0,
+        19
+      ],
+      "textAlign": [
+        "center",
         0,
         0,
         19
@@ -2447,8 +2465,11 @@ var render = function() {
                             attrs: {
                               current: _vm.currentTime,
                               direction: _vm.fullScreen ? "screenY" : "screenX",
-                              duration: _vm.duration
-                            }
+                              duration: _vm.duration,
+                              sliderWidth: _vm.sliderLen,
+                              rate: parseFloat(_vm.rate)
+                            },
+                            on: { change: _vm.sliderChange }
                           })
                         ],
                         1
@@ -2468,9 +2489,10 @@ var render = function() {
                           {
                             staticClass: ["btn", "x"],
                             appendAsTree: true,
-                            attrs: { append: "tree" }
+                            attrs: { append: "tree" },
+                            on: { click: _vm.clickRate }
                           },
-                          [_vm._v("x1.0")]
+                          [_vm._v("x" + _vm._s(_vm.rate))]
                         ),
                         _vm.fullScreen
                           ? _c(
@@ -2495,6 +2517,39 @@ var render = function() {
                             )
                       ])
                     ]
+                  )
+                : _vm._e(),
+              _vm.showRate
+                ? _c(
+                    "cover-view",
+                    {
+                      class: {
+                        "rate-list": !_vm.fullScreen,
+                        "rate-list-full": _vm.fullScreen
+                      }
+                    },
+                    _vm._l(_vm.rates, function(item) {
+                      return _c(
+                        "u-text",
+                        {
+                          key: item,
+                          class: {
+                            active: item == _vm.rate,
+                            "rate-item": !_vm.fullScreen,
+                            "rate-item-full": _vm.fullScreen
+                          },
+                          appendAsTree: true,
+                          attrs: { append: "tree" },
+                          on: {
+                            click: function($event) {
+                              _vm.changeRate(item)
+                            }
+                          }
+                        },
+                        [_vm._v(_vm._s(item))]
+                      )
+                    }),
+                    0
                   )
                 : _vm._e()
             ],
@@ -2825,6 +2880,13 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   components: {
@@ -2843,7 +2905,7 @@ __webpack_require__.r(__webpack_exports__);
       //控件显示隐藏
       timmer: null,
       //计时器
-      duration: 0,
+      duration: 360,
       //视频总时长
       currentTime: 0,
       //播放的当前时长
@@ -2855,11 +2917,18 @@ __webpack_require__.r(__webpack_exports__);
       //非全屏时长度
       fullScreenLen: 0,
       //全屏时长度
+      sliderLen: 0,
+      //进度条长度
+      rate: '1.0',
+      //当前倍数
+      showRate: false,
+      //是否展示倍数
       videoMidea: {
         title: '标题标题标题标题标题标题标题标题标题标题标题标题标题标题标题标题标题标题标题标题标题标题标题标题',
         mainImage: "/static/images/banner3.jpg",
         videoUrl: 'http://baobab.kaiyanapp.com/api/v1/playUrl?vid=164016&resourceType=video&editionType=low&source=aliyun&playUrlType=url_oss'
-      }
+      },
+      rates: ['0.5', '0.8', '1.0', '1.25', '1.5', '2.0']
     };
   },
 
@@ -2871,6 +2940,7 @@ __webpack_require__.r(__webpack_exports__);
     this.unFullScreenLen = res.screenWidth;
     this.fullScreenLen = res.screenHeight;
     this.len = this.unFullScreenLen;
+    this.sliderLen = this.len - uni.upx2px(470);
   },
 
   //nvue文件使用字体图标
@@ -2903,14 +2973,17 @@ __webpack_require__.r(__webpack_exports__);
       if (this.timmer) clearTimeout(this.timmer);
       this.timmer = setTimeout(() => {
         this.showControls = false;
+        this.showRate = false;
         this.timmer = null;
-      }, 3000);
+      }, 5000);
     },
 
     //点击视频组件
     clikcVideo() {
       this.showControls = !this.showControls;
       if (this.showControls) this.useTimer(); //显示控件，定时隐藏控件
+
+      this.showRate = false;
     },
 
     // 第一次播放视频
@@ -2940,10 +3013,8 @@ __webpack_require__.r(__webpack_exports__);
     changeDirection() {
       if (this.fullScreen) {
         this.videoContext.exitFullScreen();
-        this.len = this.unFullScreenLen;
       } else {
         this.videoContext.requestFullScreen();
-        this.len = this.fullScreenLen;
       }
 
       this.fullScreen = !this.fullScreen;
@@ -2956,6 +3027,25 @@ __webpack_require__.r(__webpack_exports__);
       } else {
         uni.navigateBack();
       }
+    },
+
+    // 滑动进度条结束时触发
+    sliderChange(currentTime) {
+      this.showRate = false;
+      this.videoContext.seek(currentTime);
+      this.currentTime = currentTime;
+    },
+
+    // 是否显示倍数选择
+    clickRate() {
+      this.showRate = !this.showRate;
+    },
+
+    //改变倍数
+    changeRate(rate) {
+      this.rate = rate;
+      this.videoContext.playbackRate(parseFloat(rate));
+      this.showRate = false;
     },
 
     // 时间过滤
@@ -2987,6 +3077,19 @@ __webpack_require__.r(__webpack_exports__);
 
     filterCurrent() {
       return this.formatTime(this.currentTime);
+    }
+
+  },
+  // 监听全屏改变底部控制栏长度和滑动条长度
+  watch: {
+    fullScreen(newValue) {
+      if (newValue) {
+        this.len = this.fullScreenLen;
+      } else {
+        this.len = this.unFullScreenLen;
+      }
+
+      this.sliderLen = this.len - uni.upx2px(470);
     }
 
   }

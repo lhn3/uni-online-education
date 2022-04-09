@@ -34,16 +34,23 @@
 				</view>
 				<text class="time">{{filterCurrent}}</text>
 				<view class="bottom-slider">
-					<slider-bar :current="currentTime" :direction="fullScreen?'screenY':'screenX'" :duration="duration"></slider-bar>
+					<slider-bar :current="currentTime" :direction="fullScreen?'screenY':'screenX'" 
+					:duration="duration" @change="sliderChange" :sliderWidth="sliderLen" :rate="parseFloat(rate)"></slider-bar>
 				</view>	
 				<text class="time">{{filterDuration}}</text>
 				<view class="row">
 					<!-- 倍数 -->
-					<text class="btn x">x1.0</text>
+					<text class="btn x" @click="clickRate">x{{rate}}</text>
 					<!-- 全屏 -->
 					<text class="btn icon" v-if="fullScreen" @click="changeDirection">&#xe61e;</text>
 					<text class="btn icon" v-else @click="changeDirection">&#xe623;</text>
 				</view>
+			</cover-view>
+			
+			<!-- 倍数 -->
+			<cover-view :class="{'rate-list':!fullScreen,'rate-list-full':fullScreen}" v-if="showRate">
+				<text :class="{'active':item == rate,'rate-item':!fullScreen,'rate-item-full':fullScreen}" 
+				v-for="item in rates" @click="changeRate(item)" :key="item">{{item}}</text>
 			</cover-view>
 		</video>
 	</view>
@@ -63,17 +70,21 @@ export default {
 			isPlay:false,		//播放暂停
 			showControls:false,	//控件显示隐藏
 			timmer:null,		//计时器
-			duration:0,			//视频总时长
+			duration:360,		//视频总时长
 			currentTime:0,		//播放的当前时长
 			fullScreen:false,	//是否全屏
 			len:0,				//底部控件长度
 			unFullScreenLen:0,	//非全屏时长度
 			fullScreenLen:0,	//全屏时长度
+			sliderLen:0,		//进度条长度
+			rate:'1.0',			//当前倍数
+			showRate:false,		//是否展示倍数
 			videoMidea:{
 				title:'标题标题标题标题标题标题标题标题标题标题标题标题标题标题标题标题标题标题标题标题标题标题标题标题',
 				mainImage:"/static/images/banner3.jpg",
 				videoUrl:'http://baobab.kaiyanapp.com/api/v1/playUrl?vid=164016&resourceType=video&editionType=low&source=aliyun&playUrlType=url_oss'
-			}
+			},
+			rates:['0.5','0.8','1.0','1.25','1.5','2.0']
 		}
 	},
 	onLoad() {
@@ -84,6 +95,7 @@ export default {
 		this.unFullScreenLen = res.screenWidth
 		this.fullScreenLen = res.screenHeight
 		this.len = this.unFullScreenLen
+		this.sliderLen = this.len - uni.upx2px(470)
 	},
 	//nvue文件使用字体图标
 	beforeCreate() {
@@ -111,13 +123,15 @@ export default {
 			if(this.timmer) clearTimeout(this.timmer);
 			this.timmer=setTimeout(()=>{
 				this.showControls = false
+				this.showRate=false
 				this.timmer = null
-			},3000) 
+			},5000)
 		},
 		//点击视频组件
 		clikcVideo(){
 			this.showControls = !this.showControls
 			if(this.showControls) this.useTimer();	//显示控件，定时隐藏控件
+			this.showRate=false
 		},
 		// 第一次播放视频
 		playFirst(){
@@ -142,10 +156,8 @@ export default {
 		changeDirection(){
 			if(this.fullScreen){
 				this.videoContext.exitFullScreen()
-				this.len=this.unFullScreenLen
 			}else{
 				this.videoContext.requestFullScreen()
-				this.len=this.fullScreenLen
 			}
 			this.fullScreen=!this.fullScreen
 		},
@@ -156,6 +168,22 @@ export default {
 			}else{
 				uni.navigateBack()
 			}
+		},
+		// 滑动进度条结束时触发
+		sliderChange(currentTime){
+			this.showRate=false
+			this.videoContext.seek(currentTime)
+			this.currentTime = currentTime
+		},
+		// 是否显示倍数选择
+		clickRate(){
+			this.showRate=!this.showRate
+		},
+		//改变倍数
+		changeRate(rate){
+			this.rate=rate
+			this.videoContext.playbackRate(parseFloat(rate))
+			this.showRate=false
 		},
 		// 时间过滤
 		leftZero(num){
@@ -184,6 +212,17 @@ export default {
 		},
 		filterCurrent(){
 			return this.formatTime(this.currentTime)
+		}
+	},
+	// 监听全屏改变底部控制栏长度和滑动条长度
+	watch:{
+		fullScreen(newValue){
+			if(newValue){
+				this.len=this.fullScreenLen
+			}else{
+				this.len=this.unFullScreenLen
+			}
+			this.sliderLen = this.len - uni.upx2px(470)
 		}
 	}
 }
@@ -251,6 +290,7 @@ export default {
 	font-size: 40rpx;
 }
 .x{
+	width: 70rpx;
 	font-size: 28rpx;
 }
 .time {
@@ -273,18 +313,19 @@ export default {
 .rate-list{
 	position: absolute;
 	bottom: 70rpx;
-	right: 65rpx;
+	right: 45rpx;
 	background-color: rgba(0,0,0, 0.7);
-	width: 110rpx;
+	width: 80rpx;
 	border-radius: 10rpx;
 }
 .rate-item{
 	color: #FFFFFF;
-	font-size: 35rpx;
-	line-height: 60rpx;
+	font-size: 28rpx;
+	line-height: 40rpx;
+	text-align: center;
 }
 .active {
-	color: #345dc2;
+	color: #A2CD5A;
 }
 
 /* 全屏倍速样式 */
@@ -300,5 +341,6 @@ export default {
 	color: #FFFFFF;
 	font-size: 50rpx;
 	line-height: 130rpx;
+	text-align: center;
 }
 </style>

@@ -37,6 +37,9 @@
 		<!-- #ifndef APP-PLUS -->
 		<my-share ref="myShare" :providerList="providerList" :shareDate="courseDetail"></my-share>
 		<!-- #endif -->
+		
+		<!-- 评价组件 -->
+		<comment ref="commentRef" :comment="comment"></comment>
 	</view>
 </template>
 
@@ -54,12 +57,20 @@ export default {
 		let {proxy} = getCurrentInstance()
 		let sectionRef = ref(null)	//课程组件
 		let myShare = ref(null)		//分享组件
+		let commentRef = ref(null)		//评价组件
 		let state = reactive({
 			id:null,
 			courseDetail:{},	//课程详情
 			courseSection:[],	//章节
 			poster:'',			//视频主图
 			videoUrl:'',		//视频地址
+			comment:{
+				userId: 1, // 当前用户id
+				nickName: 'Liu',
+				userImage: '',
+				content: '', // 评论内容
+				score: 5 // 评分值
+			},
 			activeVideo:{		// 正在播放的视频章节和之章节索引
 				parentIndex: 0,
 				childIndex: 0
@@ -104,11 +115,12 @@ export default {
 		}
 		//点击评价按钮
 		const openComment=()=>{
-			console.log('评论')
+			commentRef.value.isShow = !commentRef.value.isShow
 		}
 		return{
 			sectionRef,
 			myShare,
+			commentRef,
 			...toRefs(state),
 			
 			openVideo,

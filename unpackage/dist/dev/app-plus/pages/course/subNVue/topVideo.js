@@ -2956,6 +2956,7 @@ __webpack_require__.r(__webpack_exports__);
 
       if (res.type == 'init') {
         this.mainImage = res.courseDetail.mainImage;
+        console.log(this.mainImage);
         this.courseSection = res.courseSection;
         this.videoMidea = this.courseSection[0].sectionList[0];
         this.sectionRef = res.sectionRef;

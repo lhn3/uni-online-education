@@ -106,6 +106,7 @@ export default {
 			this.activeVideo = res.activeVideo
 			if(res.type == 'init') {
 				this.mainImage = res.courseDetail.mainImage
+				console.log(this.mainImage)
 				this.courseSection = res.courseSection
 				this.videoMidea = this.courseSection[0].sectionList[0]
 				this.sectionRef = res.sectionRef

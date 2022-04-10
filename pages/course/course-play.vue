@@ -1,8 +1,8 @@
 <template>
 	<view class="course-play">
 		<!-- #ifndef APP-PLUS -->
-		<video class="video" id="playVideo" src="http://baobab.kaiyanapp.com/api/v1/playUrl?vid=164016&resourceType=video&editionType=low&source=aliyun&playUrlType=url_oss"
-		 controls></video>
+		<video class="video" id="playVideo" :src="videoUrl"
+		 controls :poster="poster"></video>
 		<!-- #endif -->
 		
 		<!-- 详情 -->
@@ -44,7 +44,7 @@
 import {getCurrentInstance,ref,reactive,toRefs,onMounted,nextTick} from "vue";
 import { onReady,onNavigationBarButtonTap,onReachBottom,onPageScroll } from '@dcloudio/uni-app';
 import courseSection from './cpns/course-section.vue'
-import {getCourseDetail,getCourseSection} from '@/request/course-api.js'
+import {getBuyCourseSection,getCourseDetail} from '@/request/course-api.js'
 let videoContext = null
 export default {
 	components:{
@@ -58,6 +58,12 @@ export default {
 			id:null,
 			courseDetail:{},	//课程详情
 			courseSection:[],	//章节
+			poster:'',			//视频主图
+			videoUrl:'',		//视频地址
+			activeVideo:{		// 正在播放的视频章节和之章节索引
+				parentIndex: 0,
+				childIndex: 0
+			},	
 			providerList:[	//h5分享页面数据
 				{id: 'weixin',name: '微信好友',sort:0,icon: '/static/share/weixin.png'},
 				{id: 'weixin',name: '朋友圈',type:'WXSenceTimeline',sort:1,icon: '/static/share/pengyouquan.png'},
@@ -68,10 +74,28 @@ export default {
 		})
 		
 		//点击不同的章节
-		const openVideo=(section)=>{
-			//判断是否购买课程，购买了课程就进入观看页面(非试看组件)
-			sectionRef.value.actSect=section.name	//修改子组件中数据
-			// proxy.navTo('/pages/course/course-play?id='+state.id)
+		const openVideo=(itemInfo)=>{
+			sectionRef.value.actSect = itemInfo.section.name	//修改子组件中 保持选中 的参数
+			
+			// 非APP端视频切换
+			// #ifndef APP-PLUS
+			videoContext.pause()
+			state.videoUrl = itemInfo.section.videoUrl		//设置播放路由
+			setTimeout(()=>{
+				videoContext.play()
+			},300)
+			// #endif
+			
+			//APP端视频切换，向nvue文件传递视频信息
+			// #ifdef APP-PLUS
+			state.activeVideo.parentIndex = itemInfo.parentIndex
+			state.activeVideo.childIndex = itemInfo.childIndex
+			uni.$emit('videoInfo',{
+				type:'update',
+				activeVideo:state.activeVideo,	//视频索引
+				section:itemInfo.section		//正在播放的视频信息对象
+				})
+			// #endif
 		}
 		//点击分享按钮，显示关闭分享组件
 		const share=()=>{
@@ -94,11 +118,37 @@ export default {
 	},
 	async onLoad(option) {
 		this.id=option.id
-		this.courseDetail=await getCourseDetail(this.id)
-		this.courseSection=await getCourseSection(this.id)
+		this.getPageInfo()
 	},
 	onReady(){
+		// #ifndef APP-PLUS
 		videoContext=uni.createVideoContext('playVideo',this)
+		// #endif
+	},
+	methods:{
+		// 初始化获取页面信息
+		async getPageInfo(){
+			this.courseDetail=await getCourseDetail(this.id)
+			this.courseSection=await getBuyCourseSection(this.id)
+			
+			// 非APP端初始化
+			// #ifndef APP-PLUS
+			this.poster = this.courseDetail.mainImage								//设置主图
+			this.videoUrl = this.courseSection[0].sectionList[0].videoUrl			//设置播放路由
+			// #endif
+			
+			// 初始化APP端视频信息,发射事件
+			// #ifdef APP-PLUS
+			uni.$emit('videoInfo',{
+				type:'init',
+				courseDetail:this.courseDetail,	//课程信息
+				courseSection:this.courseSection,//此课程所有视频
+				activeVideo:this.activeVideo	// 正在播放的视频章节和之章节索引
+				})
+			// #endif
+			
+			this.$refs.sectionRef.actSect=this.courseSection[0].sectionList[0].name	//修改子组件中数据
+		}
 	}
 
 }

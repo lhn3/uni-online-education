@@ -148,18 +148,19 @@ export default {
 			}
 		}
 		// 点击视频
-		let openVideo = (section) => {
+		let openVideo = (itemInfo) => {
 			// 判断单个视频是否免费，判断此课程是否免费,并且没买的情况下
-			if((section.isFree || state.courseDetail.isFree) && !state.isBuy){
-				state.videoUrl = section.videoUrl	//设置播放url
-				state.videoText = section.name		//播放标题
+			console.log(itemInfo)
+			if((itemInfo.section.isFree || state.courseDetail.isFree) && !state.isBuy){
+				state.videoUrl = itemInfo.section.videoUrl	//设置播放url
+				state.videoText = itemInfo.section.name		//播放标题
 				state.freeVideo = true				//弹出框
 				nextTick(()=>{
 					state.videoContext.play()			//手动播放
 				})
 			}else if(state.isBuy){
 				//判断是否购买课程，购买了课程就进入观看页面(非试看组件)
-				sectionRef.value.actSect=section.name	//修改子组件中数据
+				sectionRef.value.actSect=itemInfo.section.name	//修改子组件中数据
 				proxy.navTo('/pages/course/course-play?id='+state.id)
 			}else{
 				proxy.$message.toast('课程尚未购买，无法观看')
@@ -210,7 +211,7 @@ export default {
 			uni.setNavigationBarTitle({
 				title:this.courseDetail.title
 			})
-			this.courseSections = await getCourseSection(id)
+			this.courseSection = await getCourseSection(id)
 			this.courseComment = await getCourseComment(id)
 			this.coursePackage = await getCoursePackage(id)
 			// 判断是否登录了

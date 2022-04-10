@@ -1983,6 +1983,11 @@ var __spreadProps = (a, b) => __defProps(a, __getOwnPropDescs(b));
       url: "/course/course/is-buy/" + id
     });
   };
+  const getBuyCourseSection = (id) => {
+    return request({
+      url: "/course/course/buy/list/" + id
+    });
+  };
   const MescrollMixin = {
     data() {
       return {
@@ -5467,11 +5472,11 @@ var __spreadProps = (a, b) => __defProps(a, __getOwnPropDescs(b));
     },
     setup(props, { emit }) {
       let actSect = vue.ref("");
-      let handleClick = (section) => {
+      let handleClick = (section, parentIndex, childIndex) => {
         if ((section.isFree || props.isFree) && !props.isBuy) {
           actSect.value = section.name;
         }
-        emit("openVideo", section);
+        emit("openVideo", { section, parentIndex, childIndex });
       };
       return {
         actSect,
@@ -5486,12 +5491,11 @@ var __spreadProps = (a, b) => __defProps(a, __getOwnPropDescs(b));
           vue.createCommentVNode(" \u7B2C\u51E0\u7AE0 "),
           vue.createElementVNode("text", { class: "chapters text-ellipsis" }, "\u7B2C" + vue.toDisplayString(index + 1) + "\u7AE0 " + vue.toDisplayString(chapter.name), 1),
           vue.createCommentVNode(" \u7B2C\u51E0\u8282 "),
-          vue.createCommentVNode(' 			<view class="sections row "\n				:class="{active: index=== activeObj.chapterIndex&& index2 === activeObj.sectionIndex}"\n				@click="playVideo(index, index2, section)"\n				v-for="(section, index2) in chapter.sectionList" :key="index2"> '),
           (vue.openBlock(true), vue.createElementBlock(vue.Fragment, null, vue.renderList(chapter.sectionList, (section, index2) => {
             return vue.openBlock(), vue.createElementBlock("view", {
               class: vue.normalizeClass(["sections row", { active: $setup.actSect == section.name }]),
               key: index2,
-              onClick: ($event) => $setup.handleClick(section)
+              onClick: ($event) => $setup.handleClick(section, index, index2)
             }, [
               vue.createElementVNode("text", { class: "iconfont icon-roundrightfill" }),
               vue.createElementVNode("view", { class: "row" }, [
@@ -5750,16 +5754,17 @@ var __spreadProps = (a, b) => __defProps(a, __getOwnPropDescs(b));
           formatAppLog("log", "at pages/course/course-details.vue:147", "\u7ACB\u5373\u8D2D\u4E70");
         }
       };
-      let openVideo = (section) => {
-        if ((section.isFree || state.courseDetail.isFree) && !state.isBuy) {
-          state.videoUrl = section.videoUrl;
-          state.videoText = section.name;
+      let openVideo = (itemInfo) => {
+        formatAppLog("log", "at pages/course/course-details.vue:153", itemInfo);
+        if ((itemInfo.section.isFree || state.courseDetail.isFree) && !state.isBuy) {
+          state.videoUrl = itemInfo.section.videoUrl;
+          state.videoText = itemInfo.section.name;
           state.freeVideo = true;
           vue.nextTick(() => {
             state.videoContext.play();
           });
         } else if (state.isBuy) {
-          sectionRef.value.actSect = section.name;
+          sectionRef.value.actSect = itemInfo.section.name;
           proxy.navTo("/pages/course/course-play?id=" + state.id);
         } else {
           proxy.$message.toast("\u8BFE\u7A0B\u5C1A\u672A\u8D2D\u4E70\uFF0C\u65E0\u6CD5\u89C2\u770B");
@@ -5802,7 +5807,7 @@ var __spreadProps = (a, b) => __defProps(a, __getOwnPropDescs(b));
         uni.setNavigationBarTitle({
           title: this.courseDetail.title
         });
-        this.courseSections = await getCourseSection(id);
+        this.courseSection = await getCourseSection(id);
         this.courseComment = await getCourseComment(id);
         this.coursePackage = await getCoursePackage(id);
         if (this.$utils.isLogin({ nav: false })) {
@@ -5948,6 +5953,12 @@ var __spreadProps = (a, b) => __defProps(a, __getOwnPropDescs(b));
         id: null,
         courseDetail: {},
         courseSection: [],
+        poster: "",
+        videoUrl: "",
+        activeVideo: {
+          parentIndex: 0,
+          childIndex: 0
+        },
         providerList: [
           { id: "weixin", name: "\u5FAE\u4FE1\u597D\u53CB", sort: 0, icon: "/static/share/weixin.png" },
           { id: "weixin", name: "\u670B\u53CB\u5708", type: "WXSenceTimeline", sort: 1, icon: "/static/share/pengyouquan.png" },
@@ -5956,14 +5967,21 @@ var __spreadProps = (a, b) => __defProps(a, __getOwnPropDescs(b));
           { id: "copy", name: "\u590D\u5236\u94FE\u63A5", sort: 4, icon: "/static/share/link.png" }
         ]
       });
-      const openVideo = (section) => {
-        sectionRef.value.actSect = section.name;
+      const openVideo = (itemInfo) => {
+        sectionRef.value.actSect = itemInfo.section.name;
+        state.activeVideo.parentIndex = itemInfo.parentIndex;
+        state.activeVideo.childIndex = itemInfo.childIndex;
+        uni.$emit("videoInfo", {
+          type: "update",
+          activeVideo: state.activeVideo,
+          section: itemInfo.section
+        });
       };
       const share = () => {
         myShare.value.isShow = !myShare.value.isShow;
       };
       const openComment = () => {
-        formatAppLog("log", "at pages/course/course-play.vue:83", "\u8BC4\u8BBA");
+        formatAppLog("log", "at pages/course/course-play.vue:107", "\u8BC4\u8BBA");
       };
       return __spreadProps(__spreadValues({
         sectionRef,
@@ -5976,11 +5994,22 @@ var __spreadProps = (a, b) => __defProps(a, __getOwnPropDescs(b));
     },
     async onLoad(option) {
       this.id = option.id;
-      this.courseDetail = await getCourseDetail(this.id);
-      this.courseSection = await getCourseSection(this.id);
+      this.getPageInfo();
     },
     onReady() {
-      uni.createVideoContext("playVideo", this);
+    },
+    methods: {
+      async getPageInfo() {
+        this.courseDetail = await getCourseDetail(this.id);
+        this.courseSection = await getBuyCourseSection(this.id);
+        uni.$emit("videoInfo", {
+          type: "init",
+          courseDetail: this.courseDetail,
+          courseSection: this.courseSection,
+          activeVideo: this.activeVideo
+        });
+        this.$refs.sectionRef.actSect = this.courseSection[0].sectionList[0].name;
+      }
     }
   };
   function _sfc_render(_ctx, _cache, $props, $setup, $data, $options) {

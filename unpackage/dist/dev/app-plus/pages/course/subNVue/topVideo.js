@@ -2343,7 +2343,7 @@ var render = function() {
           attrs: {
             src: _vm.videoMidea.videoUrl,
             controls: false,
-            poster: _vm.videoMidea.mainImage,
+            poster: _vm.mainImage,
             showFullscreenBtn: false,
             showCenterPlayBtn: false,
             showProgress: false
@@ -2386,7 +2386,7 @@ var render = function() {
                         appendAsTree: true,
                         attrs: { append: "tree" }
                       },
-                      [_vm._v(_vm._s(_vm.videoMidea.title))]
+                      [_vm._v(_vm._s(_vm.videoMidea.name))]
                     )
                   ])
                 : _vm._e(),
@@ -2901,7 +2901,7 @@ __webpack_require__.r(__webpack_exports__);
       //中间播放按钮
       isPlay: false,
       //播放暂停
-      showControls: false,
+      showControls: true,
       //控件显示隐藏
       timmer: null,
       //计时器
@@ -2923,10 +2923,15 @@ __webpack_require__.r(__webpack_exports__);
       //当前倍数
       showRate: false,
       //是否展示倍数
+      courseSection: [],
+      //视频列表
+      activeVideo: {},
+      //正在播放的视频索引
+      mainImage: "",
       videoMidea: {
-        title: '标题标题标题标题标题标题标题标题标题标题标题标题标题标题标题标题标题标题标题标题标题标题标题标题',
-        mainImage: "/static/images/banner3.jpg",
-        videoUrl: 'http://baobab.kaiyanapp.com/api/v1/playUrl?vid=164016&resourceType=video&editionType=low&source=aliyun&playUrlType=url_oss'
+        id: null,
+        name: '',
+        videoUrl: ''
       },
       rates: ['0.5', '0.8', '1.0', '1.25', '1.5', '2.0']
     };
@@ -2940,7 +2945,25 @@ __webpack_require__.r(__webpack_exports__);
     this.unFullScreenLen = res.screenWidth;
     this.fullScreenLen = res.screenHeight;
     this.len = this.unFullScreenLen;
-    this.sliderLen = this.len - uni.upx2px(470);
+    this.sliderLen = this.len - uni.upx2px(470); //监听视频信息传递事件
+
+    uni.$on('videoInfo', res => {
+      this.activeVideo = res.activeVideo;
+
+      if (res.type == 'init') {
+        this.mainImage = res.courseDetail.mainImage;
+        this.courseSection = res.courseSection;
+        this.videoMidea = this.courseSection[0].sectionList[0];
+      } else {
+        this.videoMidea = res.section;
+        this.videoContext.pause();
+        setTimeout(() => {
+          this.first = false;
+          this.isPlay = true;
+          this.videoContext.play();
+        }, 300);
+      }
+    });
   },
 
   //nvue文件使用字体图标
@@ -3092,7 +3115,13 @@ __webpack_require__.r(__webpack_exports__);
       this.sliderLen = this.len - uni.upx2px(470);
     }
 
+  },
+
+  // 写在页面删除监听
+  onUnload() {
+    uni.$off('videoInfo');
   }
+
 });
 
 /***/ }),

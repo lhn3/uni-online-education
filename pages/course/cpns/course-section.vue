@@ -4,11 +4,7 @@
 			<!-- 第几章 -->
 			<text class="chapters text-ellipsis">第{{index+1}}章 {{chapter.name}}</text>
 			<!-- 第几节 -->
-<!-- 			<view class="sections row "
-				:class="{active: index=== activeObj.chapterIndex&& index2 === activeObj.sectionIndex}"
-				@click="playVideo(index, index2, section)"
-				v-for="(section, index2) in chapter.sectionList" :key="index2"> -->
-			<view class="sections row" :class="{active:actSect == section.name }" v-for="(section, index2) in chapter.sectionList" :key="index2"  @click="handleClick(section)">
+			<view class="sections row" :class="{active:actSect == section.name }" v-for="(section, index2) in chapter.sectionList" :key="index2"  @click="handleClick(section,index,index2)">
 				<text class="iconfont icon-roundrightfill"></text>
 				<view class="row">
 					<text>{{index+1}}-{{index2+1}}</text>
@@ -52,12 +48,12 @@ export default {
 	},
 	setup(props,{emit}){
 		let actSect=ref("")
-		let handleClick = (section) => {
+		let handleClick = (section,parentIndex,childIndex) => {
 			// 只有试看的才打开试看窗口，保持选择
 			if((section.isFree || props.isFree) && !props.isBuy){
 				actSect.value=section.name
 			}
-			emit('openVideo',section)
+			emit('openVideo',{section,parentIndex,childIndex})
 		}
 		return{
 			actSect,

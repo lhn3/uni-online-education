@@ -60,6 +60,13 @@ const getCourseIsBuy=(id)=>{
 	})
 }
 
+//通过id查询已经购买的课程列表
+const getBuyCourseSection=(id)=>{
+	return request({
+		url:'/course/course/buy/list/'+id,
+	})
+}
+
 export {
 	getBanners,
 	getCategory,
@@ -68,5 +75,6 @@ export {
 	getCourseSection,
 	getCourseComment,
 	getCoursePackage,
-	getCourseIsBuy
+	getCourseIsBuy,
+	getBuyCourseSection
 }

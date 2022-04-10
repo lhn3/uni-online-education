@@ -9,7 +9,7 @@
 					<scroll-view :scroll-y="isScroll" class="scroll-box" :upper-threshold="0" @scrolltoupper="toupper">
 						<view class="details-info">
 							<course-info v-if="tabId == 1" :detailUrls="courseDetail.detailUrls"></course-info>
-							<course-section v-if="tabId == 2" :chapterList="courseSection" @openVideo="openVideo" :isBuy="isBuy" :isFree="courseDetail.isFree"></course-section>
+							<course-section v-if="tabId == 2" ref="sectionRef" :chapterList="courseSection" @openVideo="openVideo" :isBuy="isBuy" :isFree="courseDetail.isFree"></course-section>
 							<course-comment v-if="tabId == 3" :commentList="courseComment"></course-comment>
 							<course-package v-if="tabId == 4" :groupList="coursePackage"></course-package>
 						</view>
@@ -68,7 +68,8 @@ export default {
 		])
 		let tabBar = ref(null)		//标签组件
 		let myShare = ref(null)		//分享组件
-		let providerList = ref([//分享页面数据
+		let sectionRef = ref(null)		//章节组件
+		let providerList = ref([	//h5分享页面数据
 			{id: 'weixin',name: '微信好友',sort:0,icon: '/static/share/weixin.png'},
 			{id: 'weixin',name: '朋友圈',type:'WXSenceTimeline',sort:1,icon: '/static/share/pengyouquan.png'},
 			{id: 'sinaweibo',name: '新浪微博',sort:2,icon: '/static/share/weibo.png'},
@@ -90,9 +91,9 @@ export default {
 			videoContext:null,	//播放实例
 			
 			courseDetail:{},	//课程详情
-			courseSection:{},	//章节
-			courseComment:{},	//评论
-			coursePackage:{}	//套餐
+			courseSection:[],	//章节
+			courseComment:[],	//评论
+			coursePackage:[]	//套餐
 		})
 		
 		//页面触底事件--------------------------------------------
@@ -158,6 +159,7 @@ export default {
 				})
 			}else if(state.isBuy){
 				//判断是否购买课程，购买了课程就进入观看页面(非试看组件)
+				sectionRef.value.actSect=section.name	//修改子组件中数据
 				proxy.navTo('/pages/course/course-play?id='+state.id)
 			}else{
 				proxy.$message.toast('课程尚未购买，无法观看')
@@ -175,6 +177,7 @@ export default {
 			tabs,
 			tabBar,
 			myShare,
+			sectionRef,
 			providerList,
 			...toRefs(state),
 			
@@ -207,7 +210,7 @@ export default {
 			uni.setNavigationBarTitle({
 				title:this.courseDetail.title
 			})
-			this.courseSection = await getCourseSection(id)
+			this.courseSections = await getCourseSection(id)
 			this.courseComment = await getCourseComment(id)
 			this.coursePackage = await getCoursePackage(id)
 			// 判断是否登录了

@@ -53,6 +53,7 @@ export default {
 	setup(props,{emit}){
 		let actSect=ref("")
 		let handleClick = (section) => {
+			// 只有试看的才打开试看窗口，保持选择
 			if((section.isFree || props.isFree) && !props.isBuy){
 				actSect.value=section.name
 			}

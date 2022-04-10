@@ -130,11 +130,13 @@
 		}
         ,{
             "path" : "pages/course/course-play",
-            "style" :                                                                                    
+            "style" :
             {
                 "navigationBarTitleText": "视频播放",
 				"app-plus":{
+					// #ifdef APP-PLUS
 					"titleNView":false,
+					// #endif
 					"bounce":"none",		//关闭回弹
 					"subNVues":[
 						{
@@ -150,7 +152,6 @@
 					]
 				}
             }
-            
         }
     ],
 	"globalStyle": {

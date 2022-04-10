@@ -1,0 +1,161 @@
+/**
+ * 这里是uni-app内置的常用样式变量
+ *
+ * uni-app 官方扩展插件及插件市场（https://ext.dcloud.net.cn）上很多三方插件均使用了这些样式变量
+ * 如果你是插件开发者，建议你使用scss预处理，并在插件代码中直接使用这些变量（无需 import 这个文件），方便用户通过搭积木的方式开发整体风格一致的App
+ *
+ */
+/**
+ * 如果你是App开发者（插件使用者），你可以通过修改这些变量来定制自己的插件主题，实现自定义主题功能
+ *
+ * 如果你的项目同样使用了scss预处理，你也可以直接在你的 scss 代码中使用如下变量，同时无需 import 这个文件
+ */
+/* 颜色变量 */
+/*文本基本颜色*/
+.mask[data-v-448797c4] {
+  z-index: 99;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.6);
+}
+.share-body[data-v-448797c4] {
+  z-index: 100;
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+}
+.share-body .share-scroll[data-v-448797c4] {
+  border-radius: 0.9375rem 0.9375rem 0 0;
+  background-color: #f7f7f7;
+  width: 100%;
+  height: 6.25rem;
+  display: flex;
+  white-space: nowrap;
+  padding-top: 1.40625rem;
+}
+.share-body .share-scroll .share-item[data-v-448797c4] {
+  display: inline-flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 25%;
+}
+.share-body .share-scroll .share-item uni-image[data-v-448797c4] {
+  width: 1.875rem;
+  height: 1.875rem;
+}
+.share-body .share-scroll .share-item uni-view[data-v-448797c4] {
+  color: #959DA5;
+  font-size: 0.78125rem;
+  padding-top: 0.3125rem;
+}
+.share-body .share-cancel[data-v-448797c4] {
+  background-color: #fff;
+  text-align: center;
+  width: 100%;
+  padding: 0.78125rem 0;
+}
+/**
+ * 这里是uni-app内置的常用样式变量
+ *
+ * uni-app 官方扩展插件及插件市场（https://ext.dcloud.net.cn）上很多三方插件均使用了这些样式变量
+ * 如果你是插件开发者，建议你使用scss预处理，并在插件代码中直接使用这些变量（无需 import 这个文件），方便用户通过搭积木的方式开发整体风格一致的App
+ *
+ */
+/**
+ * 如果你是App开发者（插件使用者），你可以通过修改这些变量来定制自己的插件主题，实现自定义主题功能
+ *
+ * 如果你的项目同样使用了scss预处理，你也可以直接在你的 scss 代码中使用如下变量，同时无需 import 这个文件
+ */
+/* 颜色变量 */
+/*文本基本颜色*/
+.course-dir[data-v-6773dd35] {
+  padding: 0 1.125rem;
+}
+.course-dir .chapters[data-v-6773dd35] {
+  margin-top: 0.9375rem;
+  margin-bottom: 0.3125rem;
+  color: #333333;
+  font-size: 1.09375rem;
+  font-weight: bold;
+}
+.course-dir .sections[data-v-6773dd35] {
+  padding: 0.625rem 0;
+  font-size: 0.9375rem;
+  border-bottom: 0.5px solid #efeff4;
+  line-height: 1.25rem;
+  color: #3d3c40;
+}
+.course-dir .sections uni-text[data-v-6773dd35] {
+  margin-right: 0.3125rem;
+}
+.course-dir .sections .title[data-v-6773dd35] {
+  width: 14.6875rem;
+}
+.course-dir .sections .see[data-v-6773dd35] {
+  color: #A2CD5A;
+  font-size: 0.78125rem;
+  flex: 1;
+  text-align: right;
+}
+.course-dir .active[data-v-6773dd35] {
+  color: #A2CD5A;
+}
+/**
+ * 这里是uni-app内置的常用样式变量
+ *
+ * uni-app 官方扩展插件及插件市场（https://ext.dcloud.net.cn）上很多三方插件均使用了这些样式变量
+ * 如果你是插件开发者，建议你使用scss预处理，并在插件代码中直接使用这些变量（无需 import 这个文件），方便用户通过搭积木的方式开发整体风格一致的App
+ *
+ */
+/**
+ * 如果你是App开发者（插件使用者），你可以通过修改这些变量来定制自己的插件主题，实现自定义主题功能
+ *
+ * 如果你的项目同样使用了scss预处理，你也可以直接在你的 scss 代码中使用如下变量，同时无需 import 这个文件
+ */
+/* 颜色变量 */
+/*文本基本颜色*/
+.video {
+  width: 100%;
+  height: 15.625rem;
+}
+.course-play {
+  padding-bottom: 3.125rem;
+}
+.course-info {
+  padding: 0.9375rem;
+  font-weight: bold;
+  border-bottom: 0.5px solid #efeff4;
+}
+.course-info .title {
+  width: 15.625rem;
+  font-size: 1.09375rem;
+  line-height: 1.875rem;
+  color: #333333;
+}
+.course-info .right > uni-text {
+  font-size: 0.875rem;
+  line-height: 1.875rem;
+  color: #333333;
+}
+.bottom {
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 3.125rem;
+  background-color: #FFFFFF;
+  border-top: 0.5px solid #efeff4;
+}
+.btn-item uni-text {
+  text-align: center;
+  color: #959DA5;
+  font-size: 0.78125rem;
+}
+.btn-item .iconfont {
+  font-size: 1.1875rem;
+}

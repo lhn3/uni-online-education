@@ -5472,6 +5472,10 @@ var __spreadProps = (a, b) => __defProps(a, __getOwnPropDescs(b));
     },
     setup(props, { emit }) {
       let actSect = vue.ref("");
+      vue.reactive({
+        parentIndex: 0,
+        childIndex: 0
+      });
       let handleClick = (section, parentIndex, childIndex) => {
         if ((section.isFree || props.isFree) && !props.isBuy) {
           actSect.value = section.name;
@@ -6006,7 +6010,8 @@ var __spreadProps = (a, b) => __defProps(a, __getOwnPropDescs(b));
           type: "init",
           courseDetail: this.courseDetail,
           courseSection: this.courseSection,
-          activeVideo: this.activeVideo
+          activeVideo: this.activeVideo,
+          sectionRef: this.$refs.sectionRef
         });
         this.$refs.sectionRef.actSect = this.courseSection[0].sectionList[0].name;
       }

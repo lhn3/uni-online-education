@@ -2443,7 +2443,8 @@ var render = function() {
                           {
                             staticClass: ["btn", "icon"],
                             appendAsTree: true,
-                            attrs: { append: "tree" }
+                            attrs: { append: "tree" },
+                            on: { click: _vm.nextVideo }
                           },
                           [_vm._v("")]
                         )
@@ -2925,9 +2926,12 @@ __webpack_require__.r(__webpack_exports__);
       //是否展示倍数
       courseSection: [],
       //视频列表
+      sectionRef: null,
+      //视频列表的实例
       activeVideo: {},
       //正在播放的视频索引
       mainImage: "",
+      //主图
       videoMidea: {
         id: null,
         name: '',
@@ -2954,14 +2958,10 @@ __webpack_require__.r(__webpack_exports__);
         this.mainImage = res.courseDetail.mainImage;
         this.courseSection = res.courseSection;
         this.videoMidea = this.courseSection[0].sectionList[0];
+        this.sectionRef = res.sectionRef;
       } else {
         this.videoMidea = res.section;
-        this.videoContext.pause();
-        setTimeout(() => {
-          this.first = false;
-          this.isPlay = true;
-          this.videoContext.play();
-        }, 300);
+        this.playVideo();
       }
     });
   },
@@ -2980,9 +2980,59 @@ __webpack_require__.r(__webpack_exports__);
   },
 
   methods: {
+    playVideo() {
+      this.videoContext.pause();
+      setTimeout(() => {
+        this.first = false;
+        this.isPlay = true;
+        this.videoContext.play();
+      }, 300);
+    },
+
     //视频播放到末尾播放下一个
     nextVideo() {
-      console.log('next');
+      let courseSection = this.courseSection; //要浅拷贝，否则下面使用activeVideo，又在改变activeVideo，会产生递归
+
+      let activeVideo = { ...this.activeVideo
+      };
+      courseSection.forEach((item1, index1) => {
+        if (index1 == activeVideo.parentIndex) {
+          item1.sectionList.forEach((item2, index2) => {
+            if (index2 == activeVideo.childIndex) {
+              //找到正在播放的
+              if (item1.sectionList.length > activeVideo.childIndex + 1) {
+                //如果此章节此视频后还有视频
+                this.videoMidea = item1.sectionList[index2 + 1]; //就播放此章节下一个视频
+
+                this.activeVideo.childIndex += 1;
+                this.sectionRef.actSect = this.videoMidea.name;
+                this.playVideo();
+                return;
+              } else {
+                //否则就寻找下一章
+                if (courseSection.length > activeVideo.parentIndex + 1) {
+                  //判断此课程是否还有下一章
+                  this.videoMidea = courseSection[index1 + 1].sectionList[0]; //有下一章就播放下一章的第一个视频
+
+                  this.activeVideo.parentIndex += 1;
+                  this.activeVideo.childIndex = 0;
+                  this.sectionRef.actSect = this.videoMidea.name;
+                  this.playVideo();
+                  return;
+                } else {
+                  //没有下一章播放第一个视频
+                  this.videoMidea = courseSection[0].sectionList[0];
+                  this.activeVideo.parentIndex = 0;
+                  this.activeVideo.childIndex = 0;
+                  this.sectionRef.actSect = this.videoMidea.name;
+                  this.playVideo();
+                  return;
+                }
+              }
+            }
+          });
+        }
+      });
     },
 
     // 获取播放进度变化，视频总时长duration，播放当前时长等

@@ -41,7 +41,7 @@
 </template>
 
 <script>
-import {getCurrentInstance,ref,reactive,toRefs,onMounted,nextTick} from "vue";
+import {getCurrentInstance,ref,reactive,toRefs,onMounted,nextTick,watch} from "vue";
 import { onReady,onNavigationBarButtonTap,onReachBottom,onPageScroll } from '@dcloudio/uni-app';
 import courseSection from './cpns/course-section.vue'
 import {getBuyCourseSection,getCourseDetail} from '@/request/course-api.js'
@@ -143,7 +143,8 @@ export default {
 				type:'init',
 				courseDetail:this.courseDetail,	//课程信息
 				courseSection:this.courseSection,//此课程所有视频
-				activeVideo:this.activeVideo	// 正在播放的视频章节和之章节索引
+				activeVideo:this.activeVideo,	// 正在播放的视频章节和之章节索引
+				sectionRef:this.$refs.sectionRef//课程组件实例，方便改变组件中判断选择的视频背景
 				})
 			// #endif
 			
@@ -157,12 +158,18 @@ export default {
 <style lang="scss">
 .video{
 	width: 100%;
-	height: 500rpx;
+	height: 450rpx;
+	position: fixed;
+	top: 0;
+	left: 0;
 }
 .course-play {
 	padding-bottom: 100rpx;
 }
 .course-info {
+	/* #ifndef APP-PLUS */
+	margin-top: 450rpx;
+	/* #endif */
 	padding: 30rpx;
 	font-weight: bold;
 	border-bottom: $mxg-underLine;

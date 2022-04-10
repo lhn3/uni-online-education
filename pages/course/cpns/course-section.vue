@@ -18,7 +18,7 @@
 </template>
 
 <script>
-import {ref} from 'vue'
+import {ref,reactive,toRefs} from 'vue'
 export default {
 	props: {
 		isBuy: Boolean, // 是否购买
@@ -48,6 +48,10 @@ export default {
 	},
 	setup(props,{emit}){
 		let actSect=ref("")
+		let activeVideo=reactive({
+			parentIndex: 0,
+			childIndex: 0
+		})
 		let handleClick = (section,parentIndex,childIndex) => {
 			// 只有试看的才打开试看窗口，保持选择
 			if((section.isFree || props.isFree) && !props.isBuy){

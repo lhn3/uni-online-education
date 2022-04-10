@@ -133,11 +133,10 @@
             "style" :
             {
                 "navigationBarTitleText": "视频播放",
+				"backgroundColor":"#FFFFFF",
 				"app-plus":{
-					// #ifdef APP-PLUS
 					"titleNView":false,
-					// #endif
-					"bounce":"none",		//关闭回弹
+					// "bounce":"none",		//关闭回弹
 					"subNVues":[
 						{
 							"id":"topVideo",

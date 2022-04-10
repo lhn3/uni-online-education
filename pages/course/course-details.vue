@@ -202,7 +202,13 @@ export default {
 				this.statusNavHeight = res.statusBarHeight + 44
 			}
 			// -40手机原因
+			// #ifdef APP-PLUS
 			this.pageHeight = res.screenHeight - this.statusNavHeight-40
+			// #endif
+			// #ifndef APP-PLUS
+			this.pageHeight = res.screenHeight - this.statusNavHeight
+			// #endif
+			
 		},
 		// 获取页面数据
 		async getPageInfo(id){

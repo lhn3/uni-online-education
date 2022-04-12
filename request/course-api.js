@@ -67,6 +67,7 @@ const getBuyCourseSection=(id)=>{
 	})
 }
 
+
 export {
 	getBanners,
 	getCategory,

@@ -90,11 +90,19 @@ export default {
 			
 			// 非APP端视频切换
 			// #ifndef APP-PLUS
-			videoContext.pause()
-			state.videoUrl = itemInfo.section.videoUrl		//设置播放路由
-			setTimeout(()=>{
-				videoContext.play()
-			},300)
+			uni.request({
+				url:itemInfo.section.videoUrl,
+				method:'GET',
+				success:(res)=> {
+					videoContext.pause()
+					state.videoUrl = res.data.data.url	//设置播放url
+				},
+				complete: () => {
+					setTimeout(()=>{
+						videoContext.play()
+					},300)
+				}
+			})
 			// #endif
 			
 			//APP端视频切换，向nvue文件传递视频信息
@@ -146,7 +154,13 @@ export default {
 			// 非APP端初始化
 			// #ifndef APP-PLUS
 			this.poster = this.courseDetail.mainImage								//设置主图
-			this.videoUrl = this.courseSection[0].sectionList[0].videoUrl			//设置播放路由
+			uni.request({
+				url:this.courseSection[0].sectionList[0].videoUrl,
+				method:'GET',
+				success:(res)=> {
+					this.videoUrl = res.data.data.url	//设置播放url
+				}
+			})
 			// #endif
 			
 			// 初始化APP端视频信息,发射事件

@@ -2956,13 +2956,29 @@ __webpack_require__.r(__webpack_exports__);
 
       if (res.type == 'init') {
         this.mainImage = res.courseDetail.mainImage;
-        console.log(this.mainImage);
         this.courseSection = res.courseSection;
-        this.videoMidea = this.courseSection[0].sectionList[0];
         this.sectionRef = res.sectionRef;
+        this.videoMidea = { ...this.courseSection[0].sectionList[0]
+        };
+        uni.request({
+          url: this.courseSection[0].sectionList[0].videoUrl,
+          method: 'GET',
+          success: res => {
+            this.videoMidea.videoUrl = res.data.data.url; //设置播放url
+          }
+        });
       } else {
-        this.videoMidea = res.section;
-        this.playVideo();
+        this.videoMidea = { ...res.section
+        };
+        uni.request({
+          url: res.section.videoUrl,
+          method: 'GET',
+          success: res => {
+            this.videoMidea.videoUrl = res.data.data.url; //设置播放url
+
+            this.playVideo();
+          }
+        });
       }
     });
   },
@@ -3003,31 +3019,55 @@ __webpack_require__.r(__webpack_exports__);
               //找到正在播放的
               if (item1.sectionList.length > activeVideo.childIndex + 1) {
                 //如果此章节此视频后还有视频
-                this.videoMidea = item1.sectionList[index2 + 1]; //就播放此章节下一个视频
+                this.videoMidea = { ...item1.sectionList[index2 + 1]
+                }; //就播放此章节下一个视频
 
-                this.activeVideo.childIndex += 1;
-                this.sectionRef.actSect = this.videoMidea.name;
-                this.playVideo();
-                return;
+                uni.request({
+                  url: item1.sectionList[index2 + 1].videoUrl,
+                  method: 'GET',
+                  success: res => {
+                    this.videoMidea.videoUrl = res.data.data.url; //设置播放url
+
+                    this.activeVideo.childIndex += 1;
+                    this.sectionRef.actSect = this.videoMidea.name;
+                    this.playVideo();
+                  }
+                });
               } else {
                 //否则就寻找下一章
                 if (courseSection.length > activeVideo.parentIndex + 1) {
                   //判断此课程是否还有下一章
-                  this.videoMidea = courseSection[index1 + 1].sectionList[0]; //有下一章就播放下一章的第一个视频
+                  this.videoMidea = { ...courseSection[index1 + 1].sectionList[0]
+                  }; //有下一章就播放下一章的第一个视频
 
-                  this.activeVideo.parentIndex += 1;
-                  this.activeVideo.childIndex = 0;
-                  this.sectionRef.actSect = this.videoMidea.name;
-                  this.playVideo();
-                  return;
+                  uni.request({
+                    url: courseSection[index1 + 1].sectionList[0].videoUrl,
+                    method: 'GET',
+                    success: res => {
+                      this.videoMidea.videoUrl = res.data.data.url; //设置播放url
+
+                      this.activeVideo.parentIndex += 1;
+                      this.activeVideo.childIndex = 0;
+                      this.sectionRef.actSect = this.videoMidea.name;
+                      this.playVideo();
+                    }
+                  });
                 } else {
                   //没有下一章播放第一个视频
-                  this.videoMidea = courseSection[0].sectionList[0];
-                  this.activeVideo.parentIndex = 0;
-                  this.activeVideo.childIndex = 0;
-                  this.sectionRef.actSect = this.videoMidea.name;
-                  this.playVideo();
-                  return;
+                  this.videoMidea = { ...courseSection[0].sectionList[0]
+                  };
+                  uni.request({
+                    url: courseSection[0].sectionList[0].videoUrl,
+                    method: 'GET',
+                    success: res => {
+                      this.videoMidea.videoUrl = res.data.data.url; //设置播放url
+
+                      this.activeVideo.parentIndex = 0;
+                      this.activeVideo.childIndex = 0;
+                      this.sectionRef.actSect = this.videoMidea.name;
+                      this.playVideo();
+                    }
+                  });
                 }
               }
             }

@@ -76,9 +76,9 @@
 .share-body[data-v-448797c4] {
   z-index: 100;
   position: fixed;
-  left: 0;
-  right: 0;
-  bottom: 0;
+  left: 50%;
+  top: 50%;
+  margin: auto;
 }
 .share-body .share-scroll[data-v-448797c4] {
   border-radius: 0.9375rem 0.9375rem 0 0;

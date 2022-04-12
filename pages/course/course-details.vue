@@ -148,15 +148,23 @@ export default {
 			}
 		}
 		// 点击视频
-		let openVideo = (itemInfo) => {
+		let openVideo = async (itemInfo) => {
 			// 判断单个视频是否免费，判断此课程是否免费,并且没买的情况下
 			console.log(itemInfo)
 			if((itemInfo.section.isFree || state.courseDetail.isFree) && !state.isBuy){
-				state.videoUrl = itemInfo.section.videoUrl	//设置播放url
-				state.videoText = itemInfo.section.name		//播放标题
-				state.freeVideo = true				//弹出框
-				nextTick(()=>{
-					state.videoContext.play()			//手动播放
+				uni.request({
+					url:itemInfo.section.videoUrl,
+					method:'GET',
+					success:(res)=> {
+						state.videoUrl = res.data.data.url	//设置播放url
+					},
+					complete: () => {
+						state.videoText = itemInfo.section.name		//播放标题
+						state.freeVideo = true				//弹出框
+						nextTick(()=>{
+							state.videoContext.play()			//手动播放
+						})
+					}
 				})
 			}else if(state.isBuy){
 				//判断是否购买课程，购买了课程就进入观看页面(非试看组件)

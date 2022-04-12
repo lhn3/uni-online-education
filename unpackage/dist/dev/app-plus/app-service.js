@@ -5758,14 +5758,22 @@ var __spreadProps = (a, b) => __defProps(a, __getOwnPropDescs(b));
           formatAppLog("log", "at pages/course/course-details.vue:147", "\u7ACB\u5373\u8D2D\u4E70");
         }
       };
-      let openVideo = (itemInfo) => {
+      let openVideo = async (itemInfo) => {
         formatAppLog("log", "at pages/course/course-details.vue:153", itemInfo);
         if ((itemInfo.section.isFree || state.courseDetail.isFree) && !state.isBuy) {
-          state.videoUrl = itemInfo.section.videoUrl;
-          state.videoText = itemInfo.section.name;
-          state.freeVideo = true;
-          vue.nextTick(() => {
-            state.videoContext.play();
+          uni.request({
+            url: itemInfo.section.videoUrl,
+            method: "GET",
+            success: (res) => {
+              state.videoUrl = res.data.data.url;
+            },
+            complete: () => {
+              state.videoText = itemInfo.section.name;
+              state.freeVideo = true;
+              vue.nextTick(() => {
+                state.videoContext.play();
+              });
+            }
           });
         } else if (state.isBuy) {
           sectionRef.value.actSect = itemInfo.section.name;

@@ -67,6 +67,15 @@ const getBuyCourseSection=(id)=>{
 	})
 }
 
+//通过id查询已经购买的课程列表
+const updateComment=(data)=>{
+	return request({
+		url:'/course/comment',
+		method:'POST',
+		data
+	})
+}
+
 
 export {
 	getBanners,
@@ -77,5 +86,6 @@ export {
 	getCourseComment,
 	getCoursePackage,
 	getCourseIsBuy,
-	getBuyCourseSection
+	getBuyCourseSection,
+	updateComment
 }

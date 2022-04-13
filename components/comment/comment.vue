@@ -17,7 +17,7 @@
 
 <script>
 	
-import {ref,reactive,onMounted,toRefs} from "vue";
+import {ref,reactive,onMounted,toRefs,getCurrentInstance} from "vue";
 export default {
 	props: {
 		comment: {
@@ -41,7 +41,8 @@ export default {
 			]
 		}
 	},
-	setup(props){
+	setup(props,{emit}){
+		let {proxy} = getCurrentInstance()
 		let isShow=ref(false)
 		let state=ref({
 			userId: null, 		// 当前用户id
@@ -68,7 +69,11 @@ export default {
 		//提交按钮
 		let submitComment=()=>{
 			console.log(state.value)
+			emit('submit',state.value)
+			proxy.$message.toast('发表成功','success')
 			isShow.value = false
+			state.score=5
+			state.content=''
 		}
 
 		return{

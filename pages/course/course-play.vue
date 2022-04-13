@@ -39,7 +39,7 @@
 		<!-- #endif -->
 		
 		<!-- 评价组件 -->
-		<comment ref="commentRef" :comment="comment"></comment>
+		<comment ref="commentRef" :comment="comment" @submit='submit'></comment>
 	</view>
 </template>
 
@@ -47,7 +47,7 @@
 import {getCurrentInstance,ref,reactive,toRefs,onMounted,nextTick,watch} from "vue";
 import { onReady,onNavigationBarButtonTap,onReachBottom,onPageScroll } from '@dcloudio/uni-app';
 import courseSection from './cpns/course-section.vue'
-import {getBuyCourseSection,getCourseDetail} from '@/request/course-api.js'
+import {getBuyCourseSection,getCourseDetail,updateComment} from '@/request/course-api.js'
 let videoContext = null
 export default {
 	components:{
@@ -66,6 +66,7 @@ export default {
 			videoUrl:'',		//视频地址
 			comment:{
 				userId: 1, // 当前用户id
+				courseId:10,//课程id
 				nickName: 'Liu',
 				userImage: '',
 				content: '', // 评论内容
@@ -119,11 +120,20 @@ export default {
 		//点击分享按钮，显示关闭分享组件
 		const share=()=>{
 			myShare.value.isShow=!myShare.value.isShow
-			
 		}
 		//点击评价按钮
 		const openComment=()=>{
 			commentRef.value.isShow = !commentRef.value.isShow
+		}
+		//提交评论
+		const submit = async (data) => {
+			let res = await updateComment(data) 
+			if(res.code == 200){
+				proxy.$message.toast('发表成功','success')
+				commentRef.value.isShow = false
+				data.score=5
+				data.content=''
+			}
 		}
 		return{
 			sectionRef,
@@ -133,7 +143,8 @@ export default {
 			
 			openVideo,
 			share,
-			openComment
+			openComment,
+			submit
 		}
 	},
 	async onLoad(option) {
@@ -177,7 +188,6 @@ export default {
 			this.$refs.sectionRef.actSect=this.courseSection[0].sectionList[0].name	//修改子组件中数据
 		}
 	}
-
 }
 </script>
 

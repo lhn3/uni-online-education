@@ -5936,6 +5936,7 @@ function initVueI18n(locale, messages = {}, fallbackLocale, watcher) {
   };
 }
 exports._export_sfc = _export_sfc;
+exports.computed$1 = computed$1;
 exports.createSSRApp = createSSRApp;
 exports.e = e;
 exports.f = f;

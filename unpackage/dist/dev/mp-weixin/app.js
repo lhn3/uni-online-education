@@ -18,6 +18,7 @@ if (!Math) {
   "./pages/course/course-details.js";
   "./pages/course/course-play.js";
   "./pages/order/confirm-buy.js";
+  "./pages/order/my-balance.js";
 }
 const _sfc_main = {
   onLaunch: function() {

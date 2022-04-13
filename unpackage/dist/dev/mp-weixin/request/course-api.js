@@ -74,6 +74,19 @@ const updateComment = (data) => {
     data
   });
 };
+const getBalance = () => {
+  return request_request.request({
+    url: "/pay/user/balance"
+  });
+};
+const orderPay = (data) => {
+  return request_request.request({
+    url: "/pay",
+    method: "POST",
+    data
+  });
+};
+exports.getBalance = getBalance;
 exports.getBanners = getBanners;
 exports.getBuyCourseSection = getBuyCourseSection;
 exports.getCategory = getCategory;
@@ -83,4 +96,5 @@ exports.getCourseIsBuy = getCourseIsBuy;
 exports.getCourseList = getCourseList;
 exports.getCoursePackage = getCoursePackage;
 exports.getCourseSection = getCourseSection;
+exports.orderPay = orderPay;
 exports.updateComment = updateComment;

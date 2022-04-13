@@ -1,6 +1,5 @@
 {
-  "navigationBarTitleText": "",
-  "enablePullDownRefresh": false,
+  "navigationBarTitleText": "商品支付",
   "usingComponents": {
     "course-item": "../../components/course-item/course-item"
   }

@@ -156,8 +156,21 @@
             "path" : "pages/order/confirm-buy",
             "style" :                                                                                    
             {
-                "navigationBarTitleText": "",
-                "enablePullDownRefresh": false
+                "navigationBarTitleText": "商品支付",
+				"app-plus":{
+					"bounce":false
+				}
+            }
+            
+        }
+        ,{
+            "path" : "pages/order/my-balance",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "余额充值",
+				"app-plus":{
+					"bounce":false
+				}
             }
             
         }

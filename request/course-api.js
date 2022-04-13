@@ -67,7 +67,7 @@ const getBuyCourseSection=(id)=>{
 	})
 }
 
-//通过id查询已经购买的课程列表
+//发表课程评论
 const updateComment=(data)=>{
 	return request({
 		url:'/course/comment',
@@ -76,6 +76,21 @@ const updateComment=(data)=>{
 	})
 }
 
+//查询个人余额
+const getBalance=()=>{
+	return request({
+		url:'/pay/user/balance',
+	})
+}
+
+//支付
+const orderPay=(data)=>{
+	return request({
+		url:'/pay',
+		method:'POST',
+		data
+	})
+}
 
 export {
 	getBanners,
@@ -87,5 +102,7 @@ export {
 	getCoursePackage,
 	getCourseIsBuy,
 	getBuyCourseSection,
-	updateComment
+	updateComment,
+	getBalance,
+	orderPay
 }

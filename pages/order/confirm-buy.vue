@@ -12,7 +12,7 @@
 			<!-- APP端的IOS设备上显示 -->
 			<view v-if="isIos" class="ios">
 				<text>余额：</text>
-				<text>0.00币(不足支付)</text>
+				<text>{{balance}}币{{canPay?'':'(余额不足)'}}</text>
 			</view>
 			<!-- 非APP端的IOS设备上显示 -->
 			<radio-group v-else @change="radioChange">
@@ -59,12 +59,11 @@
 		<view class="pay space-between">
 			<view>
 				<text class="grey">实付金额：</text>
-				<!-- <text>￥{{course.priceDiscount || course.groupPrice || course.priceOriginal || course.totalPrice}}</text> -->
-				<text>123</text>
+				<text>￥{{price}}</text>
 			</view>
 			<view>
 				<button v-if="isIos" class="btn" :loading="loading" :disabled="loading" @click="iosPayHandler">
-					充值并支付
+					{{canPay?'立即支付':'充值并支付'}}
 				</button>
 				<view v-else>
 					<button v-if="payStyle == 'wxpay'" class="btn" :loading="loading" :disabled="loading" @click="wxPayHandler">微信支付</button>
@@ -75,9 +74,10 @@
 		</view>
 	</view>
 </template>
-<script>
-import {getCurrentInstance,ref,reactive,toRefs,onMounted,nextTick} from "vue";
+<script> 
+import {getCurrentInstance,ref,reactive,toRefs,onMounted,computed,watch} from "vue";
 import coursePackage from '@/pages/course/cpns/course-package.vue'
+import {getBalance,orderPay} from '@/request/course-api.js'
 export default {
 	components:{
 		'course-package':coursePackage,
@@ -88,30 +88,86 @@ export default {
 		let loading = ref(false)
 		let isIos = ref(false) 		//操作系统
 		let payStyle = ref(null)	//支付方式
+		let balance = ref()			//账户余额
+		//计算实付金额
+		let price = computed(() => detail.value.priceDiscount || detail.value.groupPrice || detail.value.priceOriginal || detail.value.totalPrice)
+		//判断余额是否充足
+		let canPay = computed(() => parseFloat(balance.value) >= parseFloat(price.value))
+		//所有课程的id
+		let courseIds = computed(() => {
+			let courseIdList = []
+			if(detail.value.list){
+				detail.value.list.forEach(item=>{
+					courseIdList.push(item.id)
+				})
+			}else{
+				courseIdList.push(detail.value.id)
+			}
+			return courseIdList
+		})
 		
 		//小程序：devtools
 		//苹果：ios
-		// #ifdef APP-PLUS
 		onMounted(()=>{
+			// 判断是否是ios系统
+			// #ifdef APP-PLUS
 			let sys = uni.getSystemInfoSync().platform
 			if(sys == 'ios'){
 				isIos.value = true
 			}
+			// #endif
 		})
-		// #endif
-
+		
 		//选择不同支付方式
 		let radioChange = (e) => {
 			payStyle.value=e.detail.value
-		}
+		} 
 		
 		//苹果支付
-		const iosPayHandler = () => {
+		const iosPayHandler = async () => {
 			console.log('苹果支付')
-		}
+			//传递后端数据
+			let data = {price:price.value,courseIds:courseIds.value}
+			if(canPay.value){
+				//直接支付
+				loading.value=true
+				uni.showLoading({
+					title:"支付中...",
+					mask:true
+				})
+				let res = await orderPay(data)
+				setTimeout(()=>{
+					uni.hideLoading() 
+					loading.value=false
+					if(res.code == 200){
+						uni.showModal({
+							content:'支付成功，立即学习', 
+							showCancel:true,
+							success: (e) => {
+								//确定就跳转到课程详情页
+								if(e.confirm){ 
+									uni.redirectTo({url:'/pages/course/course-details?id='+detail.value.id})
+								}else{
+									// 取消就跳转到订单页
+									console.log('订单页')
+									// uni.redirectTo({url:''})
+								}
+							}
+						})
+					}else{
+						proxy.$message.toast('支付失败','error')
+					}
+				},2000)
+			}else{
+				//前往充值
+				proxy.navTo(`/pages/order/my-balance?params=${JSON.stringify(data)}`)
+			}
+		} 
+		
 		const wxPayHandler = () => {
 			console.log('微信支付')
 		}
+		
 		const payHandler = () => {
 			console.log('支付宝支付')
 		}
@@ -120,6 +176,9 @@ export default {
 			loading,
 			isIos,
 			payStyle,
+			price,
+			balance,
+			canPay,
 			
 			radioChange,
 			iosPayHandler,
@@ -127,7 +186,7 @@ export default {
 			payHandler
 		}
 	},
-	onLoad(option) {
+	async onLoad(option) {
 		// #ifdef MP-WEIXIN
 		this.detail=JSON.parse(decodeURIComponent(option.detail))
 		// #endif
@@ -135,7 +194,10 @@ export default {
 		// #ifndef MP-WEIXIN
 		this.detail=JSON.parse(decodeURIComponent(option.detail.replace(/%/g,'%25')))
 		// #endif
-	}
+		
+		//查询个人余额
+		this.balance = await getBalance()
+	},
 }
 </script>
 

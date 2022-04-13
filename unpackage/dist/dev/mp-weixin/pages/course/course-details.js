@@ -38,6 +38,7 @@ const _sfc_main = {
     "bottom-btn": bottomBtn
   },
   setup() {
+    let { proxy } = common_vendor.getCurrentInstance();
     let tabs = common_vendor.ref([
       { id: 1, name: "\u8BE6\u60C5" },
       { id: 2, name: "\u7AE0\u8282" },
@@ -46,6 +47,7 @@ const _sfc_main = {
     ]);
     let tabBar = common_vendor.ref(null);
     let myShare = common_vendor.ref(null);
+    let sectionRef = common_vendor.ref(null);
     let providerList = common_vendor.ref([
       { id: "weixin", name: "\u5FAE\u4FE1\u597D\u53CB", sort: 0, icon: "/static/share/weixin.png" },
       { id: "weixin", name: "\u670B\u53CB\u5708", type: "WXSenceTimeline", sort: 1, icon: "/static/share/pengyouquan.png" },
@@ -54,7 +56,7 @@ const _sfc_main = {
       { id: "copy", name: "\u590D\u5236\u94FE\u63A5", sort: 4, icon: "/static/share/link.png" }
     ]);
     let state = common_vendor.reactive({
-      id: 0,
+      id: null,
       pageHeight: 0,
       statusNavHeight: 0,
       detailToTop: 0,
@@ -65,10 +67,11 @@ const _sfc_main = {
       freeVideo: false,
       videoUrl: null,
       videoText: "",
+      videoContext: null,
       courseDetail: {},
-      courseSection: {},
-      courseComment: {},
-      coursePackage: {}
+      courseSection: [],
+      courseComment: [],
+      coursePackage: []
     });
     common_vendor.onReachBottom(() => {
       state.isScroll = true;
@@ -104,22 +107,47 @@ const _sfc_main = {
     let clickBottom = () => {
       if (state.isBuy || state.courseDetail.isFree == 1) {
         console.log("\u7ACB\u5373\u89C2\u770B");
+        proxy.navTo("/pages/course/course-play?id=" + state.id);
       } else {
         console.log("\u7ACB\u5373\u8D2D\u4E70");
+        proxy.navTo("/pages/order/confirm-buy?detail=" + encodeURIComponent(JSON.stringify(state.courseDetail)));
       }
     };
-    let openVideo = (setion) => {
-      state.videoUrl = setion.videoUrl;
-      state.videoText = setion.name;
-      state.freeVideo = true;
+    let openVideo = async (itemInfo) => {
+      console.log(itemInfo);
+      if ((itemInfo.section.isFree || state.courseDetail.isFree) && !state.isBuy) {
+        common_vendor.index.request({
+          url: itemInfo.section.videoUrl,
+          method: "GET",
+          success: (res) => {
+            state.videoUrl = res.data.data.url;
+          },
+          complete: () => {
+            state.videoText = itemInfo.section.name;
+            state.freeVideo = true;
+            common_vendor.nextTick(() => {
+              state.videoContext.play();
+            });
+          }
+        });
+      } else if (state.isBuy) {
+        sectionRef.value.actSect = itemInfo.section.name;
+        proxy.navTo("/pages/course/course-play?id=" + state.id);
+      } else {
+        proxy.$message.toast("\u8BFE\u7A0B\u5C1A\u672A\u8D2D\u4E70\uFF0C\u65E0\u6CD5\u89C2\u770B");
+      }
     };
     let closeVideo = () => {
       state.freeVideo = false;
+      state.videoContext.stop();
+      state.videoUrl = "";
+      state.videoText = "";
     };
     return __spreadProps(__spreadValues({
       tabs,
       tabBar,
       myShare,
+      sectionRef,
       providerList
     }, common_vendor.toRefs(state)), {
       changeTab,
@@ -168,6 +196,7 @@ const _sfc_main = {
     }, (data) => {
       this.detailToTop = data.top;
     }).exec();
+    this.videoContext = common_vendor.index.createVideoContext("playVideo", this);
   },
   onShareAppMessage(res) {
     return {
@@ -210,23 +239,28 @@ function _sfc_render(_ctx, _cache, $props, $setup, $data, $options) {
           detailUrls: _ctx.courseDetail.detailUrls
         })
       } : {}, _ctx.tabId == 2 ? {
-        c: common_vendor.o($setup.openVideo),
-        d: "05d1fded-3-" + i0,
-        e: common_vendor.p({
-          chapterList: _ctx.courseSection
+        c: common_vendor.sr("sectionRef", "05d1fded-3-" + i0, {
+          "f": 1
+        }),
+        d: common_vendor.o($setup.openVideo),
+        e: "05d1fded-3-" + i0,
+        f: common_vendor.p({
+          chapterList: _ctx.courseSection,
+          isBuy: _ctx.isBuy,
+          isFree: _ctx.courseDetail.isFree
         })
       } : {}, _ctx.tabId == 3 ? {
-        f: "05d1fded-4-" + i0,
-        g: common_vendor.p({
+        g: "05d1fded-4-" + i0,
+        h: common_vendor.p({
           commentList: _ctx.courseComment
         })
       } : {}, _ctx.tabId == 4 ? {
-        h: "05d1fded-5-" + i0,
-        i: common_vendor.p({
+        i: "05d1fded-5-" + i0,
+        j: common_vendor.p({
           groupList: _ctx.coursePackage
         })
       } : {}, {
-        j: item.id
+        k: item.id
       });
     }),
     f: _ctx.tabId == 1,

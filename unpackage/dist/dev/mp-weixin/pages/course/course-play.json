@@ -1,0 +1,9 @@
+{
+  "navigationBarTitleText": "视频播放",
+  "backgroundColor": "#FFFFFF",
+  "usingComponents": {
+    "course-section": "./cpns/course-section",
+    "my-share": "../../components/my-share/my-share",
+    "comment": "../../components/comment/comment"
+  }
+}

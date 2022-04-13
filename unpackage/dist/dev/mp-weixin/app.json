@@ -7,7 +7,9 @@
         "pages/tab-my/my",
         "pages/public/public",
         "pages/search/search",
-        "pages/course/course-details"
+        "pages/course/course-details",
+        "pages/course/course-play",
+        "pages/order/confirm-buy"
     ],
     "window": {
         "navigationBarBackgroundColor": "#A2CD5A",

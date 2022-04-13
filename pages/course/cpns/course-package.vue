@@ -6,7 +6,7 @@
 			<view class="group-item" elevation="12px" v-for="(item, index) in groupList" :key="index">
 				<text class="title">{{item.title}}</text>
 				<course-item v-for="(info, i) in item.list" :key="i" :item="info"></course-item>
-				<view class="price-box space-between center">
+				<view class="price-box space-between center" v-if="showBuy">
 					<view class="price">
 						<text class="group-price">￥{{item.groupPrice}}</text>
 						<text class="total-price">￥{{item.totalPrice}}</text>
@@ -19,6 +19,7 @@
 </template>
 
 <script>
+import {getCurrentInstance,ref,reactive,toRefs,onMounted,nextTick} from "vue";
 import groupData from '@/mock/courseGroupData.js'
 export default {
 	props: {
@@ -26,11 +27,16 @@ export default {
 			type: Array,
 			// default: () => groupData
 			default: () => []
+		},
+		showBuy:{
+			type:Boolean,
+			default:true
 		}
 	},
 	setup(){
+		let {proxy} = getCurrentInstance()
 		let buyGroupHandler=(item)=>{
-			console.log(item)
+			proxy.navTo('/pages/order/confirm-buy?detail='+encodeURIComponent(JSON.stringify(item)))
 		}
 		return{
 			buyGroupHandler

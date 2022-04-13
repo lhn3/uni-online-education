@@ -76,8 +76,9 @@
 .share-body[data-v-448797c4] {
   z-index: 100;
   position: fixed;
-  left: 50%;
-  top: 50%;
+  left: 50;
+  width: 100%;
+  bottom: 0;
   margin: auto;
 }
 .share-body .share-scroll[data-v-448797c4] {

@@ -12,51 +12,38 @@
  */
 /* 颜色变量 */
 /*文本基本颜色*/
-.mask {
-  z-index: 99;
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background-color: rgba(0, 0, 0, 0.6);
-}
-.share-body {
+.course-comment {
   z-index: 100;
   position: fixed;
-  left: 50;
-  width: 100%;
-  bottom: 0;
-  margin: auto;
+  left: 0;
+  right: 0;
+  bottom: 50%;
+  width: 650rpx;
+  margin: 0 auto;
+  padding-top: 30rpx;
+  font-size: 30rpx;
+  background-color: #FFFFFF;
+  border-radius: 20rpx;
 }
-.share-body .share-scroll {
-  border-radius: 30rpx 30rpx 0 0;
-  background-color: #f7f7f7;
+.course-comment .desc {
+  color: #333333;
+  letter-spacing: 2px;
+  padding: 20rpx 0;
+}
+.course-comment .input-box {
+  border-top: 0.5px solid #efeff4;
   width: 100%;
-  height: 200rpx;
-  display: flex;
   white-space: nowrap;
-  padding-top: 45rpx;
 }
-.share-body .share-scroll .share-item {
-  display: inline-flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  width: 25%;
-}
-.share-body .share-scroll .share-item image {
-  width: 60rpx;
-  height: 60rpx;
-}
-.share-body .share-scroll .share-item view {
-  color: #959DA5;
-  font-size: 25rpx;
-  padding-top: 10rpx;
-}
-.share-body .share-cancel {
-  background-color: #fff;
-  text-align: center;
+.course-comment .textarea {
+  background-color: #F8F9FB;
+  border-radius: 0 0 0 20rpx;
+  height: 100rpx;
+  font-size: 30rpx;
+  padding: 10rpx;
   width: 100%;
-  padding: 25rpx 0;
+}
+.course-comment .btn {
+  padding: 0 15rpx;
+  color: #A2CD5A;
 }

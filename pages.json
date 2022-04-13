@@ -152,6 +152,15 @@
 				}
             }
         }
+        ,{
+            "path" : "pages/order/confirm-buy",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "",
+                "enablePullDownRefresh": false
+            }
+            
+        }
     ],
 	"globalStyle": {
 		"navigationBarBackgroundColor": "#A2CD5A",

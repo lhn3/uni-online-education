@@ -5,11 +5,16 @@ const _sfc_main = {
     groupList: {
       type: Array,
       default: () => []
+    },
+    showBuy: {
+      type: Boolean,
+      default: true
     }
   },
   setup() {
+    let { proxy } = common_vendor.getCurrentInstance();
     let buyGroupHandler = (item) => {
-      console.log(item);
+      proxy.navTo("/pages/order/confirm-buy?detail=" + encodeURIComponent(JSON.stringify(item)));
     };
     return {
       buyGroupHandler
@@ -35,7 +40,7 @@ function _sfc_render(_ctx, _cache, $props, $setup, $data, $options) {
     })
   } : {
     c: common_vendor.f($props.groupList, (item, index, i0) => {
-      return {
+      return common_vendor.e({
         a: common_vendor.t(item.title),
         b: common_vendor.f(item.list, (info, i, i1) => {
           return {
@@ -45,13 +50,16 @@ function _sfc_render(_ctx, _cache, $props, $setup, $data, $options) {
               item: info
             })
           };
-        }),
+        })
+      }, $props.showBuy ? {
         c: common_vendor.t(item.groupPrice),
         d: common_vendor.t(item.totalPrice),
-        e: common_vendor.o(($event) => $setup.buyGroupHandler(item)),
+        e: common_vendor.o(($event) => $setup.buyGroupHandler(item))
+      } : {}, {
         f: index
-      };
-    })
+      });
+    }),
+    d: $props.showBuy
   });
 }
 var Component = /* @__PURE__ */ common_vendor._export_sfc(_sfc_main, [["render", _sfc_render]]);

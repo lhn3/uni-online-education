@@ -26,10 +26,7 @@ const _sfc_main = {
       if (Object.keys(newValue).length > 0) {
         state.title = newValue.title;
         state.image = newValue.mainImage;
-        state.href = proxy.$env.HOST_H5 + proxy.$utils.routePath();
       }
-    });
-    common_vendor.onMounted(() => {
     });
     const showHandler = () => {
       isShow.value = false;

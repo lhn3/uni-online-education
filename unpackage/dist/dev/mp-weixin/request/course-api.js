@@ -62,7 +62,20 @@ const getCourseIsBuy = (id) => {
     url: "/course/course/is-buy/" + id
   });
 };
+const getBuyCourseSection = (id) => {
+  return request_request.request({
+    url: "/course/course/buy/list/" + id
+  });
+};
+const updateComment = (data) => {
+  return request_request.request({
+    url: "/course/comment",
+    method: "POST",
+    data
+  });
+};
 exports.getBanners = getBanners;
+exports.getBuyCourseSection = getBuyCourseSection;
 exports.getCategory = getCategory;
 exports.getCourseComment = getCourseComment;
 exports.getCourseDetail = getCourseDetail;
@@ -70,3 +83,4 @@ exports.getCourseIsBuy = getCourseIsBuy;
 exports.getCourseList = getCourseList;
 exports.getCoursePackage = getCoursePackage;
 exports.getCourseSection = getCourseSection;
+exports.updateComment = updateComment;

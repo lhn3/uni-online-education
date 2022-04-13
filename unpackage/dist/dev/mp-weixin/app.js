@@ -16,6 +16,8 @@ if (!Math) {
   "./pages/public/public.js";
   "./pages/search/search.js";
   "./pages/course/course-details.js";
+  "./pages/course/course-play.js";
+  "./pages/order/confirm-buy.js";
 }
 const _sfc_main = {
   onLaunch: function() {

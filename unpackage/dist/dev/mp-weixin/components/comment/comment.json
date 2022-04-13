@@ -1,0 +1,6 @@
+{
+  "component": true,
+  "usingComponents": {
+    "uni-rate": "../uni-rate/uni-rate"
+  }
+}

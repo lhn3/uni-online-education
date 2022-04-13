@@ -145,6 +145,7 @@ export default {
 				proxy.navTo('/pages/course/course-play?id='+state.id)
 			}else{
 				console.log('立即购买')
+				proxy.navTo('/pages/order/confirm-buy?detail='+encodeURIComponent(JSON.stringify(state.courseDetail)))
 			}
 		}
 		// 点击视频

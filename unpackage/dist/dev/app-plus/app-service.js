@@ -5783,11 +5783,11 @@ var __spreadProps = (a, b) => __defProps(a, __getOwnPropDescs(b));
           proxy.navTo("/pages/course/course-play?id=" + state.id);
         } else {
           formatAppLog("log", "at pages/course/course-details.vue:147", "\u7ACB\u5373\u8D2D\u4E70");
-          proxy.navTo("/pages/order/confirm-buy?detail=" + encodeURIComponent(JSON.stringify(state.courseDetail)));
+          proxy.navTo("/pages/order/confirm-buy?detail=" + JSON.stringify(state.courseDetail));
         }
       };
       let openVideo = async (itemInfo) => {
-        formatAppLog("log", "at pages/course/course-details.vue:154", itemInfo);
+        formatAppLog("log", "at pages/course/course-details.vue:155", itemInfo);
         if ((itemInfo.section.isFree || state.courseDetail.isFree) && !state.isBuy) {
           uni.request({
             url: itemInfo.section.videoUrl,
@@ -6496,7 +6496,7 @@ var __spreadProps = (a, b) => __defProps(a, __getOwnPropDescs(b));
       };
     },
     async onLoad(option) {
-      this.detail = JSON.parse(decodeURIComponent(option.detail.replace(/%/g, "%25")));
+      this.detail = JSON.parse(option.detail);
       this.balance = await getBalance();
     }
   };
@@ -6615,18 +6615,96 @@ var __spreadProps = (a, b) => __defProps(a, __getOwnPropDescs(b));
   var PagesOrderConfirmBuy = /* @__PURE__ */ _export_sfc(_sfc_main$2, [["render", _sfc_render$1]]);
   const _sfc_main$1 = {
     setup() {
+      let { proxy } = vue.getCurrentInstance();
       let params = vue.ref({});
+      let balance = vue.ref(0);
+      let loading = vue.ref(false);
+      let activeIndex = vue.ref(0);
+      let selectBalance = vue.ref(0);
+      let moneyList = vue.ref([30, 50, 100, 200, 500]);
+      const clickItem = (index, item) => {
+        activeIndex.value = index;
+        selectBalance.value = item;
+      };
+      const iosPayHandler = () => {
+        loading.value = true;
+        uni.showLoading({
+          title: "\u5145\u503C\u4E2D...",
+          mask: true
+        });
+        setTimeout(() => {
+          proxy.$message.toast("\u5145\u503C\u6210\u529F", "success");
+          formatAppLog("log", "at pages/order/my-balance.vue:67", selectBalance.value);
+          loading.value = false;
+          uni.hideLoading();
+        }, 3e3);
+      };
       return {
-        params
+        params,
+        balance,
+        loading,
+        activeIndex,
+        selectBalance,
+        moneyList,
+        clickItem,
+        iosPayHandler
       };
     },
-    onLoad(option) {
+    async onLoad(option) {
       this.params = JSON.parse(option.params);
-      formatAppLog("log", "at pages/order/my-balance.vue:20", this.params);
+      this.init();
+    },
+    methods: {
+      async init() {
+        this.balance = await getBalance();
+        this.selectBalance = this.params.price - this.balance;
+        this.moneyList.unshift(this.selectBalance);
+      }
     }
   };
   function _sfc_render(_ctx, _cache, $props, $setup, $data, $options) {
-    return vue.openBlock(), vue.createElementBlock("view", null, " \u5145\u503C\u9875\u9762 ");
+    return vue.openBlock(), vue.createElementBlock("view", null, [
+      vue.createElementVNode("view", { class: "money column center" }, [
+        vue.createElementVNode("text", null, "\u4F59\u989D\uFF1A"),
+        vue.createElementVNode("text", null, vue.toDisplayString(parseFloat($setup.balance).toFixed(2)) + "\u5E01", 1)
+      ]),
+      vue.createElementVNode("view", { class: "recharge" }, [
+        vue.createElementVNode("view", null, "\u5145\u503C\uFF1A"),
+        vue.createElementVNode("view", { class: "list" }, [
+          (vue.openBlock(true), vue.createElementBlock(vue.Fragment, null, vue.renderList($setup.moneyList, (item, index) => {
+            return vue.openBlock(), vue.createElementBlock("view", {
+              class: vue.normalizeClass({ active: index === $setup.activeIndex }),
+              key: index,
+              onClick: ($event) => $setup.clickItem(index, item)
+            }, [
+              vue.createElementVNode("view", null, vue.toDisplayString(parseFloat(item).toFixed(2)) + "\u5E01", 1),
+              vue.createElementVNode("view", null, "\uFFE5" + vue.toDisplayString(parseFloat(item).toFixed(2)), 1)
+            ], 10, ["onClick"]);
+          }), 128))
+        ])
+      ]),
+      vue.createElementVNode("view", { class: "desc" }, [
+        vue.createElementVNode("view", null, "\u5145\u503C\u8BF4\u660E\uFF1A"),
+        vue.createElementVNode("view", null, [
+          vue.createTextVNode(" 1.\u5728IOS\u8BBE\u5907\u7684APP\u8981\u8FDB\u884C\u5145\u503C\u540E\uFF0C\u4F7F\u7528\u865A\u62DF\u5E01\u6D88\u8D39\u3002"),
+          vue.createElementVNode("br"),
+          vue.createTextVNode(" 2.\u5145\u503C\u540E\u4E0D\u80FD\u5728\u975EIOS\u8BBE\u5907\u4F7F\u7528\uFF0C\u4E0E\u5B89\u5353\u7248\u548C\u7F51\u7AD9\u4F59\u989D\u4E0D\u901A\u7528\u3002"),
+          vue.createElementVNode("br"),
+          vue.createTextVNode(" 3.\u5145\u503C\u540E\u6CA1\u6709\u4F7F\u7528\u671F\u9650\uFF0C\u4F46\u4E0D\u53EF\u63D0\u73B0\u3001\u9000\u6362\u3001\u8F6C\u8BA9\u548C\u7533\u8BF7\u53D1\u7968\u3002"),
+          vue.createElementVNode("br"),
+          vue.createTextVNode(" 4.\u5982\u9047\u65E0\u6CD5\u5145\u503C\u3001\u5145\u503C\u5931\u8D25\u7B49\u95EE\u9898\uFF0C\u53EF\u5173\u6CE8[\u68A6\u5B66\u8C37]\u516C\u4F17\u53F7\uFF0C\u8054\u7CFB\u6211\u4EEC\u89E3\u51B3\u3002"),
+          vue.createElementVNode("br")
+        ])
+      ]),
+      vue.createElementVNode("view", { class: "bottom center" }, [
+        vue.createElementVNode("button", {
+          class: "btn",
+          loading: $setup.loading,
+          disabled: $setup.loading,
+          onClick: _cache[0] || (_cache[0] = (...args) => $setup.iosPayHandler && $setup.iosPayHandler(...args))
+        }, "\u7ACB\u5373\u5145\u503C", 8, ["loading", "disabled"])
+      ])
+    ]);
   }
   var PagesOrderMyBalance = /* @__PURE__ */ _export_sfc(_sfc_main$1, [["render", _sfc_render]]);
   if (typeof Promise !== "undefined" && !Promise.prototype.finally) {

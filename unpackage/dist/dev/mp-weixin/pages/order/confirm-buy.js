@@ -87,7 +87,7 @@ const _sfc_main = {
     };
   },
   async onLoad(option) {
-    this.detail = JSON.parse(decodeURIComponent(option.detail));
+    this.detail = JSON.parse(option.detail);
     this.balance = await request_courseApi.getBalance();
   }
 };

@@ -1,0 +1,86 @@
+/**
+ * 这里是uni-app内置的常用样式变量
+ *
+ * uni-app 官方扩展插件及插件市场（https://ext.dcloud.net.cn）上很多三方插件均使用了这些样式变量
+ * 如果你是插件开发者，建议你使用scss预处理，并在插件代码中直接使用这些变量（无需 import 这个文件），方便用户通过搭积木的方式开发整体风格一致的App
+ *
+ */
+/**
+ * 如果你是App开发者（插件使用者），你可以通过修改这些变量来定制自己的插件主题，实现自定义主题功能
+ *
+ * 如果你的项目同样使用了scss预处理，你也可以直接在你的 scss 代码中使用如下变量，同时无需 import 这个文件
+ */
+/* 颜色变量 */
+/*文本基本颜色*/
+.money {
+  height: 9rem;
+  background-color: #A2CD5A;
+  color: #FFFFFF;
+  font-size: 2.75rem;
+}
+.money uni-text:first-child {
+  color: #e7e4e9;
+  font-size: 0.9375rem;
+}
+.recharge {
+  margin: 0.625rem 0 0 0.625rem;
+  font-size: 0.9375rem;
+  color: #999999;
+}
+.recharge .list {
+  margin-top: 0.625rem;
+  text-align: center;
+}
+.recharge .list > uni-view {
+  float: left;
+  width: 7.03125rem;
+  border: 1px solid #F8F9FB;
+  border-radius: 0.3125rem;
+  background-color: #FFFFFF;
+  margin-right: 0.3125rem;
+  margin-bottom: 0.46875rem;
+  padding: 0.625rem 0;
+  flex-wrap: wrap;
+}
+.recharge .list > uni-view uni-view:first-child {
+  color: #FA140E;
+  font-size: 1.125rem;
+}
+.active {
+  box-shadow: 0 0 0 0.5px #FA140E;
+}
+.desc {
+  clear: both;
+  margin: 0 0.625rem;
+  font-size: 0.9375rem;
+  line-height: 1.40625rem;
+  color: #6e6d70;
+}
+.desc uni-view:first-child {
+  font-weight: bold;
+  padding-top: 1.5625rem;
+  padding-bottom: 0.9375rem;
+}
+.desc uni-view:last-child {
+  padding-bottom: 3.75rem;
+}
+.bottom {
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 3.125rem;
+  background-color: #FFFFFF;
+  border-top: 0.5px solid #efeff4;
+}
+.bottom .btn {
+  width: 21.875rem;
+  background-color: #A2CD5A;
+  color: #FFFFFF;
+  border-radius: 1.5625rem;
+  line-height: 2.5rem;
+  font-size: 0.9375rem;
+}
+.bottom .btn::after {
+  border: none;
+}

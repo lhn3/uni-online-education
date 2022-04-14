@@ -110,7 +110,7 @@ const _sfc_main = {
         proxy.navTo("/pages/course/course-play?id=" + state.id);
       } else {
         console.log("\u7ACB\u5373\u8D2D\u4E70");
-        proxy.navTo("/pages/order/confirm-buy?detail=" + encodeURIComponent(JSON.stringify(state.courseDetail)));
+        proxy.navTo("/pages/order/confirm-buy?detail=" + JSON.stringify(state.courseDetail));
       }
     };
     let openVideo = async (itemInfo) => {

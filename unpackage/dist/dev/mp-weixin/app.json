@@ -1,58 +1,59 @@
 {
-  "pages": [
-    "pages/tab-index/index",
-    "pages/tab-category/category",
-    "pages/tab-article/article",
-    "pages/tab-question/question",
-    "pages/tab-my/my",
-    "pages/public/public",
-    "pages/search/search",
-    "pages/course/course-details",
-    "pages/course/course-play",
-    "pages/order/confirm-buy",
-    "pages/order/my-balance"
-  ],
-  "window": {
-    "navigationBarBackgroundColor": "#A2CD5A",
-    "navigationBarTextStyle": "white",
-    "backgroundColor": "#6E8B3D"
-  },
-  "tabBar": {
-    "color": "#8a8a8a",
-    "selectedColor": "#A2CD5A",
-    "backgroundColor": "#FFFFFF",
-    "list": [
-      {
-        "text": "首页",
-        "pagePath": "pages/tab-index/index",
-        "iconPath": "static/tab/index.png",
-        "selectedIconPath": "static/tab/index-active.png"
-      },
-      {
-        "text": "分类",
-        "pagePath": "pages/tab-category/category",
-        "iconPath": "static/tab/category.png",
-        "selectedIconPath": "static/tab/category-active.png"
-      },
-      {
-        "text": "阅读",
-        "pagePath": "pages/tab-article/article",
-        "iconPath": "static/tab/article.png",
-        "selectedIconPath": "static/tab/article-active.png"
-      },
-      {
-        "text": "问答",
-        "pagePath": "pages/tab-question/question",
-        "iconPath": "static/tab/question.png",
-        "selectedIconPath": "static/tab/question-active.png"
-      },
-      {
-        "text": "我的",
-        "pagePath": "pages/tab-my/my",
-        "iconPath": "static/tab/my.png",
-        "selectedIconPath": "static/tab/my-active.png"
-      }
-    ]
-  },
-  "usingComponents": {}
+    "pages": [
+        "pages/tab-index/index",
+        "pages/tab-category/category",
+        "pages/tab-article/article",
+        "pages/tab-question/question",
+        "pages/tab-my/my",
+        "pages/public/public",
+        "pages/search/search",
+        "pages/course/course-details",
+        "pages/course/course-play",
+        "pages/order/confirm-buy",
+        "pages/order/my-balance"
+    ],
+    "window": {
+        "navigationBarBackgroundColor": "#A2CD5A",
+        "navigationBarTextStyle": "white",
+        "backgroundColor": "#6E8B3D"
+    },
+    "tabBar": {
+        "color": "#8a8a8a",
+        "selectedColor": "#A2CD5A",
+        "backgroundColor": "#FFFFFF",
+        "list": [
+            {
+                "text": "首页",
+                "pagePath": "pages/tab-index/index",
+                "iconPath": "static/tab/index.png",
+                "selectedIconPath": "static/tab/index-active.png"
+            },
+            {
+                "text": "分类",
+                "pagePath": "pages/tab-category/category",
+                "iconPath": "static/tab/category.png",
+                "selectedIconPath": "static/tab/category-active.png"
+            },
+            {
+                "text": "阅读",
+                "pagePath": "pages/tab-article/article",
+                "iconPath": "static/tab/article.png",
+                "selectedIconPath": "static/tab/article-active.png"
+            },
+            {
+                "text": "问答",
+                "pagePath": "pages/tab-question/question",
+                "iconPath": "static/tab/question.png",
+                "selectedIconPath": "static/tab/question-active.png"
+            },
+            {
+                "text": "我的",
+                "pagePath": "pages/tab-my/my",
+                "iconPath": "static/tab/my.png",
+                "selectedIconPath": "static/tab/my-active.png"
+            }
+        ]
+    },
+    "usingComponents": {},
+    "sitemapLocation": "sitemap.json"
 }

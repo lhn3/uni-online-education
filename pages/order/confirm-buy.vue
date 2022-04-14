@@ -188,11 +188,13 @@ export default {
 	},
 	async onLoad(option) {
 		// #ifdef MP-WEIXIN
-		this.detail=JSON.parse(decodeURIComponent(option.detail))
+		// this.detail=JSON.parse(decodeURIComponent(option.detail))
+		this.detail=JSON.parse(option.detail)
 		// #endif
 		//APP端和H5端需要替换%
 		// #ifndef MP-WEIXIN
-		this.detail=JSON.parse(decodeURIComponent(option.detail.replace(/%/g,'%25')))
+		// this.detail=JSON.parse(decodeURIComponent(option.detail.replace(/%/g,'%25')))
+		this.detail=JSON.parse(option.detail)
 		// #endif
 		
 		//查询个人余额

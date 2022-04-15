@@ -9,35 +9,38 @@
 		</view>
 		<view class="option-pay card">
 			<view class="title">支付方式</view>
-			<!-- APP端的IOS设备上显示 -->
-			<view v-if="isIos" class="ios">
-				<text>余额：</text>
-				<text>{{balance}}币{{canPay?'':'(余额不足)'}}</text>
-			</view>
-			<!-- 非APP端的IOS设备上显示 -->
-			<radio-group v-else @change="radioChange">
-				<!-- 微信小程序只显示微信支付 -->
-				<!-- 支付宝小程序只显示支付宝支付 -->
-				
+			<radio-group @change="radioChange">
+				<!-- ISO端显示三种支付方式，h5显示两种支付方式，微信小程序显示一种支付方式 -->
+				 <!-- #ifdef APP-PLUS -->
+				 <label v-if="isIos" class="pay-item center space-between" >
+					<view class="ios">
+						<text>余额：</text>
+						<text>{{balance}}币{{canPay?'':'(余额不足)'}}</text>
+					</view>
+				 	<radio value="iospay" :checked="payStyle == 'iospay'" style="transform:scale(0.8)"/>
+				 </label>
+				 <!-- #endif -->
+				 
+				 <!-- #ifndef MP-ALIPAY -->
+				 <label class="pay-item center space-between" >
+				 	<view class="left center">
+				 		<image src="/static/pay/wxpay.png"></image>
+				 		<text>微信支付</text>
+				 	</view>
+				 	<radio value="wxpay" :checked="payStyle == 'wxpay'" style="transform:scale(0.8)"/>
+				 </label>
+				 <!-- #endif -->
+				 
 				 <!-- #ifndef MP-WEIXIN -->
 				 <label class="pay-item center space-between" >
 				 	<view class="left center">
 				 		<image src="/static/pay/alipay.png"></image>
 				 		<text>支付宝</text>
 				 	</view>
-				 	<radio value="alipay" style="transform:scale(0.8)"/>
+				 	<radio value="alipay" :checked="payStyle == 'alipay'" style="transform:scale(0.8)"/>
 				 </label>
 				 <!-- #endif -->
 				 
-				 <!-- #ifndef MP-ALIPAY -->
-				<label class="pay-item center space-between" >
-					<view class="left center">
-						<image src="/static/pay/wxpay.png"></image>
-						<text>微信支付</text>
-					</view>
-					<radio value="wxpay" style="transform:scale(0.8)"/>
-				</label>
-				<!-- #endif -->
 			</radio-group>
 		</view>
 		
@@ -62,14 +65,11 @@
 				<text>￥{{price}}</text>
 			</view>
 			<view>
-				<button v-if="isIos" class="btn" :loading="loading" :disabled="loading" @click="iosPayHandler">
+				<button v-if="payStyle == 'iospay'" class="btn" :loading="loading" :disabled="loading" @click="iosPayHandler">
 					{{canPay?'立即支付':'充值并支付'}}
 				</button>
-				<view v-else>
-					<button v-if="payStyle == 'wxpay'" class="btn" :loading="loading" :disabled="loading" @click="wxPayHandler">微信支付</button>
-					<button v-if="payStyle == 'alipay'" class="btn" :loading="loading" :disabled="loading" @click="payHandler">支付宝支付</button>
-					<button v-if="payStyle == null" class="btn" style="background-color: #eee;" :disabled="true">立即支付</button>
-				</view>
+				<button v-if="payStyle == 'wxpay' || payStyle == 'alipay'" class="btn" :loading="loading" :disabled="loading" @click="payHandler">立即支付</button>
+				<button v-if="payStyle == null" class="btn" style="background-color: #eee;" :disabled="true">立即支付</button>
 			</view>
 		</view>
 	</view>
@@ -77,7 +77,7 @@
 <script> 
 import {getCurrentInstance,ref,reactive,toRefs,onMounted,computed,watch} from "vue";
 import coursePackage from '@/pages/course/cpns/course-package.vue'
-import {getBalance,orderPay} from '@/request/course-api.js'
+import {getBalance,orderPay,getWXOrderInfo,getALOrderInfo} from '@/request/course-api.js'
 export default {
 	components:{
 		'course-package':coursePackage,
@@ -116,6 +116,12 @@ export default {
 				isIos.value = true
 			}
 			// #endif
+			//初始化默认支付方式
+			if(isIos.value){
+				payStyle.value = 'iospay'
+			}else{
+				payStyle.value = 'wxpay'
+			}
 		})
 		
 		//选择不同支付方式
@@ -164,12 +170,46 @@ export default {
 			}
 		} 
 		
-		const wxPayHandler = () => {
-			console.log('微信支付')
-		}
-		
-		const payHandler = () => {
-			console.log('支付宝支付')
+		// 微信/支付宝支付
+		const payHandler = async () => {
+			loading.value = true
+			//1获取支付信息
+			let res = null
+			if(payStyle.value == 'wxpay'){
+				res = await getWXOrderInfo(courseIds.value)
+			}else if(payStyle.value == 'alipay'){
+				res = await getALOrderInfo(courseIds.value)
+			}
+			//2发送支付请求
+			uni.requestPayment({
+				provider:payStyle.value,	//支付供应商
+				orderInfo:res,				//支付信息
+				success: (e) => {
+					uni.showModal({
+						content:'支付成功，立即学习', 
+						showCancel:true,
+						success: (e) => {
+							//确定就跳转到课程详情页
+							if(e.confirm){ 
+								uni.redirectTo({url:'/pages/course/course-details?id='+detail.value.id})
+							}else{
+								// 取消就跳转到订单页
+								console.log('订单页')
+								// uni.redirectTo({url:''})
+							}
+						}
+					})
+				},
+				fail: (err) => {
+					uni.showModal({
+						content:'支付失败',
+						showCancel:false
+					})
+				},
+				complete: () => {
+					loading.value = false
+				}
+			})
 		}
 		return{
 			detail,
@@ -182,7 +222,6 @@ export default {
 			
 			radioChange,
 			iosPayHandler,
-			wxPayHandler,
 			payHandler
 		}
 	},

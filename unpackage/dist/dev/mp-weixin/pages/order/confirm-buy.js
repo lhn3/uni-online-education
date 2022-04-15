@@ -67,10 +67,10 @@ const _sfc_main = {
       }
     };
     const wxPayHandler = () => {
-      console.log("\u5FAE\u4FE1\u652F\u4ED8");
+      console.log(`${payStyle.value}\u652F\u4ED8`);
     };
     const payHandler = () => {
-      console.log("\u652F\u4ED8\u5B9D\u652F\u4ED8");
+      console.log(`${payStyle.value}\u652F\u4ED8`);
     };
     return {
       detail,

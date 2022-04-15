@@ -64,7 +64,7 @@ export default {
 			})
 			setTimeout(()=>{
 				proxy.$message.toast('充值成功','success')
-				console.log(selectBalance.value)
+				balance.value += selectBalance.value
 				loading.value = false
 				uni.hideLoading()
 			},3000)

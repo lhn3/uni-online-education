@@ -92,6 +92,23 @@ const orderPay=(data)=>{
 	})
 }
 
+//微信支付获取订单信息
+const getWXOrderInfo=(data)=>{
+	return request({
+		url:'/pay/orferInfo/wxpay',
+		method:'POST',
+		data
+	})
+}
+//微信支付获取订单信息
+const getALOrderInfo=(data)=>{
+	return request({
+		url:'/pay/orderInfo/alipy',
+		method:'POST',
+		data
+	})
+}
+
 export {
 	getBanners,
 	getCategory,
@@ -104,5 +121,7 @@ export {
 	getBuyCourseSection,
 	updateComment,
 	getBalance,
-	orderPay
+	orderPay,
+	getWXOrderInfo,
+	getALOrderInfo
 }

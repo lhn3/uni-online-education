@@ -17,6 +17,7 @@
     "url": ""
   },
   "permissions": {
+    "Payment": {},
     "UniNView": {
       "description": "UniNView原生渲染"
     }
@@ -67,6 +68,23 @@
       },
       "apple": {},
       "plugins": {
+        "payment": {
+          "alipay": {
+            "__platform__": [
+              "ios",
+              "android"
+            ]
+          },
+          "weixin": {
+            "__platform__": [
+              "ios",
+              "android"
+            ],
+            "appid": "wx69bef75a88236b3b",
+            "UniversalLinks": ""
+          },
+          "appleiap": {}
+        },
         "audio": {
           "mp3": {
             "description": "Android平台录音支持MP3格式文件"

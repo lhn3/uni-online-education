@@ -2007,6 +2007,20 @@ var __spreadProps = (a, b) => __defProps(a, __getOwnPropDescs(b));
       data
     });
   };
+  const getWXOrderInfo = (data) => {
+    return request({
+      url: "/pay/orferInfo/wxpay",
+      method: "POST",
+      data
+    });
+  };
+  const getALOrderInfo = (data) => {
+    return request({
+      url: "/pay/orderInfo/alipy",
+      method: "POST",
+      data
+    });
+  };
   const MescrollMixin = {
     data() {
       return {
@@ -6438,12 +6452,17 @@ var __spreadProps = (a, b) => __defProps(a, __getOwnPropDescs(b));
         if (sys == "ios") {
           isIos.value = true;
         }
+        if (isIos.value) {
+          payStyle.value = "iospay";
+        } else {
+          payStyle.value = "wxpay";
+        }
       });
       let radioChange = (e) => {
         payStyle.value = e.detail.value;
       };
       const iosPayHandler = async () => {
-        formatAppLog("log", "at pages/order/confirm-buy.vue:128", "\u82F9\u679C\u652F\u4ED8");
+        formatAppLog("log", "at pages/order/confirm-buy.vue:134", "\u82F9\u679C\u652F\u4ED8");
         let data = { price: price.value, courseIds: courseIds.value };
         if (canPay.value) {
           loading.value = true;
@@ -6463,7 +6482,7 @@ var __spreadProps = (a, b) => __defProps(a, __getOwnPropDescs(b));
                   if (e.confirm) {
                     uni.redirectTo({ url: "/pages/course/course-details?id=" + detail.value.id });
                   } else {
-                    formatAppLog("log", "at pages/order/confirm-buy.vue:152", "\u8BA2\u5355\u9875");
+                    formatAppLog("log", "at pages/order/confirm-buy.vue:158", "\u8BA2\u5355\u9875");
                   }
                 }
               });
@@ -6475,11 +6494,40 @@ var __spreadProps = (a, b) => __defProps(a, __getOwnPropDescs(b));
           proxy.navTo(`/pages/order/my-balance?params=${JSON.stringify(data)}`);
         }
       };
-      const wxPayHandler = () => {
-        formatAppLog("log", "at pages/order/confirm-buy.vue:168", "\u5FAE\u4FE1\u652F\u4ED8");
-      };
-      const payHandler = () => {
-        formatAppLog("log", "at pages/order/confirm-buy.vue:172", "\u652F\u4ED8\u5B9D\u652F\u4ED8");
+      const payHandler = async () => {
+        loading.value = true;
+        let res = null;
+        if (payStyle.value == "wxpay") {
+          res = await getWXOrderInfo(courseIds.value);
+        } else if (payStyle.value == "alipay") {
+          res = await getALOrderInfo(courseIds.value);
+        }
+        uni.requestPayment({
+          provider: payStyle.value,
+          orderInfo: res,
+          success: (e) => {
+            uni.showModal({
+              content: "\u652F\u4ED8\u6210\u529F\uFF0C\u7ACB\u5373\u5B66\u4E60",
+              showCancel: true,
+              success: (e2) => {
+                if (e2.confirm) {
+                  uni.redirectTo({ url: "/pages/course/course-details?id=" + detail.value.id });
+                } else {
+                  formatAppLog("log", "at pages/order/confirm-buy.vue:197", "\u8BA2\u5355\u9875");
+                }
+              }
+            });
+          },
+          fail: (err) => {
+            uni.showModal({
+              content: "\u652F\u4ED8\u5931\u8D25",
+              showCancel: false
+            });
+          },
+          complete: () => {
+            loading.value = false;
+          }
+        });
       };
       return {
         detail,
@@ -6491,7 +6539,6 @@ var __spreadProps = (a, b) => __defProps(a, __getOwnPropDescs(b));
         canPay,
         radioChange,
         iosPayHandler,
-        wxPayHandler,
         payHandler
       };
     },
@@ -6520,42 +6567,47 @@ var __spreadProps = (a, b) => __defProps(a, __getOwnPropDescs(b));
       ]),
       vue.createElementVNode("view", { class: "option-pay card" }, [
         vue.createElementVNode("view", { class: "title" }, "\u652F\u4ED8\u65B9\u5F0F"),
-        vue.createCommentVNode(" APP\u7AEF\u7684IOS\u8BBE\u5907\u4E0A\u663E\u793A "),
-        $setup.isIos ? (vue.openBlock(), vue.createElementBlock("view", {
-          key: 0,
-          class: "ios"
+        vue.createElementVNode("radio-group", {
+          onChange: _cache[0] || (_cache[0] = (...args) => $setup.radioChange && $setup.radioChange(...args))
         }, [
-          vue.createElementVNode("text", null, "\u4F59\u989D\uFF1A"),
-          vue.createElementVNode("text", null, vue.toDisplayString($setup.balance) + "\u5E01" + vue.toDisplayString($setup.canPay ? "" : "(\u4F59\u989D\u4E0D\u8DB3)"), 1)
-        ])) : (vue.openBlock(), vue.createElementBlock(vue.Fragment, { key: 1 }, [
-          vue.createCommentVNode(" \u975EAPP\u7AEF\u7684IOS\u8BBE\u5907\u4E0A\u663E\u793A "),
-          vue.createElementVNode("radio-group", {
-            onChange: _cache[0] || (_cache[0] = (...args) => $setup.radioChange && $setup.radioChange(...args))
+          vue.createCommentVNode(" ISO\u7AEF\u663E\u793A\u4E09\u79CD\u652F\u4ED8\u65B9\u5F0F\uFF0Ch5\u663E\u793A\u4E24\u79CD\u652F\u4ED8\u65B9\u5F0F\uFF0C\u5FAE\u4FE1\u5C0F\u7A0B\u5E8F\u663E\u793A\u4E00\u79CD\u652F\u4ED8\u65B9\u5F0F "),
+          $setup.isIos ? (vue.openBlock(), vue.createElementBlock("label", {
+            key: 0,
+            class: "pay-item center space-between"
           }, [
-            vue.createCommentVNode(" \u5FAE\u4FE1\u5C0F\u7A0B\u5E8F\u53EA\u663E\u793A\u5FAE\u4FE1\u652F\u4ED8 "),
-            vue.createCommentVNode(" \u652F\u4ED8\u5B9D\u5C0F\u7A0B\u5E8F\u53EA\u663E\u793A\u652F\u4ED8\u5B9D\u652F\u4ED8 "),
-            vue.createElementVNode("label", { class: "pay-item center space-between" }, [
-              vue.createElementVNode("view", { class: "left center" }, [
-                vue.createElementVNode("image", { src: "/static/pay/alipay.png" }),
-                vue.createElementVNode("text", null, "\u652F\u4ED8\u5B9D")
-              ]),
-              vue.createElementVNode("radio", {
-                value: "alipay",
-                style: { "transform": "scale(0.8)" }
-              })
+            vue.createElementVNode("view", { class: "ios" }, [
+              vue.createElementVNode("text", null, "\u4F59\u989D\uFF1A"),
+              vue.createElementVNode("text", null, vue.toDisplayString($setup.balance) + "\u5E01" + vue.toDisplayString($setup.canPay ? "" : "(\u4F59\u989D\u4E0D\u8DB3)"), 1)
             ]),
-            vue.createElementVNode("label", { class: "pay-item center space-between" }, [
-              vue.createElementVNode("view", { class: "left center" }, [
-                vue.createElementVNode("image", { src: "/static/pay/wxpay.png" }),
-                vue.createElementVNode("text", null, "\u5FAE\u4FE1\u652F\u4ED8")
-              ]),
-              vue.createElementVNode("radio", {
-                value: "wxpay",
-                style: { "transform": "scale(0.8)" }
-              })
-            ])
-          ], 32)
-        ], 2112))
+            vue.createElementVNode("radio", {
+              value: "iospay",
+              checked: $setup.payStyle == "iospay",
+              style: { "transform": "scale(0.8)" }
+            }, null, 8, ["checked"])
+          ])) : vue.createCommentVNode("v-if", true),
+          vue.createElementVNode("label", { class: "pay-item center space-between" }, [
+            vue.createElementVNode("view", { class: "left center" }, [
+              vue.createElementVNode("image", { src: "/static/pay/wxpay.png" }),
+              vue.createElementVNode("text", null, "\u5FAE\u4FE1\u652F\u4ED8")
+            ]),
+            vue.createElementVNode("radio", {
+              value: "wxpay",
+              checked: $setup.payStyle == "wxpay",
+              style: { "transform": "scale(0.8)" }
+            }, null, 8, ["checked"])
+          ]),
+          vue.createElementVNode("label", { class: "pay-item center space-between" }, [
+            vue.createElementVNode("view", { class: "left center" }, [
+              vue.createElementVNode("image", { src: "/static/pay/alipay.png" }),
+              vue.createElementVNode("text", null, "\u652F\u4ED8\u5B9D")
+            ]),
+            vue.createElementVNode("radio", {
+              value: "alipay",
+              checked: $setup.payStyle == "alipay",
+              style: { "transform": "scale(0.8)" }
+            }, null, 8, ["checked"])
+          ])
+        ], 32)
       ]),
       vue.createElementVNode("view", { class: "card price" }, [
         vue.createElementVNode("view", { class: "space-between" }, [
@@ -6580,34 +6632,26 @@ var __spreadProps = (a, b) => __defProps(a, __getOwnPropDescs(b));
           vue.createElementVNode("text", null, "\uFFE5" + vue.toDisplayString($setup.price), 1)
         ]),
         vue.createElementVNode("view", null, [
-          $setup.isIos ? (vue.openBlock(), vue.createElementBlock("button", {
+          $setup.payStyle == "iospay" ? (vue.openBlock(), vue.createElementBlock("button", {
             key: 0,
             class: "btn",
             loading: $setup.loading,
             disabled: $setup.loading,
             onClick: _cache[1] || (_cache[1] = (...args) => $setup.iosPayHandler && $setup.iosPayHandler(...args))
-          }, vue.toDisplayString($setup.canPay ? "\u7ACB\u5373\u652F\u4ED8" : "\u5145\u503C\u5E76\u652F\u4ED8"), 9, ["loading", "disabled"])) : (vue.openBlock(), vue.createElementBlock("view", { key: 1 }, [
-            $setup.payStyle == "wxpay" ? (vue.openBlock(), vue.createElementBlock("button", {
-              key: 0,
-              class: "btn",
-              loading: $setup.loading,
-              disabled: $setup.loading,
-              onClick: _cache[2] || (_cache[2] = (...args) => $setup.wxPayHandler && $setup.wxPayHandler(...args))
-            }, "\u5FAE\u4FE1\u652F\u4ED8", 8, ["loading", "disabled"])) : vue.createCommentVNode("v-if", true),
-            $setup.payStyle == "alipay" ? (vue.openBlock(), vue.createElementBlock("button", {
-              key: 1,
-              class: "btn",
-              loading: $setup.loading,
-              disabled: $setup.loading,
-              onClick: _cache[3] || (_cache[3] = (...args) => $setup.payHandler && $setup.payHandler(...args))
-            }, "\u652F\u4ED8\u5B9D\u652F\u4ED8", 8, ["loading", "disabled"])) : vue.createCommentVNode("v-if", true),
-            $setup.payStyle == null ? (vue.openBlock(), vue.createElementBlock("button", {
-              key: 2,
-              class: "btn",
-              style: { "background-color": "#eee" },
-              disabled: true
-            }, "\u7ACB\u5373\u652F\u4ED8")) : vue.createCommentVNode("v-if", true)
-          ]))
+          }, vue.toDisplayString($setup.canPay ? "\u7ACB\u5373\u652F\u4ED8" : "\u5145\u503C\u5E76\u652F\u4ED8"), 9, ["loading", "disabled"])) : vue.createCommentVNode("v-if", true),
+          $setup.payStyle == "wxpay" || $setup.payStyle == "alipay" ? (vue.openBlock(), vue.createElementBlock("button", {
+            key: 1,
+            class: "btn",
+            loading: $setup.loading,
+            disabled: $setup.loading,
+            onClick: _cache[2] || (_cache[2] = (...args) => $setup.payHandler && $setup.payHandler(...args))
+          }, "\u7ACB\u5373\u652F\u4ED8", 8, ["loading", "disabled"])) : vue.createCommentVNode("v-if", true),
+          $setup.payStyle == null ? (vue.openBlock(), vue.createElementBlock("button", {
+            key: 2,
+            class: "btn",
+            style: { "background-color": "#eee" },
+            disabled: true
+          }, "\u7ACB\u5373\u652F\u4ED8")) : vue.createCommentVNode("v-if", true)
         ])
       ])
     ]);
@@ -6634,7 +6678,7 @@ var __spreadProps = (a, b) => __defProps(a, __getOwnPropDescs(b));
         });
         setTimeout(() => {
           proxy.$message.toast("\u5145\u503C\u6210\u529F", "success");
-          formatAppLog("log", "at pages/order/my-balance.vue:67", selectBalance.value);
+          balance.value += selectBalance.value;
           loading.value = false;
           uni.hideLoading();
         }, 3e3);

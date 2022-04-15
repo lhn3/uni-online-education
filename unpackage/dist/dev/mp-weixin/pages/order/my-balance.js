@@ -24,7 +24,7 @@ const _sfc_main = {
       });
       setTimeout(() => {
         proxy.$message.toast("\u5145\u503C\u6210\u529F", "success");
-        console.log(selectBalance.value);
+        balance.value += selectBalance.value;
         loading.value = false;
         common_vendor.index.hideLoading();
       }, 3e3);

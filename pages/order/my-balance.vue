@@ -39,15 +39,18 @@
 <script>
 import {getCurrentInstance,ref,reactive,toRefs,onMounted,computed,watch} from "vue";
 import {getBalance,orderPay} from '@/request/course-api.js'
+let productId = 'HelloUniappPayment1';
+let productIds = ['HelloUniappPayment1', 'HelloUniappPayment6'];
 export default {
 	setup(){
 		let {proxy} = getCurrentInstance()
 		let params = ref({})
 		let balance = ref(0)		//我的余额
-		let loading = ref(false)
+		let loading = ref(true)
 		let activeIndex = ref(0)
 		let selectBalance = ref(0) 
 		let moneyList = ref([30,50,100,200,500])	//可充值的金额列表
+		let iapChannel = ref(null)
 		
 		// 点击每一个充值金额
 		const clickItem=(index,item)=>{
@@ -67,8 +70,32 @@ export default {
 				balance.value += selectBalance.value
 				loading.value = false
 				uni.hideLoading()
-			},3000)
+			},2000)
 			
+			// 开始支付
+			//loading.value = true
+			// uni.requestPayment({
+			// 	provider: 'appleiap',
+			// 	orderInfo: {
+			// 		productid: productId
+			// 	},
+			// 	success: (e) => {
+			// 		uni.showModal({
+			// 			content: "感谢您的赞助",
+			// 			showCancel: false
+			// 		})
+			// 	},
+			// 	fail: (e) => {
+			// 		uni.showModal({
+			// 			content: "支付失败,原因为: " + e.errMsg,
+			// 			showCancel: false
+			// 		})
+			// 	},
+			// 	complete: () => {
+			// 		console.log("payment结束")
+			// 		loading.value = false;
+			// 	}
+			// })
 		}
 		return{
 			params,
@@ -77,6 +104,7 @@ export default {
 			activeIndex,
 			selectBalance,
 			moneyList,
+			iapChannel,
 			
 			clickItem,
 			iosPayHandler
@@ -87,8 +115,29 @@ export default {
 		// 获取传递的参数
 		this.params = JSON.parse(option.params)
 		
-		//
+		//初始化数据
 		this.init()
+		
+		//检测支付环境
+		plus.payment.getChannels((channels) => {
+			console.log("获取到channel" + JSON.stringify(channels))
+			//[{"id":"alipay","description":"支付宝","serviceReady":true},
+			//{"id":"wxpay","description":"微信","serviceReady":true},
+			//{"id":"appleiap","description":"苹果","serviceReady":true}]
+			channels.push({"id":"appleiap","description":"苹果","serviceReady":true})//手动添加一个
+			for (let i in channels) {
+				let channel = channels[i];
+				if (channel.id === 'appleiap') {
+					this.iapChannel = channel;
+					this.requestOrder();
+					}
+				}
+			if(!this.iapChannel){
+				this.errorMsg()
+			}
+		}, (error) => {
+			this.errorMsg()
+		});
 	},
 	methods:{
 		async init(){
@@ -97,7 +146,32 @@ export default {
 			//计算需要充值的金额
 			this.selectBalance = this.params.price - this.balance
 			this.moneyList.unshift(this.selectBalance)
+		},
+		requestOrder() {
+			uni.showLoading({
+				title:'检测支付环境...'
+			})
+			// this.iapChannel.requestOrder(productIds, (orderList) => { //必须调用此方法才能进行 iap 支付
+			// 	this.loading = false;
+			// 	console.log('requestOrder success666: ' + JSON.stringify(orderList));
+			// 	uni.hideLoading();
+			// }, (e) => {
+			// 	console.log('requestOrder failed: ' + JSON.stringify(e));
+			// 	uni.hideLoading();
+			// 	this.errorMsg()
+			// });
+			setTimeout(()=>{
+				this.loading = false;
+				uni.hideLoading();
+			},2000)
+		},
+		errorMsg(){
+			uni.showModal({
+				content: "暂不支持苹果 iap 支付",
+				showCancel: false
+			})
 		}
+		
 	}
 }
 </script>

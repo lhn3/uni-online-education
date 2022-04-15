@@ -6662,10 +6662,11 @@ var __spreadProps = (a, b) => __defProps(a, __getOwnPropDescs(b));
       let { proxy } = vue.getCurrentInstance();
       let params = vue.ref({});
       let balance = vue.ref(0);
-      let loading = vue.ref(false);
+      let loading = vue.ref(true);
       let activeIndex = vue.ref(0);
       let selectBalance = vue.ref(0);
       let moneyList = vue.ref([30, 50, 100, 200, 500]);
+      let iapChannel = vue.ref(null);
       const clickItem = (index, item) => {
         activeIndex.value = index;
         selectBalance.value = item;
@@ -6681,7 +6682,7 @@ var __spreadProps = (a, b) => __defProps(a, __getOwnPropDescs(b));
           balance.value += selectBalance.value;
           loading.value = false;
           uni.hideLoading();
-        }, 3e3);
+        }, 2e3);
       };
       return {
         params,
@@ -6690,6 +6691,7 @@ var __spreadProps = (a, b) => __defProps(a, __getOwnPropDescs(b));
         activeIndex,
         selectBalance,
         moneyList,
+        iapChannel,
         clickItem,
         iosPayHandler
       };
@@ -6697,12 +6699,43 @@ var __spreadProps = (a, b) => __defProps(a, __getOwnPropDescs(b));
     async onLoad(option) {
       this.params = JSON.parse(option.params);
       this.init();
+      plus.payment.getChannels((channels) => {
+        formatAppLog("log", "at pages/order/my-balance.vue:123", "\u83B7\u53D6\u5230channel" + JSON.stringify(channels));
+        channels.push({ "id": "appleiap", "description": "\u82F9\u679C", "serviceReady": true });
+        for (let i in channels) {
+          let channel = channels[i];
+          if (channel.id === "appleiap") {
+            this.iapChannel = channel;
+            this.requestOrder();
+          }
+        }
+        if (!this.iapChannel) {
+          this.errorMsg();
+        }
+      }, (error) => {
+        this.errorMsg();
+      });
     },
     methods: {
       async init() {
         this.balance = await getBalance();
         this.selectBalance = this.params.price - this.balance;
         this.moneyList.unshift(this.selectBalance);
+      },
+      requestOrder() {
+        uni.showLoading({
+          title: "\u68C0\u6D4B\u652F\u4ED8\u73AF\u5883..."
+        });
+        setTimeout(() => {
+          this.loading = false;
+          uni.hideLoading();
+        }, 2e3);
+      },
+      errorMsg() {
+        uni.showModal({
+          content: "\u6682\u4E0D\u652F\u6301\u82F9\u679C iap \u652F\u4ED8",
+          showCancel: false
+        });
       }
     }
   };

@@ -1,9 +1,9 @@
 <template>
 	<view class="tab-bar" @touchmove.stop.prevent="()=>{}">
-		<scroll-view class="noScorll bar-view" scroll-x scroll-with-animation>
-			<view class="bar-item" :style="{width: `${itemWidth}px`}" :class="{current: item.id == tabId}"
-				v-for="item in tabs" :key="item.id"
-				@click="changeTabs(item.id)"
+		<scroll-view class="noScorll bar-view" scroll-x scroll-with-animation :scroll-left="move">
+			<view class="bar-item" :style="{width: `${realItemWidth}px`}" :class="{current: item.id == tabId}"
+				v-for="(item,index) in tabs" :key="item.id"
+				@click="changeTabs(item.id,index)"
 				>
 				{{item.name}}
 			</view>
@@ -12,9 +12,10 @@
 </template>
 
 <script>
-import {getCurrentInstance,ref,reactive,toRefs,watch,onMounted} from "vue";
+import {getCurrentInstance,ref,reactive,toRefs,watch,onMounted,nextTick} from "vue";
 export default {
 	props:{
+		//[{id:1,name:'默认标签'}]
 		tabs:{
 			type:Array,
 			default:()=>[]
@@ -24,15 +25,33 @@ export default {
 			default:100
 		}
 	},
-	emits:['changeTab'],
 	setup(props,{emit}){
-		let tabId=ref()
+		let tabId = ref()
+		let realItemWidth = ref(100)
+		let move = ref(0)
 		
-		onMounted(()=>{
-			tabId.value=props.tabs[0].id
+		watch(() => props.tabs, (newValue)=>{
+			if(newValue.length == 0) return;
+			tabId.value=newValue[0].id
+			if(newValue.length <= 5){	//如果tabs小于5个就平均分配
+				realItemWidth.value = uni.upx2px(750/newValue.length)
+			}else{
+				realItemWidth.value = props.itemWidth
+			}
+		},{
+			deep:true,
+			immediate:true
 		})
 		
-		let changeTabs=(id)=>{
+		
+		let changeTabs=(id,index)=>{
+			if(tabId.value == id) return;
+			if(index > 2){
+				move.value = (index-2) * props.itemWidth
+			}else{
+				move.value = 0
+			}
+			
 			if(tabId.value != id){
 				tabId.value=id
 				emit('changeTab',id)	
@@ -40,6 +59,9 @@ export default {
 		}
 		return{
 			tabId,
+			realItemWidth,
+			move,
+			
 			changeTabs
 		}
 	}
@@ -60,8 +82,6 @@ export default {
 		.bar-item {
 			/* flex: 1; */
 			display: inline-block;
-			width: 150rpx;
-			
 			font-size: 30rpx;
 			line-height: 80rpx;
 			position: relative;

@@ -63,6 +63,7 @@ export default {
 				webView.setStyle({"titleNView":{"searchInput":{"placeholder":arr[i++]}}})
 			},3000)
 		}
+		resetSearchInfo()
 		// 监听nav按钮点击
 		onNavigationBarButtonTap((event)=>{
 			if(event.index === 0){//扫一扫
@@ -149,9 +150,6 @@ export default {
 			proxy.navTo("/pages/search/search")
 		}
 		return{
-			// #ifdef APP-PLUS
-			resetSearchInfo,
-			// #endif
 			courseData,
 			getPageInfo,
 			...toRefs(state),
@@ -161,13 +159,6 @@ export default {
 			upOption,
 			toSearch
 		}
-	},
-	onLoad(){
-		// #ifdef APP-PLUS
-		this.resetSearchInfo()
-		// #endif
-		// 获取页面数据
-		// this.getPageInfo()
 	}
 }
 </script>

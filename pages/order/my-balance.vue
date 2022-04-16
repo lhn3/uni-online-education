@@ -38,7 +38,7 @@
 
 <script>
 import {getCurrentInstance,ref,reactive,toRefs,onMounted,computed,watch} from "vue";
-import {getBalance,orderPay} from '@/request/course-api.js'
+import {getBalance,orderPay} from '@/request/order-api.js'
 let productId = 'HelloUniappPayment1';
 let productIds = ['HelloUniappPayment1', 'HelloUniappPayment6'];
 export default {

@@ -77,7 +77,7 @@
 <script> 
 import {getCurrentInstance,ref,reactive,toRefs,onMounted,computed,watch} from "vue";
 import coursePackage from '@/pages/course/cpns/course-package.vue'
-import {getBalance,orderPay,getWXOrderInfo,getALOrderInfo} from '@/request/course-api.js'
+import {getBalance,orderPay,getWXOrderInfo,getALOrderInfo} from '@/request/order-api.js'
 export default {
 	components:{
 		'course-package':coursePackage,
@@ -124,6 +124,37 @@ export default {
 			}
 		})
 		
+		//虚拟支付成功定时事件
+		const XuNiPay= async (data)=>{
+			loading.value=true
+			uni.showLoading({
+				title:"支付中...",
+				mask:true
+			})
+			let res = await orderPay(data)
+			setTimeout(()=>{
+				uni.hideLoading() 
+				loading.value=false
+				if(res.code == 200){
+					uni.showModal({
+						content:'支付成功，立即学习', 
+						showCancel:true,
+						success: (e) => {
+							//确定就跳转到课程详情页
+							if(e.confirm){ 
+								uni.redirectTo({url:'/pages/course/course-details?id='+detail.value.id})
+							}else{
+								// 取消就跳转到订单页
+								uni.redirectTo({url:'/pages/order/order-list'})
+							}
+						}
+					})
+				}else{
+					proxy.$message.toast('支付失败','error')
+				}
+			},2000)
+		}
+		
 		//选择不同支付方式
 		let radioChange = (e) => {
 			payStyle.value=e.detail.value
@@ -135,35 +166,8 @@ export default {
 			//传递后端数据
 			let data = {price:price.value,courseIds:courseIds.value}
 			if(canPay.value){
-				//直接支付
-				loading.value=true
-				uni.showLoading({
-					title:"支付中...",
-					mask:true
-				})
-				let res = await orderPay(data)
-				setTimeout(()=>{
-					uni.hideLoading() 
-					loading.value=false
-					if(res.code == 200){
-						uni.showModal({
-							content:'支付成功，立即学习', 
-							showCancel:true,
-							success: (e) => {
-								//确定就跳转到课程详情页
-								if(e.confirm){ 
-									uni.redirectTo({url:'/pages/course/course-details?id='+detail.value.id})
-								}else{
-									// 取消就跳转到订单页
-									console.log('订单页')
-									// uni.redirectTo({url:''})
-								}
-							}
-						})
-					}else{
-						proxy.$message.toast('支付失败','error')
-					}
-				},2000)
+				//余额充足直接支付
+				XuNiPay(data)
 			}else{
 				//前往充值
 				proxy.navTo(`/pages/order/my-balance?params=${JSON.stringify(data)}`)
@@ -173,14 +177,21 @@ export default {
 		// 微信/支付宝支付
 		const payHandler = async () => {
 			loading.value = true
-			//1获取支付信息
+			//1获取支付信息----------
 			let res = null
 			if(payStyle.value == 'wxpay'){
 				res = await getWXOrderInfo(courseIds.value)
 			}else if(payStyle.value == 'alipay'){
 				res = await getALOrderInfo(courseIds.value)
 			}
-			//2发送支付请求
+			//2发送支付请求----------
+			// H5小程序发送虚拟支付
+			// #ifndef APP-PLUS
+			XuNiPay(res)
+			// #endif
+			
+			//app调用相应的供应商接口
+			// #ifdef APP-PLUS
 			uni.requestPayment({
 				provider:payStyle.value,	//支付供应商
 				orderInfo:res,				//支付信息
@@ -210,6 +221,7 @@ export default {
 					loading.value = false
 				}
 			})
+			// #endif
 		}
 		return{
 			detail,

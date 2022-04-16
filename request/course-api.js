@@ -76,39 +76,6 @@ const updateComment=(data)=>{
 	})
 }
 
-//查询个人余额
-const getBalance=()=>{
-	return request({
-		url:'/pay/user/balance',
-	})
-}
-
-//支付
-const orderPay=(data)=>{
-	return request({
-		url:'/pay',
-		method:'POST',
-		data
-	})
-}
-
-//微信支付获取订单信息
-const getWXOrderInfo=(data)=>{
-	return request({
-		url:'/pay/orferInfo/wxpay',
-		method:'POST',
-		data
-	})
-}
-//微信支付获取订单信息
-const getALOrderInfo=(data)=>{
-	return request({
-		url:'/pay/orderInfo/alipy',
-		method:'POST',
-		data
-	})
-}
-
 export {
 	getBanners,
 	getCategory,
@@ -119,9 +86,5 @@ export {
 	getCoursePackage,
 	getCourseIsBuy,
 	getBuyCourseSection,
-	updateComment,
-	getBalance,
-	orderPay,
-	getWXOrderInfo,
-	getALOrderInfo
+	updateComment
 }

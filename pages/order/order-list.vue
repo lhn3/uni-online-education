@@ -27,12 +27,13 @@
 					 3交易关闭:显示删除按钮
 					 -->
 					<button @click="orderCancel(item)" v-if="item.status === 1" type="default" size="mini">取消订单</button>
-					<button @click="orderPay(item)" v-if="item.status === 1" style="background-color: #A2CD5A;color: #FFFFFF;" size="mini">立即支付</button>
+					<button @click="orderPayBtn(item)" v-if="item.status === 1" style="background-color: #A2CD5A;color: #FFFFFF;" size="mini">立即支付</button>
 					<button @click="orderDelete(item)" v-if="item.status === 3" type="warn" size="mini">删除订单</button>
 				</view>
 			</view>
 		</view> 
 		
+		<!-- 底部弹窗 -->
 		<view v-if="isShow" class="mask" :catchtouchmove="true" @touchmove.stop.prevent="()=>{}"></view>
 		<view v-if="isShow" class="bottom-ios" :catchtouchmove="true" @touchmove.stop.prevent="()=>{}">
 			<view class="title center">
@@ -88,7 +89,7 @@
 
 <script>
 import {getCurrentInstance,reactive,ref,onMounted,computed} from "vue";
-import {getOrderList,getBalance,cancelOrder,deleteOrder,getWXOrderInfo,getALOrderInfo} from '@/request/order-api.js'
+import {getOrderList,getBalance,cancelOrder,deleteOrder,orderPay,getWXOrderInfo,getALOrderInfo} from '@/request/order-api.js'
 export default {
 	setup(){
 		let {proxy} = getCurrentInstance()
@@ -117,7 +118,6 @@ export default {
 			}
 			
 			orderList.value = await getOrderList()
-			balance.value = await getBalance()
 		})
 		
 		//判断余额是否充足
@@ -159,7 +159,12 @@ export default {
 		}
 		
 		//点击支付订单按钮
-		const orderPay = (item)=>{
+		const orderPayBtn = async (item)=>{
+			if(isIos.value){
+				loading.value = true
+				balance.value = await getBalance()
+				loading.value = false
+			}
 			isShow.value = true
 			clickItem.value = item
 			price.value = item.priceDiscount || item.pricePayable
@@ -173,27 +178,36 @@ export default {
 		//选择不同支付方式
 		let radioChange = (e) => {
 			payStyle.value=e.detail.value
-		} 
+		}
 		
-		let XuNiPay=()=>{
+		//假装支付
+		const XuNiPay= async (data)=>{
 			loading.value=true
 			uni.showLoading({
 				title:"支付中...",
 				mask:true
 			})
+			let res = await orderPay(data)
 			setTimeout(()=>{
 				uni.hideLoading() 
 				loading.value=false
 				isShow.value = false
-				clickItem.value.status = 2
-				proxy.$message.toast('支付成功','success')
+				if(res.code == 200){
+					// 数据重新获取
+					// orderList.value = await getOrderList()
+					
+					clickItem.value.status = 2
+					proxy.$message.toast('支付成功','success')
+				}else{
+					proxy.$message.toast('支付失败','error')
+				}
 			},2000)
 		}
 		
 		//苹果支付
-		const iosPayHandler=()=>{
+		const iosPayHandler = ()=>{
 			if(canPay.value){
-				XuNiPay()
+				XuNiPay(courseIds.value)
 			}else{
 				proxy.navTo('/pages/order/my-balance?params='+JSON.stringify({price:price.value}))
 			}
@@ -212,7 +226,7 @@ export default {
 			//2发送支付请求----------
 			// H5小程序发送虚拟支付
 			// #ifndef APP-PLUS
-			XuNiPay()
+			XuNiPay(courseIds.value)
 			// #endif
 			
 			//app调用相应的供应商接口
@@ -225,6 +239,9 @@ export default {
 						content:'支付成功', 
 						showCancel:false
 					})
+					// 数据重新获取
+					// orderList.value = await getOrderList()
+					
 					clickItem.value.status = 2
 				},
 				fail: (err) => {
@@ -252,7 +269,7 @@ export default {
 			
 			orderCancel,
 			orderDelete,
-			orderPay,
+			orderPayBtn,
 			showHidePay,
 			radioChange,
 			iosPayHandler,

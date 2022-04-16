@@ -6836,7 +6836,6 @@ var __spreadProps = (a, b) => __defProps(a, __getOwnPropDescs(b));
           payStyle.value = "wxpay";
         }
         orderList.value = await getOrderList();
-        balance.value = await getBalance();
       });
       let canPay = vue.computed(() => parseFloat(balance.value) >= parseFloat(price.value));
       let courseIds = vue.computed(() => {
@@ -6862,7 +6861,12 @@ var __spreadProps = (a, b) => __defProps(a, __getOwnPropDescs(b));
           proxy.$message.toast("\u5220\u9664\u6210\u529F", "success");
         });
       };
-      const orderPay2 = (item) => {
+      const orderPayBtn = async (item) => {
+        if (isIos.value) {
+          loading.value = true;
+          balance.value = await getBalance();
+          loading.value = false;
+        }
         isShow.value = true;
         clickItem.value = item;
         price.value = item.priceDiscount || item.pricePayable;
@@ -6873,23 +6877,28 @@ var __spreadProps = (a, b) => __defProps(a, __getOwnPropDescs(b));
       let radioChange = (e) => {
         payStyle.value = e.detail.value;
       };
-      let XuNiPay = () => {
+      const XuNiPay = async (data) => {
         loading.value = true;
         uni.showLoading({
           title: "\u652F\u4ED8\u4E2D...",
           mask: true
         });
+        let res = await orderPay(data);
         setTimeout(() => {
           uni.hideLoading();
           loading.value = false;
           isShow.value = false;
-          clickItem.value.status = 2;
-          proxy.$message.toast("\u652F\u4ED8\u6210\u529F", "success");
+          if (res.code == 200) {
+            clickItem.value.status = 2;
+            proxy.$message.toast("\u652F\u4ED8\u6210\u529F", "success");
+          } else {
+            proxy.$message.toast("\u652F\u4ED8\u5931\u8D25", "error");
+          }
         }, 2e3);
       };
       const iosPayHandler = () => {
         if (canPay.value) {
-          XuNiPay();
+          XuNiPay(courseIds.value);
         } else {
           proxy.navTo("/pages/order/my-balance?params=" + JSON.stringify({ price: price.value }));
         }
@@ -6935,7 +6944,7 @@ var __spreadProps = (a, b) => __defProps(a, __getOwnPropDescs(b));
         payStyle,
         orderCancel,
         orderDelete,
-        orderPay: orderPay2,
+        orderPayBtn,
         showHidePay,
         radioChange,
         iosPayHandler,
@@ -6989,7 +6998,7 @@ var __spreadProps = (a, b) => __defProps(a, __getOwnPropDescs(b));
               }, "\u53D6\u6D88\u8BA2\u5355", 8, ["onClick"])) : vue.createCommentVNode("v-if", true),
               item.status === 1 ? (vue.openBlock(), vue.createElementBlock("button", {
                 key: 1,
-                onClick: ($event) => $setup.orderPay(item),
+                onClick: ($event) => $setup.orderPayBtn(item),
                 style: { "background-color": "#A2CD5A", "color": "#FFFFFF" },
                 size: "mini"
               }, "\u7ACB\u5373\u652F\u4ED8", 8, ["onClick"])) : vue.createCommentVNode("v-if", true),
@@ -7003,6 +7012,7 @@ var __spreadProps = (a, b) => __defProps(a, __getOwnPropDescs(b));
           ])
         ]);
       }), 128)),
+      vue.createCommentVNode(" \u5E95\u90E8\u5F39\u7A97 "),
       $setup.isShow ? (vue.openBlock(), vue.createElementBlock("view", {
         key: 0,
         class: "mask",

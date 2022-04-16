@@ -164,3 +164,20 @@
 .bottom-ios .btn::after {
   border: none;
 }
+.ios {
+  line-height: 2.8125rem;
+}
+.ios uni-text:last-child {
+  color: #FA140E;
+}
+.pay-item {
+  line-height: 2.8125rem;
+}
+.pay-item .left uni-image {
+  width: 1.875rem;
+  height: 1.875rem;
+}
+.pay-item .left uni-text {
+  font-size: 1.03125rem;
+  padding-left: 0.625rem;
+}

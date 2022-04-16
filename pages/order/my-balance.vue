@@ -113,7 +113,9 @@ export default {
 	},
 	async onLoad(option) {
 		// 获取传递的参数
-		this.params = JSON.parse(option.params)
+		if(option.params){
+			this.params = JSON.parse(option.params)
+		}
 		
 		//初始化数据
 		this.init()

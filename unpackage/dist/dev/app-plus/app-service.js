@@ -6725,10 +6725,12 @@ var __spreadProps = (a, b) => __defProps(a, __getOwnPropDescs(b));
       };
     },
     async onLoad(option) {
-      this.params = JSON.parse(option.params);
+      if (option.params) {
+        this.params = JSON.parse(option.params);
+      }
       this.init();
       plus.payment.getChannels((channels) => {
-        formatAppLog("log", "at pages/order/my-balance.vue:123", "\u83B7\u53D6\u5230channel" + JSON.stringify(channels));
+        formatAppLog("log", "at pages/order/my-balance.vue:125", "\u83B7\u53D6\u5230channel" + JSON.stringify(channels));
         channels.push({ "id": "appleiap", "description": "\u82F9\u679C", "serviceReady": true });
         for (let i in channels) {
           let channel = channels[i];
@@ -6816,8 +6818,35 @@ var __spreadProps = (a, b) => __defProps(a, __getOwnPropDescs(b));
     setup() {
       let { proxy } = vue.getCurrentInstance();
       let orderList = vue.ref([]);
+      let isShow = vue.ref(false);
+      let balance = vue.ref(0);
+      let clickItem = vue.ref(null);
+      let price = vue.ref(0);
+      let loading = vue.ref(false);
+      let isIos = vue.ref(false);
+      let payStyle = vue.ref(null);
       vue.onMounted(async () => {
+        let sys = uni.getSystemInfoSync().platform;
+        if (sys == "ios") {
+          isIos.value = true;
+        }
+        if (isIos.value) {
+          payStyle.value = "iospay";
+        } else {
+          payStyle.value = "wxpay";
+        }
         orderList.value = await getOrderList();
+        balance.value = await getBalance();
+      });
+      let canPay = vue.computed(() => parseFloat(balance.value) >= parseFloat(price.value));
+      let courseIds = vue.computed(() => {
+        let courseIdList = [];
+        if (clickItem.value.courseList) {
+          clickItem.value.courseList.forEach((item) => {
+            courseIdList.push(item.id);
+          });
+        }
+        return courseIdList;
       });
       const orderCancel = (item) => {
         proxy.$message.confirm("\u786E\u5B9A\u53D6\u6D88\u8BA2\u5355").then(async () => {
@@ -6834,13 +6863,83 @@ var __spreadProps = (a, b) => __defProps(a, __getOwnPropDescs(b));
         });
       };
       const orderPay2 = (item) => {
-        formatAppLog("log", "at pages/order/order-list.vue:96", "\u652F\u4ED8\u8BA2\u5355");
+        isShow.value = true;
+        clickItem.value = item;
+        price.value = item.priceDiscount || item.pricePayable;
+      };
+      const showHidePay = () => {
+        isShow.value = false;
+      };
+      let radioChange = (e) => {
+        payStyle.value = e.detail.value;
+      };
+      let XuNiPay = () => {
+        loading.value = true;
+        uni.showLoading({
+          title: "\u652F\u4ED8\u4E2D...",
+          mask: true
+        });
+        setTimeout(() => {
+          uni.hideLoading();
+          loading.value = false;
+          isShow.value = false;
+          clickItem.value.status = 2;
+          proxy.$message.toast("\u652F\u4ED8\u6210\u529F", "success");
+        }, 2e3);
+      };
+      const iosPayHandler = () => {
+        if (canPay.value) {
+          XuNiPay();
+        } else {
+          proxy.navTo("/pages/order/my-balance?params=" + JSON.stringify({ price: price.value }));
+        }
+      };
+      const payHandler = async () => {
+        loading.value = true;
+        let res = null;
+        if (payStyle.value == "wxpay") {
+          res = await getWXOrderInfo(courseIds.value);
+        } else if (payStyle.value == "alipay") {
+          res = await getALOrderInfo(courseIds.value);
+        }
+        uni.requestPayment({
+          provider: payStyle.value,
+          orderInfo: res,
+          success: (e) => {
+            uni.showModal({
+              content: "\u652F\u4ED8\u6210\u529F",
+              showCancel: false
+            });
+            clickItem.value.status = 2;
+          },
+          fail: (err) => {
+            uni.showModal({
+              content: "\u652F\u4ED8\u5931\u8D25",
+              showCancel: false
+            });
+          },
+          complete: () => {
+            isShow.value = false;
+            loading.value = false;
+          }
+        });
       };
       return {
         orderList,
+        isShow,
+        balance,
+        price,
+        loading,
+        canPay,
+        isIos,
+        payStyle,
         orderCancel,
         orderDelete,
-        orderPay: orderPay2
+        orderPay: orderPay2,
+        showHidePay,
+        radioChange,
+        iosPayHandler,
+        payHandler
       };
     }
   };
@@ -6881,7 +6980,7 @@ var __spreadProps = (a, b) => __defProps(a, __getOwnPropDescs(b));
               class: "grey"
             }, "\u4EA4\u6613\u6210\u529F")) : vue.createCommentVNode("v-if", true),
             vue.createElementVNode("view", null, [
-              vue.createCommentVNode(" \n					 1\u5F85\u652F\u4ED8: \u53D6\u6D88\u8BA2\u5355/\u7ACB\u5373\u652F\u4ED8\n					 2\u4EA4\u6613\u6210\u529F: \u4E0D\u663E\u4EFB\u4F55\u6309\u94AE\n					 3\u4EA4\u6613\u5173\u95ED:\u663E\u793A\u5220\u9664\u6309\u94AE\n					 "),
+              vue.createCommentVNode(" \r\n					 1\u5F85\u652F\u4ED8: \u53D6\u6D88\u8BA2\u5355/\u7ACB\u5373\u652F\u4ED8\r\n					 2\u4EA4\u6613\u6210\u529F: \u4E0D\u663E\u4EFB\u4F55\u6309\u94AE\r\n					 3\u4EA4\u6613\u5173\u95ED:\u663E\u793A\u5220\u9664\u6309\u94AE\r\n					 "),
               item.status === 1 ? (vue.openBlock(), vue.createElementBlock("button", {
                 key: 0,
                 onClick: ($event) => $setup.orderCancel(item),
@@ -6904,27 +7003,92 @@ var __spreadProps = (a, b) => __defProps(a, __getOwnPropDescs(b));
           ])
         ]);
       }), 128)),
-      vue.createCommentVNode(' <view v-if="isShow" class="mask" catchtouchmove="true" @touchmove.stop.prevent="()=>{}"></view> '),
-      vue.createCommentVNode(` 		<view v-if="isShow" class="bottom-ios" catchtouchmove="true" @touchmove.stop.prevent="()=>{}">
-			<view class="title center">
-				<text>\u786E\u5B9A\u652F\u4ED8</text>
-				<text @click="showHidePay">\u53D6\u6D88</text>
-			</view>
-			<view class="price space-between">
-				<text>\u652F\u4ED8\u91D1\u989D</text>
-				<text>{{order.priceDiscount || order.pricePayable}}</text>
-			</view>
-			<view class="price space-between">
-				<text>\u5F53\u524D\u4F59\u989D</text>
-				<text>{{balance}}</text>
-			</view>
-			<button  class="btn" type="default"
-				:loading="loading" :disabled="loading"
-				@click="iosPay"
-			>
-			{{isPay ? '\u7ACB\u5373\u652F\u4ED8': '\u4F59\u989D\u4E0D\u8DB3\uFF0C\u7ACB\u5373\u5145\u503C'}}
-			</button>
-		</view> `)
+      $setup.isShow ? (vue.openBlock(), vue.createElementBlock("view", {
+        key: 0,
+        class: "mask",
+        catchtouchmove: true,
+        onTouchmove: _cache[0] || (_cache[0] = vue.withModifiers(() => {
+        }, ["stop", "prevent"]))
+      }, null, 32)) : vue.createCommentVNode("v-if", true),
+      $setup.isShow ? (vue.openBlock(), vue.createElementBlock("view", {
+        key: 1,
+        class: "bottom-ios",
+        catchtouchmove: true,
+        onTouchmove: _cache[5] || (_cache[5] = vue.withModifiers(() => {
+        }, ["stop", "prevent"]))
+      }, [
+        vue.createElementVNode("view", { class: "title center" }, [
+          vue.createElementVNode("text", null, "\u786E\u5B9A\u652F\u4ED8"),
+          vue.createElementVNode("text", {
+            onClick: _cache[1] || (_cache[1] = (...args) => $setup.showHidePay && $setup.showHidePay(...args))
+          }, "\u53D6\u6D88")
+        ]),
+        vue.createElementVNode("view", { class: "price space-between" }, [
+          vue.createElementVNode("text", null, "\u652F\u4ED8\u91D1\u989D"),
+          vue.createElementVNode("text", null, "\uFFE5" + vue.toDisplayString($setup.price), 1)
+        ]),
+        vue.createElementVNode("radio-group", {
+          onChange: _cache[2] || (_cache[2] = (...args) => $setup.radioChange && $setup.radioChange(...args))
+        }, [
+          vue.createCommentVNode(" ISO\u7AEF\u663E\u793A\u4E09\u79CD\u652F\u4ED8\u65B9\u5F0F\uFF0Ch5\u663E\u793A\u4E24\u79CD\u652F\u4ED8\u65B9\u5F0F\uFF0C\u5FAE\u4FE1\u5C0F\u7A0B\u5E8F\u663E\u793A\u4E00\u79CD\u652F\u4ED8\u65B9\u5F0F "),
+          $setup.isIos ? (vue.openBlock(), vue.createElementBlock("label", {
+            key: 0,
+            class: "pay-item center space-between"
+          }, [
+            vue.createElementVNode("view", { class: "ios" }, [
+              vue.createElementVNode("text", null, "\u4F59\u989D\uFF1A"),
+              vue.createElementVNode("text", null, vue.toDisplayString($setup.balance) + "\u5E01" + vue.toDisplayString($setup.canPay ? "" : "(\u4F59\u989D\u4E0D\u8DB3)"), 1)
+            ]),
+            vue.createElementVNode("radio", {
+              value: "iospay",
+              checked: $setup.payStyle == "iospay",
+              style: { "transform": "scale(0.8)" }
+            }, null, 8, ["checked"])
+          ])) : vue.createCommentVNode("v-if", true),
+          vue.createElementVNode("label", { class: "pay-item center space-between" }, [
+            vue.createElementVNode("view", { class: "left center" }, [
+              vue.createElementVNode("image", { src: "/static/pay/wxpay.png" }),
+              vue.createElementVNode("text", null, "\u5FAE\u4FE1\u652F\u4ED8")
+            ]),
+            vue.createElementVNode("radio", {
+              value: "wxpay",
+              checked: $setup.payStyle == "wxpay",
+              style: { "transform": "scale(0.8)" }
+            }, null, 8, ["checked"])
+          ]),
+          vue.createElementVNode("label", { class: "pay-item center space-between" }, [
+            vue.createElementVNode("view", { class: "left center" }, [
+              vue.createElementVNode("image", { src: "/static/pay/alipay.png" }),
+              vue.createElementVNode("text", null, "\u652F\u4ED8\u5B9D")
+            ]),
+            vue.createElementVNode("radio", {
+              value: "alipay",
+              checked: $setup.payStyle == "alipay",
+              style: { "transform": "scale(0.8)" }
+            }, null, 8, ["checked"])
+          ])
+        ], 32),
+        $setup.payStyle == "iospay" ? (vue.openBlock(), vue.createElementBlock("button", {
+          key: 0,
+          class: "btn",
+          loading: $setup.loading,
+          disabled: $setup.loading,
+          onClick: _cache[3] || (_cache[3] = (...args) => $setup.iosPayHandler && $setup.iosPayHandler(...args))
+        }, vue.toDisplayString($setup.canPay ? "\u7ACB\u5373\u652F\u4ED8" : "\u5145\u503C\u5E76\u652F\u4ED8"), 9, ["loading", "disabled"])) : vue.createCommentVNode("v-if", true),
+        $setup.payStyle == "wxpay" || $setup.payStyle == "alipay" ? (vue.openBlock(), vue.createElementBlock("button", {
+          key: 1,
+          class: "btn",
+          loading: $setup.loading,
+          disabled: $setup.loading,
+          onClick: _cache[4] || (_cache[4] = (...args) => $setup.payHandler && $setup.payHandler(...args))
+        }, "\u7ACB\u5373\u652F\u4ED8", 8, ["loading", "disabled"])) : vue.createCommentVNode("v-if", true),
+        $setup.payStyle == null ? (vue.openBlock(), vue.createElementBlock("button", {
+          key: 2,
+          class: "btn",
+          style: { "background-color": "#eee" },
+          disabled: true
+        }, "\u7ACB\u5373\u652F\u4ED8")) : vue.createCommentVNode("v-if", true)
+      ], 32)) : vue.createCommentVNode("v-if", true)
     ]);
   }
   var PagesOrderOrderList = /* @__PURE__ */ _export_sfc(_sfc_main$1, [["render", _sfc_render]]);

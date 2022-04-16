@@ -31,41 +31,106 @@
 					<button @click="orderDelete(item)" v-if="item.status === 3" type="warn" size="mini">删除订单</button>
 				</view>
 			</view>
-		</view>
+		</view> 
 		
-		<!-- <view v-if="isShow" class="mask" catchtouchmove="true" @touchmove.stop.prevent="()=>{}"></view> -->
-<!-- 		<view v-if="isShow" class="bottom-ios" catchtouchmove="true" @touchmove.stop.prevent="()=>{}">
+		<view v-if="isShow" class="mask" :catchtouchmove="true" @touchmove.stop.prevent="()=>{}"></view>
+		<view v-if="isShow" class="bottom-ios" :catchtouchmove="true" @touchmove.stop.prevent="()=>{}">
 			<view class="title center">
 				<text>确定支付</text>
 				<text @click="showHidePay">取消</text>
 			</view>
 			<view class="price space-between">
 				<text>支付金额</text>
-				<text>{{order.priceDiscount || order.pricePayable}}</text>
+				<text>￥{{price}}</text>
 			</view>
-			<view class="price space-between">
-				<text>当前余额</text>
-				<text>{{balance}}</text>
-			</view>
-			<button  class="btn" type="default"
-				:loading="loading" :disabled="loading"
-				@click="iosPay"
-			>
-			{{isPay ? '立即支付': '余额不足，立即充值'}}
+			
+			<radio-group @change="radioChange">
+				<!-- ISO端显示三种支付方式，h5显示两种支付方式，微信小程序显示一种支付方式 -->
+				 <!-- #ifdef APP-PLUS -->
+				 <label v-if="isIos" class="pay-item center space-between" >
+					<view class="ios">
+						<text>余额：</text>
+						<text>{{balance}}币{{canPay?'':'(余额不足)'}}</text>
+					</view>
+				 	<radio value="iospay" :checked="payStyle == 'iospay'" style="transform:scale(0.8)"/>
+				 </label>
+				 <!-- #endif -->
+				 
+				 <!-- #ifndef MP-ALIPAY -->
+				 <label class="pay-item center space-between" >
+				 	<view class="left center">
+				 		<image src="/static/pay/wxpay.png"></image>
+				 		<text>微信支付</text>
+				 	</view>
+				 	<radio value="wxpay" :checked="payStyle == 'wxpay'" style="transform:scale(0.8)"/>
+				 </label>
+				 <!-- #endif -->
+				 
+				 <!-- #ifndef MP-WEIXIN -->
+				 <label class="pay-item center space-between" >
+				 	<view class="left center">
+				 		<image src="/static/pay/alipay.png"></image>
+				 		<text>支付宝</text>
+				 	</view>
+				 	<radio value="alipay" :checked="payStyle == 'alipay'" style="transform:scale(0.8)"/>
+				 </label>
+				 <!-- #endif -->
+			</radio-group>
+			
+			<button v-if="payStyle == 'iospay'" class="btn" :loading="loading" :disabled="loading" @click="iosPayHandler">
+				{{canPay?'立即支付':'充值并支付'}}
 			</button>
-		</view> -->
+			<button v-if="payStyle == 'wxpay' || payStyle == 'alipay'" class="btn" :loading="loading" :disabled="loading" @click="payHandler">立即支付</button>
+			<button v-if="payStyle == null" class="btn" style="background-color: #eee;" :disabled="true">立即支付</button>
+		</view>
 	</view>
 </template>
 
 <script>
-import {getCurrentInstance,reactive,ref,onMounted} from "vue";
-import {getOrderList,cancelOrder,deleteOrder} from '@/request/order-api.js'
+import {getCurrentInstance,reactive,ref,onMounted,computed} from "vue";
+import {getOrderList,getBalance,cancelOrder,deleteOrder,getWXOrderInfo,getALOrderInfo} from '@/request/order-api.js'
 export default {
 	setup(){
 		let {proxy} = getCurrentInstance()
-		let orderList = ref([])//订单列表
+		let orderList = ref([])		//订单列表
+		let isShow = ref(false)
+		let balance = ref(0)		//剩余余额
+		let clickItem = ref(null)	//点击的这个待付课程
+		let price = ref(0)			//点击支付按钮的那个订单价格
+		let loading = ref(false)
+		let isIos = ref(false) 		//操作系统
+		let payStyle = ref(null)	//支付方式
+
 		onMounted(async ()=>{
+			// 判断是否是ios系统
+			// #ifdef APP-PLUS
+			let sys = uni.getSystemInfoSync().platform
+			if(sys == 'ios'){
+				isIos.value = true
+			}
+			// #endif
+			//初始化默认支付方式
+			if(isIos.value){
+				payStyle.value = 'iospay'
+			}else{
+				payStyle.value = 'wxpay'
+			}
+			
 			orderList.value = await getOrderList()
+			balance.value = await getBalance()
+		})
+		
+		//判断余额是否充足
+		let canPay = computed(() => parseFloat(balance.value) >= parseFloat(price.value))
+		//所有课程的id
+		let courseIds = computed(() => {
+			let courseIdList = []
+			if(clickItem.value.courseList){
+				clickItem.value.courseList.forEach(item=>{
+					courseIdList.push(item.id)
+				})
+			}
+			return courseIdList
 		})
 		
 		// 取消订单
@@ -79,6 +144,7 @@ export default {
 				proxy.$message.toast('取消成功','success')
 			})
 		}
+		
 		// 删除订单
 		const orderDelete = (item)=>{
 			proxy.$message.confirm('确定删除订单').then(async ()=>{
@@ -91,16 +157,106 @@ export default {
 			})
 
 		}
-		//支付订单
+		
+		//点击支付订单按钮
 		const orderPay = (item)=>{
-			console.log('支付订单')
+			isShow.value = true
+			clickItem.value = item
+			price.value = item.priceDiscount || item.pricePayable
+		}
+		
+		//取消支付
+		const showHidePay = ()=>{
+			isShow.value = false
+		}
+		
+		//选择不同支付方式
+		let radioChange = (e) => {
+			payStyle.value=e.detail.value
+		} 
+		
+		let XuNiPay=()=>{
+			loading.value=true
+			uni.showLoading({
+				title:"支付中...",
+				mask:true
+			})
+			setTimeout(()=>{
+				uni.hideLoading() 
+				loading.value=false
+				isShow.value = false
+				clickItem.value.status = 2
+				proxy.$message.toast('支付成功','success')
+			},2000)
+		}
+		
+		//苹果支付
+		const iosPayHandler=()=>{
+			if(canPay.value){
+				XuNiPay()
+			}else{
+				proxy.navTo('/pages/order/my-balance?params='+JSON.stringify({price:price.value}))
+			}
+		}
+		
+		// 微信/支付宝支付
+		const payHandler = async () => {
+			loading.value = true
+			//1获取支付信息----------
+			let res = null
+			if(payStyle.value == 'wxpay'){
+				res = await getWXOrderInfo(courseIds.value)
+			}else if(payStyle.value == 'alipay'){
+				res = await getALOrderInfo(courseIds.value)
+			}
+			//2发送支付请求----------
+			// H5小程序发送虚拟支付
+			// #ifndef APP-PLUS
+			XuNiPay()
+			// #endif
+			
+			//app调用相应的供应商接口
+			// #ifdef APP-PLUS
+			uni.requestPayment({
+				provider:payStyle.value,	//支付供应商
+				orderInfo:res,				//支付信息
+				success: (e) => {
+					uni.showModal({
+						content:'支付成功', 
+						showCancel:false
+					})
+					clickItem.value.status = 2
+				},
+				fail: (err) => {
+					uni.showModal({
+						content:'支付失败',
+						showCancel:false
+					})
+				},
+				complete: () => {
+					isShow.value = false
+					loading.value = false
+				}
+			})
+			// #endif
 		}
 		return{
 			orderList,
+			isShow,
+			balance,
+			price,
+			loading,
+			canPay,
+			isIos,
+			payStyle,
 			
 			orderCancel,
 			orderDelete,
-			orderPay
+			orderPay,
+			showHidePay,
+			radioChange,
+			iosPayHandler,
+			payHandler
 		}
 	}  
 }
@@ -186,5 +342,25 @@ export default {
 			border: none;
 		}
 	}
+}
+.ios {
+	line-height: 90rpx;
+	text:last-child{
+		color: $mxg-text-color-red;
+	}
+}
+.pay-item {
+	line-height: 90rpx;
+	.left {
+		image {
+			width: 60rpx;
+			height: 60rpx;
+		}
+		text{
+			font-size: 33rpx;
+			padding-left: 20rpx;
+		}
+	}
+	
 }
 </style>

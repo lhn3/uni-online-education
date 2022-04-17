@@ -4,8 +4,7 @@
 		<down-bar :params="params" :downCategoty="downCategoty" @changeCategory="changeCategory"></down-bar>
 		<!-- 展示列表数据 -->
 		<!-- ref动态生成: 字节跳动小程序编辑器不支持一个页面存在相同的ref (如不考虑字节跳动小程序可固定值为 ref="mescrollRef") -->
-		<mescroll-body :ref="'mescrollRef'+i" 
-			@init="mescrollInit" 
+		<mescroll-body ref="mescrollRef" 
 			:down="downOption" 
 			@down="downCallback" 
 			:up="upOption"

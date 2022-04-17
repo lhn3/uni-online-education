@@ -754,6 +754,9 @@
 }
 
 /* 无任何数据的空布局 */
+uni-image[data-v-79c5cef0]{
+	display: inline-block;
+}
 .mescroll-empty[data-v-79c5cef0] {
 	box-sizing: border-box;
 	width: 100%;

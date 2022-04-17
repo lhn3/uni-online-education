@@ -47,7 +47,7 @@ const MescrollMoreItemMixin = {
 			// 自动加载当前tab的数据
 			if(this.i === this.index){
 				// 取消自动调用下拉刷新
-				// this.mescrollTrigger()
+				this.mescrollTrigger()
 			}
 		},
 		// 主动触发加载

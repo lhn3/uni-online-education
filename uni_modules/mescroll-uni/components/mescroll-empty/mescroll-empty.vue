@@ -74,6 +74,9 @@ export default {
 
 <style>
 /* 无任何数据的空布局 */
+image{
+	display: inline-block;
+}
 .mescroll-empty {
 	box-sizing: border-box;
 	width: 100%;

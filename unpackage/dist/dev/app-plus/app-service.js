@@ -135,8 +135,8 @@ var __spreadProps = (a, b) => __defProps(a, __getOwnPropDescs(b));
     __injectCSSVars__();
     return __setup__(props, ctx);
   } : __injectCSSVars__;
-  const _sfc_main$G = __default__;
-  function _sfc_render$F(_ctx, _cache, $props, $setup, $data, $options) {
+  const _sfc_main$I = __default__;
+  function _sfc_render$H(_ctx, _cache, $props, $setup, $data, $options) {
     return vue.openBlock(), vue.createElementBlock("view", { class: "main" }, [
       vue.createElementVNode("view", { class: "sw-background" }),
       vue.createElementVNode("swiper", {
@@ -163,7 +163,7 @@ var __spreadProps = (a, b) => __defProps(a, __getOwnPropDescs(b));
       ], 32)
     ]);
   }
-  var __easycom_0$9 = /* @__PURE__ */ _export_sfc(_sfc_main$G, [["render", _sfc_render$F], ["__scopeId", "data-v-3f833c78"]]);
+  var __easycom_0$9 = /* @__PURE__ */ _export_sfc(_sfc_main$I, [["render", _sfc_render$H], ["__scopeId", "data-v-3f833c78"]]);
   function resolveEasycom(component, easycom) {
     return isString(component) ? easycom : component;
   }
@@ -237,7 +237,7 @@ var __spreadProps = (a, b) => __defProps(a, __getOwnPropDescs(b));
       uni.setStorageSync("mescroll-i18n", type);
     }
   };
-  const _sfc_main$F = {
+  const _sfc_main$H = {
     props: {
       option: {
         type: Object,
@@ -286,7 +286,7 @@ var __spreadProps = (a, b) => __defProps(a, __getOwnPropDescs(b));
       }
     }
   };
-  function _sfc_render$E(_ctx, _cache, $props, $setup, $data, $options) {
+  function _sfc_render$G(_ctx, _cache, $props, $setup, $data, $options) {
     return vue.openBlock(), vue.createElementBlock("view", {
       class: vue.normalizeClass(["mescroll-empty", { "empty-fixed": $props.option.fixed }]),
       style: vue.normalizeStyle({ "z-index": $props.option.zIndex, top: $props.option.top })
@@ -310,7 +310,7 @@ var __spreadProps = (a, b) => __defProps(a, __getOwnPropDescs(b));
       }, vue.toDisplayString($options.btnText), 1)) : vue.createCommentVNode("v-if", true)
     ], 6);
   }
-  var __easycom_0$8 = /* @__PURE__ */ _export_sfc(_sfc_main$F, [["render", _sfc_render$E], ["__scopeId", "data-v-79c5cef0"]]);
+  var __easycom_0$8 = /* @__PURE__ */ _export_sfc(_sfc_main$H, [["render", _sfc_render$G], ["__scopeId", "data-v-79c5cef0"]]);
   function MeScroll(options, isScrollBody) {
     let me = this;
     me.version = "1.3.7";
@@ -918,7 +918,7 @@ var __spreadProps = (a, b) => __defProps(a, __getOwnPropDescs(b));
     if (e && e.cancelable && !e.defaultPrevented)
       e.preventDefault();
   };
-  const _sfc_main$E = {
+  const _sfc_main$G = {
     props: {
       option: Object,
       value: false
@@ -948,7 +948,7 @@ var __spreadProps = (a, b) => __defProps(a, __getOwnPropDescs(b));
       }
     }
   };
-  function _sfc_render$D(_ctx, _cache, $props, $setup, $data, $options) {
+  function _sfc_render$F(_ctx, _cache, $props, $setup, $data, $options) {
     return $options.mOption.src ? (vue.openBlock(), vue.createElementBlock("image", {
       key: 0,
       class: vue.normalizeClass(["mescroll-totop", [$props.value ? "mescroll-totop-in" : "mescroll-totop-out", { "mescroll-totop-safearea": $options.mOption.safearea }]]),
@@ -958,7 +958,7 @@ var __spreadProps = (a, b) => __defProps(a, __getOwnPropDescs(b));
       onClick: _cache[0] || (_cache[0] = (...args) => $options.toTopClick && $options.toTopClick(...args))
     }, null, 14, ["src"])) : vue.createCommentVNode("v-if", true);
   }
-  var MescrollTop = /* @__PURE__ */ _export_sfc(_sfc_main$E, [["render", _sfc_render$D], ["__scopeId", "data-v-49b47e96"]]);
+  var MescrollTop = /* @__PURE__ */ _export_sfc(_sfc_main$G, [["render", _sfc_render$F], ["__scopeId", "data-v-49b47e96"]]);
   const WxsMixin = {
     data() {
       return {
@@ -1025,11 +1025,11 @@ var __spreadProps = (a, b) => __defProps(a, __getOwnPropDescs(b));
     (Comp.$wxs || (Comp.$wxs = [])).push("wxsBiz");
     (Comp.$wxsModules || (Comp.$wxsModules = {}))["wxsBiz"] = "3169f6de";
   };
-  var block1 = (Comp) => {
+  var block1$1 = (Comp) => {
     (Comp.$renderjs || (Comp.$renderjs = [])).push("renderBiz");
     (Comp.$renderjsModules || (Comp.$renderjsModules = {}))["renderBiz"] = "1ca30ca9";
   };
-  const _sfc_main$D = {
+  const _sfc_main$F = {
     name: "mescroll-body",
     mixins: [WxsMixin],
     components: {
@@ -1280,7 +1280,7 @@ var __spreadProps = (a, b) => __defProps(a, __getOwnPropDescs(b));
       uni.$off("setMescrollGlobalOption");
     }
   };
-  function _sfc_render$C(_ctx, _cache, $props, $setup, $data, $options) {
+  function _sfc_render$E(_ctx, _cache, $props, $setup, $data, $options) {
     const _component_mescroll_empty = resolveEasycom(vue.resolveDynamicComponent("mescroll-empty"), __easycom_0$8);
     const _component_mescroll_top = vue.resolveComponent("mescroll-top");
     return vue.openBlock(), vue.createElementBlock("view", {
@@ -1373,11 +1373,11 @@ var __spreadProps = (a, b) => __defProps(a, __getOwnPropDescs(b));
     ], 46, ["change:prop", "prop"]);
   }
   if (typeof block0 === "function")
-    block0(_sfc_main$D);
-  if (typeof block1 === "function")
-    block1(_sfc_main$D);
-  var __easycom_1$2 = /* @__PURE__ */ _export_sfc(_sfc_main$D, [["render", _sfc_render$C], ["__scopeId", "data-v-07e5713e"]]);
-  const _sfc_main$C = {
+    block0(_sfc_main$F);
+  if (typeof block1$1 === "function")
+    block1$1(_sfc_main$F);
+  var __easycom_1$3 = /* @__PURE__ */ _export_sfc(_sfc_main$F, [["render", _sfc_render$E], ["__scopeId", "data-v-07e5713e"]]);
+  const _sfc_main$E = {
     props: {
       categoryList: {
         type: Array,
@@ -1400,7 +1400,7 @@ var __spreadProps = (a, b) => __defProps(a, __getOwnPropDescs(b));
       };
     }
   };
-  function _sfc_render$B(_ctx, _cache, $props, $setup, $data, $options) {
+  function _sfc_render$D(_ctx, _cache, $props, $setup, $data, $options) {
     return vue.openBlock(), vue.createElementBlock("view", { class: "category-box" }, [
       (vue.openBlock(true), vue.createElementBlock(vue.Fragment, null, vue.renderList($props.categoryList.slice(0, 7), (item) => {
         return vue.openBlock(), vue.createElementBlock("view", {
@@ -1413,8 +1413,8 @@ var __spreadProps = (a, b) => __defProps(a, __getOwnPropDescs(b));
       }, "\u5168\u90E8\u5206\u7C7B")
     ]);
   }
-  var categoryBox = /* @__PURE__ */ _export_sfc(_sfc_main$C, [["render", _sfc_render$B], ["__scopeId", "data-v-a0997b4a"]]);
-  const _sfc_main$B = {
+  var categoryBox = /* @__PURE__ */ _export_sfc(_sfc_main$E, [["render", _sfc_render$D], ["__scopeId", "data-v-a0997b4a"]]);
+  const _sfc_main$D = {
     props: {
       isColumn: {
         type: Boolean,
@@ -1438,7 +1438,7 @@ var __spreadProps = (a, b) => __defProps(a, __getOwnPropDescs(b));
     setup() {
     }
   };
-  function _sfc_render$A(_ctx, _cache, $props, $setup, $data, $options) {
+  function _sfc_render$C(_ctx, _cache, $props, $setup, $data, $options) {
     return vue.openBlock(), vue.createElementBlock("view", {
       class: vue.normalizeClass(["course-item", { "column": $props.isColumn }]),
       onClick: _cache[0] || (_cache[0] = ($event) => _ctx.navTo(`/pages/course/course-details?id=${$props.item.id}`))
@@ -1468,8 +1468,8 @@ var __spreadProps = (a, b) => __defProps(a, __getOwnPropDescs(b));
       ])
     ], 2);
   }
-  var __easycom_0$7 = /* @__PURE__ */ _export_sfc(_sfc_main$B, [["render", _sfc_render$A], ["__scopeId", "data-v-1990ede0"]]);
-  const _sfc_main$A = {
+  var __easycom_0$7 = /* @__PURE__ */ _export_sfc(_sfc_main$D, [["render", _sfc_render$C], ["__scopeId", "data-v-1990ede0"]]);
+  const _sfc_main$C = {
     props: {
       title: {
         type: String,
@@ -1493,7 +1493,7 @@ var __spreadProps = (a, b) => __defProps(a, __getOwnPropDescs(b));
       };
     }
   };
-  function _sfc_render$z(_ctx, _cache, $props, $setup, $data, $options) {
+  function _sfc_render$B(_ctx, _cache, $props, $setup, $data, $options) {
     return vue.openBlock(), vue.createElementBlock("view", { class: "list-box" }, [
       vue.createElementVNode("view", { class: "title space-between center" }, [
         vue.createElementVNode("view", { class: "center" }, [
@@ -1515,8 +1515,8 @@ var __spreadProps = (a, b) => __defProps(a, __getOwnPropDescs(b));
       vue.renderSlot(_ctx.$slots, "default", {}, void 0, true)
     ]);
   }
-  var __easycom_1$1 = /* @__PURE__ */ _export_sfc(_sfc_main$A, [["render", _sfc_render$z], ["__scopeId", "data-v-0993e984"]]);
-  const _sfc_main$z = {
+  var __easycom_1$2 = /* @__PURE__ */ _export_sfc(_sfc_main$C, [["render", _sfc_render$B], ["__scopeId", "data-v-0993e984"]]);
+  const _sfc_main$B = {
     props: {
       title: {
         type: String,
@@ -1558,9 +1558,9 @@ var __spreadProps = (a, b) => __defProps(a, __getOwnPropDescs(b));
       };
     }
   };
-  function _sfc_render$y(_ctx, _cache, $props, $setup, $data, $options) {
+  function _sfc_render$A(_ctx, _cache, $props, $setup, $data, $options) {
     const _component_course_item = resolveEasycom(vue.resolveDynamicComponent("course-item"), __easycom_0$7);
-    const _component_list_box = resolveEasycom(vue.resolveDynamicComponent("list-box"), __easycom_1$1);
+    const _component_list_box = resolveEasycom(vue.resolveDynamicComponent("list-box"), __easycom_1$2);
     return vue.openBlock(), vue.createElementBlock(vue.Fragment, null, [
       vue.createCommentVNode(" \u5E26\u5934\u90E8\u7684\u63D2\u69FD\u7EC4\u4EF6 "),
       vue.createVNode(_component_list_box, {
@@ -1590,8 +1590,8 @@ var __spreadProps = (a, b) => __defProps(a, __getOwnPropDescs(b));
       }, 8, ["title", "word", "all", "onClickAll"])
     ], 2112);
   }
-  var swiperCourse = /* @__PURE__ */ _export_sfc(_sfc_main$z, [["render", _sfc_render$y]]);
-  const _sfc_main$y = {
+  var swiperCourse = /* @__PURE__ */ _export_sfc(_sfc_main$B, [["render", _sfc_render$A]]);
+  const _sfc_main$A = {
     props: {
       title: {
         type: String,
@@ -1625,9 +1625,9 @@ var __spreadProps = (a, b) => __defProps(a, __getOwnPropDescs(b));
       };
     }
   };
-  function _sfc_render$x(_ctx, _cache, $props, $setup, $data, $options) {
+  function _sfc_render$z(_ctx, _cache, $props, $setup, $data, $options) {
     const _component_course_item = resolveEasycom(vue.resolveDynamicComponent("course-item"), __easycom_0$7);
-    const _component_list_box = resolveEasycom(vue.resolveDynamicComponent("list-box"), __easycom_1$1);
+    const _component_list_box = resolveEasycom(vue.resolveDynamicComponent("list-box"), __easycom_1$2);
     return vue.openBlock(), vue.createElementBlock(vue.Fragment, null, [
       vue.createCommentVNode(" \u5E26\u5934\u90E8\u7684\u63D2\u69FD\u7EC4\u4EF6 "),
       vue.createVNode(_component_list_box, {
@@ -1658,8 +1658,8 @@ var __spreadProps = (a, b) => __defProps(a, __getOwnPropDescs(b));
       }, 8, ["title", "word", "all", "onClickAll"])
     ], 2112);
   }
-  var scrollCourse = /* @__PURE__ */ _export_sfc(_sfc_main$y, [["render", _sfc_render$x], ["__scopeId", "data-v-2d5bbbcc"]]);
-  const _sfc_main$x = {
+  var scrollCourse = /* @__PURE__ */ _export_sfc(_sfc_main$A, [["render", _sfc_render$z], ["__scopeId", "data-v-2d5bbbcc"]]);
+  const _sfc_main$z = {
     props: {
       title: {
         type: String,
@@ -1693,9 +1693,9 @@ var __spreadProps = (a, b) => __defProps(a, __getOwnPropDescs(b));
       };
     }
   };
-  function _sfc_render$w(_ctx, _cache, $props, $setup, $data, $options) {
+  function _sfc_render$y(_ctx, _cache, $props, $setup, $data, $options) {
     const _component_course_item = resolveEasycom(vue.resolveDynamicComponent("course-item"), __easycom_0$7);
-    const _component_list_box = resolveEasycom(vue.resolveDynamicComponent("list-box"), __easycom_1$1);
+    const _component_list_box = resolveEasycom(vue.resolveDynamicComponent("list-box"), __easycom_1$2);
     return vue.openBlock(), vue.createElementBlock(vue.Fragment, null, [
       vue.createCommentVNode(" \u5E26\u5934\u90E8\u7684\u63D2\u69FD\u7EC4\u4EF6 "),
       vue.createCommentVNode(" \u89E6\u5E95\u52A0\u8F7D\u66F4\u591A "),
@@ -1719,7 +1719,7 @@ var __spreadProps = (a, b) => __defProps(a, __getOwnPropDescs(b));
       }, 8, ["title", "word", "all", "onClickAll"])
     ], 2112);
   }
-  var payCourse = /* @__PURE__ */ _export_sfc(_sfc_main$x, [["render", _sfc_render$w], ["__scopeId", "data-v-534bbb02"]]);
+  var payCourse = /* @__PURE__ */ _export_sfc(_sfc_main$z, [["render", _sfc_render$y], ["__scopeId", "data-v-534bbb02"]]);
   var courseData = [
     {
       id: 1,
@@ -2041,14 +2041,14 @@ var __spreadProps = (a, b) => __defProps(a, __getOwnPropDescs(b));
       this.mescrollInitByRef();
     }
   };
-  const _sfc_main$w = {
+  const _sfc_main$y = {
     mixins: [MescrollMixin],
     components: {
       "category-box": categoryBox,
       "swiper-course": swiperCourse,
       "scroll-course": scrollCourse,
       "pay-course": payCourse,
-      "mescroll-body": __easycom_1$2
+      "mescroll-body": __easycom_1$3
     },
     setup() {
       const { proxy } = vue.getCurrentInstance();
@@ -2138,13 +2138,13 @@ var __spreadProps = (a, b) => __defProps(a, __getOwnPropDescs(b));
       });
     }
   };
-  function _sfc_render$v(_ctx, _cache, $props, $setup, $data, $options) {
+  function _sfc_render$x(_ctx, _cache, $props, $setup, $data, $options) {
     const _component_my_swiper = resolveEasycom(vue.resolveDynamicComponent("my-swiper"), __easycom_0$9);
     const _component_category_box = vue.resolveComponent("category-box");
     const _component_swiper_course = vue.resolveComponent("swiper-course");
     const _component_scroll_course = vue.resolveComponent("scroll-course");
     const _component_pay_course = vue.resolveComponent("pay-course");
-    const _component_mescroll_body = resolveEasycom(vue.resolveDynamicComponent("mescroll-body"), __easycom_1$2);
+    const _component_mescroll_body = resolveEasycom(vue.resolveDynamicComponent("mescroll-body"), __easycom_1$3);
     return vue.openBlock(), vue.createElementBlock("view", { class: "content" }, [
       vue.createCommentVNode(" \u5C0F\u7A0B\u5E8F\u624D\u663E\u793A\u7684\u641C\u7D22\u6846 "),
       vue.createCommentVNode(" \u8F6E\u64AD\u56FE "),
@@ -2197,8 +2197,8 @@ var __spreadProps = (a, b) => __defProps(a, __getOwnPropDescs(b));
       }, 8, ["onInit", "onDown", "onUp", "down", "up"])
     ]);
   }
-  var PagesTabIndexIndex = /* @__PURE__ */ _export_sfc(_sfc_main$w, [["render", _sfc_render$v], ["__scopeId", "data-v-f5bdc598"]]);
-  const _sfc_main$v = {
+  var PagesTabIndexIndex = /* @__PURE__ */ _export_sfc(_sfc_main$y, [["render", _sfc_render$x], ["__scopeId", "data-v-f5bdc598"]]);
+  const _sfc_main$x = {
     props: {
       value: {
         type: Object,
@@ -2263,7 +2263,7 @@ var __spreadProps = (a, b) => __defProps(a, __getOwnPropDescs(b));
       };
     }
   };
-  function _sfc_render$u(_ctx, _cache, $props, $setup, $data, $options) {
+  function _sfc_render$w(_ctx, _cache, $props, $setup, $data, $options) {
     return vue.openBlock(), vue.createElementBlock("view", { class: "category" }, [
       vue.createElementVNode("scroll-view", {
         class: "left noScorll",
@@ -2295,8 +2295,8 @@ var __spreadProps = (a, b) => __defProps(a, __getOwnPropDescs(b));
       ])
     ]);
   }
-  var PagesTabCategoryCategory = /* @__PURE__ */ _export_sfc(_sfc_main$v, [["render", _sfc_render$u]]);
-  const _sfc_main$u = {
+  var PagesTabCategoryCategory = /* @__PURE__ */ _export_sfc(_sfc_main$x, [["render", _sfc_render$w]]);
+  const _sfc_main$w = {
     props: {
       tabs: {
         type: Array,
@@ -2345,7 +2345,7 @@ var __spreadProps = (a, b) => __defProps(a, __getOwnPropDescs(b));
       };
     }
   };
-  function _sfc_render$t(_ctx, _cache, $props, $setup, $data, $options) {
+  function _sfc_render$v(_ctx, _cache, $props, $setup, $data, $options) {
     return vue.openBlock(), vue.createElementBlock("view", {
       class: "tab-bar",
       onTouchmove: _cache[0] || (_cache[0] = vue.withModifiers(() => {
@@ -2368,7 +2368,7 @@ var __spreadProps = (a, b) => __defProps(a, __getOwnPropDescs(b));
       ], 8, ["scroll-left"])
     ], 32);
   }
-  var __easycom_0$6 = /* @__PURE__ */ _export_sfc(_sfc_main$u, [["render", _sfc_render$t], ["__scopeId", "data-v-6dc8a5bc"]]);
+  var __easycom_0$6 = /* @__PURE__ */ _export_sfc(_sfc_main$w, [["render", _sfc_render$v], ["__scopeId", "data-v-6dc8a5bc"]]);
   function formatCount(count) {
     if (count == null)
       return "";
@@ -2381,7 +2381,7 @@ var __spreadProps = (a, b) => __defProps(a, __getOwnPropDescs(b));
       return count;
     }
   }
-  const _sfc_main$t = {
+  const _sfc_main$v = {
     props: {
       item: {
         type: Object,
@@ -2404,7 +2404,7 @@ var __spreadProps = (a, b) => __defProps(a, __getOwnPropDescs(b));
       };
     }
   };
-  function _sfc_render$s(_ctx, _cache, $props, $setup, $data, $options) {
+  function _sfc_render$u(_ctx, _cache, $props, $setup, $data, $options) {
     return vue.openBlock(), vue.createElementBlock("view", {
       class: "article-item",
       onClick: _cache[0] || (_cache[0] = ($event) => _ctx.navTo(`/pages/article/details?id=${$props.item.id}`))
@@ -2431,12 +2431,582 @@ var __spreadProps = (a, b) => __defProps(a, __getOwnPropDescs(b));
       ])
     ]);
   }
-  var __easycom_0$5 = /* @__PURE__ */ _export_sfc(_sfc_main$t, [["render", _sfc_render$s], ["__scopeId", "data-v-f7ab0478"]]);
+  var __easycom_0$5 = /* @__PURE__ */ _export_sfc(_sfc_main$v, [["render", _sfc_render$u], ["__scopeId", "data-v-f7ab0478"]]);
+  var block1 = (Comp) => {
+    (Comp.$renderjs || (Comp.$renderjs = [])).push("renderBiz");
+    (Comp.$renderjsModules || (Comp.$renderjsModules = {}))["renderBiz"] = "5a9dc23f";
+  };
+  const _sfc_main$u = {
+    name: "mescroll-uni",
+    mixins: [WxsMixin],
+    components: {
+      MescrollTop
+    },
+    props: {
+      down: Object,
+      up: Object,
+      i18n: Object,
+      top: [String, Number],
+      topbar: [Boolean, String],
+      bottom: [String, Number],
+      safearea: Boolean,
+      fixed: {
+        type: Boolean,
+        default: true
+      },
+      height: [String, Number],
+      bottombar: {
+        type: Boolean,
+        default: true
+      },
+      disableScroll: Boolean
+    },
+    data() {
+      return {
+        mescroll: { optDown: {}, optUp: {} },
+        viewId: "id_" + Math.random().toString(36).substr(2, 16),
+        downHight: 0,
+        downRate: 0,
+        downLoadType: 0,
+        upLoadType: 0,
+        isShowEmpty: false,
+        isShowToTop: false,
+        scrollTop: 0,
+        scrollAnim: false,
+        windowTop: 0,
+        windowBottom: 0,
+        windowHeight: 0,
+        statusBarHeight: 0
+      };
+    },
+    computed: {
+      isFixed() {
+        return !this.height && this.fixed;
+      },
+      scrollHeight() {
+        if (this.isFixed) {
+          return "auto";
+        } else if (this.height) {
+          return this.toPx(this.height) + "px";
+        } else {
+          return "100%";
+        }
+      },
+      numTop() {
+        return this.toPx(this.top);
+      },
+      fixedTop() {
+        return this.isFixed ? this.numTop + this.windowTop + "px" : 0;
+      },
+      padTop() {
+        return !this.isFixed ? this.numTop + "px" : 0;
+      },
+      numBottom() {
+        return this.toPx(this.bottom);
+      },
+      fixedBottom() {
+        return this.isFixed ? this.numBottom + this.windowBottom + "px" : 0;
+      },
+      padBottom() {
+        return !this.isFixed ? this.numBottom + "px" : 0;
+      },
+      isDownReset() {
+        return this.downLoadType === 3 || this.downLoadType === 4;
+      },
+      transition() {
+        return this.isDownReset ? "transform 300ms" : "";
+      },
+      translateY() {
+        return this.downHight > 0 ? "translateY(" + this.downHight + "px)" : "";
+      },
+      scrollable() {
+        if (this.disableScroll)
+          return false;
+        return this.downLoadType === 0 || this.isDownReset;
+      },
+      isDownLoading() {
+        return this.downLoadType === 3;
+      },
+      downRotate() {
+        return "rotate(" + 360 * this.downRate + "deg)";
+      },
+      downText() {
+        if (!this.mescroll)
+          return "";
+        switch (this.downLoadType) {
+          case 1:
+            return this.mescroll.optDown.textInOffset;
+          case 2:
+            return this.mescroll.optDown.textOutOffset;
+          case 3:
+            return this.mescroll.optDown.textLoading;
+          case 4:
+            return this.mescroll.isDownEndSuccess ? this.mescroll.optDown.textSuccess : this.mescroll.isDownEndSuccess == false ? this.mescroll.optDown.textErr : this.mescroll.optDown.textInOffset;
+          default:
+            return this.mescroll.optDown.textInOffset;
+        }
+      }
+    },
+    methods: {
+      toPx(num) {
+        if (typeof num === "string") {
+          if (num.indexOf("px") !== -1) {
+            if (num.indexOf("rpx") !== -1) {
+              num = num.replace("rpx", "");
+            } else if (num.indexOf("upx") !== -1) {
+              num = num.replace("upx", "");
+            } else {
+              return Number(num.replace("px", ""));
+            }
+          } else if (num.indexOf("%") !== -1) {
+            let rate = Number(num.replace("%", "")) / 100;
+            return this.windowHeight * rate;
+          }
+        }
+        return num ? uni.upx2px(Number(num)) : 0;
+      },
+      scroll(e) {
+        this.mescroll.scroll(e.detail, () => {
+          this.$emit("scroll", this.mescroll);
+        });
+      },
+      emptyClick() {
+        this.$emit("emptyclick", this.mescroll);
+      },
+      toTopClick() {
+        this.mescroll.scrollTo(0, this.mescroll.optUp.toTop.duration);
+        this.$emit("topclick", this.mescroll);
+      },
+      setClientHeight() {
+        if (this.mescroll.getClientHeight(true) === 0 && !this.isExec) {
+          this.isExec = true;
+          this.$nextTick(() => {
+            this.getClientInfo((data) => {
+              this.isExec = false;
+              if (data) {
+                this.mescroll.setClientHeight(data.height);
+              } else if (this.clientNum != 3) {
+                this.clientNum = this.clientNum == null ? 1 : this.clientNum + 1;
+                setTimeout(() => {
+                  this.setClientHeight();
+                }, this.clientNum * 100);
+              }
+            });
+          });
+        }
+      },
+      getClientInfo(success) {
+        let query = uni.createSelectorQuery();
+        query = query.in(this);
+        let view = query.select("#" + this.viewId);
+        view.boundingClientRect((data) => {
+          success(data);
+        }).exec();
+      }
+    },
+    created() {
+      let vm = this;
+      let diyOption = {
+        down: {
+          inOffset() {
+            vm.downLoadType = 1;
+          },
+          outOffset() {
+            vm.downLoadType = 2;
+          },
+          onMoving(mescroll, rate, downHight) {
+            vm.downHight = downHight;
+            vm.downRate = rate;
+          },
+          showLoading(mescroll, downHight) {
+            vm.downLoadType = 3;
+            vm.downHight = downHight;
+          },
+          beforeEndDownScroll(mescroll) {
+            vm.downLoadType = 4;
+            return mescroll.optDown.beforeEndDelay;
+          },
+          endDownScroll() {
+            vm.downLoadType = 4;
+            vm.downHight = 0;
+            vm.downResetTimer && clearTimeout(vm.downResetTimer);
+            vm.downResetTimer = setTimeout(() => {
+              if (vm.downLoadType === 4)
+                vm.downLoadType = 0;
+            }, 300);
+          },
+          callback: function(mescroll) {
+            vm.$emit("down", mescroll);
+          }
+        },
+        up: {
+          showLoading() {
+            vm.upLoadType = 1;
+          },
+          showNoMore() {
+            vm.upLoadType = 2;
+          },
+          hideUpScroll(mescroll) {
+            vm.upLoadType = mescroll.optUp.hasNext ? 0 : 3;
+          },
+          empty: {
+            onShow(isShow) {
+              vm.isShowEmpty = isShow;
+            }
+          },
+          toTop: {
+            onShow(isShow) {
+              vm.isShowToTop = isShow;
+            }
+          },
+          callback: function(mescroll) {
+            vm.$emit("up", mescroll);
+            vm.setClientHeight();
+          }
+        }
+      };
+      let i18nType = mescrollI18n.getType();
+      let i18nOption = { type: i18nType };
+      MeScroll.extend(i18nOption, vm.i18n);
+      MeScroll.extend(i18nOption, GlobalOption.i18n);
+      MeScroll.extend(diyOption, i18nOption[i18nType]);
+      MeScroll.extend(diyOption, { down: GlobalOption.down, up: GlobalOption.up });
+      let myOption = JSON.parse(JSON.stringify({ "down": vm.down, "up": vm.up }));
+      MeScroll.extend(myOption, diyOption);
+      vm.mescroll = new MeScroll(myOption);
+      vm.mescroll.viewId = vm.viewId;
+      vm.mescroll.i18n = i18nOption;
+      vm.$emit("init", vm.mescroll);
+      const sys = uni.getSystemInfoSync();
+      if (sys.windowTop)
+        vm.windowTop = sys.windowTop;
+      if (sys.windowBottom)
+        vm.windowBottom = sys.windowBottom;
+      if (sys.windowHeight)
+        vm.windowHeight = sys.windowHeight;
+      if (sys.statusBarHeight)
+        vm.statusBarHeight = sys.statusBarHeight;
+      vm.mescroll.setBodyHeight(sys.windowHeight);
+      vm.mescroll.resetScrollTo((y, t2) => {
+        vm.scrollAnim = t2 !== 0;
+        if (typeof y === "string") {
+          vm.getClientInfo(function(rect) {
+            let mescrollTop = rect.top;
+            let selector;
+            if (y.indexOf("#") == -1 && y.indexOf(".") == -1) {
+              selector = "#" + y;
+            } else {
+              selector = y;
+              if (y.indexOf(">>>") != -1) {
+                selector = y.split(">>>")[1].trim();
+              }
+            }
+            uni.createSelectorQuery().select(selector).boundingClientRect(function(rect2) {
+              if (rect2) {
+                let curY2 = vm.mescroll.getScrollTop();
+                let top = rect2.top - mescrollTop;
+                top += curY2;
+                if (!vm.isFixed)
+                  top -= vm.numTop;
+                vm.scrollTop = curY2;
+                vm.$nextTick(function() {
+                  vm.scrollTop = top;
+                });
+              } else {
+                formatAppLog("error", "at uni_modules/mescroll-uni/components/mescroll-uni/mescroll-uni.vue:419", selector + " does not exist");
+              }
+            }).exec();
+          });
+          return;
+        }
+        let curY = vm.mescroll.getScrollTop();
+        if (t2 === 0 || t2 === 300) {
+          vm.scrollTop = curY;
+          vm.$nextTick(function() {
+            vm.scrollTop = y;
+          });
+        } else {
+          vm.mescroll.getStep(curY, y, (step) => {
+            vm.scrollTop = step;
+          }, t2);
+        }
+      });
+      if (vm.up && vm.up.toTop && vm.up.toTop.safearea != null)
+        ;
+      else {
+        vm.mescroll.optUp.toTop.safearea = vm.safearea;
+      }
+      uni.$on("setMescrollGlobalOption", (options) => {
+        if (!options)
+          return;
+        let i18nType2 = options.i18n ? options.i18n.type : null;
+        if (i18nType2 && vm.mescroll.i18n.type != i18nType2) {
+          vm.mescroll.i18n.type = i18nType2;
+          mescrollI18n.setType(i18nType2);
+          MeScroll.extend(options, vm.mescroll.i18n[i18nType2]);
+        }
+        if (options.down) {
+          let down = MeScroll.extend({}, options.down);
+          vm.mescroll.optDown = MeScroll.extend(down, vm.mescroll.optDown);
+        }
+        if (options.up) {
+          let up = MeScroll.extend({}, options.up);
+          vm.mescroll.optUp = MeScroll.extend(up, vm.mescroll.optUp);
+        }
+      });
+    },
+    mounted() {
+      this.setClientHeight();
+    },
+    destroyed() {
+      uni.$off("setMescrollGlobalOption");
+    }
+  };
+  function _sfc_render$t(_ctx, _cache, $props, $setup, $data, $options) {
+    const _component_mescroll_empty = resolveEasycom(vue.resolveDynamicComponent("mescroll-empty"), __easycom_0$8);
+    const _component_mescroll_top = vue.resolveComponent("mescroll-top");
+    return vue.openBlock(), vue.createElementBlock("view", { class: "mescroll-uni-warp" }, [
+      vue.createElementVNode("scroll-view", {
+        id: $data.viewId,
+        class: vue.normalizeClass(["mescroll-uni", { "mescroll-uni-fixed": $options.isFixed }]),
+        style: vue.normalizeStyle({ "height": $options.scrollHeight, "padding-top": $options.padTop, "padding-bottom": $options.padBottom, "top": $options.fixedTop, "bottom": $options.fixedBottom }),
+        "scroll-top": $data.scrollTop,
+        "scroll-with-animation": $data.scrollAnim,
+        onScroll: _cache[4] || (_cache[4] = (...args) => $options.scroll && $options.scroll(...args)),
+        "scroll-y": $options.scrollable,
+        "enable-back-to-top": true,
+        throttle: false
+      }, [
+        vue.createElementVNode("view", {
+          class: "mescroll-uni-content mescroll-render-touch",
+          onTouchstart: _cache[0] || (_cache[0] = (...args) => _ctx.wxsBiz.touchstartEvent && _ctx.wxsBiz.touchstartEvent(...args)),
+          onTouchmove: _cache[1] || (_cache[1] = (...args) => _ctx.wxsBiz.touchmoveEvent && _ctx.wxsBiz.touchmoveEvent(...args)),
+          onTouchend: _cache[2] || (_cache[2] = (...args) => _ctx.wxsBiz.touchendEvent && _ctx.wxsBiz.touchendEvent(...args)),
+          onTouchcancel: _cache[3] || (_cache[3] = (...args) => _ctx.wxsBiz.touchendEvent && _ctx.wxsBiz.touchendEvent(...args)),
+          "change:prop": _ctx.wxsBiz.propObserver,
+          prop: _ctx.wxsProp
+        }, [
+          vue.createCommentVNode(" \u72B6\u6001\u680F "),
+          $props.topbar && $data.statusBarHeight ? (vue.openBlock(), vue.createElementBlock("view", {
+            key: 0,
+            class: "mescroll-topbar",
+            style: vue.normalizeStyle({ height: $data.statusBarHeight + "px", background: $props.topbar })
+          }, null, 4)) : vue.createCommentVNode("v-if", true),
+          vue.createElementVNode("view", {
+            class: "mescroll-wxs-content",
+            style: vue.normalizeStyle({ "transform": $options.translateY, "transition": $options.transition }),
+            "change:prop": _ctx.wxsBiz.callObserver,
+            prop: _ctx.callProp
+          }, [
+            vue.createCommentVNode(" \u4E0B\u62C9\u52A0\u8F7D\u533A\u57DF (\u652F\u4ED8\u5B9D\u5C0F\u7A0B\u5E8F\u5B50\u7EC4\u4EF6\u4F20\u53C2\u7ED9\u5B50\u5B50\u7EC4\u4EF6\u4ECD\u62A5\u5355\u9879\u6570\u636E\u6D41\u7684\u5F02\u5E38,\u6682\u65F6\u4E0D\u901A\u8FC7mescroll-down\u7EC4\u4EF6\u5B9E\u73B0)"),
+            vue.createCommentVNode(' <mescroll-down :option="mescroll.optDown" :type="downLoadType" :rate="downRate"></mescroll-down> '),
+            $data.mescroll.optDown.use ? (vue.openBlock(), vue.createElementBlock("view", {
+              key: 0,
+              class: "mescroll-downwarp",
+              style: vue.normalizeStyle({ "background": $data.mescroll.optDown.bgColor, "color": $data.mescroll.optDown.textColor })
+            }, [
+              vue.createElementVNode("view", { class: "downwarp-content" }, [
+                vue.createElementVNode("view", {
+                  class: vue.normalizeClass(["downwarp-progress mescroll-wxs-progress", { "mescroll-rotate": $options.isDownLoading }]),
+                  style: vue.normalizeStyle({ "border-color": $data.mescroll.optDown.textColor, "transform": $options.downRotate })
+                }, null, 6),
+                vue.createElementVNode("view", { class: "downwarp-tip" }, vue.toDisplayString($options.downText), 1)
+              ])
+            ], 4)) : vue.createCommentVNode("v-if", true),
+            vue.createCommentVNode(" \u5217\u8868\u5185\u5BB9 "),
+            vue.renderSlot(_ctx.$slots, "default", {}, void 0, true),
+            vue.createCommentVNode(" \u7A7A\u5E03\u5C40 "),
+            $data.isShowEmpty ? (vue.openBlock(), vue.createBlock(_component_mescroll_empty, {
+              key: 1,
+              option: $data.mescroll.optUp.empty,
+              onEmptyclick: $options.emptyClick
+            }, null, 8, ["option", "onEmptyclick"])) : vue.createCommentVNode("v-if", true),
+            vue.createCommentVNode(" \u4E0A\u62C9\u52A0\u8F7D\u533A\u57DF (\u4E0B\u62C9\u5237\u65B0\u65F6\u4E0D\u663E\u793A, \u652F\u4ED8\u5B9D\u5C0F\u7A0B\u5E8F\u5B50\u7EC4\u4EF6\u4F20\u53C2\u7ED9\u5B50\u5B50\u7EC4\u4EF6\u4ECD\u62A5\u5355\u9879\u6570\u636E\u6D41\u7684\u5F02\u5E38,\u6682\u65F6\u4E0D\u901A\u8FC7mescroll-up\u7EC4\u4EF6\u5B9E\u73B0)"),
+            vue.createCommentVNode(' <mescroll-up v-if="mescroll.optUp.use && !isDownLoading && upLoadType!==3" :option="mescroll.optUp" :type="upLoadType"></mescroll-up> '),
+            $data.mescroll.optUp.use && !$options.isDownLoading && $data.upLoadType !== 3 ? (vue.openBlock(), vue.createElementBlock("view", {
+              key: 2,
+              class: "mescroll-upwarp",
+              style: vue.normalizeStyle({ "background": $data.mescroll.optUp.bgColor, "color": $data.mescroll.optUp.textColor })
+            }, [
+              vue.createCommentVNode(" \u52A0\u8F7D\u4E2D (\u6B64\u5904\u4E0D\u80FD\u7528v-if,\u5426\u5219android\u5C0F\u7A0B\u5E8F\u5FEB\u901F\u4E0A\u62C9\u53EF\u80FD\u4F1A\u4E0D\u65AD\u89E6\u53D1\u4E0A\u62C9\u56DE\u8C03) "),
+              vue.withDirectives(vue.createElementVNode("view", null, [
+                vue.createElementVNode("view", {
+                  class: "upwarp-progress mescroll-rotate",
+                  style: vue.normalizeStyle({ "border-color": $data.mescroll.optUp.textColor })
+                }, null, 4),
+                vue.createElementVNode("view", { class: "upwarp-tip" }, vue.toDisplayString($data.mescroll.optUp.textLoading), 1)
+              ], 512), [
+                [vue.vShow, $data.upLoadType === 1]
+              ]),
+              vue.createCommentVNode(" \u65E0\u6570\u636E "),
+              $data.upLoadType === 2 ? (vue.openBlock(), vue.createElementBlock("view", {
+                key: 0,
+                class: "upwarp-nodata"
+              }, vue.toDisplayString($data.mescroll.optUp.textNoMore), 1)) : vue.createCommentVNode("v-if", true)
+            ], 4)) : vue.createCommentVNode("v-if", true)
+          ], 12, ["change:prop", "prop"]),
+          vue.createCommentVNode(" \u5E95\u90E8\u662F\u5426\u504F\u79FBTabBar\u7684\u9AD8\u5EA6(\u9ED8\u8BA4\u4EC5\u5728H5\u7AEF\u7684tab\u9875\u751F\u6548) "),
+          vue.createCommentVNode(" \u9002\u914DiPhoneX "),
+          $props.safearea ? (vue.openBlock(), vue.createElementBlock("view", {
+            key: 1,
+            class: "mescroll-safearea"
+          })) : vue.createCommentVNode("v-if", true)
+        ], 40, ["change:prop", "prop"])
+      ], 46, ["id", "scroll-top", "scroll-with-animation", "scroll-y"]),
+      vue.createCommentVNode(" \u56DE\u5230\u9876\u90E8\u6309\u94AE (fixed\u5143\u7D20,\u9700\u5199\u5728scroll-view\u5916\u9762,\u9632\u6B62\u6EDA\u52A8\u7684\u65F6\u5019\u6296\u52A8)"),
+      vue.createVNode(_component_mescroll_top, {
+        modelValue: $data.isShowToTop,
+        "onUpdate:modelValue": _cache[5] || (_cache[5] = ($event) => $data.isShowToTop = $event),
+        option: $data.mescroll.optUp.toTop,
+        onClick: $options.toTopClick
+      }, null, 8, ["modelValue", "option", "onClick"]),
+      vue.createCommentVNode(" renderjs\u7684\u6570\u636E\u8F7D\u4F53,\u4E0D\u53EF\u5199\u5728mescroll-downwarp\u5185\u90E8,\u907F\u514Duse\u4E3Afalse\u65F6,\u8F7D\u4F53\u4E22\u5931,\u65E0\u6CD5\u66F4\u65B0\u6570\u636E "),
+      vue.createElementVNode("view", {
+        "change:prop": _ctx.renderBiz.propObserver,
+        prop: _ctx.wxsProp
+      }, null, 8, ["change:prop", "prop"])
+    ]);
+  }
+  if (typeof block0 === "function")
+    block0(_sfc_main$u);
+  if (typeof block1 === "function")
+    block1(_sfc_main$u);
+  var __easycom_1$1 = /* @__PURE__ */ _export_sfc(_sfc_main$u, [["render", _sfc_render$t], ["__scopeId", "data-v-6f5cf468"]]);
+  const MescrollMoreItemMixin = {
+    props: {
+      i: Number,
+      index: {
+        type: Number,
+        default() {
+          return 0;
+        }
+      }
+    },
+    data() {
+      return {
+        downOption: {
+          auto: false
+        },
+        upOption: {
+          auto: false
+        },
+        isInit: false
+      };
+    },
+    watch: {
+      index(val) {
+        if (this.i === val && !this.isInit)
+          this.mescrollTrigger();
+      }
+    },
+    methods: {
+      mescrollInitByRef() {
+        if (!this.mescroll || !this.mescroll.resetUpScroll) {
+          let mescrollRef = this.$refs.mescrollRef || this.$refs["mescrollRef" + this.i];
+          if (mescrollRef)
+            this.mescroll = mescrollRef.mescroll;
+        }
+      },
+      mescrollInit(mescroll) {
+        this.mescroll = mescroll;
+        this.mescrollInitByRef && this.mescrollInitByRef();
+        if (this.i === this.index) {
+          this.mescrollTrigger();
+        }
+      },
+      mescrollTrigger() {
+        this.isInit = true;
+        if (this.mescroll) {
+          if (this.mescroll.optDown.use) {
+            this.mescroll.triggerDownScroll();
+          } else {
+            this.mescroll.triggerUpScroll();
+          }
+        }
+      }
+    }
+  };
+  const _sfc_main$t = {
+    components: {
+      "mescroll-uni": __easycom_1$1
+    },
+    mixins: [MescrollMixin, MescrollMoreItemMixin],
+    props: {
+      i: Number,
+      index: {
+        type: Number,
+        default() {
+          return 0;
+        }
+      },
+      tabs: {
+        type: Array,
+        default() {
+          return [];
+        }
+      }
+    },
+    setup(props) {
+      let { proxy } = vue.getCurrentInstance();
+      let downOption = vue.ref({ auto: false });
+      let upOption = vue.ref({
+        auto: false,
+        noMoreSize: 4,
+        empty: {
+          tip: "~ \u7A7A\u7A7A\u5982\u4E5F ~"
+        }
+      });
+      let upCallback = (page) => {
+        let keyword = props.tabs[props.i].name;
+        formatAppLog("log", "at pages/tab-article/cpns/article-swiper.vue:64", keyword, page.num, page.size);
+        proxy.mescroll.endSuccess(1);
+        proxy.mescroll.endBySize(1, 1);
+      };
+      return {
+        downOption,
+        upOption,
+        upCallback
+      };
+    }
+  };
+  function _sfc_render$s(_ctx, _cache, $props, $setup, $data, $options) {
+    const _component_article_item = resolveEasycom(vue.resolveDynamicComponent("article-item"), __easycom_0$5);
+    const _component_mescroll_uni = resolveEasycom(vue.resolveDynamicComponent("mescroll-uni"), __easycom_1$1);
+    return vue.openBlock(), vue.createElementBlock("view", null, [
+      vue.createCommentVNode(' top="xxx"\u4E0B\u62C9\u5E03\u5C40\u5F80\u4E0B\u504F\u79FB,\u9632\u6B62\u88AB\u60AC\u6D6E\u83DC\u5355\u906E\u4F4F '),
+      vue.createVNode(_component_mescroll_uni, {
+        ref: "mescrollRef" + $props.i,
+        onInit: _ctx.mescrollInit,
+        height: "100%",
+        bottom: "80",
+        down: $setup.downOption,
+        onDown: _ctx.downCallback,
+        up: $setup.upOption,
+        onUp: $setup.upCallback
+      }, {
+        default: vue.withCtx(() => [
+          vue.createCommentVNode(" \u6570\u636E\u5217\u8868 "),
+          (vue.openBlock(), vue.createElementBlock(vue.Fragment, null, vue.renderList(10, (q) => {
+            return vue.createVNode(_component_article_item, { key: q });
+          }), 64))
+        ]),
+        _: 1
+      }, 8, ["onInit", "down", "onDown", "up", "onUp"])
+    ]);
+  }
+  var articleSwiper = /* @__PURE__ */ _export_sfc(_sfc_main$t, [["render", _sfc_render$s]]);
   const _sfc_main$s = {
+    components: {
+      "article-swiper": articleSwiper
+    },
     setup() {
       let { proxy } = vue.getCurrentInstance();
-      let tabId = vue.ref(null);
+      let tabRef = vue.ref(null);
+      let articleRef = vue.ref(null);
       let tabs = vue.ref([]);
+      let tabId = vue.ref(null);
+      let current = vue.ref(0);
+      let swiperHeight = vue.ref(500);
       let arr = ["APP \xB7 \u5FAE\u4FE1\u5C0F\u7A0B\u5E8F", "Java \xB7 SpringBoot ", "springCloud \xB7 SpringSecurity", "Vue \xB7 React"];
       let i = 0;
       let resetSearchInfo = () => {
@@ -2448,6 +3018,7 @@ var __spreadProps = (a, b) => __defProps(a, __getOwnPropDescs(b));
       };
       resetSearchInfo();
       vue.onMounted(async () => {
+        swiperHeight.value = uni.getSystemInfoSync().windowHeight - 40;
         let res = await getCategory();
         tabs.value = res;
         tabId.value = res[0].id;
@@ -2457,29 +3028,60 @@ var __spreadProps = (a, b) => __defProps(a, __getOwnPropDescs(b));
       });
       const changeTab = (id) => {
         tabId.value = id;
+        current.value = id - 1;
+      };
+      const swiperChange = (e) => {
+        current.value = e.detail.current;
+        tabId.value = e.detail.current + 1;
+        tabRef.value.tabId = tabId.value;
       };
       return {
+        tabRef,
+        articleRef,
         tabs,
-        changeTab
+        tabId,
+        current,
+        swiperHeight,
+        changeTab,
+        swiperChange
       };
     }
   };
   function _sfc_render$r(_ctx, _cache, $props, $setup, $data, $options) {
     const _component_tab_bar = resolveEasycom(vue.resolveDynamicComponent("tab-bar"), __easycom_0$6);
-    const _component_article_item = resolveEasycom(vue.resolveDynamicComponent("article-item"), __easycom_0$5);
-    return vue.openBlock(), vue.createElementBlock("view", null, [
+    const _component_article_swiper = vue.resolveComponent("article-swiper");
+    return vue.openBlock(), vue.createElementBlock("view", { class: "cantainer" }, [
       vue.createElementVNode("view", { class: "tab" }, [
         vue.createVNode(_component_tab_bar, {
+          ref: "tabRef",
           tabs: $setup.tabs,
           itemWidth: 75,
           onChangeTab: $setup.changeTab
         }, null, 8, ["tabs", "onChangeTab"])
       ]),
-      vue.createVNode(_component_article_item),
-      vue.createTextVNode(" \u6587\u7AE0 "),
-      (vue.openBlock(), vue.createElementBlock(vue.Fragment, null, vue.renderList(100, (i) => {
-        return vue.createElementVNode("view", { key: i }, vue.toDisplayString(i), 1);
-      }), 64))
+      vue.createCommentVNode(" <article-item></article-item> "),
+      vue.createCommentVNode(" \u5DE6\u53F3\u6ED1\u52A8\u5207\u6362\u5207\u6362(swiper)+\u4E0A\u62C9\u52A0\u8F7D\u4E0B\u62C9\u5237\u65B0(mescroll) "),
+      vue.createElementVNode("swiper", {
+        duration: 1e3,
+        style: vue.normalizeStyle({ "height": $setup.swiperHeight + "px" }),
+        current: $setup.current,
+        onChange: _cache[0] || (_cache[0] = (...args) => $setup.swiperChange && $setup.swiperChange(...args))
+      }, [
+        (vue.openBlock(true), vue.createElementBlock(vue.Fragment, null, vue.renderList($setup.tabs, (item, index) => {
+          return vue.openBlock(), vue.createElementBlock("swiper-item", {
+            key: item.id
+          }, [
+            vue.createCommentVNode(" \u6BCF\u4E2A\u7EC4\u4EF6\u4E00\u4E2Aindex\uFF0C\u6570\u636E\u53EA\u52A0\u8F7D\u5F53\u524Dcurrent\u7684 "),
+            vue.createVNode(_component_article_swiper, {
+              ref_for: true,
+              ref: "articleRef",
+              i: index,
+              index: $setup.current,
+              tabs: $setup.tabs
+            }, null, 8, ["i", "index", "tabs"])
+          ]);
+        }), 128))
+      ], 44, ["current"])
     ]);
   }
   var PagesTabArticleArticle = /* @__PURE__ */ _export_sfc(_sfc_main$s, [["render", _sfc_render$r]]);
@@ -4473,64 +5075,11 @@ var __spreadProps = (a, b) => __defProps(a, __getOwnPropDescs(b));
     ], 32);
   }
   var downBar = /* @__PURE__ */ _export_sfc(_sfc_main$l, [["render", _sfc_render$k], ["__scopeId", "data-v-66c7cbb7"]]);
-  const MescrollMoreItemMixin = {
-    props: {
-      i: Number,
-      index: {
-        type: Number,
-        default() {
-          return 0;
-        }
-      }
-    },
-    data() {
-      return {
-        downOption: {
-          auto: false
-        },
-        upOption: {
-          auto: false
-        },
-        isInit: false
-      };
-    },
-    watch: {
-      index(val) {
-        if (this.i === val && !this.isInit)
-          this.mescrollTrigger();
-      }
-    },
-    methods: {
-      mescrollInitByRef() {
-        if (!this.mescroll || !this.mescroll.resetUpScroll) {
-          let mescrollRef = this.$refs.mescrollRef || this.$refs["mescrollRef" + this.i];
-          if (mescrollRef)
-            this.mescroll = mescrollRef.mescroll;
-        }
-      },
-      mescrollInit(mescroll) {
-        this.mescroll = mescroll;
-        this.mescrollInitByRef && this.mescrollInitByRef();
-        if (this.i === this.index)
-          ;
-      },
-      mescrollTrigger() {
-        this.isInit = true;
-        if (this.mescroll) {
-          if (this.mescroll.optDown.use) {
-            this.mescroll.triggerDownScroll();
-          } else {
-            this.mescroll.triggerUpScroll();
-          }
-        }
-      }
-    }
-  };
   const _sfc_main$k = {
     mixins: [MescrollMixin, MescrollMoreItemMixin],
     components: {
       "down-bar": downBar,
-      "mescroll-body": __easycom_1$2
+      "mescroll-body": __easycom_1$3
     },
     props: {
       i: Number,
@@ -4615,8 +5164,8 @@ var __spreadProps = (a, b) => __defProps(a, __getOwnPropDescs(b));
       let upCallback = async (page) => {
         page.num;
         page.size;
-        formatAppLog("log", "at pages/search/cpns/course-list.vue:130", "\u6574\u5408\u641C\u7D22\u8BFE\u7A0B\u5185\u5BB9-----", searchDate);
-        formatAppLog("log", "at pages/search/cpns/course-list.vue:131", `\u641C\u7D22\u8BFE\u7A0B\u5F53\u524D\u7B2C${page.num}\u9875`, page.size);
+        formatAppLog("log", "at pages/search/cpns/course-list.vue:129", "\u6574\u5408\u641C\u7D22\u8BFE\u7A0B\u5185\u5BB9-----", searchDate);
+        formatAppLog("log", "at pages/search/cpns/course-list.vue:130", `\u641C\u7D22\u8BFE\u7A0B\u5F53\u524D\u7B2C${page.num}\u9875`, page.size);
         let res = await getCourseList(searchDate, page.num, page.size);
         if (page.num == 1) {
           courseList2.value = [];
@@ -4638,7 +5187,7 @@ var __spreadProps = (a, b) => __defProps(a, __getOwnPropDescs(b));
   function _sfc_render$j(_ctx, _cache, $props, $setup, $data, $options) {
     const _component_down_bar = vue.resolveComponent("down-bar");
     const _component_course_item = resolveEasycom(vue.resolveDynamicComponent("course-item"), __easycom_0$7);
-    const _component_mescroll_body = resolveEasycom(vue.resolveDynamicComponent("mescroll-body"), __easycom_1$2);
+    const _component_mescroll_body = resolveEasycom(vue.resolveDynamicComponent("mescroll-body"), __easycom_1$3);
     return vue.openBlock(), vue.createElementBlock(vue.Fragment, null, [
       vue.createCommentVNode(" \u4E0D\u80FD\u7528v-if (i: \u6BCF\u4E2Atab\u9875\u7684\u4E13\u5C5E\u4E0B\u6807;  index: \u5F53\u524Dtab\u7684\u4E0B\u6807; \u7533\u660E\u5728 MescrollMoreItemMixin )"),
       vue.withDirectives(vue.createElementVNode("view", null, [
@@ -4650,8 +5199,7 @@ var __spreadProps = (a, b) => __defProps(a, __getOwnPropDescs(b));
         vue.createCommentVNode(" \u5C55\u793A\u5217\u8868\u6570\u636E "),
         vue.createCommentVNode(' ref\u52A8\u6001\u751F\u6210: \u5B57\u8282\u8DF3\u52A8\u5C0F\u7A0B\u5E8F\u7F16\u8F91\u5668\u4E0D\u652F\u6301\u4E00\u4E2A\u9875\u9762\u5B58\u5728\u76F8\u540C\u7684ref (\u5982\u4E0D\u8003\u8651\u5B57\u8282\u8DF3\u52A8\u5C0F\u7A0B\u5E8F\u53EF\u56FA\u5B9A\u503C\u4E3A ref="mescrollRef") '),
         vue.createVNode(_component_mescroll_body, {
-          ref: "mescrollRef" + $props.i,
-          onInit: _ctx.mescrollInit,
+          ref: "mescrollRef",
           down: _ctx.downOption,
           onDown: _ctx.downCallback,
           up: $setup.upOption,
@@ -4669,7 +5217,7 @@ var __spreadProps = (a, b) => __defProps(a, __getOwnPropDescs(b));
             ])
           ]),
           _: 1
-        }, 8, ["onInit", "down", "onDown", "up", "onUp"])
+        }, 8, ["down", "onDown", "up", "onUp"])
       ], 512), [
         [vue.vShow, $props.i === $props.index]
       ])
@@ -4687,7 +5235,7 @@ var __spreadProps = (a, b) => __defProps(a, __getOwnPropDescs(b));
     mixins: [MescrollMixin, MescrollMoreItemMixin],
     components: {
       "down-bar": downBar,
-      "mescroll-body": __easycom_1$2
+      "mescroll-body": __easycom_1$3
     },
     props: {
       i: Number,
@@ -4747,7 +5295,7 @@ var __spreadProps = (a, b) => __defProps(a, __getOwnPropDescs(b));
       let changeCategory = (data) => {
         let content = props.content;
         searchDate = __spreadProps(__spreadValues(__spreadValues({}, searchDate), data), { content });
-        formatAppLog("log", "at pages/search/cpns/article-list.vue:95", "\u6574\u5408\u641C\u7D22\u6587\u7AE0\u5185\u5BB9-----", searchDate);
+        formatAppLog("log", "at pages/search/cpns/article-list.vue:94", "\u6574\u5408\u641C\u7D22\u6587\u7AE0\u5185\u5BB9-----", searchDate);
         proxy.mescroll.resetUpScroll();
       };
       let upOption = vue.ref({
@@ -4757,7 +5305,7 @@ var __spreadProps = (a, b) => __defProps(a, __getOwnPropDescs(b));
       let upCallback = async (page) => {
         page.num;
         page.size;
-        formatAppLog("log", "at pages/search/cpns/article-list.vue:111", `\u641C\u7D22\u6587\u7AE0\u5F53\u524D\u7B2C${page.num}\u9875`, page.size);
+        formatAppLog("log", "at pages/search/cpns/article-list.vue:110", `\u641C\u7D22\u6587\u7AE0\u5F53\u524D\u7B2C${page.num}\u9875`, page.size);
         let res = await getArticleList(searchDate, page.num, page.size);
         if (page.num == 1) {
           articleList2.value = [];
@@ -4779,7 +5327,7 @@ var __spreadProps = (a, b) => __defProps(a, __getOwnPropDescs(b));
   function _sfc_render$i(_ctx, _cache, $props, $setup, $data, $options) {
     const _component_down_bar = vue.resolveComponent("down-bar");
     const _component_article_item = resolveEasycom(vue.resolveDynamicComponent("article-item"), __easycom_0$5);
-    const _component_mescroll_body = resolveEasycom(vue.resolveDynamicComponent("mescroll-body"), __easycom_1$2);
+    const _component_mescroll_body = resolveEasycom(vue.resolveDynamicComponent("mescroll-body"), __easycom_1$3);
     return vue.openBlock(), vue.createElementBlock(vue.Fragment, null, [
       vue.createCommentVNode(" \u4E0D\u80FD\u7528v-if (i: \u6BCF\u4E2Atab\u9875\u7684\u4E13\u5C5E\u4E0B\u6807;  index: \u5F53\u524Dtab\u7684\u4E0B\u6807; \u7533\u660E\u5728 MescrollMoreItemMixin )"),
       vue.withDirectives(vue.createElementVNode("view", null, [
@@ -4792,7 +5340,6 @@ var __spreadProps = (a, b) => __defProps(a, __getOwnPropDescs(b));
         vue.createCommentVNode(' ref\u52A8\u6001\u751F\u6210: \u5B57\u8282\u8DF3\u52A8\u5C0F\u7A0B\u5E8F\u7F16\u8F91\u5668\u4E0D\u652F\u6301\u4E00\u4E2A\u9875\u9762\u5B58\u5728\u76F8\u540C\u7684ref (\u5982\u4E0D\u8003\u8651\u5B57\u8282\u8DF3\u52A8\u5C0F\u7A0B\u5E8F\u53EF\u56FA\u5B9A\u503C\u4E3A ref="mescrollRef") '),
         vue.createVNode(_component_mescroll_body, {
           ref: "mescrollRef" + $props.i,
-          onInit: _ctx.mescrollInit,
           down: _ctx.downOption,
           onDown: _ctx.downCallback,
           up: $setup.upOption,
@@ -4813,7 +5360,7 @@ var __spreadProps = (a, b) => __defProps(a, __getOwnPropDescs(b));
             }), 128))
           ]),
           _: 1
-        }, 8, ["onInit", "down", "onDown", "up", "onUp"])
+        }, 8, ["down", "onDown", "up", "onUp"])
       ], 512), [
         [vue.vShow, $props.i === $props.index]
       ])
@@ -4870,7 +5417,7 @@ var __spreadProps = (a, b) => __defProps(a, __getOwnPropDescs(b));
     mixins: [MescrollMixin, MescrollMoreItemMixin],
     components: {
       "down-bar": downBar,
-      "mescroll-body": __easycom_1$2
+      "mescroll-body": __easycom_1$3
     },
     props: {
       i: Number,
@@ -4930,7 +5477,7 @@ var __spreadProps = (a, b) => __defProps(a, __getOwnPropDescs(b));
       let changeCategory = (data) => {
         let content = props.content;
         searchDate = __spreadProps(__spreadValues(__spreadValues({}, searchDate), data), { content });
-        formatAppLog("log", "at pages/search/cpns/question-list.vue:95", "\u6574\u5408\u641C\u7D22\u95EE\u7B54\u5185\u5BB9-----", searchDate);
+        formatAppLog("log", "at pages/search/cpns/question-list.vue:94", "\u6574\u5408\u641C\u7D22\u95EE\u7B54\u5185\u5BB9-----", searchDate);
         proxy.mescroll.resetUpScroll();
       };
       let upOption = vue.ref({
@@ -4940,7 +5487,7 @@ var __spreadProps = (a, b) => __defProps(a, __getOwnPropDescs(b));
       let upCallback = async (page) => {
         page.num;
         page.size;
-        formatAppLog("log", "at pages/search/cpns/question-list.vue:111", `\u641C\u7D22\u95EE\u7B54\u5F53\u524D\u7B2C${page.num}\u9875`, page.size);
+        formatAppLog("log", "at pages/search/cpns/question-list.vue:110", `\u641C\u7D22\u95EE\u7B54\u5F53\u524D\u7B2C${page.num}\u9875`, page.size);
         let res = await getQuestionList(searchDate, page.num, page.size);
         if (page.num == 1) {
           questionList2.value = [];
@@ -4962,7 +5509,7 @@ var __spreadProps = (a, b) => __defProps(a, __getOwnPropDescs(b));
   function _sfc_render$g(_ctx, _cache, $props, $setup, $data, $options) {
     const _component_down_bar = vue.resolveComponent("down-bar");
     const _component_question_item = resolveEasycom(vue.resolveDynamicComponent("question-item"), __easycom_0$3);
-    const _component_mescroll_body = resolveEasycom(vue.resolveDynamicComponent("mescroll-body"), __easycom_1$2);
+    const _component_mescroll_body = resolveEasycom(vue.resolveDynamicComponent("mescroll-body"), __easycom_1$3);
     return vue.openBlock(), vue.createElementBlock(vue.Fragment, null, [
       vue.createCommentVNode(" \u4E0D\u80FD\u7528v-if (i: \u6BCF\u4E2Atab\u9875\u7684\u4E13\u5C5E\u4E0B\u6807;  index: \u5F53\u524Dtab\u7684\u4E0B\u6807; \u7533\u660E\u5728 MescrollMoreItemMixin )"),
       vue.withDirectives(vue.createElementVNode("view", null, [
@@ -4975,7 +5522,6 @@ var __spreadProps = (a, b) => __defProps(a, __getOwnPropDescs(b));
         vue.createCommentVNode(' ref\u52A8\u6001\u751F\u6210: \u5B57\u8282\u8DF3\u52A8\u5C0F\u7A0B\u5E8F\u7F16\u8F91\u5668\u4E0D\u652F\u6301\u4E00\u4E2A\u9875\u9762\u5B58\u5728\u76F8\u540C\u7684ref (\u5982\u4E0D\u8003\u8651\u5B57\u8282\u8DF3\u52A8\u5C0F\u7A0B\u5E8F\u53EF\u56FA\u5B9A\u503C\u4E3A ref="mescrollRef") '),
         vue.createVNode(_component_mescroll_body, {
           ref: "mescrollRef" + $props.i,
-          onInit: _ctx.mescrollInit,
           down: _ctx.downOption,
           onDown: _ctx.downCallback,
           up: $setup.upOption,
@@ -4996,7 +5542,7 @@ var __spreadProps = (a, b) => __defProps(a, __getOwnPropDescs(b));
             }), 128))
           ]),
           _: 1
-        }, 8, ["onInit", "down", "onDown", "up", "onUp"])
+        }, 8, ["down", "onDown", "up", "onUp"])
       ], 512), [
         [vue.vShow, $props.i === $props.index]
       ])

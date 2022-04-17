@@ -2,9 +2,64 @@
 	<view>
 		<!-- 标签 -->
 		<view class="example-body">
-			<view class="tag-view" v-for="(item,index) in 10" :key="item">
-				<uni-tag :circle="true" :inverted="true" text="标签" :type="type[index]" />
+			<view class="tag-view" v-for="(item,index) in articleDetail.labelList" :key="item.id">
+				<uni-tag :circle="true" :inverted="true" :text="item.name" :type="type[index]" />
 			</view>
+		</view>
+				
+		<view class="content-main">
+			<text class="title">{{articleDetail.title}}</text>
+			<view class="info">
+				<view class="author center">
+					<image :src="articleDetail.imageUrl"></image>
+					<text>{{articleDetail.nickName}}</text>
+				</view>
+				<text> · {{articleDetail.updateDate}}</text>
+				<text> · {{articleDetail.viewCount}}人阅读</text>
+			</view>
+			
+			<!-- 文章内容 -->
+			<!-- #ifdef MP -->
+			<!-- nodes 是html代码字符串 -->
+			<rich-text selectable="true" :nodes="articleDetail.htmlContent"></rich-text>
+			<!-- #endif -->
+			<!-- #ifndef MP -->
+			<text selectable="true" v-html="`${articleDetail.htmlContent}`"></text>
+			<!-- #endif -->
+		</view>
+		
+		<!-- 热门评论 -->
+		<view class="footer">
+			<view class="comment">
+				<view class="footer-header">热门评论</view>
+				<view class="comment-item row">
+					<image src="/static/logo.png"></image>
+					<view class="comment-right">
+						<view class="info space-between center">
+							<text>梦小二</text>
+							<text>2009-09-09</text>
+						</view>
+						<text class="content">文章写得很好</text>
+					</view>
+				</view>
+				
+				<view class="comment-item row">
+					<image src="/static/logo.png"></image>
+					<view class="comment-right">
+						<view class="info space-between">
+							<text>梦小三</text>
+							<text>2011-09-09</text>
+						</view>
+						<text class="content">顶替枯文章写得很好</text>
+					</view>
+				</view>
+			</view>
+		</view>
+		
+		<!-- 评论区 -->
+		<view class="bottom center" @touchmove.stop.prevent="()=>{}">
+			<textarea class="textarea" placeholder="有何高见,展开讲讲……" />
+			<button class="btn" size="mini">提交</button>
 		</view>
 		
 		<!-- 分享组件 -->
@@ -43,10 +98,11 @@ export default {
 		let articleDetail = ref({})
 		let type = ['primary','success','warning','error']
 		
-		// onMounted(async ()=>{
-		// 	let res = await getArticleDetail(id.value)
-		// 	articleDetail.value = res
-		// })
+		onMounted(async ()=>{
+			let res = await getArticleDetail(id.value)
+			articleDetail.value = res
+			console.log(res)
+		})
 		
 		//分享按钮
 		//监听导航栏按钮点击
@@ -60,6 +116,7 @@ export default {
 			id,
 			providerList,
 			myShare,
+			articleDetail,
 			type
 		}
 	},
@@ -78,6 +135,105 @@ export default {
 	margin: 20rpx;
 	.tag-view{
 		margin: 0 20rpx 20rpx 0;
+	}
+}
+.content-main {
+	padding: 25rpx;
+	.title {
+		font-size: 45rpx;
+		line-height: 55rpx;
+		font-weight: bold;
+	}
+	.info {
+		display: flex;
+		align-items: center;
+		margin: 30rpx 0;
+		.author {
+			font-size: 30rpx;
+			color: #303133;
+			image {
+				width: 45rpx;
+				height: 45rpx;
+				border-radius: 100%;
+				margin-right: 10rpx;
+			}
+		}
+		&>text {
+			margin-left: 10rpx;
+			font-size: 25rpx;
+			color: #999;
+		}
+	}
+}
+
+.footer {
+	background-color: #F1F1F1;
+	padding-top: 10rpx;
+	/* 标题 */
+	.footer-header{
+		font-size: 30rpx;
+		color: #303133;
+		font-weight: bold;
+		padding: 25rpx;
+		&:before{
+			content: '';
+			width: 0;
+			height: 40rpx;
+			margin-right: 25rpx;
+			border-left: 6rpx solid $mxg-color-primary;
+		}
+	}
+}
+
+/* 评论 */
+.comment {
+	background-color: #FFFFFF;
+	margin-top: 10rpx;
+	// 最下方有评论按钮,
+	padding-bottom: 120rpx;
+	.comment-item {
+		padding: 20rpx 25rpx;
+		image{
+			width: 50rpx;
+			height: 50rpx;
+			border-radius: 50rpx;
+			margin-right: 20rpx;
+		}
+		
+		.comment-right{
+			width: calc(100% - 80rpx);
+			font-size: 25rpx;
+			color: $mxg-text-color-grey;
+			.content{
+				font-size: 30rpx;
+				color: $mxg-text-color-black;
+				margin: 10rpx 0;
+			}
+		}
+	}
+}
+
+/* 底部 */
+.bottom {
+	position: fixed;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	white-space: nowrap;// 不换行
+	padding: 20rpx;
+	background-color: #FFFFFF;
+	border-top: $mxg-underLine;
+	.textarea {
+		font-size: 30rpx;
+		padding: 15rpx 20rpx;
+		width: 100%;
+		height: 45rpx;
+		background-color: #F8F9FB;
+		border-radius: 30rpx;
+	}
+	.btn {
+		padding: 0 20rpx;
+		margin-left: 15rpx;
 	}
 }
 </style>

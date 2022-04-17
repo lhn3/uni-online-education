@@ -13,7 +13,7 @@ const getArticleList=(query,current = 1,size = 10)=>{
 //获取文章详情
 const getArticleDetail=(id)=>{
 	return request({
-		url:'/article/api/article?id'+id,
+		url:'/article/api/article/'+id,
 	})
 }
 

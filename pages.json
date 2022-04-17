@@ -74,7 +74,21 @@
 		,{
 			"path": "pages/tab-question/question",
 			"style": {
-				"navigationBarTitleText": "问答"
+				"navigationBarTitleText": "问答",
+				"app-plus":{
+					"bounce":false,
+					"scrollIndicator":"none",//不显示滚动条
+					"titleNView":{
+						"searchInput":{//搜索
+								"align":"center",
+								"backgroundColor":"rgba(255,255,255,0.5)",
+								"disabled":true,
+								"placeholder":"请输入搜索内容",
+								"placeholderColor":"rgba(255,255,255,0.8)",
+								"borderRadius":"30rpx"
+								}
+					}
+				}
 			}
 		}
 		,{

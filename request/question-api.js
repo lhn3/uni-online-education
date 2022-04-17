@@ -10,6 +10,30 @@ const getQuestionList=(query,current = 1,size = 10)=>{
 	})
 }
 
+const getHotQuestionList=(current = 1,size = 10)=>{
+	return request({
+		method:'POST',
+		url:'/question/api/question/hot',
+		data:{current,size}
+	})
+}
+const getNewQuestionList=(current = 1,size = 10)=>{
+	return request({
+		method:'POST',
+		url:'/question/api/question/new',
+		data:{current,size}
+	})
+}
+const getWaitQuestionList=(current = 1,size = 10)=>{
+	return request({
+		method:'POST',
+		url:'/question/api/question/wait',
+		data:{current,size}
+	})
+}
 export {
-	getQuestionList
+	getQuestionList,
+	getHotQuestionList,
+	getNewQuestionList,
+	getWaitQuestionList
 }

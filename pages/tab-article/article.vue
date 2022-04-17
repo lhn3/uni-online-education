@@ -3,7 +3,6 @@
 		<view class="tab">
 			<tab-bar ref="tabRef" :tabs="tabs" @changeTab="changeTab"></tab-bar>
 		</view>
-		<!-- <article-item></article-item> -->
 		
 		<!-- 左右滑动切换切换(swiper)+上拉加载下拉刷新(mescroll) -->
 		<swiper :duration="1000" :style="{'height':swiperHeight+'px'}" :current="current" @change="swiperChange">
@@ -17,7 +16,7 @@
 
 <script>
 import { getCurrentInstance,ref,reactive,toRefs,onMounted,nextTick } from "vue";
-import { onNavigationBarSearchInputClicked,onReachBottom,onPageScroll } from '@dcloudio/uni-app';
+import { onNavigationBarSearchInputClicked } from '@dcloudio/uni-app';
 import articleSwiper from './cpns/article-swiper';
 import {getCategory} from '@/request/course-api.js'
 export default {
@@ -29,7 +28,7 @@ export default {
 		let tabRef = ref(null)
 		let articleRef = ref(null)
 		let tabs = ref([])
-		let tabId = ref(null)
+		// let tabId = ref(null)
 		let current = ref(0)
 		let swiperHeight = ref(500)
 		
@@ -53,7 +52,7 @@ export default {
 			let res = await getCategory()
 			res.unshift({id:0,name:'全部'})
 			tabs.value = res
-			tabId.value = res[0].id
+			// tabId.value = res[0].id
 		})
 		
 		//监听nav搜索点击
@@ -63,21 +62,22 @@ export default {
 		
 		//标签点击事件
 		const changeTab = (id) => {
-			tabId.value = id
+			// tabId.value = id
 			current.value = id 
 		}
 		
 		//swiper切换时
 		const swiperChange=(e)=>{
-			current.value = e.detail.current
-			tabId.value = e.detail.current
-			tabRef.value.tabId = tabId.value
+			current.value = e.detail.current //展示当前选择的数据
+			// tabId.value = e.detail.current
+			tabRef.value.tabId = e.detail.current
+			tabRef.value.tabPosition(e.detail.current)
 		}
 		return{
 			tabRef,
 			articleRef,
 			tabs,
-			tabId,
+			// tabId,
 			current,
 			swiperHeight,
 			

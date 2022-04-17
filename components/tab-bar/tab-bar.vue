@@ -1,7 +1,7 @@
 <template>
 	<view class="tab-bar" @touchmove.stop.prevent="()=>{}">
 		<scroll-view class="noScorll bar-view" scroll-x scroll-with-animation :scroll-left="move">
-			<view class="bar-item" :style="{width: `${realItemWidth}px`}" :class="{current: item.id == tabId}"
+			<view class="bar-item" :style="{width: `${itemWidth}px`}" :class="{current: item.id == tabId}"
 				v-for="(item,index) in tabs" :key="item.id"
 				@click="changeTabs(item.id,index)"
 				>
@@ -23,30 +23,34 @@ export default {
 	},
 	setup(props,{emit}){
 		let tabId = ref()
-		let realItemWidth = ref(100)	//每个标签的宽度
+		let itemWidth = ref(100)	//每个标签的宽度
 		let move = ref(0)
 		
 		watch(() => props.tabs, (newValue)=>{
 			if(newValue.length == 0) return;
 			tabId.value=newValue[0].id
 			if(newValue.length < 5){	//如果tabs小于5个就平均分配
-				realItemWidth.value = uni.upx2px(750/newValue.length)
+				itemWidth.value = uni.upx2px(750/newValue.length)
 			}else{
-				realItemWidth.value = uni.upx2px(750/5)
+				itemWidth.value = uni.upx2px(750/5)
 			}
 		},{
 			deep:true,
 			immediate:true
 		})
 		
-		
-		let changeTabs=(id,index)=>{
-			if(tabId.value == id) return;
+		//计算item的位置
+		let tabPosition=(index)=>{
 			if(index > 2){
-				move.value = (index-2) * realItemWidth.value
+				move.value = (index-2) * itemWidth.value
 			}else{
 				move.value = 0
 			}
+		}
+		
+		let changeTabs=(id,index)=>{
+			if(tabId.value == id) return;
+			tabPosition()
 			
 			if(tabId.value != id){
 				tabId.value=id
@@ -55,9 +59,10 @@ export default {
 		}
 		return{
 			tabId,
-			realItemWidth,
+			itemWidth,
 			move,
 			
+			tabPosition,
 			changeTabs
 		}
 	}

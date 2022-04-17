@@ -19,24 +19,20 @@ export default {
 		tabs:{
 			type:Array,
 			default:()=>[]
-		},
-		itemWidth:{
-			type:Number,
-			default:100
 		}
 	},
 	setup(props,{emit}){
 		let tabId = ref()
-		let realItemWidth = ref(100)
+		let realItemWidth = ref(100)	//每个标签的宽度
 		let move = ref(0)
 		
 		watch(() => props.tabs, (newValue)=>{
 			if(newValue.length == 0) return;
 			tabId.value=newValue[0].id
-			if(newValue.length <= 5){	//如果tabs小于5个就平均分配
+			if(newValue.length < 5){	//如果tabs小于5个就平均分配
 				realItemWidth.value = uni.upx2px(750/newValue.length)
 			}else{
-				realItemWidth.value = props.itemWidth
+				realItemWidth.value = uni.upx2px(750/5)
 			}
 		},{
 			deep:true,
@@ -47,7 +43,7 @@ export default {
 		let changeTabs=(id,index)=>{
 			if(tabId.value == id) return;
 			if(index > 2){
-				move.value = (index-2) * props.itemWidth
+				move.value = (index-2) * realItemWidth.value
 			}else{
 				move.value = 0
 			}

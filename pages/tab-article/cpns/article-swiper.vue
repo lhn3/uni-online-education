@@ -12,7 +12,7 @@
 		 @up="upCallback" 
 		>
 			<!-- 数据列表 -->
-			<article-item v-for="q in 10" :key="q"></article-item>
+			<article-item v-for="item in articleList" :key="item.id" :item="item"></article-item>
 		</mescroll-uni>
 	</view>
 </template>
@@ -22,6 +22,7 @@ import MescrollMixin from "@/uni_modules/mescroll-uni/components/mescroll-uni/me
 import MescrollMoreItemMixin from "@/uni_modules/mescroll-uni/components/mescroll-uni/mixins/mescroll-more-item.js";
 import mescrollUni from "@/uni_modules/mescroll-uni/components/mescroll-uni/mescroll-uni.vue";
 import { getCurrentInstance,ref,reactive,toRefs,onMounted,nextTick } from "vue";
+import {getArticleList} from '@/request/article-api.js'
 export default {
 	components:{
 		'mescroll-uni':mescrollUni
@@ -56,18 +57,30 @@ export default {
 						tip: '~ 空空如也 ~', // 提示
 					}
 				},)
+		let articleList=ref([])
 		
 		 /*上拉加载的回调: 其中page.num:当前页 从1开始, page.size:每页数据条数,默认10 */
-		let upCallback=(page) => {
+		let upCallback = async (page) => {
 			//联网加载数据
 			let keyword = props.tabs[props.i].name
 			console.log(keyword,page.num,page.size)
-			proxy.mescroll.endSuccess(1);
-			proxy.mescroll.endBySize(1,1);
+			let res = await getArticleList({content:keyword},page.num,page.size) 
+			if(page.num==1){
+				articleList.value = []
+				// 回到顶部
+				proxy.mescroll.scrollTo(0,100)
+			}
+			articleList.value = [...articleList.value,...res.records]
+			//判断数组长度有没有大于会等于总长度
+			proxy.mescroll.endBySize(articleList.value.length,res.total)
+			proxy.mescroll.endErr()
+			//搜索成功的条数
+			// proxy.mescroll.endSuccess(1)
 		}
 		return {
 			downOption,
 			upOption,
+			articleList,
 			
 			upCallback
 		}

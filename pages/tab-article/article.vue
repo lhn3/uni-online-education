@@ -1,7 +1,7 @@
 <template>
 	<view class="cantainer">
 		<view class="tab">
-			<tab-bar ref="tabRef" :tabs="tabs" :itemWidth="75" @changeTab="changeTab"></tab-bar>
+			<tab-bar ref="tabRef" :tabs="tabs" @changeTab="changeTab"></tab-bar>
 		</view>
 		<!-- <article-item></article-item> -->
 		
@@ -49,7 +49,9 @@ export default {
 		
 		onMounted(async ()=>{
 			swiperHeight.value = uni.getSystemInfoSync().windowHeight - 40
+			console.log(swiperHeight.value)
 			let res = await getCategory()
+			res.unshift({id:0,name:'全部'})
 			tabs.value = res
 			tabId.value = res[0].id
 		})
@@ -62,13 +64,13 @@ export default {
 		//标签点击事件
 		const changeTab = (id) => {
 			tabId.value = id
-			current.value = id - 1
+			current.value = id 
 		}
 		
 		//swiper切换时
 		const swiperChange=(e)=>{
 			current.value = e.detail.current
-			tabId.value = e.detail.current + 1
+			tabId.value = e.detail.current
 			tabRef.value.tabId = tabId.value
 		}
 		return{

@@ -2301,10 +2301,6 @@ var __spreadProps = (a, b) => __defProps(a, __getOwnPropDescs(b));
       tabs: {
         type: Array,
         default: () => []
-      },
-      itemWidth: {
-        type: Number,
-        default: 100
       }
     },
     setup(props, { emit }) {
@@ -2315,10 +2311,10 @@ var __spreadProps = (a, b) => __defProps(a, __getOwnPropDescs(b));
         if (newValue.length == 0)
           return;
         tabId.value = newValue[0].id;
-        if (newValue.length <= 5) {
+        if (newValue.length < 5) {
           realItemWidth.value = uni.upx2px(750 / newValue.length);
         } else {
-          realItemWidth.value = props.itemWidth;
+          realItemWidth.value = uni.upx2px(750 / 5);
         }
       }, {
         deep: true,
@@ -2328,7 +2324,7 @@ var __spreadProps = (a, b) => __defProps(a, __getOwnPropDescs(b));
         if (tabId.value == id)
           return;
         if (index > 2) {
-          move.value = (index - 2) * props.itemWidth;
+          move.value = (index - 2) * realItemWidth.value;
         } else {
           move.value = 0;
         }
@@ -2926,6 +2922,13 @@ var __spreadProps = (a, b) => __defProps(a, __getOwnPropDescs(b));
       }
     }
   };
+  const getArticleList = (query, current = 1, size = 10) => {
+    return request({
+      method: "POST",
+      url: "/article/api/article/search",
+      data: __spreadProps(__spreadValues({}, query), { current, size })
+    });
+  };
   const _sfc_main$t = {
     components: {
       "mescroll-uni": __easycom_1$1
@@ -2956,15 +2959,23 @@ var __spreadProps = (a, b) => __defProps(a, __getOwnPropDescs(b));
           tip: "~ \u7A7A\u7A7A\u5982\u4E5F ~"
         }
       });
-      let upCallback = (page) => {
+      let articleList2 = vue.ref([]);
+      let upCallback = async (page) => {
         let keyword = props.tabs[props.i].name;
-        formatAppLog("log", "at pages/tab-article/cpns/article-swiper.vue:64", keyword, page.num, page.size);
-        proxy.mescroll.endSuccess(1);
-        proxy.mescroll.endBySize(1, 1);
+        formatAppLog("log", "at pages/tab-article/cpns/article-swiper.vue:66", keyword, page.num, page.size);
+        let res = await getArticleList({ content: keyword }, page.num, page.size);
+        if (page.num == 1) {
+          articleList2.value = [];
+          proxy.mescroll.scrollTo(0, 100);
+        }
+        articleList2.value = [...articleList2.value, ...res.records];
+        proxy.mescroll.endBySize(articleList2.value.length, res.total);
+        proxy.mescroll.endErr();
       };
       return {
         downOption,
         upOption,
+        articleList: articleList2,
         upCallback
       };
     }
@@ -2986,9 +2997,12 @@ var __spreadProps = (a, b) => __defProps(a, __getOwnPropDescs(b));
       }, {
         default: vue.withCtx(() => [
           vue.createCommentVNode(" \u6570\u636E\u5217\u8868 "),
-          (vue.openBlock(), vue.createElementBlock(vue.Fragment, null, vue.renderList(10, (q) => {
-            return vue.createVNode(_component_article_item, { key: q });
-          }), 64))
+          (vue.openBlock(true), vue.createElementBlock(vue.Fragment, null, vue.renderList($setup.articleList, (item) => {
+            return vue.openBlock(), vue.createBlock(_component_article_item, {
+              key: item.id,
+              item
+            }, null, 8, ["item"]);
+          }), 128))
         ]),
         _: 1
       }, 8, ["onInit", "down", "onDown", "up", "onUp"])
@@ -3019,7 +3033,9 @@ var __spreadProps = (a, b) => __defProps(a, __getOwnPropDescs(b));
       resetSearchInfo();
       vue.onMounted(async () => {
         swiperHeight.value = uni.getSystemInfoSync().windowHeight - 40;
+        formatAppLog("log", "at pages/tab-article/article.vue:52", swiperHeight.value);
         let res = await getCategory();
+        res.unshift({ id: 0, name: "\u5168\u90E8" });
         tabs.value = res;
         tabId.value = res[0].id;
       });
@@ -3028,11 +3044,11 @@ var __spreadProps = (a, b) => __defProps(a, __getOwnPropDescs(b));
       });
       const changeTab = (id) => {
         tabId.value = id;
-        current.value = id - 1;
+        current.value = id;
       };
       const swiperChange = (e) => {
         current.value = e.detail.current;
-        tabId.value = e.detail.current + 1;
+        tabId.value = e.detail.current;
         tabRef.value.tabId = tabId.value;
       };
       return {
@@ -3055,7 +3071,6 @@ var __spreadProps = (a, b) => __defProps(a, __getOwnPropDescs(b));
         vue.createVNode(_component_tab_bar, {
           ref: "tabRef",
           tabs: $setup.tabs,
-          itemWidth: 75,
           onChangeTab: $setup.changeTab
         }, null, 8, ["tabs", "onChangeTab"])
       ]),
@@ -5224,13 +5239,6 @@ var __spreadProps = (a, b) => __defProps(a, __getOwnPropDescs(b));
     ], 2112);
   }
   var courseList = /* @__PURE__ */ _export_sfc(_sfc_main$k, [["render", _sfc_render$j]]);
-  const getArticleList = (query, current = 1, size = 10) => {
-    return request({
-      method: "POST",
-      url: "/article/api/article/search",
-      data: __spreadProps(__spreadValues({}, query), { current, size })
-    });
-  };
   const _sfc_main$j = {
     mixins: [MescrollMixin, MescrollMoreItemMixin],
     components: {

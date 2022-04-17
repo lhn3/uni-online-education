@@ -48,7 +48,7 @@ export default {
 			if(Object.keys(newValue).length>0){
 				state.title = newValue.title
 				state.image = newValue.mainImage
-				// state.href = proxy.$env.HOST_H5 + proxy.$utils.routePath()
+				state.href = proxy.$env.HOST_H5 + proxy.$utils.routePath()
 			}
 		})
 		// #ifdef APP-PLUS

@@ -1,5 +1,5 @@
 <template>
-	<view>
+	<view class="cantainer">
 		<view class="tab">
 			<tab-bar ref="tabRef" :tabs="tabs" @changeTab="changeTab"></tab-bar>
 		</view>
@@ -81,5 +81,9 @@ export default {
 </script>
 
 <style lang="scss">
+page .cantainer{
+	height: 100%;
+	overflow: hidden;
+}
 
 </style>

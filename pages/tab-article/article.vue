@@ -48,7 +48,6 @@ export default {
 		
 		onMounted(async ()=>{
 			swiperHeight.value = uni.getSystemInfoSync().windowHeight - 40
-			console.log(swiperHeight.value)
 			let res = await getCategory()
 			res.unshift({id:0,name:'全部'})
 			tabs.value = res

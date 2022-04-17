@@ -143,8 +143,8 @@
 					"bounce":"none",		//关闭回弹
 					"titleNView":{//自定义导航栏App、H5
 						"type":"transparent",//
-						"titleText":"课程详情"
-						,"buttons":[//按钮
+						"titleText":"课程详情",
+						"buttons":[//按钮
 							{
 								"type":"share",
 								"fontSize":"28",
@@ -209,6 +209,27 @@
                 "navigationBarTitleText": "我的订单",
 				"app-plus":{
 					"bounce":false
+				}
+            }
+            
+        }
+        ,{
+            "path" : "pages/tab-article/article-details",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "阅读详情",
+				"app-plus":{
+					"titleNView":{
+						"buttons":[//按钮
+							{
+								"type":"share",
+								"fontSize":"28",
+								"float": "right",
+								"background":"rgba(0,0,0,0)",
+								"color":"#FFFFFF"
+							}
+						]
+					}
 				}
             }
             

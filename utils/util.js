@@ -63,7 +63,7 @@ export const routePath = () => {
 	
 	// 当前路由参数对象 {id: 2, name: 'xx'}
 	// 在小程序或app中，使用 page.options ; H5端使用 page.$route.query
-	const query = page.options || page.$route.query;
+	const query = page.$page.options || page.$route.query;
 	// 将参数对象转换为 key1=value1&key2=value2形式
 	let queryStr = '';
 	query && Object.keys(query).forEach((key)=>{

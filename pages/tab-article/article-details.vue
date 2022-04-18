@@ -102,7 +102,6 @@ export default {
 			//评论内容不能为空
 			if(content.value.trim() == ''){
 				proxy.$message.toast('评论内容不能为空')
-				proxy.$message.toast('评论内容不能为空')
 				return;
 			}
 			
@@ -153,8 +152,8 @@ export default {
 </script>
 
 <style lang="scss">
-	@import url("@/common/css/github-markdown.css");
-	@import url("@/common/css/github-min.css");
+@import url("@/common/css/github-markdown.css");
+@import url("@/common/css/github-min.css");
 .example-body{
 	display: flex;
 	flex-wrap: wrap;

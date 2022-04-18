@@ -31,9 +31,17 @@ const getWaitQuestionList=(current = 1,size = 10)=>{
 		data:{current,size}
 	})
 }
+
+// 查询问题详情
+const getQuestionDetail=()=>{
+	return request({
+		// url:'/question/api/question/wait',
+	})
+}
 export {
 	getQuestionList,
 	getHotQuestionList,
 	getNewQuestionList,
-	getWaitQuestionList
+	getWaitQuestionList,
+	getQuestionDetail
 }

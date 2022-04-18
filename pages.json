@@ -238,8 +238,28 @@
             "path" : "pages/auth/login",
             "style" :                                                                                    
             {
-                "navigationBarTitleText": "登录",
-                "enablePullDownRefresh": false
+                "navigationBarTitleText": "登录"
+            }
+            
+        }
+        ,{
+            "path" : "pages/tab-question/question-details",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "问题详情",
+				"app-plus":{
+					"titleNView":{
+						"buttons":[//按钮
+							{
+								"type":"share",
+								"fontSize":"28",
+								"float": "right",
+								"background":"rgba(0,0,0,0)",
+								"color":"#FFFFFF"
+							}
+						]
+					}
+				}
             }
             
         }

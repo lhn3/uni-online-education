@@ -11,7 +11,7 @@
 			<text class="title">{{articleDetail.title}}</text>
 			<view class="info">
 				<view class="author center">
-					<image :src="articleDetail.imageUrl"></image>
+					<image :src="articleDetail.userImage"></image>
 					<text>{{articleDetail.nickName}}</text>
 				</view>
 				<text> · {{articleDetail.updateDate}}</text>
@@ -24,7 +24,7 @@
 			<rich-text selectable="true" :nodes="articleDetail.htmlContent"></rich-text>
 			<!-- #endif -->
 			<!-- #ifndef MP -->
-			<text selectable="true" v-html="`${articleDetail.htmlContent}`"></text>
+			<text selectable="true" v-html="articleDetail.htmlContent"></text>
 			<!-- #endif -->
 		</view>
 		
@@ -32,25 +32,14 @@
 		<view class="footer">
 			<view class="comment">
 				<view class="footer-header">热门评论</view>
-				<view class="comment-item row">
-					<image src="/static/logo.png"></image>
+				<view class="comment-item row" v-for="item in commentList" :key="item.id">
+					<image :src="item.userImage"></image>
 					<view class="comment-right">
 						<view class="info space-between center">
-							<text>梦小二</text>
-							<text>2009-09-09</text>
+							<text>{{item.nickName}}</text>
+							<text>{{item.createDate}}</text>
 						</view>
-						<text class="content">文章写得很好</text>
-					</view>
-				</view>
-				
-				<view class="comment-item row">
-					<image src="/static/logo.png"></image>
-					<view class="comment-right">
-						<view class="info space-between">
-							<text>梦小三</text>
-							<text>2011-09-09</text>
-						</view>
-						<text class="content">顶替枯文章写得很好</text>
+						<text class="content">{{item.content}}</text>
 					</view>
 				</view>
 			</view>
@@ -58,16 +47,16 @@
 		
 		<!-- 评论区 -->
 		<view class="bottom center" @touchmove.stop.prevent="()=>{}">
-			<textarea class="textarea" placeholder="有何高见,展开讲讲……" />
-			<button class="btn" size="mini">提交</button>
+			<textarea v-model="content" class="textarea" placeholder="有何高见,展开讲讲……" />
+			<button class="btn" size="mini" @click="submit">提交</button>
 		</view>
 		
 		<!-- 分享组件 -->
 		<!-- #ifdef APP-PLUS -->
-		<my-share ref="myShare" :shareDate="courseDetail"></my-share>
+		<my-share ref="myShare" :shareDate="{title:articleDetail.title,mainImage:articleDetail.imageUrl}"></my-share>
 		<!-- #endif -->
 		<!-- #ifndef APP-PLUS -->
-		<my-share ref="myShare" :providerList="providerList" :shareDate="courseDetail"></my-share>
+		<my-share ref="myShare" :providerList="providerList" :shareDate="{title:articleDetail.title,mainImage:articleDetail.imageUrl}"></my-share>
 		<!-- #endif -->
 	</view>
 	
@@ -78,7 +67,7 @@
 import { getCurrentInstance,ref,reactive,toRefs,onMounted,nextTick } from "vue";
 import { onNavigationBarButtonTap } from '@dcloudio/uni-app';
 import uniTag from '@/uni_modules/uni-tag/components/uni-tag/uni-tag.vue'
-import {getArticleDetail} from '@/request/article-api.js'
+import {getArticleDetail,getArticleComment,addArticleComment} from '@/request/article-api.js'
 
 export default {
 	components:{
@@ -94,15 +83,46 @@ export default {
 			{id: 'copy',name: '复制链接',sort: 4,icon: '/static/share/link.png'}
 		])
 		let id = ref(null)
-		let myShare = ref(null)
-		let articleDetail = ref({})
+		let myShare = ref(null)			//分享组件
 		let type = ['primary','success','warning','error']
+		let articleDetail = ref({})		//文章详情
+		let commentList = ref([])		//评论列表
+		let content = ref('')
 		
 		onMounted(async ()=>{
-			let res = await getArticleDetail(id.value)
-			articleDetail.value = res
-			console.log(res)
+			articleDetail.value = await getArticleDetail(id.value)
+			uni.setNavigationBarTitle({
+				title:articleDetail.value.title
+			})
+			commentList.value = await getArticleComment(id.value)
 		})
+		
+		//提交评论
+		const submit = async ()=>{
+			//评论内容不能为空
+			if(content.value.trim() == ''){
+				proxy.$message.toast('评论内容不能为空')
+				proxy.$message.toast('评论内容不能为空')
+				return;
+			}
+			
+			//检测是否登录
+			if(!proxy.$utils.isLogin()) return;
+			
+			commentList.value.unshift({
+			  "id": 1,
+			  "parentId": "-1",
+			  "userId": 1,
+			  "nickName": "小明",
+			  "userImage": "https://gimg2.baidu.com/image_search/src=http%3A%2F%2Fi0.hdslb.com%2Fbfs%2Farticle%2F6477f4d1e658b314b5e7d5db2c92306e50c711ef.jpg&refer=http%3A%2F%2Fi0.hdslb.com&app=2002&size=f9999,10000&q=a80&n=0&g=0n&fmt=auto",
+			  "articleId": id.value,
+			  "content": content.value,
+			  "createDate": "2019-04-13 05:54:16"
+			})
+			let res = await addArticleComment(commentList.value)
+			content.value = ''
+			proxy.$message.toast('发表成功','success')
+		}
 		
 		//分享按钮
 		//监听导航栏按钮点击
@@ -116,8 +136,12 @@ export default {
 			id,
 			providerList,
 			myShare,
+			type,
 			articleDetail,
-			type
+			commentList,
+			content,
+			
+			submit
 		}
 	},
 	onLoad(option) {
@@ -129,6 +153,8 @@ export default {
 </script>
 
 <style lang="scss">
+	@import url("@/common/css/github-markdown.css");
+	@import url("@/common/css/github-min.css");
 .example-body{
 	display: flex;
 	flex-wrap: wrap;
@@ -232,8 +258,10 @@ export default {
 		border-radius: 30rpx;
 	}
 	.btn {
-		padding: 0 20rpx;
+		text-align: center;
 		margin-left: 15rpx;
+		background-color: $mxg-color-primary;
+		color: #FFFFFF;
 	}
 }
 </style>

@@ -46,8 +46,8 @@ export default {
 		// 初始化分享数据
 		watch(()=>props.shareDate,(newValue)=>{
 			if(Object.keys(newValue).length>0){
-				state.title = newValue.title
-				state.image = newValue.mainImage
+				if(newValue.title) state.title = newValue.title;
+				if(newValue.mainImage) state.image = newValue.mainImage;
 				state.href = proxy.$env.HOST_H5 + proxy.$utils.routePath()
 			}
 		})
@@ -121,6 +121,7 @@ export default {
 					content:'分享内容不能为空',
 					showCancel:false
 				})
+				uni.hideLoading()
 				return;
 			}
 			
@@ -129,6 +130,7 @@ export default {
 					content:'分享图片不能为空',
 					showCancel:false
 				})
+				uni.hideLoading()
 				return;
 			}
 			

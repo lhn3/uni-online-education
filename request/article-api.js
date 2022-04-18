@@ -13,11 +13,29 @@ const getArticleList=(query,current = 1,size = 10)=>{
 //获取文章详情
 const getArticleDetail=(id)=>{
 	return request({
-		url:'/article/api/article/'+id,
+		url:'/article/api/article/'+id
+	})
+}
+
+//获取文章评论
+const getArticleComment=(id)=>{
+	return request({
+		url:'/article/api/comment/list/'+id
+	})
+}
+
+//获取文章评论
+const addArticleComment=(data)=>{
+	return request({
+		method:'POST',
+		url:'/article/comment/',
+		data
 	})
 }
 
 export {
 	getArticleList,
-	getArticleDetail
+	getArticleDetail,
+	getArticleComment,
+	addArticleComment
 }

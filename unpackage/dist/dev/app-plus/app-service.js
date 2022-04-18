@@ -2938,6 +2938,18 @@ var __spreadProps = (a, b) => __defProps(a, __getOwnPropDescs(b));
       url: "/article/api/article/" + id
     });
   };
+  const getArticleComment = (id) => {
+    return request({
+      url: "/article/api/comment/list/" + id
+    });
+  };
+  const addArticleComment = (data) => {
+    return request({
+      method: "POST",
+      url: "/article/comment/",
+      data
+    });
+  };
   const _sfc_main$w = {
     components: {
       "mescroll-uni": __easycom_1$2
@@ -6024,6 +6036,7 @@ var __spreadProps = (a, b) => __defProps(a, __getOwnPropDescs(b));
             content: "\u5206\u4EAB\u5185\u5BB9\u4E0D\u80FD\u4E3A\u7A7A",
             showCancel: false
           });
+          uni.hideLoading();
           return;
         }
         if (!state.image && (state.shareType === 2 || state.shareType === 0)) {
@@ -6031,6 +6044,7 @@ var __spreadProps = (a, b) => __defProps(a, __getOwnPropDescs(b));
             content: "\u5206\u4EAB\u56FE\u7247\u4E0D\u80FD\u4E3A\u7A7A",
             showCancel: false
           });
+          uni.hideLoading();
           return;
         }
         let shareOPtions = {
@@ -6038,21 +6052,21 @@ var __spreadProps = (a, b) => __defProps(a, __getOwnPropDescs(b));
           scene: e.type && e.type === "WXSceneTimeline" ? "WXSceneTimeline" : "WXSceneSession",
           type: state.shareType,
           success: (e2) => {
-            formatAppLog("log", "at components/my-share/my-share.vue:140", "success", e2);
+            formatAppLog("log", "at components/my-share/my-share.vue:142", "success", e2);
             uni.showModal({
               content: "\u5DF2\u5206\u4EAB",
               showCancel: false
             });
           },
           fail: (e2) => {
-            formatAppLog("log", "at components/my-share/my-share.vue:147", "fail", e2);
+            formatAppLog("log", "at components/my-share/my-share.vue:149", "fail", e2);
             uni.showModal({
               content: e2.errMsg,
               showCancel: false
             });
           },
           complete: () => {
-            formatAppLog("log", "at components/my-share/my-share.vue:154", "\u5206\u4EAB\u64CD\u4F5C\u7ED3\u675F!");
+            formatAppLog("log", "at components/my-share/my-share.vue:156", "\u5206\u4EAB\u64CD\u4F5C\u7ED3\u675F!");
           }
         };
         switch (state.shareType) {
@@ -6097,7 +6111,7 @@ var __spreadProps = (a, b) => __defProps(a, __getOwnPropDescs(b));
     },
     methods: {
       compress() {
-        formatAppLog("log", "at components/my-share/my-share.vue:211", "\u5F00\u59CB\u538B\u7F29");
+        formatAppLog("log", "at components/my-share/my-share.vue:213", "\u5F00\u59CB\u538B\u7F29");
         let img = this.image;
         return new Promise(async (res) => {
           if (img.startsWith("http")) {
@@ -6105,7 +6119,7 @@ var __spreadProps = (a, b) => __defProps(a, __getOwnPropDescs(b));
           }
           plus.io.resolveLocalFileSystemURL(img, (entry) => {
             entry.file((file) => {
-              formatAppLog("log", "at components/my-share/my-share.vue:224", "getFile:" + JSON.stringify(file));
+              formatAppLog("log", "at components/my-share/my-share.vue:226", "getFile:" + JSON.stringify(file));
               if (file.size > 20480) {
                 plus.zip.compressImage({
                   src: img,
@@ -6126,7 +6140,7 @@ var __spreadProps = (a, b) => __defProps(a, __getOwnPropDescs(b));
               }
             });
           }, (e) => {
-            formatAppLog("log", "at components/my-share/my-share.vue:246", "Resolve file URL failed: " + e.message);
+            formatAppLog("log", "at components/my-share/my-share.vue:248", "Resolve file URL failed: " + e.message);
             uni.showModal({
               content: "\u5206\u4EAB\u56FE\u7247\u592A\u5927,\u9700\u8981\u8BF7\u91CD\u65B0\u9009\u62E9\u56FE\u7247!",
               showCancel: false
@@ -7988,7 +8002,7 @@ var __spreadProps = (a, b) => __defProps(a, __getOwnPropDescs(b));
       "uni-tag": __easycom_0
     },
     setup() {
-      vue.getCurrentInstance();
+      let { proxy } = vue.getCurrentInstance();
       let providerList = vue.ref([
         { id: "weixin", name: "\u5FAE\u4FE1\u597D\u53CB", sort: 0, icon: "/static/share/weixin.png" },
         { id: "weixin", name: "\u670B\u53CB\u5708", type: "WXSenceTimeline", sort: 1, icon: "/static/share/pengyouquan.png" },
@@ -7998,13 +8012,37 @@ var __spreadProps = (a, b) => __defProps(a, __getOwnPropDescs(b));
       ]);
       let id = vue.ref(null);
       let myShare = vue.ref(null);
-      let articleDetail = vue.ref({});
       let type = ["primary", "success", "warning", "error"];
+      let articleDetail = vue.ref({});
+      let commentList = vue.ref([]);
+      let content = vue.ref("");
       vue.onMounted(async () => {
-        let res = await getArticleDetail(id.value);
-        articleDetail.value = res;
-        formatAppLog("log", "at pages/tab-article/article-details.vue:104", res);
+        articleDetail.value = await getArticleDetail(id.value);
+        uni.setNavigationBarTitle({
+          title: articleDetail.value.title
+        });
+        commentList.value = await getArticleComment(id.value);
       });
+      const submit = async () => {
+        formatAppLog("log", "at pages/tab-article/article-details.vue:102", content.value);
+        if (content.value.trim() == "") {
+          proxy.$message.toast("\u8BF7\u8F93\u5165\u8BC4\u8BBA\u5185\u5BB9");
+          return;
+        }
+        commentList.value.unshift({
+          "id": 1,
+          "parentId": "-1",
+          "userId": 1,
+          "nickName": "\u5C0F\u660E",
+          "userImage": "https://gimg2.baidu.com/image_search/src=http%3A%2F%2Fi0.hdslb.com%2Fbfs%2Farticle%2F6477f4d1e658b314b5e7d5db2c92306e50c711ef.jpg&refer=http%3A%2F%2Fi0.hdslb.com&app=2002&size=f9999,10000&q=a80&n=0&g=0n&fmt=auto",
+          "articleId": id.value,
+          "content": content.value,
+          "createDate": "2019-04-13 05:54:16"
+        });
+        await addArticleComment(commentList.value);
+        content.value = "";
+        proxy.$message.toast("\u53D1\u8868\u6210\u529F", "success");
+      };
       onNavigationBarButtonTap((e) => {
         if (e.type = "share") {
           myShare.value.isShow = !myShare.value.isShow;
@@ -8014,8 +8052,11 @@ var __spreadProps = (a, b) => __defProps(a, __getOwnPropDescs(b));
         id,
         providerList,
         myShare,
+        type,
         articleDetail,
-        type
+        commentList,
+        content,
+        submit
       };
     },
     onLoad(option) {
@@ -8049,7 +8090,7 @@ var __spreadProps = (a, b) => __defProps(a, __getOwnPropDescs(b));
         vue.createElementVNode("view", { class: "info" }, [
           vue.createElementVNode("view", { class: "author center" }, [
             vue.createElementVNode("image", {
-              src: $setup.articleDetail.imageUrl
+              src: $setup.articleDetail.userImage
             }, null, 8, ["src"]),
             vue.createElementVNode("text", null, vue.toDisplayString($setup.articleDetail.nickName), 1)
           ]),
@@ -8059,54 +8100,55 @@ var __spreadProps = (a, b) => __defProps(a, __getOwnPropDescs(b));
         vue.createCommentVNode(" \u6587\u7AE0\u5185\u5BB9 "),
         vue.createElementVNode("text", {
           selectable: "true",
-          innerHTML: `${$setup.articleDetail.htmlContent}`
+          innerHTML: $setup.articleDetail.htmlContent
         }, null, 8, ["innerHTML"])
       ]),
       vue.createCommentVNode(" \u70ED\u95E8\u8BC4\u8BBA "),
       vue.createElementVNode("view", { class: "footer" }, [
         vue.createElementVNode("view", { class: "comment" }, [
           vue.createElementVNode("view", { class: "footer-header" }, "\u70ED\u95E8\u8BC4\u8BBA"),
-          vue.createElementVNode("view", { class: "comment-item row" }, [
-            vue.createElementVNode("image", { src: "/static/logo.png" }),
-            vue.createElementVNode("view", { class: "comment-right" }, [
-              vue.createElementVNode("view", { class: "info space-between center" }, [
-                vue.createElementVNode("text", null, "\u68A6\u5C0F\u4E8C"),
-                vue.createElementVNode("text", null, "2009-09-09")
-              ]),
-              vue.createElementVNode("text", { class: "content" }, "\u6587\u7AE0\u5199\u5F97\u5F88\u597D")
-            ])
-          ]),
-          vue.createElementVNode("view", { class: "comment-item row" }, [
-            vue.createElementVNode("image", { src: "/static/logo.png" }),
-            vue.createElementVNode("view", { class: "comment-right" }, [
-              vue.createElementVNode("view", { class: "info space-between" }, [
-                vue.createElementVNode("text", null, "\u68A6\u5C0F\u4E09"),
-                vue.createElementVNode("text", null, "2011-09-09")
-              ]),
-              vue.createElementVNode("text", { class: "content" }, "\u9876\u66FF\u67AF\u6587\u7AE0\u5199\u5F97\u5F88\u597D")
-            ])
-          ])
+          (vue.openBlock(true), vue.createElementBlock(vue.Fragment, null, vue.renderList($setup.commentList, (item) => {
+            return vue.openBlock(), vue.createElementBlock("view", {
+              class: "comment-item row",
+              key: item.id
+            }, [
+              vue.createElementVNode("image", {
+                src: item.userImage
+              }, null, 8, ["src"]),
+              vue.createElementVNode("view", { class: "comment-right" }, [
+                vue.createElementVNode("view", { class: "info space-between center" }, [
+                  vue.createElementVNode("text", null, vue.toDisplayString(item.nickName), 1),
+                  vue.createElementVNode("text", null, vue.toDisplayString(item.createDate), 1)
+                ]),
+                vue.createElementVNode("text", { class: "content" }, vue.toDisplayString(item.content), 1)
+              ])
+            ]);
+          }), 128))
         ])
       ]),
       vue.createCommentVNode(" \u8BC4\u8BBA\u533A "),
       vue.createElementVNode("view", {
         class: "bottom center",
-        onTouchmove: _cache[0] || (_cache[0] = vue.withModifiers(() => {
+        onTouchmove: _cache[2] || (_cache[2] = vue.withModifiers(() => {
         }, ["stop", "prevent"]))
       }, [
-        vue.createElementVNode("textarea", {
+        vue.withDirectives(vue.createElementVNode("textarea", {
+          "onUpdate:modelValue": _cache[0] || (_cache[0] = ($event) => $setup.content = $event),
           class: "textarea",
           placeholder: "\u6709\u4F55\u9AD8\u89C1,\u5C55\u5F00\u8BB2\u8BB2\u2026\u2026"
-        }),
+        }, null, 512), [
+          [vue.vModelText, $setup.content]
+        ]),
         vue.createElementVNode("button", {
           class: "btn",
-          size: "mini"
+          size: "mini",
+          onClick: _cache[1] || (_cache[1] = (...args) => $setup.submit && $setup.submit(...args))
         }, "\u63D0\u4EA4")
       ], 32),
       vue.createCommentVNode(" \u5206\u4EAB\u7EC4\u4EF6 "),
       vue.createVNode(_component_my_share, {
         ref: "myShare",
-        shareDate: _ctx.courseDetail
+        shareDate: $setup.articleDetail
       }, null, 8, ["shareDate"])
     ]);
   }

@@ -15,18 +15,22 @@ export const msg = (title = '', param={}) => {
  * 检查登录
  * @return {Boolean}
  */
-export const isLogin = (options={}) => {
-	const token = uni.getStorageSync('mxgEducationToken');
+export const isLogin = () => {
+	const token = uni.getStorageSync('educationToken');
 	if(token){ // 加上!先暂时表示已经登录
 		return true;
 	}
-	// options.nav只要传的不是 false，默认跳转到登录页
-	if(options.nav !== false){
-		// console.log('options.nav', options.nav)
-		uni.navigateTo({
-			url: '/pages/auth/login'
-		})
-	}
+	uni.showModal({
+		content:'请登录后再评论', 
+		showCancel:true,
+		success: (e) => {
+			if(e.confirm){
+				uni.navigateTo({
+					url: '/pages/auth/login'
+				})
+			}
+		}
+	})
 	return false;
 }
 

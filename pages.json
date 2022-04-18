@@ -234,6 +234,15 @@
             }
             
         }
+        ,{
+            "path" : "pages/auth/login",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "登录",
+                "enablePullDownRefresh": false
+            }
+            
+        }
     ],
 	"globalStyle": {
 		"navigationBarBackgroundColor": "#A2CD5A",

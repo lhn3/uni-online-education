@@ -33,15 +33,44 @@ const getWaitQuestionList=(current = 1,size = 10)=>{
 }
 
 // 查询问题详情
-const getQuestionDetail=()=>{
+const getQuestionDetail=(id)=>{
 	return request({
-		// url:'/question/api/question/wait',
+		url:'/question/api/question/' + id
 	})
 }
+
+// 查询问题的回答列表
+const getQuestionAnswerList=(id)=>{
+	return request({
+		url:'/question/api/reply/list/' + id
+	})
+}
+
+// 新增回答	
+const addQuestionAnswer=(data)=>{
+	return request({
+		method:"POST",
+		url:'/question/reply',
+		data
+	})
+}
+
+// 关注问题
+const focusQuestion=(id)=>{
+	return request({
+		method:"PUT",
+		url:'/question/question/star/' + id
+	})
+}
+
+
 export {
 	getQuestionList,
 	getHotQuestionList,
 	getNewQuestionList,
 	getWaitQuestionList,
-	getQuestionDetail
+	getQuestionDetail,
+	getQuestionAnswerList,
+	addQuestionAnswer,
+	focusQuestion
 }

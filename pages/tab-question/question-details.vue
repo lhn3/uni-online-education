@@ -2,47 +2,47 @@
 	<view>
 		<!-- 所属标签 -->
 		<view class="tag-list row" >
-			<uni-tag v-for="(item, index) in 5" :key="index" :text="item" class="tag-view" :type="type[index]" size="small" :circle="true" :inverted="true" />
+			<uni-tag v-for="(item, index) in questionDetail.labelList" :key="index" :text="item.name" class="tag-view" :type="type[index]" size="small" :circle="true" :inverted="true" />
 		</view>
 		
 		<!-- 问题详情 -->
 		<view class="content-main">
-			<text class="title">title</text>
+			<text class="title">{{questionDetail.title}}</text>
 			<view class="info">
 				<view class="author center">
-					<image src="/static/logo.png"></image>
-					<text>网名</text>
+					<image :src="questionDetail.userImage"></image>
+					<text>{{questionDetail.nickName}}</text>
 				</view>
-				<text> · 时间</text>
+				<text> · {{questionDetail.updateDate}}</text>
 			</view>
 			
-			<!-- 文章内容 -->
+			<!-- 问题内容 -->
 			<!-- #ifdef MP -->
 			<!-- nodes 是html代码字符串 -->
-			<rich-text class="markdown-body" selectable="true" nodes="<h2 style='color:red'>文章内容</h2>"></rich-text>
+			<rich-text class="markdown-body" selectable="true" :nodes="questionDetail.mdContent"></rich-text>
 			<!-- #endif -->
 			<!-- #ifndef MP -->
-			<text class="markdown-body" selectable="true" v-html="`<h2 style='color:red'>文章内容</h2>`"></text>
+			<text class="markdown-body" selectable="true" v-html="questionDetail.htmlContent"></text>
 			<!-- #endif -->
 		</view>
 		
 		<!-- 回答 -->
 		<view class="footer">
 			<view class="comment">
-				<view class="footer-header">1个回答</view>
-				<view class="comment-item row" >
-					<image src="/static/logo.png"></image>
+				<view class="footer-header">{{answerList.length}}个回答</view>
+				<view class="comment-item row" v-for="item in answerList" :key="item.id">
+					<image :src="item.userImage"></image>
 					<view class="comment-right">
 						<view class="info space-between center">
-							<text></text>
-							<text> </text>
+							<text>{{item.nickName}}</text>
+							<text>{{item.createDate}}</text>
 						</view>
 						<!-- <text class="content">{{item.htmlContent}}</text> -->
 						<!-- #ifdef MP -->
-						<rich-text class="markdown-body content" selectable="true" nodes="<h2 style='color:red'>文章内容</h2>"></rich-text>
+						<rich-text class="markdown-body content" selectable="true" :nodes="item.mdContent"></rich-text>
 						<!-- #endif -->
 						<!-- #ifndef MP -->
-						<text class="markdown-body content" selectable="true" v-html="`<h2 style='color:red'>文章内容</h2>`"></text>
+						<text class="markdown-body content" selectable="true" v-html="item.htmlContent"></text>
 						<!-- #endif -->
 					</view>
 				</view>
@@ -51,20 +51,19 @@
 		
 		<!-- 底部按钮：关注和评论按钮 -->
 		<view class="question-option row">
-			<!-- 0 未关注，1已关注   -->
-			<text class="one grey">已关注问题</text>
-			<text class="one iconfont icon-jiaguanzhu">关注问题</text>
-			<text class="one iconfont icon-edit">回答问题</text>
+			<text v-if="isFocus" class="one grey" @click="focusClick">已关注问题</text>
+			<text v-else class="one iconfont icon-jiaguanzhu" @click="focusClick">关注问题</text>
+			<text class="one iconfont icon-edit" @click="answerClick">回答问题</text>
 		</view>
 		
 		<!-- 回答问题输入框 -->
 		<view v-if="showAnswer" class="answer-box" @touchmove.stop.prevent="()=>{}">
-			<view class="title center" @touchend.prevent="()=>{}">
+			<view class="title center">
 				<view class="one">
-					<text class="iconfont icon-close"></text>
+					<text class="iconfont icon-close" @click="close"></text>
 				</view>
 				<text class="one">回答问题</text>
-				<button class="btn" type="primary" size="mini">提交</button>
+				<button class="btn" size="mini" @click="submit">提交</button>
 			</view>
 			<textarea v-model="content" maxlength="200" class="textarea" placeholder="有何高见,展开讲讲……" />
 		</view>
@@ -80,12 +79,15 @@
 </template>
 
 <script>
-import { getCurrentInstance,ref,reactive,toRefs,onMounted,nextTick } from "vue";
+import { getCurrentInstance,ref,onMounted } from "vue";
 import { onNavigationBarButtonTap } from '@dcloudio/uni-app';
 import uniTag from '@/uni_modules/uni-tag/components/uni-tag/uni-tag.vue'
-import {getQuestionDetail} from '@/request/question-api.js'
+import {getQuestionDetail,getQuestionAnswerList,addQuestionAnswer,focusQuestion} from '@/request/question-api.js'
 
 export default {
+	components:{
+		'uni-tag':uniTag
+	},
 	setup(){
 		let {proxy} = getCurrentInstance()
 		let id = ref(null)
@@ -99,41 +101,68 @@ export default {
 		let myShare = ref(null)			//分享组件
 		let type = ['primary','success','warning','error']
 		let questionDetail = ref({})		//文章详情
+		let answerList = ref([])		//文章详情
 		let showAnswer = ref(false)
+		let isFocus = ref(1)		//是否关注
 		let content = ref('')
 		
 		onMounted(async ()=>{
-			// questionDetail.value = await getQuestionDetail(id.value)
-			// uni.setNavigationBarTitle({
-				// title:articleDetail.value.title
-			// })
+			questionDetail.value = await getQuestionDetail(id.value)
+			uni.setNavigationBarTitle({
+				title:questionDetail.value.title
+			})
+			answerList.value = await getQuestionAnswerList(id.value)
+			isFocus.value = questionDetail.value.star
 		})
 		
+		//点击关注
+		const focusClick = async ()=>{
+			await focusQuestion(id.value)
+			if(isFocus.value){
+				isFocus.value = 0
+				proxy.$message.toast('已取消')
+			}else{
+				isFocus.value = 1
+				proxy.$message.toast('已关注')
+			}
+		}
+		
+		//点击回答
+		const answerClick=()=>{
+			showAnswer.value = true
+		}
+		
+		//关闭回答
+		const close=()=>{
+			showAnswer.value = false
+		}
+		
 		//提交回答
-		// const submit = async ()=>{
-		// 	//评论内容不能为空
-		// 	if(content.value.trim() == ''){
-		// 		proxy.$message.toast('评论内容不能为空')
-		// 		return;
-		// 	}
+		const submit = async ()=>{
+			//评论内容不能为空
+			if(content.value.trim() == ''){
+				proxy.$message.toast('评论内容不能为空')
+				return;
+			}
 			
-		// 	//检测是否登录
-		// 	if(!proxy.$utils.isLogin()) return;
+			//检测是否登录
+			if(!proxy.$utils.isLogin()) return;
 			
-		// 	commentList.value.unshift({
-		// 	  "id": 1,
-		// 	  "parentId": "-1",
-		// 	  "userId": 1,
-		// 	  "nickName": "小明",
-		// 	  "userImage": "https://gimg2.baidu.com/image_search/src=http%3A%2F%2Fi0.hdslb.com%2Fbfs%2Farticle%2F6477f4d1e658b314b5e7d5db2c92306e50c711ef.jpg&refer=http%3A%2F%2Fi0.hdslb.com&app=2002&size=f9999,10000&q=a80&n=0&g=0n&fmt=auto",
-		// 	  "articleId": id.value,
-		// 	  "content": content.value,
-		// 	  "createDate": "2019-04-13 05:54:16"
-		// 	})
-		// 	let res = await addArticleComment(commentList.value)
-		// 	content.value = ''
-		// 	proxy.$message.toast('发表成功','success')
-		// }
+			let data = {
+			  "id": 1,
+			  "parentId": "-1",
+			  "userId": 1,
+			  "nickName": "小明",
+			  "userImage": "https://gimg2.baidu.com/image_search/src=http%3A%2F%2Fi0.hdslb.com%2Fbfs%2Farticle%2F6477f4d1e658b314b5e7d5db2c92306e50c711ef.jpg&refer=http%3A%2F%2Fi0.hdslb.com&app=2002&size=f9999,10000&q=a80&n=0&g=0n&fmt=auto",
+			  "articleId": id.value,
+			  "content": content.value,
+			  "createDate": "2019-04-13 05:54:16"
+			}
+			answerList.value.unshift(data)
+			await addQuestionAnswer(data)
+			content.value = ''
+			proxy.$message.toast('回答成功','success')
+		}
 		
 		//分享按钮
 		//监听导航栏按钮点击
@@ -149,10 +178,15 @@ export default {
 			myShare,
 			type,
 			questionDetail,
+			answerList,
 			showAnswer,
-			content
+			isFocus,
+			content,
 			
-			// submit
+			focusClick,
+			answerClick,
+			close,
+			submit
 		}
 	},
 	onLoad(option) {
@@ -272,6 +306,9 @@ export default {
 			border-right: $mxg-underLine;
 		}
 	}
+	.one{
+		color: $mxg-color-primary;
+	}
 	.grey {
 		color: $mxg-text-color-grey;
 	}
@@ -300,6 +337,8 @@ export default {
 	.btn {
 		padding: 0 20rpx;
 		margin-left: 15rpx;
+		background-color: $mxg-color-primary;
+		color: #FFFFFF
 	}
 	.textarea {
 		height: 350rpx;

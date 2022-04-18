@@ -49,7 +49,7 @@
 		<view class="bottom center" @touchmove.stop.prevent="()=>{}">
 			<textarea v-model="content" class="textarea" placeholder="有何高见,展开讲讲……" />
 			<button class="btn" size="mini" @click="submit">提交</button>
-		</view>
+		</view>	
 		
 		<!-- 分享组件 -->
 		<!-- #ifdef APP-PLUS -->
@@ -107,8 +107,7 @@ export default {
 			
 			//检测是否登录
 			if(!proxy.$utils.isLogin()) return;
-			
-			commentList.value.unshift({
+			let data = {
 			  "id": 1,
 			  "parentId": "-1",
 			  "userId": 1,
@@ -117,8 +116,9 @@ export default {
 			  "articleId": id.value,
 			  "content": content.value,
 			  "createDate": "2019-04-13 05:54:16"
-			})
-			let res = await addArticleComment(commentList.value)
+			}
+			commentList.value.unshift(data)
+			await addArticleComment(data)
 			content.value = ''
 			proxy.$message.toast('发表成功','success')
 		}

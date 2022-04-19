@@ -1,0 +1,1 @@
+<view><mescroll-uni wx:if="{{g}}" class="r" u-s="{{['d']}}" u-r="{{c}}" bindinit="{{d}}" binddown="{{e}}" bindup="{{f}}" u-i="4a74775c-0" bind:__l="__l" u-p="{{g}}"><question-item wx:for="{{a}}" wx:for-item="item" wx:key="a" u-i="{{item.b}}" bind:__l="__l" u-p="{{item.c}}"></question-item></mescroll-uni></view>

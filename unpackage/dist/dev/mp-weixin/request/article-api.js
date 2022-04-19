@@ -26,4 +26,24 @@ const getArticleList = (query, current = 1, size = 10) => {
     data: __spreadProps(__spreadValues({}, query), { current, size })
   });
 };
+const getArticleDetail = (id) => {
+  return request_request.request({
+    url: "/article/api/article/" + id
+  });
+};
+const getArticleComment = (id) => {
+  return request_request.request({
+    url: "/article/api/comment/list/" + id
+  });
+};
+const addArticleComment = (data) => {
+  return request_request.request({
+    method: "POST",
+    url: "/article/comment/",
+    data
+  });
+};
+exports.addArticleComment = addArticleComment;
+exports.getArticleComment = getArticleComment;
+exports.getArticleDetail = getArticleDetail;
 exports.getArticleList = getArticleList;

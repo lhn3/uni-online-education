@@ -6,7 +6,9 @@ const _sfc_main = {
   }
 };
 function _sfc_render(_ctx, _cache, $props, $setup, $data, $options) {
-  return {};
+  return {
+    a: common_vendor.o(($event) => _ctx.navTo("/pages/order/order-list"))
+  };
 }
 var MiniProgramPage = /* @__PURE__ */ common_vendor._export_sfc(_sfc_main, [["render", _sfc_render]]);
 wx.createPage(MiniProgramPage);

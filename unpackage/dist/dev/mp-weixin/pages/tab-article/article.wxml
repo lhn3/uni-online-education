@@ -1,1 +1,1 @@
-<view> 文章 </view>
+<view class="cantainer"><view class="tab"><tab-bar wx:if="{{c}}" class="r" u-r="tabRef" bindchangeTab="{{b}}" u-i="fb9aad64-0" bind:__l="__l" u-p="{{c}}"></tab-bar></view><swiper duration="{{1000}}" style="{{'height:' + e}}" current="{{f}}" bindchange="{{g}}"><swiper-item wx:for="{{d}}" wx:for-item="item" wx:key="d"><article-swiper wx:if="{{item.c}}" class="r-i-f" u-r="articleRef" u-i="{{item.b}}" bind:__l="__l" u-p="{{item.c}}"></article-swiper></swiper-item></swiper></view>

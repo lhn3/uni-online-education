@@ -10,14 +10,22 @@ const msg = (title = "", param = {}) => {
     icon: param.icon || "none"
   });
 };
-const isLogin = (options = {}) => {
-  const token = common_vendor.index.getStorageSync("mxgEducationToken");
+const isLogin = (toast = true) => {
+  const token = common_vendor.index.getStorageSync("educationToken");
   if (token) {
     return true;
   }
-  if (options.nav !== false) {
-    common_vendor.index.navigateTo({
-      url: "/pages/auth/login"
+  if (toast) {
+    common_vendor.index.showModal({
+      content: "\u8BF7\u767B\u5F55\u540E\u518D\u64CD\u4F5C",
+      showCancel: true,
+      success: (e) => {
+        if (e.confirm) {
+          common_vendor.index.navigateTo({
+            url: "/pages/auth/login"
+          });
+        }
+      }
     });
   }
   return false;
@@ -36,7 +44,7 @@ const throttle = (fn, delay = 500) => {
 const routePath = () => {
   const pages = getCurrentPages();
   const page = pages[pages.length - 1];
-  const query = page.options || page.$route.query;
+  const query = page.$page.options || page.$route.query;
   let queryStr = "";
   query && Object.keys(query).forEach((key) => {
     queryStr += `${key}=${query[key]}`;

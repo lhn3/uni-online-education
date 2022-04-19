@@ -37,8 +37,9 @@ const MescrollMoreItemMixin = {
     mescrollInit(mescroll) {
       this.mescroll = mescroll;
       this.mescrollInitByRef && this.mescrollInitByRef();
-      if (this.i === this.index)
-        ;
+      if (this.i === this.index) {
+        this.mescrollTrigger();
+      }
     },
     mescrollTrigger() {
       this.isInit = true;

@@ -177,7 +177,7 @@ const _sfc_main = {
       this.courseSection = await request_courseApi.getCourseSection(id);
       this.courseComment = await request_courseApi.getCourseComment(id);
       this.coursePackage = await request_courseApi.getCoursePackage(id);
-      if (this.$utils.isLogin({ nav: false })) {
+      if (this.$utils.isLogin(false)) {
         this.isBuy = (await request_courseApi.getCourseIsBuy(id)).isBuy;
       }
     }

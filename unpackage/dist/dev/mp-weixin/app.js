@@ -19,6 +19,10 @@ if (!Math) {
   "./pages/course/course-play.js";
   "./pages/order/confirm-buy.js";
   "./pages/order/my-balance.js";
+  "./pages/order/order-list.js";
+  "./pages/tab-article/article-details.js";
+  "./pages/auth/login.js";
+  "./pages/tab-question/question-details.js";
 }
 const _sfc_main = {
   onLaunch: function() {

@@ -231,7 +231,7 @@ export default {
 			this.courseComment = await getCourseComment(id)
 			this.coursePackage = await getCoursePackage(id)
 			// 判断是否登录了
-			if(this.$utils.isLogin({nav:false})){
+			if(this.$utils.isLogin(false)){
 				this.isBuy = (await getCourseIsBuy(id)).isBuy
 			}
 		}

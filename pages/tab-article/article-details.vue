@@ -252,7 +252,7 @@ export default {
 		font-size: 30rpx;
 		padding: 15rpx 20rpx;
 		width: 100%;
-		height: 45rpx;
+		height: 50rpx;
 		background-color: #F8F9FB;
 		border-radius: 30rpx;
 	}

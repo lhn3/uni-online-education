@@ -27,7 +27,6 @@
 .tab-bar .bar-view .bar-item {
   /* flex: 1; */
   display: inline-block;
-  width: 150rpx;
   font-size: 30rpx;
   line-height: 80rpx;
   position: relative;

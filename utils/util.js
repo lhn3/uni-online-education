@@ -15,22 +15,24 @@ export const msg = (title = '', param={}) => {
  * 检查登录
  * @return {Boolean}
  */
-export const isLogin = () => {
+export const isLogin = (toast=true) => {
 	const token = uni.getStorageSync('educationToken');
 	if(token){ // 加上!先暂时表示已经登录
 		return true;
 	}
-	uni.showModal({
-		content:'请登录后再评论', 
-		showCancel:true,
-		success: (e) => {
-			if(e.confirm){
-				uni.navigateTo({
-					url: '/pages/auth/login'
-				})
+	if(toast){
+		uni.showModal({
+			content:'请登录后再操作', 
+			showCancel:true,
+			success: (e) => {
+				if(e.confirm){
+					uni.navigateTo({
+						url: '/pages/auth/login'
+					})
+				}
 			}
-		}
-	})
+		})
+	}
 	return false;
 }
 

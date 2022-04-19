@@ -37,11 +37,10 @@
 							<text>{{item.nickName}}</text>
 							<text>{{item.createDate}}</text>
 						</view>
-						<!-- <text class="content">{{item.htmlContent}}</text> -->
 						<!-- #ifdef MP -->
 						<rich-text class="markdown-body content" selectable="true" :nodes="item.mdContent"></rich-text>
 						<!-- #endif -->
-						<!-- #ifndef MP -->
+						<!-- #ifndef MP --> 
 						<text class="markdown-body content" selectable="true" v-html="item.htmlContent"></text>
 						<!-- #endif -->
 					</view>
@@ -51,29 +50,29 @@
 		
 		<!-- 底部按钮：关注和评论按钮 -->
 		<view class="question-option row">
-			<text v-if="isFocus" class="one grey" @click="focusClick">已关注问题</text>
-			<text v-else class="one iconfont icon-jiaguanzhu" @click="focusClick">关注问题</text>
+			<text v-if="isFocus" class="one grey" @click="focusClick">已关注</text>
+			<text v-else class="one iconfont icon-jiaguanzhu" @click="focusClick">关注</text>
 			<text class="one iconfont icon-edit" @click="answerClick">回答问题</text>
 		</view>
 		
 		<!-- 回答问题输入框 -->
 		<view v-if="showAnswer" class="answer-box" @touchmove.stop.prevent="()=>{}">
-			<view class="title center">
+			<view class="title center" @touchend.prevent="()=>{}">
 				<view class="one">
-					<text class="iconfont icon-close" @click="close"></text>
+					<text class="iconfont icon-close" @touchend.prevent="close"></text>
 				</view>
 				<text class="one">回答问题</text>
-				<button class="btn" size="mini" @click="submit">提交</button>
+				<button class="btn" size="mini" @touchend.prevent="submit">提交</button>
 			</view>
 			<textarea v-model="content" maxlength="200" class="textarea" placeholder="有何高见,展开讲讲……" />
 		</view>
 		
 		<!-- 分享组件 -->
 		<!-- #ifdef APP-PLUS -->
-		<my-share ref="myShare" :shareDate="{title:'title'}"></my-share>
+		<my-share ref="myShare" :shareDate="{title: questionDetail.title}"></my-share>
 		<!-- #endif -->
 		<!-- #ifndef APP-PLUS -->
-		<my-share ref="myShare" :providerList="providerList" :shareDate="{title:'title'}"></my-share>
+		<my-share ref="myShare" :providerList="providerList" :shareDate="{title:questionDetail.title}"></my-share>
 		<!-- #endif -->
 	</view>
 </template>
@@ -102,22 +101,31 @@ export default {
 		let type = ['primary','success','warning','error']
 		let questionDetail = ref({})		//文章详情
 		let answerList = ref([])		//文章详情
-		let showAnswer = ref(false)
-		let isFocus = ref(1)		//是否关注
-		let content = ref('')
+		let showAnswer = ref(false)	//是否展示回答输入框
+		let isFocus = ref(0)		//是否关注
+		let content = ref('')		//输入的内容
 		
 		onMounted(async ()=>{
 			questionDetail.value = await getQuestionDetail(id.value)
 			uni.setNavigationBarTitle({
 				title:questionDetail.value.title
 			})
-			answerList.value = await getQuestionAnswerList(id.value)
 			isFocus.value = questionDetail.value.star
+			answerList.value = await getQuestionAnswerList(id.value)
 		})
 		
 		//点击关注
 		const focusClick = async ()=>{
+			// 发送请求修改关注
 			await focusQuestion(id.value)
+			// // 重新获取信息关注信息
+			// isFocus.value = (await getQuestionDetail(id.value)).star
+			// if(isFocus.value){
+			// 	proxy.$message.toast('已关注')
+			// }else{
+			// 	proxy.$message.toast('已取消')
+			// }
+			
 			if(isFocus.value){
 				isFocus.value = 0
 				proxy.$message.toast('已取消')
@@ -155,12 +163,15 @@ export default {
 			  "nickName": "小明",
 			  "userImage": "https://gimg2.baidu.com/image_search/src=http%3A%2F%2Fi0.hdslb.com%2Fbfs%2Farticle%2F6477f4d1e658b314b5e7d5db2c92306e50c711ef.jpg&refer=http%3A%2F%2Fi0.hdslb.com&app=2002&size=f9999,10000&q=a80&n=0&g=0n&fmt=auto",
 			  "articleId": id.value,
-			  "content": content.value,
+			  "mdContent": content.value,
+			  "htmlContent": content.value,
 			  "createDate": "2019-04-13 05:54:16"
 			}
+			console.log(data)
 			answerList.value.unshift(data)
 			await addQuestionAnswer(data)
 			content.value = ''
+			showAnswer.value = false
 			proxy.$message.toast('回答成功','success')
 		}
 		

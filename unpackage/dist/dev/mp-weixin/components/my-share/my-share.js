@@ -24,8 +24,11 @@ const _sfc_main = {
     });
     common_vendor.watch(() => props.shareDate, (newValue) => {
       if (Object.keys(newValue).length > 0) {
-        state.title = newValue.title;
-        state.image = newValue.mainImage;
+        if (newValue.title)
+          state.title = newValue.title;
+        if (newValue.mainImage)
+          state.image = newValue.mainImage;
+        state.href = proxy.$env.HOST_H5 + proxy.$utils.routePath();
       }
     });
     const showHandler = () => {

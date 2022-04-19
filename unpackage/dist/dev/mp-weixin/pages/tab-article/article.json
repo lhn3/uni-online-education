@@ -1,4 +1,7 @@
 {
   "navigationBarTitleText": "阅读",
-  "usingComponents": {}
+  "usingComponents": {
+    "article-swiper": "./cpns/article-swiper",
+    "tab-bar": "../../components/tab-bar/tab-bar"
+  }
 }

@@ -1,6 +1,6 @@
 "use strict";
 var common_vendor = require("../../common/vendor.js");
-var request_courseApi = require("../../request/course-api.js");
+var request_orderApi = require("../../request/order-api.js");
 require("../../request/request.js");
 require("../../utils/showMessage.js");
 const coursePackage = () => "../course/cpns/course-package.js";
@@ -29,7 +29,39 @@ const _sfc_main = {
       return courseIdList;
     });
     common_vendor.onMounted(() => {
+      if (isIos.value) {
+        payStyle.value = "iospay";
+      } else {
+        payStyle.value = "wxpay";
+      }
     });
+    const XuNiPay = async (data) => {
+      loading.value = true;
+      common_vendor.index.showLoading({
+        title: "\u652F\u4ED8\u4E2D...",
+        mask: true
+      });
+      let res = await request_orderApi.orderPay(data);
+      setTimeout(() => {
+        common_vendor.index.hideLoading();
+        loading.value = false;
+        if (res.code == 200) {
+          common_vendor.index.showModal({
+            content: "\u652F\u4ED8\u6210\u529F\uFF0C\u7ACB\u5373\u5B66\u4E60",
+            showCancel: true,
+            success: (e) => {
+              if (e.confirm) {
+                common_vendor.index.redirectTo({ url: "/pages/course/course-details?id=" + detail.value.id });
+              } else {
+                common_vendor.index.redirectTo({ url: "/pages/order/order-list" });
+              }
+            }
+          });
+        } else {
+          proxy.$message.toast("\u652F\u4ED8\u5931\u8D25", "error");
+        }
+      }, 2e3);
+    };
     let radioChange = (e) => {
       payStyle.value = e.detail.value;
     };
@@ -37,40 +69,20 @@ const _sfc_main = {
       console.log("\u82F9\u679C\u652F\u4ED8");
       let data = { price: price.value, courseIds: courseIds.value };
       if (canPay.value) {
-        loading.value = true;
-        common_vendor.index.showLoading({
-          title: "\u652F\u4ED8\u4E2D...",
-          mask: true
-        });
-        let res = await request_courseApi.orderPay(data);
-        setTimeout(() => {
-          common_vendor.index.hideLoading();
-          loading.value = false;
-          if (res.code == 200) {
-            common_vendor.index.showModal({
-              content: "\u652F\u4ED8\u6210\u529F\uFF0C\u7ACB\u5373\u5B66\u4E60",
-              showCancel: true,
-              success: (e) => {
-                if (e.confirm) {
-                  common_vendor.index.redirectTo({ url: "/pages/course/course-details?id=" + detail.value.id });
-                } else {
-                  console.log("\u8BA2\u5355\u9875");
-                }
-              }
-            });
-          } else {
-            proxy.$message.toast("\u652F\u4ED8\u5931\u8D25", "error");
-          }
-        }, 2e3);
+        XuNiPay(data);
       } else {
         proxy.navTo(`/pages/order/my-balance?params=${JSON.stringify(data)}`);
       }
     };
-    const wxPayHandler = () => {
-      console.log(`${payStyle.value}\u652F\u4ED8`);
-    };
-    const payHandler = () => {
-      console.log(`${payStyle.value}\u652F\u4ED8`);
+    const payHandler = async () => {
+      loading.value = true;
+      let res = null;
+      if (payStyle.value == "wxpay") {
+        res = await request_orderApi.getWXOrderInfo(courseIds.value);
+      } else if (payStyle.value == "alipay") {
+        res = await request_orderApi.getALOrderInfo(courseIds.value);
+      }
+      XuNiPay(res);
     };
     return {
       detail,
@@ -82,13 +94,12 @@ const _sfc_main = {
       canPay,
       radioChange,
       iosPayHandler,
-      wxPayHandler,
       payHandler
     };
   },
   async onLoad(option) {
     this.detail = JSON.parse(option.detail);
-    this.balance = await request_courseApi.getBalance();
+    this.balance = await request_orderApi.getBalance();
   }
 };
 if (!Array) {
@@ -117,40 +128,29 @@ function _sfc_render(_ctx, _cache, $props, $setup, $data, $options) {
       item: $setup.detail
     })
   }, {
-    d: $setup.isIos
-  }, $setup.isIos ? {
-    e: common_vendor.t($setup.balance),
-    f: common_vendor.t($setup.canPay ? "" : "(\u4F59\u989D\u4E0D\u8DB3)")
-  } : {
-    g: common_vendor.o((...args) => $setup.radioChange && $setup.radioChange(...args))
-  }, {
-    h: common_vendor.t($setup.detail.priceOriginal || $setup.detail.totalPrice),
-    i: $setup.detail.priceDiscount || $setup.detail.groupPrice
+    d: $setup.payStyle == "wxpay",
+    e: common_vendor.o((...args) => $setup.radioChange && $setup.radioChange(...args)),
+    f: common_vendor.t($setup.detail.priceOriginal || $setup.detail.totalPrice),
+    g: $setup.detail.priceDiscount || $setup.detail.groupPrice
   }, $setup.detail.priceDiscount || $setup.detail.groupPrice ? {
-    j: common_vendor.t($setup.detail.priceDiscount || $setup.detail.groupPrice)
+    h: common_vendor.t($setup.detail.priceDiscount || $setup.detail.groupPrice)
   } : {}, {
-    k: common_vendor.t($setup.price),
-    l: $setup.isIos
-  }, $setup.isIos ? {
-    m: common_vendor.t($setup.canPay ? "\u7ACB\u5373\u652F\u4ED8" : "\u5145\u503C\u5E76\u652F\u4ED8"),
-    n: $setup.loading,
-    o: $setup.loading,
-    p: common_vendor.o((...args) => $setup.iosPayHandler && $setup.iosPayHandler(...args))
-  } : common_vendor.e({
-    q: $setup.payStyle == "wxpay"
-  }, $setup.payStyle == "wxpay" ? {
-    r: $setup.loading,
-    s: $setup.loading,
-    t: common_vendor.o((...args) => $setup.wxPayHandler && $setup.wxPayHandler(...args))
+    i: common_vendor.t($setup.price),
+    j: $setup.payStyle == "iospay"
+  }, $setup.payStyle == "iospay" ? {
+    k: common_vendor.t($setup.canPay ? "\u7ACB\u5373\u652F\u4ED8" : "\u5145\u503C\u5E76\u652F\u4ED8"),
+    l: $setup.loading,
+    m: $setup.loading,
+    n: common_vendor.o((...args) => $setup.iosPayHandler && $setup.iosPayHandler(...args))
   } : {}, {
-    v: $setup.payStyle == "alipay"
-  }, $setup.payStyle == "alipay" ? {
-    w: $setup.loading,
-    x: $setup.loading,
-    y: common_vendor.o((...args) => $setup.payHandler && $setup.payHandler(...args))
+    o: $setup.payStyle == "wxpay" || $setup.payStyle == "alipay"
+  }, $setup.payStyle == "wxpay" || $setup.payStyle == "alipay" ? {
+    p: $setup.loading,
+    q: $setup.loading,
+    r: common_vendor.o((...args) => $setup.payHandler && $setup.payHandler(...args))
   } : {}, {
-    z: $setup.payStyle == null
-  }, $setup.payStyle == null ? {} : {}));
+    s: $setup.payStyle == null
+  }, $setup.payStyle == null ? {} : {});
 }
 var MiniProgramPage = /* @__PURE__ */ common_vendor._export_sfc(_sfc_main, [["render", _sfc_render]]);
 wx.createPage(MiniProgramPage);

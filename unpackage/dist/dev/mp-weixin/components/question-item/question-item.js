@@ -28,7 +28,7 @@ function _sfc_render(_ctx, _cache, $props, $setup, $data, $options) {
     c: common_vendor.t($setup.formatCount($props.item.viewCount)),
     d: common_vendor.t($props.item.nickName),
     e: common_vendor.t(_ctx.$utils.dateFormat($props.item.updateDate)),
-    f: common_vendor.o(($event) => _ctx.navTo(`/pages/question/details?id=${$props.item.id}`))
+    f: common_vendor.o(($event) => _ctx.navTo(`/pages/tab-question/question-details?id=${$props.item.id}`))
   };
 }
 var Component = /* @__PURE__ */ common_vendor._export_sfc(_sfc_main, [["render", _sfc_render]]);

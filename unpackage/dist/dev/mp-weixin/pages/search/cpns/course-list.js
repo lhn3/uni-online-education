@@ -164,14 +164,13 @@ function _sfc_render(_ctx, _cache, $props, $setup, $data, $options) {
     }),
     d: common_vendor.sr("mescrollRef" + $props.i, "6f12b0a3-1"),
     e: "mescrollRef" + $props.i,
-    f: common_vendor.o(_ctx.mescrollInit),
-    g: common_vendor.o(_ctx.downCallback),
-    h: common_vendor.o($setup.upCallback),
-    i: common_vendor.p({
+    f: common_vendor.o(_ctx.downCallback),
+    g: common_vendor.o($setup.upCallback),
+    h: common_vendor.p({
       down: _ctx.downOption,
       up: $setup.upOption
     }),
-    j: $props.i === $props.index
+    i: $props.i === $props.index
   };
 }
 var Component = /* @__PURE__ */ common_vendor._export_sfc(_sfc_main, [["render", _sfc_render]]);

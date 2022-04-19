@@ -1,1 +1,1 @@
-<view> 我的 </view>
+<view> 我的 <button type="default" size="mini" bindtap="{{a}}">我的订单</button></view>

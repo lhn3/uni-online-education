@@ -1,4 +1,7 @@
 {
   "navigationBarTitleText": "问答",
-  "usingComponents": {}
+  "usingComponents": {
+    "question-swiper": "./cpns/question-swiper",
+    "tab-bar": "../../components/tab-bar/tab-bar"
+  }
 }

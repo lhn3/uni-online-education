@@ -1,15 +1,9 @@
 "use strict";
 var common_vendor = require("../../../../common/vendor.js");
-var uni_modules_mescrollUni_components_mescrollUni_mescrollUni = require("../mescroll-uni/mescroll-uni.js");
+var wxs_wxs_vue_type_wxs_index_0_src_name_wxsBiz_lang = require("../../../../wxs.wxs_vue_type_wxs_index_0_src_name_wxsBiz_lang.js");
 var uni_modules_mescrollUni_components_mescrollUni_mescrollUniOption = require("../mescroll-uni/mescroll-uni-option.js");
 var uni_modules_mescrollUni_components_mescrollUni_mescrollI18n = require("../mescroll-uni/mescroll-i18n.js");
 var uni_modules_mescrollUni_components_mescrollUni_wxs_mixins = require("../mescroll-uni/wxs/mixins.js");
-var block0 = (Component2) => {
-  if (!Component2.wxsCallMethods) {
-    Component2.wxsCallMethods = [];
-  }
-  Component2.wxsCallMethods.push("wxsCall");
-};
 const MescrollTop = () => "../mescroll-uni/components/mescroll-top.js";
 const _sfc_main = {
   name: "mescroll-body",
@@ -185,13 +179,13 @@ const _sfc_main = {
     };
     let i18nType = uni_modules_mescrollUni_components_mescrollUni_mescrollI18n.mescrollI18n.getType();
     let i18nOption = { type: i18nType };
-    uni_modules_mescrollUni_components_mescrollUni_mescrollUni.MeScroll.extend(i18nOption, vm.i18n);
-    uni_modules_mescrollUni_components_mescrollUni_mescrollUni.MeScroll.extend(i18nOption, uni_modules_mescrollUni_components_mescrollUni_mescrollUniOption.GlobalOption.i18n);
-    uni_modules_mescrollUni_components_mescrollUni_mescrollUni.MeScroll.extend(diyOption, i18nOption[i18nType]);
-    uni_modules_mescrollUni_components_mescrollUni_mescrollUni.MeScroll.extend(diyOption, { down: uni_modules_mescrollUni_components_mescrollUni_mescrollUniOption.GlobalOption.down, up: uni_modules_mescrollUni_components_mescrollUni_mescrollUniOption.GlobalOption.up });
+    wxs_wxs_vue_type_wxs_index_0_src_name_wxsBiz_lang.MeScroll.extend(i18nOption, vm.i18n);
+    wxs_wxs_vue_type_wxs_index_0_src_name_wxsBiz_lang.MeScroll.extend(i18nOption, uni_modules_mescrollUni_components_mescrollUni_mescrollUniOption.GlobalOption.i18n);
+    wxs_wxs_vue_type_wxs_index_0_src_name_wxsBiz_lang.MeScroll.extend(diyOption, i18nOption[i18nType]);
+    wxs_wxs_vue_type_wxs_index_0_src_name_wxsBiz_lang.MeScroll.extend(diyOption, { down: uni_modules_mescrollUni_components_mescrollUni_mescrollUniOption.GlobalOption.down, up: uni_modules_mescrollUni_components_mescrollUni_mescrollUniOption.GlobalOption.up });
     let myOption = JSON.parse(JSON.stringify({ down: vm.down, up: vm.up }));
-    uni_modules_mescrollUni_components_mescrollUni_mescrollUni.MeScroll.extend(myOption, diyOption);
-    vm.mescroll = new uni_modules_mescrollUni_components_mescrollUni_mescrollUni.MeScroll(myOption, true);
+    wxs_wxs_vue_type_wxs_index_0_src_name_wxsBiz_lang.MeScroll.extend(myOption, diyOption);
+    vm.mescroll = new wxs_wxs_vue_type_wxs_index_0_src_name_wxsBiz_lang.MeScroll(myOption, true);
     vm.mescroll.i18n = i18nOption;
     vm.$emit("init", vm.mescroll);
     const sys = common_vendor.index.getSystemInfoSync();
@@ -243,15 +237,15 @@ const _sfc_main = {
       if (i18nType2 && vm.mescroll.i18n.type != i18nType2) {
         vm.mescroll.i18n.type = i18nType2;
         uni_modules_mescrollUni_components_mescrollUni_mescrollI18n.mescrollI18n.setType(i18nType2);
-        uni_modules_mescrollUni_components_mescrollUni_mescrollUni.MeScroll.extend(options, vm.mescroll.i18n[i18nType2]);
+        wxs_wxs_vue_type_wxs_index_0_src_name_wxsBiz_lang.MeScroll.extend(options, vm.mescroll.i18n[i18nType2]);
       }
       if (options.down) {
-        let down = uni_modules_mescrollUni_components_mescrollUni_mescrollUni.MeScroll.extend({}, options.down);
-        vm.mescroll.optDown = uni_modules_mescrollUni_components_mescrollUni_mescrollUni.MeScroll.extend(down, vm.mescroll.optDown);
+        let down = wxs_wxs_vue_type_wxs_index_0_src_name_wxsBiz_lang.MeScroll.extend({}, options.down);
+        vm.mescroll.optDown = wxs_wxs_vue_type_wxs_index_0_src_name_wxsBiz_lang.MeScroll.extend(down, vm.mescroll.optDown);
       }
       if (options.up) {
-        let up = uni_modules_mescrollUni_components_mescrollUni_mescrollUni.MeScroll.extend({}, options.up);
-        vm.mescroll.optUp = uni_modules_mescrollUni_components_mescrollUni_mescrollUni.MeScroll.extend(up, vm.mescroll.optUp);
+        let up = wxs_wxs_vue_type_wxs_index_0_src_name_wxsBiz_lang.MeScroll.extend({}, options.up);
+        vm.mescroll.optUp = wxs_wxs_vue_type_wxs_index_0_src_name_wxsBiz_lang.MeScroll.extend(up, vm.mescroll.optUp);
       }
     });
   },
@@ -323,7 +317,7 @@ function _sfc_render(_ctx, _cache, $props, $setup, $data, $options) {
     J: _ctx.wxsProp
   });
 }
-if (typeof block0 === "function")
-  block0(_sfc_main);
+if (typeof wxs_wxs_vue_type_wxs_index_0_src_name_wxsBiz_lang.block0 === "function")
+  wxs_wxs_vue_type_wxs_index_0_src_name_wxsBiz_lang.block0(_sfc_main);
 var Component = /* @__PURE__ */ common_vendor._export_sfc(_sfc_main, [["render", _sfc_render]]);
 wx.createComponent(Component);

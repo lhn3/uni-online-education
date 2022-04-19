@@ -5,19 +5,36 @@ const _sfc_main = {
     tabs: {
       type: Array,
       default: () => []
-    },
-    itemWidth: {
-      type: Number,
-      default: 100
     }
   },
-  emits: ["changeTab"],
   setup(props, { emit }) {
     let tabId = common_vendor.ref();
-    common_vendor.onMounted(() => {
-      tabId.value = props.tabs[0].id;
+    let itemWidth = common_vendor.ref(100);
+    let move = common_vendor.ref(0);
+    common_vendor.watch(() => props.tabs, (newValue) => {
+      if (newValue.length == 0)
+        return;
+      tabId.value = newValue[0].id;
+      if (newValue.length < 5) {
+        itemWidth.value = common_vendor.index.upx2px(750 / newValue.length);
+      } else {
+        itemWidth.value = common_vendor.index.upx2px(750 / 5);
+      }
+    }, {
+      deep: true,
+      immediate: true
     });
-    let changeTabs = (id) => {
+    let tabPosition = (index) => {
+      if (index > 2) {
+        move.value = (index - 2) * itemWidth.value;
+      } else {
+        move.value = 0;
+      }
+    };
+    let changeTabs = (id, index) => {
+      if (tabId.value == id)
+        return;
+      tabPosition();
       if (tabId.value != id) {
         tabId.value = id;
         emit("changeTab", id);
@@ -25,22 +42,26 @@ const _sfc_main = {
     };
     return {
       tabId,
+      itemWidth,
+      move,
+      tabPosition,
       changeTabs
     };
   }
 };
 function _sfc_render(_ctx, _cache, $props, $setup, $data, $options) {
   return {
-    a: common_vendor.f($props.tabs, (item, k0, i0) => {
+    a: common_vendor.f($props.tabs, (item, index, i0) => {
       return {
         a: common_vendor.t(item.name),
         b: item.id == $setup.tabId ? 1 : "",
         c: item.id,
-        d: common_vendor.o(($event) => $setup.changeTabs(item.id), item.id)
+        d: common_vendor.o(($event) => $setup.changeTabs(item.id, index), item.id)
       };
     }),
-    b: `${$props.itemWidth}px`,
-    c: common_vendor.o(() => {
+    b: `${$setup.itemWidth}px`,
+    c: $setup.move,
+    d: common_vendor.o(() => {
     })
   };
 }

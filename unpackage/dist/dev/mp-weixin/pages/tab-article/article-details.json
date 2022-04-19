@@ -1,0 +1,7 @@
+{
+  "navigationBarTitleText": "阅读详情",
+  "usingComponents": {
+    "uni-tag": "../../uni_modules/uni-tag/components/uni-tag/uni-tag",
+    "my-share": "../../components/my-share/my-share"
+  }
+}

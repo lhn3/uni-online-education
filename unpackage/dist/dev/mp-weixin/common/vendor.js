@@ -14,6 +14,52 @@ function makeMap(str, expectsLowerCase) {
   }
   return expectsLowerCase ? (val) => !!map[val.toLowerCase()] : (val) => !!map[val];
 }
+const isNoUnitNumericStyleProp = /* @__PURE__ */ makeMap(`animation-iteration-count,border-image-outset,border-image-slice,border-image-width,box-flex,box-flex-group,box-ordinal-group,column-count,columns,flex,flex-grow,flex-positive,flex-shrink,flex-negative,flex-order,grid-row,grid-row-end,grid-row-span,grid-row-start,grid-column,grid-column-end,grid-column-span,grid-column-start,font-weight,line-clamp,line-height,opacity,order,orphans,tab-size,widows,z-index,zoom,fill-opacity,flood-opacity,stop-opacity,stroke-dasharray,stroke-dashoffset,stroke-miterlimit,stroke-opacity,stroke-width`);
+function normalizeStyle(value) {
+  if (isArray$1(value)) {
+    const res = {};
+    for (let i = 0; i < value.length; i++) {
+      const item = value[i];
+      const normalized = isString(item) ? parseStringStyle(item) : normalizeStyle(item);
+      if (normalized) {
+        for (const key in normalized) {
+          res[key] = normalized[key];
+        }
+      }
+    }
+    return res;
+  } else if (isString(value)) {
+    return value;
+  } else if (isObject$1(value)) {
+    return value;
+  }
+}
+const listDelimiterRE = /;(?![^(]*\))/g;
+const propertyDelimiterRE = /:(.+)/;
+function parseStringStyle(cssText) {
+  const ret = {};
+  cssText.split(listDelimiterRE).forEach((item) => {
+    if (item) {
+      const tmp = item.split(propertyDelimiterRE);
+      tmp.length > 1 && (ret[tmp[0].trim()] = tmp[1].trim());
+    }
+  });
+  return ret;
+}
+function stringifyStyle$1(styles) {
+  let ret = "";
+  if (!styles || isString(styles)) {
+    return ret;
+  }
+  for (const key in styles) {
+    const value = styles[key];
+    const normalizedKey = key.startsWith(`--`) ? key : hyphenate(key);
+    if (isString(value) || typeof value === "number" && isNoUnitNumericStyleProp(normalizedKey)) {
+      ret += `${normalizedKey}:${value};`;
+    }
+  }
+  return ret;
+}
 function normalizeClass(value) {
   let res = "";
   if (isString(value)) {
@@ -2505,8 +2551,8 @@ function doWatch(source, cb, { immediate, deep, flush, onTrack, onTrigger } = EM
       warn$1(`watch() "deep" option is only respected when using the watch(source, callback, options?) signature.`);
     }
   }
-  const warnInvalidSource = (s) => {
-    warn$1(`Invalid watch source: `, s, `A watch source can only be a getter/effect function, a ref, a reactive object, or an array of these types.`);
+  const warnInvalidSource = (s2) => {
+    warn$1(`Invalid watch source: `, s2, `A watch source can only be a getter/effect function, a ref, a reactive object, or an array of these types.`);
   };
   const instance = currentInstance;
   let getter;
@@ -2521,15 +2567,15 @@ function doWatch(source, cb, { immediate, deep, flush, onTrack, onTrigger } = EM
   } else if (isArray$1(source)) {
     isMultiSource = true;
     forceTrigger = source.some(isReactive);
-    getter = () => source.map((s) => {
-      if (isRef(s)) {
-        return s.value;
-      } else if (isReactive(s)) {
-        return traverse(s);
-      } else if (isFunction(s)) {
-        return callWithErrorHandling(s, instance, 2);
+    getter = () => source.map((s2) => {
+      if (isRef(s2)) {
+        return s2.value;
+      } else if (isReactive(s2)) {
+        return traverse(s2);
+      } else if (isFunction(s2)) {
+        return callWithErrorHandling(s2, instance, 2);
       } else {
-        warnInvalidSource(s);
+        warnInvalidSource(s2);
       }
     });
   } else if (isFunction(source)) {
@@ -4841,12 +4887,19 @@ function vFor(source, renderItem) {
   }
   return ret;
 }
+function stringifyStyle(value) {
+  if (isString(value)) {
+    return value;
+  }
+  return stringifyStyle$1(normalizeStyle(value));
+}
 function setRef(ref2, id, opts = {}) {
   const { $templateRefs } = getCurrentInstance();
   $templateRefs.push({ i: id, r: ref2, k: opts.k, f: opts.f });
 }
 const o = (value, key) => vOn(value, key);
 const f = (source, renderItem) => vFor(source, renderItem);
+const s = (value) => stringifyStyle(value);
 const e = (target, ...sources) => extend(target, ...sources);
 const n = (value) => normalizeClass(value);
 const t = (val) => toDisplayString(val);
@@ -5956,6 +6009,7 @@ exports.p = p;
 exports.reactive = reactive;
 exports.ref = ref;
 exports.resolveComponent = resolveComponent;
+exports.s = s;
 exports.sr = sr;
 exports.t = t;
 exports.toRefs = toRefs;

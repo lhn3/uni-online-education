@@ -99,8 +99,6 @@ const _sfc_main = {
       upOption,
       toSearch
     });
-  },
-  onLoad() {
   }
 };
 if (!Array) {

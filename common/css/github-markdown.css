@@ -200,7 +200,7 @@
     padding: 0;
   }
   
-  .markdown-body * {
+  .markdown-body{
     box-sizing: border-box;
   }
   
@@ -380,11 +380,11 @@
     content: "";
   }
   
-  .markdown-body>*:first-child {
+  .markdown-body :first-child {
     margin-top: 0 !important;
   }
   
-  .markdown-body>*:last-child {
+  .markdown-body :last-child {
     margin-bottom: 0 !important;
   }
   

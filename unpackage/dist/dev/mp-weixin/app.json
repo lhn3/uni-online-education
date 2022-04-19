@@ -10,7 +10,11 @@
         "pages/course/course-details",
         "pages/course/course-play",
         "pages/order/confirm-buy",
-        "pages/order/my-balance"
+        "pages/order/my-balance",
+        "pages/order/order-list",
+        "pages/tab-article/article-details",
+        "pages/auth/login",
+        "pages/tab-question/question-details"
     ],
     "window": {
         "navigationBarBackgroundColor": "#A2CD5A",

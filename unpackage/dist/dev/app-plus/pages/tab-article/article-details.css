@@ -347,7 +347,7 @@
     box-sizing: border-box;
     padding: 0;
 }
-.markdown-body * {
+.markdown-body{
     box-sizing: border-box;
 }
 .markdown-body uni-input {
@@ -492,10 +492,10 @@
     clear: both;
     content: "";
 }
-.markdown-body>*:first-child {
+.markdown-body :first-child {
     margin-top: 0 !important;
 }
-.markdown-body>*:last-child {
+.markdown-body :last-child {
     margin-bottom: 0 !important;
 }
 .markdown-body a:not([href]) {
@@ -955,7 +955,7 @@
   font-size: 0.9375rem;
   padding: 0.46875rem 0.625rem;
   width: 100%;
-  height: 1.40625rem;
+  height: 1.5625rem;
   background-color: #F8F9FB;
   border-radius: 0.9375rem;
 }

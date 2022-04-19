@@ -35,7 +35,7 @@ function _sfc_render(_ctx, _cache, $props, $setup, $data, $options) {
     e: common_vendor.t($props.item.nickName),
     f: common_vendor.t(this.$utils.dateFormat($props.item.updateDate)),
     g: common_vendor.t($setup.formatCount($props.item.thumhup)),
-    h: common_vendor.o(($event) => _ctx.navTo(`/pages/article/details?id=${$props.item.id}`))
+    h: common_vendor.o(($event) => _ctx.navTo(`/pages/tab-article/article-details?id=${$props.item.id}`))
   });
 }
 var Component = /* @__PURE__ */ common_vendor._export_sfc(_sfc_main, [["render", _sfc_render]]);

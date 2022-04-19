@@ -26,4 +26,55 @@ const getQuestionList = (query, current = 1, size = 10) => {
     data: __spreadProps(__spreadValues({}, query), { current, size })
   });
 };
+const getHotQuestionList = (current = 1, size = 10) => {
+  return request_request.request({
+    method: "POST",
+    url: "/question/api/question/hot",
+    data: { current, size }
+  });
+};
+const getNewQuestionList = (current = 1, size = 10) => {
+  return request_request.request({
+    method: "POST",
+    url: "/question/api/question/new",
+    data: { current, size }
+  });
+};
+const getWaitQuestionList = (current = 1, size = 10) => {
+  return request_request.request({
+    method: "POST",
+    url: "/question/api/question/wait",
+    data: { current, size }
+  });
+};
+const getQuestionDetail = (id) => {
+  return request_request.request({
+    url: "/question/api/question/" + id
+  });
+};
+const getQuestionAnswerList = (id) => {
+  return request_request.request({
+    url: "/question/api/reply/list/" + id
+  });
+};
+const addQuestionAnswer = (data) => {
+  return request_request.request({
+    method: "POST",
+    url: "/question/reply",
+    data
+  });
+};
+const focusQuestion = (id) => {
+  return request_request.request({
+    method: "PUT",
+    url: "/question/question/star/" + id
+  });
+};
+exports.addQuestionAnswer = addQuestionAnswer;
+exports.focusQuestion = focusQuestion;
+exports.getHotQuestionList = getHotQuestionList;
+exports.getNewQuestionList = getNewQuestionList;
+exports.getQuestionAnswerList = getQuestionAnswerList;
+exports.getQuestionDetail = getQuestionDetail;
 exports.getQuestionList = getQuestionList;
+exports.getWaitQuestionList = getWaitQuestionList;

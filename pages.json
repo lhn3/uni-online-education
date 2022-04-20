@@ -246,7 +246,10 @@
             "path" : "pages/auth/login",
             "style" :                                                                                    
             {
-                "navigationBarTitleText": "登录"
+                "navigationBarTitleText": "登录",
+				"app-plus":{
+					"bounce":false
+				}
             }
             
         }
@@ -268,6 +271,50 @@
 						]
 					}
 				}
+            }
+            
+        }
+        ,{
+            "path" : "pages/tab-my/setting",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "设置",
+                "app-plus":{
+                	"bounce":false
+                }
+            }
+            
+        }
+        ,{
+            "path" : "pages/tab-my/feedback",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "意见反馈",
+                "app-plus":{
+                	"bounce":false
+                }
+            }
+            
+        }
+        ,{
+            "path" : "pages/tab-my/about",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "关于我们",
+                "app-plus":{
+                	"bounce":false
+                }
+            }
+            
+        }
+        ,{
+            "path" : "pages/tab-my/study",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "我的学习",
+                "app-plus":{
+                	"bounce":false
+                }
             }
             
         }

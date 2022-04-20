@@ -3,9 +3,9 @@
 		<!-- 一大类列表 -->
 		<view class="list" v-for="(item, index) in list" :key="index">
 			<view v-for="(nav, i) in item" :key="i"
-				@click="clickHandler(nav)"
+				@click="(nav.checked || nav.checked == false) ? '':clickHandler(nav)"
 				class="list-item space-between center"
-				:hover-class="nav.checked || nav.checked === false ? '': 'active'" 
+				:hover-class="(nav.checked || nav.checked == false) ? '': 'active'" 
 				:hover-start-time="50"
 			>
 				<view class="left center">
@@ -15,7 +15,7 @@
 				<view class="right center">
 					<text v-if="nav.text" >{{nav.text}}</text>
 					<!-- 阻止调用父组件的click事件 -->
-					<switch v-if="nav.checked || nav.checked === false"
+					<switch v-if="nav.checked || nav.checked == false"
 						@click.stop="()=>{}" @change="clickHandler(nav)"
 						:checked="nav.checked" color="#A2CD5A"
 						/>
@@ -38,7 +38,8 @@ export default {
 			// console.log('obj', obj.page)
 			if(obj.page) {
 				// 点击后跳转到目标页面，并且会判断是否要求登录，没有登录进入登录页
-				this.navTo(obj.page, {login: obj.login})
+				// this.navTo(obj.page, {login: obj.login})
+				this.navTo(obj.page)
 				return
 			}
 			

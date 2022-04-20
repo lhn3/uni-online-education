@@ -121,6 +121,7 @@ export default {
 		this.init()
 		
 		//检测支付环境
+		//  #ifdef APP-PLUS
 		plus.payment.getChannels((channels) => {
 			console.log("获取到channel" + JSON.stringify(channels))
 			//[{"id":"alipay","description":"支付宝","serviceReady":true},
@@ -140,6 +141,7 @@ export default {
 		}, (error) => {
 			this.errorMsg()
 		});
+		// #endif
 	},
 	methods:{
 		async init(){
@@ -147,6 +149,9 @@ export default {
 			this.balance = await getBalance()
 			//计算需要充值的金额
 			this.selectBalance = this.params.price - this.balance
+			if(this.selectBalance<0 || isNaN(this.selectBalance)){
+				this.selectBalance = 10
+			}
 			this.moneyList.unshift(this.selectBalance)
 		},
 		requestOrder() {

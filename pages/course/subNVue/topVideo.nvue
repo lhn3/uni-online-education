@@ -150,7 +150,11 @@ export default {
 			},300)
 		},
 		//视频播放到末尾播放下一个
-		nextVideo(){
+		nextVideo(e){
+			// 判断视频播放到最后是否要自动播放下一个
+			if(e && e.type == 'ended' && !uni.getStorageSync('auto-play')) return;
+			
+			uni.getStorageSync('auto-play')
 			let courseSection = this.courseSection
 			//要浅拷贝，否则下面使用activeVideo，又在改变activeVideo，会产生递归
 			let activeVideo = {...this.activeVideo}	

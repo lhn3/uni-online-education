@@ -8622,12 +8622,120 @@ var __spreadProps = (a, b) => __defProps(a, __getOwnPropDescs(b));
   }
   var PagesTabMySetting = /* @__PURE__ */ _export_sfc(_sfc_main$4, [["render", _sfc_render$3]]);
   const _sfc_main$3 = {
-    data() {
-      return {};
+    setup() {
+      let { proxy } = vue.getCurrentInstance();
+      let loading = vue.ref(false);
+      let location = vue.ref(null);
+      let state = vue.reactive({
+        feedback: 1,
+        content: "",
+        qq: "",
+        weixin: ""
+      });
+      uni.getLocation({
+        geocode: true,
+        success: (e) => {
+          location.value = e.address.province + e.address.city + e.address.district + "\n" + e.address.street;
+        }
+      });
+      const radioChange = (e) => {
+        state.feedback = e.detail.value;
+      };
+      const submitHandler = () => {
+        if (state.content.trim() == "") {
+          proxy.$message.toast("\u8BF7\u8F93\u5165\u53CD\u9988\u5185\u5BB9");
+          return;
+        } else if (state.qq.trim() == "") {
+          proxy.$message.toast("\u8BF7\u586B\u5199\u60A8\u7684QQ\u4FE1\u606F");
+          return;
+        } else if (state.weixin.trim() == "") {
+          proxy.$message.toast("\u8BF7\u586B\u5199\u60A8\u7684\u5FAE\u4FE1\u4FE1\u606F");
+          return;
+        }
+        loading.value = true;
+        uni.showLoading();
+        setTimeout(() => {
+          loading.value = false;
+          uni.hideLoading();
+          proxy.$message.toast("\u610F\u89C1\u53CD\u9988\u6210\u529F", "success");
+          uni.navigateBack();
+        }, 2e3);
+      };
+      return {
+        loading,
+        location,
+        state,
+        radioChange,
+        submitHandler
+      };
     }
   };
   function _sfc_render$2(_ctx, _cache, $props, $setup, $data, $options) {
-    return vue.openBlock(), vue.createElementBlock("view", null, " \u610F\u89C1\u53CD\u9988 ");
+    return vue.openBlock(), vue.createElementBlock("view", { class: "feedback-box center column" }, [
+      vue.createElementVNode("radio-group", {
+        class: "radio-group",
+        onChange: _cache[0] || (_cache[0] = (...args) => $setup.radioChange && $setup.radioChange(...args))
+      }, [
+        vue.createElementVNode("label", { class: "label" }, [
+          vue.createElementVNode("radio", {
+            value: "1",
+            checked: "",
+            color: "#A2CD5A",
+            style: { "transform": "scale(0.7)" }
+          }),
+          vue.createTextVNode("\u5185\u5BB9\u610F\u89C1 ")
+        ]),
+        vue.createElementVNode("label", { class: "label" }, [
+          vue.createElementVNode("radio", {
+            value: "2",
+            color: "#A2CD5A",
+            style: { "transform": "scale(0.7)" }
+          }),
+          vue.createTextVNode("\u4EA7\u54C1\u5EFA\u8BAE ")
+        ]),
+        vue.createElementVNode("label", { class: "label" }, [
+          vue.createElementVNode("radio", {
+            value: "3",
+            color: "#A2CD5A",
+            style: { "transform": "scale(0.7)" }
+          }),
+          vue.createTextVNode("\u5176\u4ED6 ")
+        ])
+      ], 32),
+      vue.withDirectives(vue.createElementVNode("textarea", {
+        "onUpdate:modelValue": _cache[1] || (_cache[1] = ($event) => $setup.state.content = $event),
+        maxlength: "500",
+        placeholder: "\u8BF7\u586B\u5199\u5177\u4F53\u5185\u5BB9\u5E2E\u52A9\u6211\u4EEC\u4E86\u89E3\u60A8\u7684\u610F\u89C1\u548C\u5EFA\u8BAE"
+      }, null, 512), [
+        [vue.vModelText, $setup.state.content]
+      ]),
+      vue.withDirectives(vue.createElementVNode("input", {
+        "onUpdate:modelValue": _cache[2] || (_cache[2] = ($event) => $setup.state.qq = $event),
+        maxlength: "15",
+        type: "text",
+        placeholder: "\u586B\u5199\u60A8\u7684QQ"
+      }, null, 512), [
+        [vue.vModelText, $setup.state.qq]
+      ]),
+      vue.withDirectives(vue.createElementVNode("input", {
+        "onUpdate:modelValue": _cache[3] || (_cache[3] = ($event) => $setup.state.weixin = $event),
+        maxlength: "25",
+        type: "text",
+        placeholder: "\u586B\u5199\u60A8\u7684\u5FAE\u4FE1"
+      }, null, 512), [
+        [vue.vModelText, $setup.state.weixin]
+      ]),
+      vue.createElementVNode("view", { class: "location" }, [
+        vue.createElementVNode("view", null, "\u60A8\u7684\u5F53\u524D\u4F4D\u7F6E\uFF1A"),
+        vue.createElementVNode("text", null, vue.toDisplayString($setup.location || "\u83B7\u53D6\u4FE1\u606F\u4E2D..."), 1)
+      ]),
+      vue.createElementVNode("button", {
+        loading: $setup.loading,
+        disabled: $setup.loading,
+        type: "primary",
+        onClick: _cache[4] || (_cache[4] = (...args) => $setup.submitHandler && $setup.submitHandler(...args))
+      }, "\u63D0\u4EA4", 8, ["loading", "disabled"])
+    ]);
   }
   var PagesTabMyFeedback = /* @__PURE__ */ _export_sfc(_sfc_main$3, [["render", _sfc_render$2]]);
   const _sfc_main$2 = {

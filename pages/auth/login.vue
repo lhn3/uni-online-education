@@ -46,10 +46,47 @@
 
 <script>
 import {getCurrentInstance,ref,reactive} from "vue";
+import {authLogin} from "@/request/my-api.js"
 export default {
 	setup(){
 		const {proxy} = getCurrentInstance()
+		let mobile = ref('')
+		let code = ref('')
+		let loading = ref(false)
 		let agreement = ref(false)
+		
+		//手机号登录
+		const login = async () => {
+			if(!proxy.$utils.checkStr(mobile.value,'mobile')){
+				proxy.$message.toast('请输入正确格式的手机号')
+				return;
+			}else if(!proxy.$utils.checkStr(code.value,'mobileCode')){
+				proxy.$message.toast('请输入正确格式的验证码')
+				return;
+			}else if(agreement.value == false){
+				proxy.$message.toast('请同意协议')
+				return;
+			}else if(code.value != '666666' ){
+				proxy.$message.toast('验证码错误')
+				return;
+			}
+			
+			// 验证通过执行登录
+			uni.showLoading({mask:true})
+			loading.value=true
+			let res = await authLogin({mobile:mobile.value,code:code.value})
+			loading.value=false
+			uni.hideLoading()
+			proxy.$message.toast('登陆成功','success')
+			
+			//写入用户信息
+			console.log(res)
+			
+			//页面跳转
+			setTimeout(()=>{
+				proxy.navBack()
+			},1000)
+		}
 		
 		//微信qq方式登录
 		const toProviderLogin = (type) => {
@@ -60,12 +97,18 @@ export default {
 			}	
 		}
 		
+		//同意协议
 		const checkAgreement = () => {
 			agreement.value = !agreement.value
 		}
+		
 		return{
+			mobile,
+			code,
+			loading,
 			agreement,
 			
+			login,
 			toProviderLogin,
 			checkAgreement
 		}

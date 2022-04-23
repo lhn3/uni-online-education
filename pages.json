@@ -197,7 +197,6 @@
 					"bounce":false
 				}
             }
-            
         }
         ,{
             "path" : "pages/order/my-balance",
@@ -208,7 +207,6 @@
 					"bounce":false
 				}
             }
-            
         }
         ,{
             "path" : "pages/order/order-list",
@@ -219,7 +217,6 @@
 					"bounce":false
 				}
             }
-            
         }
         ,{
             "path" : "pages/tab-article/article-details",
@@ -240,7 +237,6 @@
 					}
 				}
             }
-            
         }
         ,{
             "path" : "pages/auth/login",
@@ -252,7 +248,6 @@
 					"bounce":false
 				}
             }
-            
         }
         ,{
             "path" : "pages/tab-question/question-details",
@@ -273,7 +268,6 @@
 					}
 				}
             }
-            
         }
         ,{
             "path" : "pages/tab-my/setting",
@@ -284,7 +278,6 @@
                 	"bounce":false
                 }
             }
-            
         }
         ,{
             "path" : "pages/tab-my/feedback",
@@ -295,7 +288,6 @@
                 	"bounce":false
                 }
             }
-            
         }
         ,{
             "path" : "pages/tab-my/about",
@@ -313,6 +305,26 @@
             "style" :                                                                                    
             {
                 "navigationBarTitleText": "我的学习",
+                "app-plus":{
+                	"bounce":false
+                }
+            }
+        }
+		,{
+            "path" : "pages/public/xieyi",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "用户服务协议",
+                "app-plus":{
+                	"bounce":false
+                }
+            }
+        }
+		,{
+            "path" : "pages/public/yinsi",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "隐私权政策",
                 "app-plus":{
                 	"bounce":false
                 }

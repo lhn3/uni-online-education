@@ -9,7 +9,7 @@
 		<view class="my-header">
 			<view @click="handleClick" class="header-content space-between center">
 				<view class="left center">
-					<image class="header-image" src="/static/logo.png" ></image>
+					<image class="header-image" src="https://gimg2.baidu.com/image_search/src=http%3A%2F%2Fimg2.doubanio.com%2Fview%2Frichtext%2Flarge%2Fpublic%2Fp206989042.jpg&refer=http%3A%2F%2Fimg2.doubanio.com&app=2002&size=f9999,10000" ></image>
 					<view v-if="isLogin" class="header-info column">
 						<text class="nickname">梦小二</text>
 						<text class="username">用户名：mengxuegu</text>

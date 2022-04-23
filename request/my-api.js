@@ -9,6 +9,26 @@ const updateFeedback=(data)=>{
 	})
 }
 
+//获取短信验证码
+const getSms=(data)=>{
+	return request({
+		method:"POST",
+		url:'/system/sms/code',
+		data
+	})
+}
+
+//登录
+const authLogin=(data)=>{
+	return request({
+		method:"POST",
+		url:'/auth/login',
+		data
+	})
+}
+
 export {
-	updateFeedback
+	updateFeedback,
+	getSms,
+	authLogin
 }

@@ -247,6 +247,7 @@
             "style" :                                                                                    
             {
                 "navigationBarTitleText": "登录",
+				"navigationStyle":"custom",//隐藏导航栏
 				"app-plus":{
 					"bounce":false
 				}

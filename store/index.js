@@ -1,6 +1,6 @@
 import {createStore} from 'vuex'
 
-const store = createStore({
+export default createStore({
 	state:{
 		mobile:'',
 		token:'',
@@ -46,13 +46,3 @@ const store = createStore({
 	getters:{},
 	modules:{}
 })
-
-// 刷新保持vueX数据
-const keepVuex=()=>{
-	store.commit('keepUserInfo')
-}
-
-export {
-	store,
-	keepVuex
-}

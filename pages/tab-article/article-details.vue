@@ -66,6 +66,7 @@
 <script>
 import { getCurrentInstance,ref,reactive,toRefs,onMounted,nextTick } from "vue";
 import { onNavigationBarButtonTap } from '@dcloudio/uni-app';
+import {useStore} from 'vuex'
 import uniTag from '@/uni_modules/uni-tag/components/uni-tag/uni-tag.vue'
 import {getArticleDetail,getArticleComment,addArticleComment} from '@/request/article-api.js'
 
@@ -75,6 +76,7 @@ export default {
 	},
 	setup(){
 		let {proxy} = getCurrentInstance()
+		let store = useStore()
 		let providerList = ref([	//h5分享页面数据
 			{id: 'weixin',name: '微信好友',sort:0,icon: '/static/share/weixin.png'},
 			{id: 'weixin',name: '朋友圈',type:'WXSenceTimeline',sort:1,icon: '/static/share/pengyouquan.png'},
@@ -111,8 +113,8 @@ export default {
 			  "id": 1,
 			  "parentId": "-1",
 			  "userId": 1,
-			  "nickName": "小明",
-			  "userImage": "https://gimg2.baidu.com/image_search/src=http%3A%2F%2Fi0.hdslb.com%2Fbfs%2Farticle%2F6477f4d1e658b314b5e7d5db2c92306e50c711ef.jpg&refer=http%3A%2F%2Fi0.hdslb.com&app=2002&size=f9999,10000&q=a80&n=0&g=0n&fmt=auto",
+			  "nickName": store.state.nickName,
+			  "userImage": store.state.imageUrl,
 			  "articleId": id.value,
 			  "content": content.value,
 			  "createDate": "2019-04-13 05:54:16"

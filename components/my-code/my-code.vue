@@ -9,7 +9,7 @@
 <script>
 import {getSms} from "@/request/my-api.js"
 import {getCurrentInstance,ref,reactive} from "vue";
-// import {use} from 'vuex'
+import {useStore} from 'vuex'
 export default {
 	props: {
 		mobile: { // 手机号码
@@ -23,16 +23,17 @@ export default {
 	},
 	setup(props){
 		const {proxy} = getCurrentInstance()
+		let store = useStore()
 		let interval = ref(null)//倒计数
 		let intervalNum = ref(60)//倒计数数字
 		
 		// 发送验证码
 		const sendSmsCode = async () => {
 			//修改绑定手机时判断时候与之前手机号一致
-			// if(proxy.mobile == '13559476203'){
-			// 	proxy.$message.toast('此手机号已被绑定')
-			// 	return;
-			// }
+			if(proxy.mobile == store.state.mobile){
+				proxy.$message.toast('此手机号已被绑定')
+				return;
+			}
 			
 			//如果已经发送了短信就不能重复发送
 			if (interval.value) return;

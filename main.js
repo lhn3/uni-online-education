@@ -17,6 +17,9 @@ import request from './request/request.js'
 import mixin from '@/common/mixin/mixin.js'
 import * as utils from '@/utils/util.js'
 import * as env from '@/config/env.js'
+import {store,keepVuex} from '@/store/index.js'
+
+keepVuex()
 export function createApp() {
   const app = createSSRApp(App)
   app.config.globalProperties.$message = message;
@@ -24,6 +27,7 @@ export function createApp() {
   app.config.globalProperties.$utils = utils;
   app.config.globalProperties.$env = env;
   app.mixin(mixin)
+  app.use(store)
   return {
     app
   }

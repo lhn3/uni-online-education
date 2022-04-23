@@ -38,8 +38,7 @@ export default {
 			// console.log('obj', obj.page)
 			if(obj.page) {
 				// 点击后跳转到目标页面，并且会判断是否要求登录，没有登录进入登录页
-				// this.navTo(obj.page, {login: obj.login})
-				this.navTo(obj.page)
+				this.navTo(obj.page, {login: obj.login})
 				return
 			}
 			

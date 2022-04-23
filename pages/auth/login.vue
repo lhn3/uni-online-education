@@ -47,13 +47,16 @@
 <script>
 import {getCurrentInstance,ref,reactive} from "vue";
 import {authLogin} from "@/request/my-api.js"
+import {useStore} from 'vuex'
 export default {
 	setup(){
 		const {proxy} = getCurrentInstance()
+		const store = useStore()
 		let mobile = ref('')
 		let code = ref('')
 		let loading = ref(false)
 		let agreement = ref(false)
+		console.log(store.state.mobile)
 		
 		//手机号登录
 		const login = async () => {
@@ -80,8 +83,14 @@ export default {
 			proxy.$message.toast('登陆成功','success')
 			
 			//写入用户信息
-			console.log(res)
-			
+			store.commit('saveUserInfo',{
+				mobile:mobile.value,
+				token:res.token,
+				username:res.userInfo.username,
+				imageUrl:res.userInfo.imageUrl,
+				nickName:res.userInfo.nickName
+			})
+					
 			//页面跳转
 			setTimeout(()=>{
 				proxy.navBack()

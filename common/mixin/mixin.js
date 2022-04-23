@@ -17,7 +17,7 @@ export default{
 			if(!url){
 				return;
 			}
-			if(options.login && !this.$store.getters.hasLogin){
+			if(options.login && !this.$store.state.token){
 				url = '/pages/auth/login';
 			}
 			uni.navigateTo({

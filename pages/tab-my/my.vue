@@ -9,10 +9,10 @@
 		<view class="my-header">
 			<view @click="handleClick" class="header-content space-between center">
 				<view class="left center">
-					<image class="header-image" src="https://gimg2.baidu.com/image_search/src=http%3A%2F%2Fimg2.doubanio.com%2Fview%2Frichtext%2Flarge%2Fpublic%2Fp206989042.jpg&refer=http%3A%2F%2Fimg2.doubanio.com&app=2002&size=f9999,10000" ></image>
+					<image class="header-image" :src="$store.state.token?$store.state.imageUrl:'https://gimg2.baidu.com/image_search/src=http%3A%2F%2Fimg2.doubanio.com%2Fview%2Frichtext%2Flarge%2Fpublic%2Fp206989042.jpg&refer=http%3A%2F%2Fimg2.doubanio.com&app=2002&size=f9999,10000'" ></image>
 					<view v-if="isLogin" class="header-info column">
-						<text class="nickname">梦小二</text>
-						<text class="username">用户名：mengxuegu</text>
+						<text class="nickname">{{$store.state.username}}</text>
+						<text class="username">用户名：{{$store.state.nickName}}</text>
 					</view>
 					<view v-else class="header-info">
 						<text class="nickname">请登录</text>
@@ -29,18 +29,24 @@
 
 <script>
 import data from '@/config/my-list-bar.js'
-import {getCurrentInstance,ref,reactive} from "vue";
+import {getCurrentInstance,ref,reactive,computed} from "vue";
+import {useStore} from 'vuex'
 export default {
 	setup(){
 		let {proxy} = getCurrentInstance()
+		let store = useStore()
+		let userInfo = ref({})
 		let list = ref(data)
 		let isLogin = ref(false)
 		
 		//获取是否登录
-		const getPageInfo = () => {
-			// isLogin.value = true
-		}
-		getPageInfo()
+		isLogin = computed(()=>{
+			if(store.state.token) {
+				return true
+			}else{
+				return false
+			}
+		})
 		
 		//点击头像部分
 		let handleClick=()=>{

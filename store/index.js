@@ -39,6 +39,14 @@ export default createStore({
 			state.username = res.username
 			state.nickName = res.nickName
 			state.imageUrl = res.imageUrl
+		},
+		
+		// 修改手机号码
+		saveUserMobile(state,value){
+			let res = uni.getStorageSync('educationUserInfo')
+			state.mobile = value.mobile
+			res.mobile = value.mobile
+			uni.setStorageSync('educationUserInfo',res)
 		}
 		
 	},

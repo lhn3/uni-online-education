@@ -27,6 +27,7 @@ const authLogin = (data) => {
 	})
 }
 
+// 第三方登录
 const authorizationLogin = (data) => {
 	return request({
 		method:"POST",
@@ -35,9 +36,19 @@ const authorizationLogin = (data) => {
 	})
 }
 
+//手机号码绑定或修改
+const resetMobile = (data) => {
+	return request({
+		method:'PUT',
+		url:'/auth/user/mobile',
+		data
+	})
+}
+
 export {
 	updateFeedback,
 	getSms,
 	authLogin,
-	authorizationLogin
+	authorizationLogin,
+	resetMobile
 }

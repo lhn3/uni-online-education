@@ -92,8 +92,8 @@ export default {
 			
 			//写入用户信息
 			store.commit('saveUserInfo',{
-				mobile:res.mobile,
-				token:res.token,
+				mobile:mobile.value,
+				token:res.access_token,
 				username:res.userInfo.username,
 				imageUrl:res.userInfo.imageUrl,
 				nickName:res.userInfo.nickName
@@ -130,20 +130,11 @@ export default {
 			console.log(authResult)
 			let res = await authorizationLogin(authResult)
 			uni.hideLoading()
-			//写入用户信息
-			store.commit('saveUserInfo',{
-				mobile:res.mobile,
-				token:res.access_token,
-				username:res.userInfo.username,
-				imageUrl:res.userInfo.imageUrl,
-				nickName:res.userInfo.nickName
-			})
+	
 			// 如果没有手机号码跳转到绑定手机
 			if(!res.mobile){
-				proxy.$message.toast('授权成功','success')
-				setTimeout(()=>{
-					proxy.navTo('/pages/auth/bind-mobile?data='+JSON.stringify(res))
-				})
+				proxy.$message.toast('授权成功,请绑定手机号')
+				proxy.navTo('/pages/auth/bind-mobile?title=手机绑定&data='+JSON.stringify(res))
 			}
 		}
 		

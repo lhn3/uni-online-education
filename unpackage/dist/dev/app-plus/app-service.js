@@ -9378,6 +9378,13 @@ var __spreadProps = (a, b) => __defProps(a, __getOwnPropDescs(b));
       data: data2
     });
   };
+  const resetMobile = (data2) => {
+    return request({
+      method: "PUT",
+      url: "/auth/user/mobile",
+      data: data2
+    });
+  };
   const _sfc_main$a = {
     props: {
       mobile: {
@@ -9472,8 +9479,8 @@ var __spreadProps = (a, b) => __defProps(a, __getOwnPropDescs(b));
         uni.hideLoading();
         proxy.$message.toast("\u767B\u9646\u6210\u529F", "success");
         store2.commit("saveUserInfo", {
-          mobile: res.mobile,
-          token: res.token,
+          mobile: mobile.value,
+          token: res.access_token,
           username: res.userInfo.username,
           imageUrl: res.userInfo.imageUrl,
           nickName: res.userInfo.nickName
@@ -9501,18 +9508,9 @@ var __spreadProps = (a, b) => __defProps(a, __getOwnPropDescs(b));
         formatAppLog("log", "at pages/auth/login.vue:130", authResult);
         let res = await authorizationLogin(authResult);
         uni.hideLoading();
-        store2.commit("saveUserInfo", {
-          mobile: res.mobile,
-          token: res.access_token,
-          username: res.userInfo.username,
-          imageUrl: res.userInfo.imageUrl,
-          nickName: res.userInfo.nickName
-        });
         if (!res.mobile) {
-          proxy.$message.toast("\u6388\u6743\u6210\u529F", "success");
-          setTimeout(() => {
-            proxy.navTo("/pages/auth/bind-mobile?data=" + JSON.stringify(res));
-          });
+          proxy.$message.toast("\u6388\u6743\u6210\u529F,\u8BF7\u7ED1\u5B9A\u624B\u673A\u53F7");
+          proxy.navTo("/pages/auth/bind-mobile?title=\u624B\u673A\u7ED1\u5B9A&data=" + JSON.stringify(res));
         }
       };
       const checkAgreement = () => {
@@ -10089,16 +10087,111 @@ var __spreadProps = (a, b) => __defProps(a, __getOwnPropDescs(b));
   }
   var PagesPublicYinsi = /* @__PURE__ */ _export_sfc(_sfc_main$2, [["render", _sfc_render$1]]);
   const _sfc_main$1 = {
-    setup() {
-      return {};
-    },
     onLoad(option) {
-      formatAppLog("log", "at pages/auth/bind-mobile.vue:16", option.data);
-      JSON.parse(option.data);
+      if (option.data)
+        this.data = JSON.parse(option.data);
+      if (option.title) {
+        uni.setNavigationBarTitle({
+          title: option.title
+        });
+      }
+    },
+    setup() {
+      let { proxy } = vue.getCurrentInstance();
+      let store2 = useStore();
+      let loading = vue.ref(false);
+      let data2 = vue.ref(null);
+      let mobile = vue.ref("");
+      let code = vue.ref("");
+      const submitHandler = async () => {
+        if (!proxy.$utils.checkStr(mobile.value, "mobile")) {
+          proxy.$message.toast("\u8BF7\u8F93\u5165\u6B63\u786E\u683C\u5F0F\u7684\u624B\u673A\u53F7");
+          return;
+        } else if (!proxy.$utils.checkStr(code.value, "mobileCode")) {
+          proxy.$message.toast("\u8BF7\u8F93\u5165\u6B63\u786E\u683C\u5F0F\u7684\u9A8C\u8BC1\u7801");
+          return;
+        } else if (code.value != "666666") {
+          proxy.$message.toast("\u9A8C\u8BC1\u7801\u9519\u8BEF");
+          return;
+        }
+        uni.showLoading({ mask: true });
+        loading.value = true;
+        let res = await resetMobile({ mobile: mobile.value, code: code.value, data: data2.value });
+        loading.value = false;
+        uni.hideLoading();
+        if (!data2.value) {
+          store2.commit("saveUserInfo", {
+            mobile: mobile.value,
+            token: res.access_token,
+            username: res.userInfo.username,
+            imageUrl: res.userInfo.imageUrl,
+            nickName: res.userInfo.nickName
+          });
+          proxy.$message.toast("\u7ED1\u5B9A\u6210\u529F", "success");
+        } else {
+          store2.commit("saveUserMobile", {
+            mobile: mobile.value
+          });
+          proxy.$message.toast("\u4FEE\u6539\u6210\u529F", "success");
+        }
+        setTimeout(() => {
+          uni.switchTab({
+            url: "/pages/tab-my/my"
+          });
+        }, 1e3);
+      };
+      return {
+        data: data2,
+        loading,
+        mobile,
+        code,
+        submitHandler
+      };
     }
   };
   function _sfc_render(_ctx, _cache, $props, $setup, $data, $options) {
-    return vue.openBlock(), vue.createElementBlock("view", null, " 1234 ");
+    const _component_my_code = resolveEasycom(vue.resolveDynamicComponent("my-code"), __easycom_0);
+    return vue.openBlock(), vue.createElementBlock("view", { class: "content" }, [
+      vue.createElementVNode("view", { class: "input-group" }, [
+        vue.createElementVNode("view", { class: "center" }, [
+          vue.createElementVNode("text", { class: "title" }, "\u624B\u673A\u53F7\uFF1A"),
+          vue.createElementVNode("view", { class: "row" }, [
+            vue.withDirectives(vue.createElementVNode("input", {
+              "onUpdate:modelValue": _cache[0] || (_cache[0] = ($event) => $setup.mobile = $event),
+              class: "mxg-input",
+              type: "number",
+              maxlength: "11",
+              placeholder: "\u8BF7\u8F93\u5165\u624B\u673A\u53F7\u7801"
+            }, null, 512), [
+              [vue.vModelText, $setup.mobile]
+            ])
+          ])
+        ]),
+        vue.createElementVNode("view", { class: "center" }, [
+          vue.createElementVNode("text", { class: "title" }, "\u9A8C\u8BC1\u7801\uFF1A"),
+          vue.createElementVNode("view", { class: "row" }, [
+            vue.withDirectives(vue.createElementVNode("input", {
+              "onUpdate:modelValue": _cache[1] || (_cache[1] = ($event) => $setup.code = $event),
+              class: "mxg-input",
+              type: "number",
+              maxlength: "6",
+              placeholder: "\u8BF7\u8F93\u5165\u9A8C\u8BC1\u7801"
+            }, null, 512), [
+              [vue.vModelText, $setup.code]
+            ]),
+            vue.createVNode(_component_my_code, {
+              mobile: $setup.mobile,
+              templateCode: "SMS_1993234234"
+            }, null, 8, ["mobile"])
+          ])
+        ])
+      ]),
+      vue.createElementVNode("button", {
+        onClick: _cache[2] || (_cache[2] = (...args) => $setup.submitHandler && $setup.submitHandler(...args)),
+        loading: $setup.loading,
+        type: "primary"
+      }, "\u63D0\u4EA4", 8, ["loading"])
+    ]);
   }
   var PagesAuthBindMobile = /* @__PURE__ */ _export_sfc(_sfc_main$1, [["render", _sfc_render]]);
   if (typeof Promise !== "undefined" && !Promise.prototype.finally) {
@@ -10379,6 +10472,12 @@ var __spreadProps = (a, b) => __defProps(a, __getOwnPropDescs(b));
         state.username = res.username;
         state.nickName = res.nickName;
         state.imageUrl = res.imageUrl;
+      },
+      saveUserMobile(state, value) {
+        let res = uni.getStorageSync("educationUserInfo");
+        state.mobile = value.mobile;
+        res.mobile = value.mobile;
+        uni.setStorageSync("educationUserInfo", res);
       }
     },
     action: {},

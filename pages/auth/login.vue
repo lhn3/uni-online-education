@@ -19,7 +19,7 @@
 					<my-code :mobile="mobile" templateCode="MSM_1999123123"></my-code>
 				</view>
 			</view>
-			<button :loading="loading" type="primary" @click="login">登录</button>
+			<button :loading="loading" type="primary" @click="mobileLogin">登录</button>
 		</view>
 		
 		<view class="other-wrapper center column">
@@ -27,9 +27,9 @@
 				<text class="tit">社交帐号登录</text>
 			</view>
 			<view class="row">
-				<image @click="toProviderLogin('weixin')" class="icon" src="/static/share/weixin.png"></image>
+				<image @click="providerLogin('weixin')" class="icon" src="/static/share/weixin.png"></image>
 				<!-- #ifndef MP -->
-				<image @click="toProviderLogin('qq')" class="icon" src="/static/share/qq.png"></image>
+				<image @click="providerLogin('qq')" class="icon" src="/static/share/qq.png"></image>
 				<!-- #endif -->
 			</view>
 		</view>
@@ -45,8 +45,8 @@
 </template>
 
 <script>
-import {getCurrentInstance,ref,reactive} from "vue";
-import {authLogin} from "@/request/my-api.js"
+import {getCurrentInstance,ref,reactive,computed} from "vue";
+import {authLogin,authorizationLogin} from "@/request/my-api.js"
 import {useStore} from 'vuex'
 export default {
 	setup(){
@@ -56,10 +56,18 @@ export default {
 		let code = ref('')
 		let loading = ref(false)
 		let agreement = ref(false)
-		console.log(store.state.mobile)
 		
+		// 有登陆就重定向到个人中心页面
+		computed(()=>{
+			if(store.state.token) {
+				uni.switchTab({
+					url:'/pages/tab-index/index'
+				})
+			}
+		})
+
 		//手机号登录
-		const login = async () => {
+		const mobileLogin = async () => {
 			if(!proxy.$utils.checkStr(mobile.value,'mobile')){
 				proxy.$message.toast('请输入正确格式的手机号')
 				return;
@@ -84,7 +92,7 @@ export default {
 			
 			//写入用户信息
 			store.commit('saveUserInfo',{
-				mobile:mobile.value,
+				mobile:res.mobile,
 				token:res.token,
 				username:res.userInfo.username,
 				imageUrl:res.userInfo.imageUrl,
@@ -98,12 +106,45 @@ export default {
 		}
 		
 		//微信qq方式登录
-		const toProviderLogin = (type) => {
-			if(type=='weixin'){
-				console.log('微信登录')
-			}else{
-				console.log('QQ登录')
-			}	
+		const providerLogin = (type) => {
+			if(agreement.value == false){
+				proxy.$message.toast('请同意协议')
+				return;
+			}
+			uni.showLoading({mask:true})
+			uni.login({	//认证登录
+				provider:type,
+				// #ifdef MP
+				scopes:'auth_user',
+				// #endif
+				success: (res) => authorization(res.authResult),
+				fail: (err) => {
+					proxy.$message.toast('授权登陆失败','error')
+					uni.hideLoading()
+					},
+			})
+		}
+		
+		//应用内授权微信QQ登录
+		const authorization = async (authResult) => {
+			console.log(authResult)
+			let res = await authorizationLogin(authResult)
+			uni.hideLoading()
+			//写入用户信息
+			store.commit('saveUserInfo',{
+				mobile:res.mobile,
+				token:res.access_token,
+				username:res.userInfo.username,
+				imageUrl:res.userInfo.imageUrl,
+				nickName:res.userInfo.nickName
+			})
+			// 如果没有手机号码跳转到绑定手机
+			if(!res.mobile){
+				proxy.$message.toast('授权成功','success')
+				setTimeout(()=>{
+					proxy.navTo('/pages/auth/bind-mobile?data='+JSON.stringify(res))
+				})
+			}
 		}
 		
 		//同意协议
@@ -117,8 +158,8 @@ export default {
 			loading,
 			agreement,
 			
-			login,
-			toProviderLogin,
+			mobileLogin,
+			providerLogin,
 			checkAgreement
 		}
 	}

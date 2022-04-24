@@ -331,6 +331,15 @@
             }
             
         }
+        ,{
+            "path" : "pages/auth/bind-mobile",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "手机绑定",
+                "enablePullDownRefresh": false
+            }
+            
+        }
     ],
 	"globalStyle": {
 		"navigationBarBackgroundColor": "#A2CD5A",

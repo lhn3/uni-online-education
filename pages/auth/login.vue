@@ -96,7 +96,8 @@ export default {
 				token:res.access_token,
 				username:res.userInfo.username,
 				imageUrl:res.userInfo.imageUrl,
-				nickName:res.userInfo.nickName
+				nickName:res.userInfo.nickName,
+				sex:res.userInfo.sex
 			})
 					
 			//页面跳转

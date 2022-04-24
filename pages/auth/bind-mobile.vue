@@ -19,10 +19,10 @@
 	</view>
 </template>
 
-<script>
+<script>  
 import {getCurrentInstance,ref,reactive,computed} from "vue";
 import {useStore} from 'vuex'
-import {resetMobile} from '@/request/my-api.js'
+import {resetMobile,updateUserInfo} from '@/request/my-api.js'
 export default {
 	onLoad(option) {
 		if(option.data) this.data = JSON.parse(option.data);
@@ -52,38 +52,47 @@ export default {
 				return;
 			}
 
-			// 验证通过执行登录
-			uni.showLoading({mask:true})
-			loading.value=true
-			// 绑定手机号码传入data
-			let res = await resetMobile({mobile:mobile.value,code:code.value,data:data.value})
-			loading.value=false
-			uni.hideLoading()
 			
 			// 如果是绑定手机号码
-			if(!data.value){
-				store.commit('saveUserInfo',{
+			if(data.value){
+				// 验证通过执行登录
+				uni.showLoading({mask:true})
+				loading.value=true
+				// 绑定手机号码传入data
+				let res = await resetMobile({mobile:mobile.value,code:code.value,data:data.value})
+				store.commit('saveUserInfo',{			//修改vuex中数据
 					mobile:mobile.value,
 					token:res.access_token,
 					username:res.userInfo.username,
 					imageUrl:res.userInfo.imageUrl,
-					nickName:res.userInfo.nickName
+					nickName:res.userInfo.nickName,
+					sex:res.userInfo.sex
 				})
+				loading.value=false
+				uni.hideLoading()
 				proxy.$message.toast('绑定成功','success')
+				//页面跳转
+				setTimeout(()=>{
+					uni.switchTab({
+						url:'/pages/tab-my/my'
+					})
+				},1000)
 			}else{
-				//如果是修改手机号码
-				store.commit('saveUserMobile',{
+				//如果是修改手机号码，发送更新用户信息请求
+				uni.showLoading({mask:true})
+				loading.value=true
+				await updateUserInfo({mobile:mobile.value})
+				store.commit('saveUserMobile',{				//修改vuex中数据
 					mobile:mobile.value
 				})
+				loading.value=false
+				uni.hideLoading()
 				proxy.$message.toast('修改成功','success')
+				// 页面跳转
+				setTimeout(()=>{
+					proxy.navBack()
+				},1000)
 			}
-
-			//页面跳转
-			setTimeout(()=>{
-				uni.switchTab({
-					url:'/pages/tab-my/my'
-				})
-			},1000)
 		}
 		return{
 			data,

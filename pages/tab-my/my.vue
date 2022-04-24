@@ -52,8 +52,7 @@ export default {
 		let handleClick=()=>{
 			if(isLogin.value){
 				//前往个人信息页面
-				console.log('前往个人信息页面')
-				// proxy.navTo('/pages/auth/login')
+				proxy.navTo('/pages/tab-my/user-info')
 			}else{
 				proxy.navTo('/pages/auth/login')
 			}

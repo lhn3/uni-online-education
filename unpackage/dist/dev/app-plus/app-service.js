@@ -135,8 +135,8 @@ var __spreadProps = (a, b) => __defProps(a, __getOwnPropDescs(b));
     __injectCSSVars__();
     return __setup__(props, ctx);
   } : __injectCSSVars__;
-  const _sfc_main$W = __default__;
-  function _sfc_render$V(_ctx, _cache, $props, $setup, $data, $options) {
+  const _sfc_main$X = __default__;
+  function _sfc_render$W(_ctx, _cache, $props, $setup, $data, $options) {
     return vue.openBlock(), vue.createElementBlock("view", { class: "main" }, [
       vue.createElementVNode("view", { class: "sw-background" }),
       vue.createElementVNode("swiper", {
@@ -163,7 +163,7 @@ var __spreadProps = (a, b) => __defProps(a, __getOwnPropDescs(b));
       ], 32)
     ]);
   }
-  var __easycom_0$b = /* @__PURE__ */ _export_sfc(_sfc_main$W, [["render", _sfc_render$V], ["__scopeId", "data-v-3f833c78"]]);
+  var __easycom_0$b = /* @__PURE__ */ _export_sfc(_sfc_main$X, [["render", _sfc_render$W], ["__scopeId", "data-v-3f833c78"]]);
   function resolveEasycom(component, easycom) {
     return isString(component) ? easycom : component;
   }
@@ -237,7 +237,7 @@ var __spreadProps = (a, b) => __defProps(a, __getOwnPropDescs(b));
       uni.setStorageSync("mescroll-i18n", type);
     }
   };
-  const _sfc_main$V = {
+  const _sfc_main$W = {
     props: {
       option: {
         type: Object,
@@ -286,7 +286,7 @@ var __spreadProps = (a, b) => __defProps(a, __getOwnPropDescs(b));
       }
     }
   };
-  function _sfc_render$U(_ctx, _cache, $props, $setup, $data, $options) {
+  function _sfc_render$V(_ctx, _cache, $props, $setup, $data, $options) {
     return vue.openBlock(), vue.createElementBlock("view", {
       class: vue.normalizeClass(["mescroll-empty", { "empty-fixed": $props.option.fixed }]),
       style: vue.normalizeStyle({ "z-index": $props.option.zIndex, top: $props.option.top })
@@ -310,7 +310,7 @@ var __spreadProps = (a, b) => __defProps(a, __getOwnPropDescs(b));
       }, vue.toDisplayString($options.btnText), 1)) : vue.createCommentVNode("v-if", true)
     ], 6);
   }
-  var __easycom_0$a = /* @__PURE__ */ _export_sfc(_sfc_main$V, [["render", _sfc_render$U], ["__scopeId", "data-v-79c5cef0"]]);
+  var __easycom_0$a = /* @__PURE__ */ _export_sfc(_sfc_main$W, [["render", _sfc_render$V], ["__scopeId", "data-v-79c5cef0"]]);
   function MeScroll(options, isScrollBody) {
     let me = this;
     me.version = "1.3.7";
@@ -918,7 +918,7 @@ var __spreadProps = (a, b) => __defProps(a, __getOwnPropDescs(b));
     if (e && e.cancelable && !e.defaultPrevented)
       e.preventDefault();
   };
-  const _sfc_main$U = {
+  const _sfc_main$V = {
     props: {
       option: Object,
       value: false
@@ -948,7 +948,7 @@ var __spreadProps = (a, b) => __defProps(a, __getOwnPropDescs(b));
       }
     }
   };
-  function _sfc_render$T(_ctx, _cache, $props, $setup, $data, $options) {
+  function _sfc_render$U(_ctx, _cache, $props, $setup, $data, $options) {
     return $options.mOption.src ? (vue.openBlock(), vue.createElementBlock("image", {
       key: 0,
       class: vue.normalizeClass(["mescroll-totop", [$props.value ? "mescroll-totop-in" : "mescroll-totop-out", { "mescroll-totop-safearea": $options.mOption.safearea }]]),
@@ -958,7 +958,7 @@ var __spreadProps = (a, b) => __defProps(a, __getOwnPropDescs(b));
       onClick: _cache[0] || (_cache[0] = (...args) => $options.toTopClick && $options.toTopClick(...args))
     }, null, 14, ["src"])) : vue.createCommentVNode("v-if", true);
   }
-  var MescrollTop = /* @__PURE__ */ _export_sfc(_sfc_main$U, [["render", _sfc_render$T], ["__scopeId", "data-v-49b47e96"]]);
+  var MescrollTop = /* @__PURE__ */ _export_sfc(_sfc_main$V, [["render", _sfc_render$U], ["__scopeId", "data-v-49b47e96"]]);
   const WxsMixin = {
     data() {
       return {
@@ -1029,7 +1029,7 @@ var __spreadProps = (a, b) => __defProps(a, __getOwnPropDescs(b));
     (Comp.$renderjs || (Comp.$renderjs = [])).push("renderBiz");
     (Comp.$renderjsModules || (Comp.$renderjsModules = {}))["renderBiz"] = "1ca30ca9";
   };
-  const _sfc_main$T = {
+  const _sfc_main$U = {
     name: "mescroll-body",
     mixins: [WxsMixin],
     components: {
@@ -1280,7 +1280,7 @@ var __spreadProps = (a, b) => __defProps(a, __getOwnPropDescs(b));
       uni.$off("setMescrollGlobalOption");
     }
   };
-  function _sfc_render$S(_ctx, _cache, $props, $setup, $data, $options) {
+  function _sfc_render$T(_ctx, _cache, $props, $setup, $data, $options) {
     const _component_mescroll_empty = resolveEasycom(vue.resolveDynamicComponent("mescroll-empty"), __easycom_0$a);
     const _component_mescroll_top = vue.resolveComponent("mescroll-top");
     return vue.openBlock(), vue.createElementBlock("view", {
@@ -1373,11 +1373,11 @@ var __spreadProps = (a, b) => __defProps(a, __getOwnPropDescs(b));
     ], 46, ["change:prop", "prop"]);
   }
   if (typeof block0 === "function")
-    block0(_sfc_main$T);
+    block0(_sfc_main$U);
   if (typeof block1$1 === "function")
-    block1$1(_sfc_main$T);
-  var __easycom_1$4 = /* @__PURE__ */ _export_sfc(_sfc_main$T, [["render", _sfc_render$S], ["__scopeId", "data-v-07e5713e"]]);
-  const _sfc_main$S = {
+    block1$1(_sfc_main$U);
+  var __easycom_1$4 = /* @__PURE__ */ _export_sfc(_sfc_main$U, [["render", _sfc_render$T], ["__scopeId", "data-v-07e5713e"]]);
+  const _sfc_main$T = {
     props: {
       categoryList: {
         type: Array,
@@ -1400,7 +1400,7 @@ var __spreadProps = (a, b) => __defProps(a, __getOwnPropDescs(b));
       };
     }
   };
-  function _sfc_render$R(_ctx, _cache, $props, $setup, $data, $options) {
+  function _sfc_render$S(_ctx, _cache, $props, $setup, $data, $options) {
     return vue.openBlock(), vue.createElementBlock("view", { class: "category-box" }, [
       (vue.openBlock(true), vue.createElementBlock(vue.Fragment, null, vue.renderList($props.categoryList.slice(0, 7), (item) => {
         return vue.openBlock(), vue.createElementBlock("view", {
@@ -1413,8 +1413,8 @@ var __spreadProps = (a, b) => __defProps(a, __getOwnPropDescs(b));
       }, "\u5168\u90E8\u5206\u7C7B")
     ]);
   }
-  var categoryBox = /* @__PURE__ */ _export_sfc(_sfc_main$S, [["render", _sfc_render$R], ["__scopeId", "data-v-a0997b4a"]]);
-  const _sfc_main$R = {
+  var categoryBox = /* @__PURE__ */ _export_sfc(_sfc_main$T, [["render", _sfc_render$S], ["__scopeId", "data-v-a0997b4a"]]);
+  const _sfc_main$S = {
     props: {
       isColumn: {
         type: Boolean,
@@ -1438,7 +1438,7 @@ var __spreadProps = (a, b) => __defProps(a, __getOwnPropDescs(b));
     setup() {
     }
   };
-  function _sfc_render$Q(_ctx, _cache, $props, $setup, $data, $options) {
+  function _sfc_render$R(_ctx, _cache, $props, $setup, $data, $options) {
     return vue.openBlock(), vue.createElementBlock("view", {
       class: vue.normalizeClass(["course-item", { "column": $props.isColumn }]),
       onClick: _cache[0] || (_cache[0] = ($event) => _ctx.navTo(`/pages/course/course-details?id=${$props.item.id}`))
@@ -1468,8 +1468,8 @@ var __spreadProps = (a, b) => __defProps(a, __getOwnPropDescs(b));
       ])
     ], 2);
   }
-  var __easycom_0$9 = /* @__PURE__ */ _export_sfc(_sfc_main$R, [["render", _sfc_render$Q], ["__scopeId", "data-v-1990ede0"]]);
-  const _sfc_main$Q = {
+  var __easycom_0$9 = /* @__PURE__ */ _export_sfc(_sfc_main$S, [["render", _sfc_render$R], ["__scopeId", "data-v-1990ede0"]]);
+  const _sfc_main$R = {
     props: {
       title: {
         type: String,
@@ -1493,7 +1493,7 @@ var __spreadProps = (a, b) => __defProps(a, __getOwnPropDescs(b));
       };
     }
   };
-  function _sfc_render$P(_ctx, _cache, $props, $setup, $data, $options) {
+  function _sfc_render$Q(_ctx, _cache, $props, $setup, $data, $options) {
     return vue.openBlock(), vue.createElementBlock("view", { class: "list-box" }, [
       vue.createElementVNode("view", { class: "title space-between center" }, [
         vue.createElementVNode("view", { class: "center" }, [
@@ -1515,8 +1515,8 @@ var __spreadProps = (a, b) => __defProps(a, __getOwnPropDescs(b));
       vue.renderSlot(_ctx.$slots, "default", {}, void 0, true)
     ]);
   }
-  var __easycom_1$3 = /* @__PURE__ */ _export_sfc(_sfc_main$Q, [["render", _sfc_render$P], ["__scopeId", "data-v-0993e984"]]);
-  const _sfc_main$P = {
+  var __easycom_1$3 = /* @__PURE__ */ _export_sfc(_sfc_main$R, [["render", _sfc_render$Q], ["__scopeId", "data-v-0993e984"]]);
+  const _sfc_main$Q = {
     props: {
       title: {
         type: String,
@@ -1558,7 +1558,7 @@ var __spreadProps = (a, b) => __defProps(a, __getOwnPropDescs(b));
       };
     }
   };
-  function _sfc_render$O(_ctx, _cache, $props, $setup, $data, $options) {
+  function _sfc_render$P(_ctx, _cache, $props, $setup, $data, $options) {
     const _component_course_item = resolveEasycom(vue.resolveDynamicComponent("course-item"), __easycom_0$9);
     const _component_list_box = resolveEasycom(vue.resolveDynamicComponent("list-box"), __easycom_1$3);
     return vue.openBlock(), vue.createElementBlock(vue.Fragment, null, [
@@ -1590,7 +1590,75 @@ var __spreadProps = (a, b) => __defProps(a, __getOwnPropDescs(b));
       }, 8, ["title", "word", "all", "onClickAll"])
     ], 2112);
   }
-  var swiperCourse = /* @__PURE__ */ _export_sfc(_sfc_main$P, [["render", _sfc_render$O]]);
+  var swiperCourse = /* @__PURE__ */ _export_sfc(_sfc_main$Q, [["render", _sfc_render$P]]);
+  const _sfc_main$P = {
+    props: {
+      title: {
+        type: String,
+        default: "\u9ED8\u8BA4\u6807\u9898"
+      },
+      word: {
+        type: String,
+        default: ""
+      },
+      all: {
+        type: Boolean,
+        default: false
+      },
+      courseData: {
+        type: Array,
+        default: () => []
+      },
+      params: {
+        type: Object,
+        default: () => ({})
+      }
+    },
+    setup(props) {
+      let { proxy } = vue.getCurrentInstance();
+      let clickAll = () => {
+        let params = JSON.stringify(props.params);
+        proxy.navTo("/pages/search/search?data=" + params);
+      };
+      return {
+        clickAll
+      };
+    }
+  };
+  function _sfc_render$O(_ctx, _cache, $props, $setup, $data, $options) {
+    const _component_course_item = resolveEasycom(vue.resolveDynamicComponent("course-item"), __easycom_0$9);
+    const _component_list_box = resolveEasycom(vue.resolveDynamicComponent("list-box"), __easycom_1$3);
+    return vue.openBlock(), vue.createElementBlock(vue.Fragment, null, [
+      vue.createCommentVNode(" \u5E26\u5934\u90E8\u7684\u63D2\u69FD\u7EC4\u4EF6 "),
+      vue.createVNode(_component_list_box, {
+        title: $props.title,
+        word: $props.word,
+        all: $props.all,
+        onClickAll: $setup.clickAll
+      }, {
+        default: vue.withCtx(() => [
+          vue.createElementVNode("scroll-view", {
+            "scroll-x": "",
+            class: "list-scroll noScorll"
+          }, [
+            (vue.openBlock(true), vue.createElementBlock(vue.Fragment, null, vue.renderList($props.courseData.slice(0, 6), (item) => {
+              return vue.openBlock(), vue.createElementBlock("view", {
+                class: "list-scroll-view",
+                key: item.id
+              }, [
+                vue.createVNode(_component_course_item, {
+                  isColumn: true,
+                  item
+                }, null, 8, ["item"])
+              ]);
+            }), 128))
+          ])
+        ]),
+        _: 1
+      }, 8, ["title", "word", "all", "onClickAll"])
+    ], 2112);
+  }
+  var scrollCourse = /* @__PURE__ */ _export_sfc(_sfc_main$P, [["render", _sfc_render$O], ["__scopeId", "data-v-2d5bbbcc"]]);
   const _sfc_main$O = {
     props: {
       title: {
@@ -1630,74 +1698,6 @@ var __spreadProps = (a, b) => __defProps(a, __getOwnPropDescs(b));
     const _component_list_box = resolveEasycom(vue.resolveDynamicComponent("list-box"), __easycom_1$3);
     return vue.openBlock(), vue.createElementBlock(vue.Fragment, null, [
       vue.createCommentVNode(" \u5E26\u5934\u90E8\u7684\u63D2\u69FD\u7EC4\u4EF6 "),
-      vue.createVNode(_component_list_box, {
-        title: $props.title,
-        word: $props.word,
-        all: $props.all,
-        onClickAll: $setup.clickAll
-      }, {
-        default: vue.withCtx(() => [
-          vue.createElementVNode("scroll-view", {
-            "scroll-x": "",
-            class: "list-scroll noScorll"
-          }, [
-            (vue.openBlock(true), vue.createElementBlock(vue.Fragment, null, vue.renderList($props.courseData.slice(0, 6), (item) => {
-              return vue.openBlock(), vue.createElementBlock("view", {
-                class: "list-scroll-view",
-                key: item.id
-              }, [
-                vue.createVNode(_component_course_item, {
-                  isColumn: true,
-                  item
-                }, null, 8, ["item"])
-              ]);
-            }), 128))
-          ])
-        ]),
-        _: 1
-      }, 8, ["title", "word", "all", "onClickAll"])
-    ], 2112);
-  }
-  var scrollCourse = /* @__PURE__ */ _export_sfc(_sfc_main$O, [["render", _sfc_render$N], ["__scopeId", "data-v-2d5bbbcc"]]);
-  const _sfc_main$N = {
-    props: {
-      title: {
-        type: String,
-        default: "\u9ED8\u8BA4\u6807\u9898"
-      },
-      word: {
-        type: String,
-        default: ""
-      },
-      all: {
-        type: Boolean,
-        default: false
-      },
-      courseData: {
-        type: Array,
-        default: () => []
-      },
-      params: {
-        type: Object,
-        default: () => ({})
-      }
-    },
-    setup(props) {
-      let { proxy } = vue.getCurrentInstance();
-      let clickAll = () => {
-        let params = JSON.stringify(props.params);
-        proxy.navTo("/pages/search/search?data=" + params);
-      };
-      return {
-        clickAll
-      };
-    }
-  };
-  function _sfc_render$M(_ctx, _cache, $props, $setup, $data, $options) {
-    const _component_course_item = resolveEasycom(vue.resolveDynamicComponent("course-item"), __easycom_0$9);
-    const _component_list_box = resolveEasycom(vue.resolveDynamicComponent("list-box"), __easycom_1$3);
-    return vue.openBlock(), vue.createElementBlock(vue.Fragment, null, [
-      vue.createCommentVNode(" \u5E26\u5934\u90E8\u7684\u63D2\u69FD\u7EC4\u4EF6 "),
       vue.createCommentVNode(" \u89E6\u5E95\u52A0\u8F7D\u66F4\u591A "),
       vue.createVNode(_component_list_box, {
         title: $props.title,
@@ -1719,7 +1719,7 @@ var __spreadProps = (a, b) => __defProps(a, __getOwnPropDescs(b));
       }, 8, ["title", "word", "all", "onClickAll"])
     ], 2112);
   }
-  var payCourse = /* @__PURE__ */ _export_sfc(_sfc_main$N, [["render", _sfc_render$M], ["__scopeId", "data-v-534bbb02"]]);
+  var payCourse = /* @__PURE__ */ _export_sfc(_sfc_main$O, [["render", _sfc_render$N], ["__scopeId", "data-v-534bbb02"]]);
   var courseData = [
     {
       id: 1,
@@ -1918,11 +1918,11 @@ var __spreadProps = (a, b) => __defProps(a, __getOwnPropDescs(b));
       });
     }
   };
-  let BASE_URL = "https://mock.mengxuegu.com/mock/6246a1929a111d2ee2cb4f92/education";
+  let BASE_URL$1 = "https://mock.mengxuegu.com/mock/6246a1929a111d2ee2cb4f92/education";
   const request = (options = {}) => {
     return new Promise((resolve, reject) => {
       uni.request({
-        url: BASE_URL + options.url,
+        url: BASE_URL$1 + options.url,
         method: options.method || "GET",
         data: options.data || {},
         timeout: 6e3,
@@ -2041,7 +2041,7 @@ var __spreadProps = (a, b) => __defProps(a, __getOwnPropDescs(b));
       this.mescrollInitByRef();
     }
   };
-  const _sfc_main$M = {
+  const _sfc_main$N = {
     mixins: [MescrollMixin],
     components: {
       "category-box": categoryBox,
@@ -2138,7 +2138,7 @@ var __spreadProps = (a, b) => __defProps(a, __getOwnPropDescs(b));
       });
     }
   };
-  function _sfc_render$L(_ctx, _cache, $props, $setup, $data, $options) {
+  function _sfc_render$M(_ctx, _cache, $props, $setup, $data, $options) {
     const _component_my_swiper = resolveEasycom(vue.resolveDynamicComponent("my-swiper"), __easycom_0$b);
     const _component_category_box = vue.resolveComponent("category-box");
     const _component_swiper_course = vue.resolveComponent("swiper-course");
@@ -2197,8 +2197,8 @@ var __spreadProps = (a, b) => __defProps(a, __getOwnPropDescs(b));
       }, 8, ["onInit", "onDown", "onUp", "down", "up"])
     ]);
   }
-  var PagesTabIndexIndex = /* @__PURE__ */ _export_sfc(_sfc_main$M, [["render", _sfc_render$L], ["__scopeId", "data-v-f5bdc598"]]);
-  const _sfc_main$L = {
+  var PagesTabIndexIndex = /* @__PURE__ */ _export_sfc(_sfc_main$N, [["render", _sfc_render$M], ["__scopeId", "data-v-f5bdc598"]]);
+  const _sfc_main$M = {
     props: {
       value: {
         type: Object,
@@ -2263,7 +2263,7 @@ var __spreadProps = (a, b) => __defProps(a, __getOwnPropDescs(b));
       };
     }
   };
-  function _sfc_render$K(_ctx, _cache, $props, $setup, $data, $options) {
+  function _sfc_render$L(_ctx, _cache, $props, $setup, $data, $options) {
     return vue.openBlock(), vue.createElementBlock("view", { class: "category" }, [
       vue.createElementVNode("scroll-view", {
         class: "left noScorll",
@@ -2295,8 +2295,8 @@ var __spreadProps = (a, b) => __defProps(a, __getOwnPropDescs(b));
       ])
     ]);
   }
-  var PagesTabCategoryCategory = /* @__PURE__ */ _export_sfc(_sfc_main$L, [["render", _sfc_render$K]]);
-  const _sfc_main$K = {
+  var PagesTabCategoryCategory = /* @__PURE__ */ _export_sfc(_sfc_main$M, [["render", _sfc_render$L]]);
+  const _sfc_main$L = {
     props: {
       tabs: {
         type: Array,
@@ -2345,7 +2345,7 @@ var __spreadProps = (a, b) => __defProps(a, __getOwnPropDescs(b));
       };
     }
   };
-  function _sfc_render$J(_ctx, _cache, $props, $setup, $data, $options) {
+  function _sfc_render$K(_ctx, _cache, $props, $setup, $data, $options) {
     return vue.openBlock(), vue.createElementBlock("view", {
       class: "tab-bar",
       onTouchmove: _cache[0] || (_cache[0] = vue.withModifiers(() => {
@@ -2368,7 +2368,7 @@ var __spreadProps = (a, b) => __defProps(a, __getOwnPropDescs(b));
       ], 8, ["scroll-left"])
     ], 32);
   }
-  var __easycom_0$8 = /* @__PURE__ */ _export_sfc(_sfc_main$K, [["render", _sfc_render$J], ["__scopeId", "data-v-6dc8a5bc"]]);
+  var __easycom_0$8 = /* @__PURE__ */ _export_sfc(_sfc_main$L, [["render", _sfc_render$K], ["__scopeId", "data-v-6dc8a5bc"]]);
   function formatCount(count) {
     if (count == null)
       return "";
@@ -2381,7 +2381,7 @@ var __spreadProps = (a, b) => __defProps(a, __getOwnPropDescs(b));
       return count;
     }
   }
-  const _sfc_main$J = {
+  const _sfc_main$K = {
     props: {
       item: {
         type: Object,
@@ -2404,7 +2404,7 @@ var __spreadProps = (a, b) => __defProps(a, __getOwnPropDescs(b));
       };
     }
   };
-  function _sfc_render$I(_ctx, _cache, $props, $setup, $data, $options) {
+  function _sfc_render$J(_ctx, _cache, $props, $setup, $data, $options) {
     return vue.openBlock(), vue.createElementBlock("view", {
       class: "article-item",
       onClick: _cache[0] || (_cache[0] = ($event) => _ctx.navTo(`/pages/tab-article/article-details?id=${$props.item.id}`))
@@ -2431,12 +2431,12 @@ var __spreadProps = (a, b) => __defProps(a, __getOwnPropDescs(b));
       ])
     ]);
   }
-  var __easycom_0$7 = /* @__PURE__ */ _export_sfc(_sfc_main$J, [["render", _sfc_render$I], ["__scopeId", "data-v-f7ab0478"]]);
+  var __easycom_0$7 = /* @__PURE__ */ _export_sfc(_sfc_main$K, [["render", _sfc_render$J], ["__scopeId", "data-v-f7ab0478"]]);
   var block1 = (Comp) => {
     (Comp.$renderjs || (Comp.$renderjs = [])).push("renderBiz");
     (Comp.$renderjsModules || (Comp.$renderjsModules = {}))["renderBiz"] = "5a9dc23f";
   };
-  const _sfc_main$I = {
+  const _sfc_main$J = {
     name: "mescroll-uni",
     mixins: [WxsMixin],
     components: {
@@ -2762,7 +2762,7 @@ var __spreadProps = (a, b) => __defProps(a, __getOwnPropDescs(b));
       uni.$off("setMescrollGlobalOption");
     }
   };
-  function _sfc_render$H(_ctx, _cache, $props, $setup, $data, $options) {
+  function _sfc_render$I(_ctx, _cache, $props, $setup, $data, $options) {
     const _component_mescroll_empty = resolveEasycom(vue.resolveDynamicComponent("mescroll-empty"), __easycom_0$a);
     const _component_mescroll_top = vue.resolveComponent("mescroll-top");
     return vue.openBlock(), vue.createElementBlock("view", { class: "mescroll-uni-warp" }, [
@@ -2868,10 +2868,10 @@ var __spreadProps = (a, b) => __defProps(a, __getOwnPropDescs(b));
     ]);
   }
   if (typeof block0 === "function")
-    block0(_sfc_main$I);
+    block0(_sfc_main$J);
   if (typeof block1 === "function")
-    block1(_sfc_main$I);
-  var __easycom_1$2 = /* @__PURE__ */ _export_sfc(_sfc_main$I, [["render", _sfc_render$H], ["__scopeId", "data-v-6f5cf468"]]);
+    block1(_sfc_main$J);
+  var __easycom_1$2 = /* @__PURE__ */ _export_sfc(_sfc_main$J, [["render", _sfc_render$I], ["__scopeId", "data-v-6f5cf468"]]);
   const MescrollMoreItemMixin = {
     props: {
       i: Number,
@@ -2950,7 +2950,7 @@ var __spreadProps = (a, b) => __defProps(a, __getOwnPropDescs(b));
       data: data2
     });
   };
-  const _sfc_main$H = {
+  const _sfc_main$I = {
     components: {
       "mescroll-uni": __easycom_1$2
     },
@@ -3001,7 +3001,7 @@ var __spreadProps = (a, b) => __defProps(a, __getOwnPropDescs(b));
       };
     }
   };
-  function _sfc_render$G(_ctx, _cache, $props, $setup, $data, $options) {
+  function _sfc_render$H(_ctx, _cache, $props, $setup, $data, $options) {
     const _component_article_item = resolveEasycom(vue.resolveDynamicComponent("article-item"), __easycom_0$7);
     const _component_mescroll_uni = resolveEasycom(vue.resolveDynamicComponent("mescroll-uni"), __easycom_1$2);
     return vue.openBlock(), vue.createElementBlock("view", null, [
@@ -3029,8 +3029,8 @@ var __spreadProps = (a, b) => __defProps(a, __getOwnPropDescs(b));
       }, 8, ["onInit", "down", "onDown", "up", "onUp"])
     ]);
   }
-  var articleSwiper = /* @__PURE__ */ _export_sfc(_sfc_main$H, [["render", _sfc_render$G]]);
-  const _sfc_main$G = {
+  var articleSwiper = /* @__PURE__ */ _export_sfc(_sfc_main$I, [["render", _sfc_render$H]]);
+  const _sfc_main$H = {
     components: {
       "article-swiper": articleSwiper
     },
@@ -3079,7 +3079,7 @@ var __spreadProps = (a, b) => __defProps(a, __getOwnPropDescs(b));
       };
     }
   };
-  function _sfc_render$F(_ctx, _cache, $props, $setup, $data, $options) {
+  function _sfc_render$G(_ctx, _cache, $props, $setup, $data, $options) {
     const _component_tab_bar = resolveEasycom(vue.resolveDynamicComponent("tab-bar"), __easycom_0$8);
     const _component_article_swiper = vue.resolveComponent("article-swiper");
     return vue.openBlock(), vue.createElementBlock("view", { class: "cantainer" }, [
@@ -3114,8 +3114,8 @@ var __spreadProps = (a, b) => __defProps(a, __getOwnPropDescs(b));
       ], 44, ["current"])
     ]);
   }
-  var PagesTabArticleArticle = /* @__PURE__ */ _export_sfc(_sfc_main$G, [["render", _sfc_render$F]]);
-  const _sfc_main$F = {
+  var PagesTabArticleArticle = /* @__PURE__ */ _export_sfc(_sfc_main$H, [["render", _sfc_render$G]]);
+  const _sfc_main$G = {
     props: {
       item: {
         type: Object,
@@ -3135,7 +3135,7 @@ var __spreadProps = (a, b) => __defProps(a, __getOwnPropDescs(b));
       };
     }
   };
-  function _sfc_render$E(_ctx, _cache, $props, $setup, $data, $options) {
+  function _sfc_render$F(_ctx, _cache, $props, $setup, $data, $options) {
     return vue.openBlock(), vue.createElementBlock("view", {
       class: "question-item",
       onClick: _cache[0] || (_cache[0] = ($event) => _ctx.navTo(`/pages/tab-question/question-details?id=${$props.item.id}`))
@@ -3153,7 +3153,7 @@ var __spreadProps = (a, b) => __defProps(a, __getOwnPropDescs(b));
       ])
     ]);
   }
-  var __easycom_0$6 = /* @__PURE__ */ _export_sfc(_sfc_main$F, [["render", _sfc_render$E], ["__scopeId", "data-v-71a9857a"]]);
+  var __easycom_0$6 = /* @__PURE__ */ _export_sfc(_sfc_main$G, [["render", _sfc_render$F], ["__scopeId", "data-v-71a9857a"]]);
   const getQuestionList = (query, current = 1, size = 10) => {
     return request({
       method: "POST",
@@ -3205,7 +3205,7 @@ var __spreadProps = (a, b) => __defProps(a, __getOwnPropDescs(b));
       url: "/question/question/star/" + id
     });
   };
-  const _sfc_main$E = {
+  const _sfc_main$F = {
     components: {
       "mescroll-uni": __easycom_1$2
     },
@@ -3263,7 +3263,7 @@ var __spreadProps = (a, b) => __defProps(a, __getOwnPropDescs(b));
       };
     }
   };
-  function _sfc_render$D(_ctx, _cache, $props, $setup, $data, $options) {
+  function _sfc_render$E(_ctx, _cache, $props, $setup, $data, $options) {
     const _component_question_item = resolveEasycom(vue.resolveDynamicComponent("question-item"), __easycom_0$6);
     const _component_mescroll_uni = resolveEasycom(vue.resolveDynamicComponent("mescroll-uni"), __easycom_1$2);
     return vue.openBlock(), vue.createElementBlock("view", null, [
@@ -3291,8 +3291,8 @@ var __spreadProps = (a, b) => __defProps(a, __getOwnPropDescs(b));
       }, 8, ["onInit", "down", "onDown", "up", "onUp"])
     ]);
   }
-  var questionSwiper = /* @__PURE__ */ _export_sfc(_sfc_main$E, [["render", _sfc_render$D]]);
-  const _sfc_main$D = {
+  var questionSwiper = /* @__PURE__ */ _export_sfc(_sfc_main$F, [["render", _sfc_render$E]]);
+  const _sfc_main$E = {
     components: {
       "question-swiper": questionSwiper
     },
@@ -3339,7 +3339,7 @@ var __spreadProps = (a, b) => __defProps(a, __getOwnPropDescs(b));
       };
     }
   };
-  function _sfc_render$C(_ctx, _cache, $props, $setup, $data, $options) {
+  function _sfc_render$D(_ctx, _cache, $props, $setup, $data, $options) {
     const _component_tab_bar = resolveEasycom(vue.resolveDynamicComponent("tab-bar"), __easycom_0$8);
     const _component_question_swiper = vue.resolveComponent("question-swiper");
     return vue.openBlock(), vue.createElementBlock("view", { class: "cantainer" }, [
@@ -3374,8 +3374,8 @@ var __spreadProps = (a, b) => __defProps(a, __getOwnPropDescs(b));
       ], 44, ["current"])
     ]);
   }
-  var PagesTabQuestionQuestion = /* @__PURE__ */ _export_sfc(_sfc_main$D, [["render", _sfc_render$C]]);
-  const _sfc_main$C = {
+  var PagesTabQuestionQuestion = /* @__PURE__ */ _export_sfc(_sfc_main$E, [["render", _sfc_render$D]]);
+  const _sfc_main$D = {
     props: {
       list: Array
     },
@@ -3391,7 +3391,7 @@ var __spreadProps = (a, b) => __defProps(a, __getOwnPropDescs(b));
       }
     }
   };
-  function _sfc_render$B(_ctx, _cache, $props, $setup, $data, $options) {
+  function _sfc_render$C(_ctx, _cache, $props, $setup, $data, $options) {
     return vue.openBlock(), vue.createElementBlock("view", { class: "list-box" }, [
       vue.createCommentVNode(" \u4E00\u5927\u7C7B\u5217\u8868 "),
       (vue.openBlock(true), vue.createElementBlock(vue.Fragment, null, vue.renderList($props.list, (item, index) => {
@@ -3440,28 +3440,28 @@ var __spreadProps = (a, b) => __defProps(a, __getOwnPropDescs(b));
       }), 128))
     ]);
   }
-  var __easycom_0$5 = /* @__PURE__ */ _export_sfc(_sfc_main$C, [["render", _sfc_render$B], ["__scopeId", "data-v-f9b47b78"]]);
-  const rightIcon = "iconfont icon-right";
-  var data$1 = [
+  var __easycom_0$5 = /* @__PURE__ */ _export_sfc(_sfc_main$D, [["render", _sfc_render$C], ["__scopeId", "data-v-f9b47b78"]]);
+  const rightIcon$1 = "iconfont icon-right";
+  var data$2 = [
     [
       {
         icon: "mxg-icon mxg-icon-host-color",
         title: "\u6211\u7684\u8BA2\u5355",
-        rightIcon,
+        rightIcon: rightIcon$1,
         page: "/pages/order/order-list",
         login: true
       },
       {
         icon: "mxg-icon mxg-icon-lock-color",
         title: "\u6211\u7684\u4F59\u989D",
-        rightIcon,
+        rightIcon: rightIcon$1,
         page: "/pages/order/my-balance",
         login: true
       },
       {
         icon: "mxg-icon mxg-icon-warn",
         title: "\u6211\u7684\u5B66\u4E60",
-        rightIcon,
+        rightIcon: rightIcon$1,
         page: "/pages/tab-my/study",
         login: true
       }
@@ -3470,13 +3470,13 @@ var __spreadProps = (a, b) => __defProps(a, __getOwnPropDescs(b));
       {
         icon: "mxg-icon mxg-icon-set-color",
         title: "\u8BBE\u7F6E",
-        rightIcon,
+        rightIcon: rightIcon$1,
         page: "/pages/tab-my/setting"
       },
       {
         icon: "mxg-icon mxg-icon-notice-color",
         title: "\u610F\u89C1\u53CD\u9988",
-        rightIcon,
+        rightIcon: rightIcon$1,
         page: "/pages/tab-my/feedback"
       }
     ],
@@ -3484,7 +3484,7 @@ var __spreadProps = (a, b) => __defProps(a, __getOwnPropDescs(b));
       {
         icon: "mxg-icon mxg-icon-model-color",
         title: "\u5173\u4E8E\u6211\u4EEC",
-        rightIcon,
+        rightIcon: rightIcon$1,
         page: "/pages/tab-my/about"
       }
     ]
@@ -4490,12 +4490,12 @@ var __spreadProps = (a, b) => __defProps(a, __getOwnPropDescs(b));
     this._committing = committing;
   };
   Object.defineProperties(Store.prototype, prototypeAccessors);
-  const _sfc_main$B = {
+  const _sfc_main$C = {
     setup() {
       let { proxy } = vue.getCurrentInstance();
       let store2 = useStore();
       vue.ref({});
-      let list = vue.ref(data$1);
+      let list = vue.ref(data$2);
       let isLogin2 = vue.ref(false);
       isLogin2 = vue.computed(() => {
         if (store2.state.token) {
@@ -4506,7 +4506,7 @@ var __spreadProps = (a, b) => __defProps(a, __getOwnPropDescs(b));
       });
       let handleClick = () => {
         if (isLogin2.value) {
-          formatAppLog("log", "at pages/tab-my/my.vue:55", "\u524D\u5F80\u4E2A\u4EBA\u4FE1\u606F\u9875\u9762");
+          proxy.navTo("/pages/tab-my/user-info");
         } else {
           proxy.navTo("/pages/auth/login");
         }
@@ -4518,7 +4518,7 @@ var __spreadProps = (a, b) => __defProps(a, __getOwnPropDescs(b));
       };
     }
   };
-  function _sfc_render$A(_ctx, _cache, $props, $setup, $data, $options) {
+  function _sfc_render$B(_ctx, _cache, $props, $setup, $data, $options) {
     const _component_my_list = resolveEasycom(vue.resolveDynamicComponent("my-list"), __easycom_0$5);
     return vue.openBlock(), vue.createElementBlock("view", null, [
       vue.createCommentVNode(" \u5934\u90E8\u7A7A\u51FA\u7684\u8DDD\u79BB "),
@@ -4554,8 +4554,8 @@ var __spreadProps = (a, b) => __defProps(a, __getOwnPropDescs(b));
       vue.createVNode(_component_my_list, { list: $setup.list }, null, 8, ["list"])
     ]);
   }
-  var PagesTabMyMy = /* @__PURE__ */ _export_sfc(_sfc_main$B, [["render", _sfc_render$A]]);
-  const _sfc_main$A = {
+  var PagesTabMyMy = /* @__PURE__ */ _export_sfc(_sfc_main$C, [["render", _sfc_render$B]]);
+  const _sfc_main$B = {
     setup() {
       let url = vue.ref("");
       const open = (url2) => {
@@ -4574,7 +4574,7 @@ var __spreadProps = (a, b) => __defProps(a, __getOwnPropDescs(b));
       this.url = option.url;
     }
   };
-  function _sfc_render$z(_ctx, _cache, $props, $setup, $data, $options) {
+  function _sfc_render$A(_ctx, _cache, $props, $setup, $data, $options) {
     return vue.openBlock(), vue.createElementBlock("view", null, [
       $setup.open($setup.url) ? (vue.openBlock(), vue.createElementBlock("web-view", {
         key: 0,
@@ -4588,7 +4588,7 @@ var __spreadProps = (a, b) => __defProps(a, __getOwnPropDescs(b));
       ]))
     ]);
   }
-  var PagesPublicPublic = /* @__PURE__ */ _export_sfc(_sfc_main$A, [["render", _sfc_render$z]]);
+  var PagesPublicPublic = /* @__PURE__ */ _export_sfc(_sfc_main$B, [["render", _sfc_render$A]]);
   var icons = {
     "id": "2852637",
     "name": "uniui\u56FE\u6807\u5E93",
@@ -5764,7 +5764,7 @@ var __spreadProps = (a, b) => __defProps(a, __getOwnPropDescs(b));
     const reg = /^[0-9]*$/g;
     return typeof val === "number" || reg.test(val) ? val + "px" : val;
   };
-  const _sfc_main$z = {
+  const _sfc_main$A = {
     name: "UniIcons",
     emits: ["click"],
     props: {
@@ -5808,14 +5808,14 @@ var __spreadProps = (a, b) => __defProps(a, __getOwnPropDescs(b));
       }
     }
   };
-  function _sfc_render$y(_ctx, _cache, $props, $setup, $data, $options) {
+  function _sfc_render$z(_ctx, _cache, $props, $setup, $data, $options) {
     return vue.openBlock(), vue.createElementBlock("text", {
       style: vue.normalizeStyle({ color: $props.color, "font-size": $options.iconSize }),
       class: vue.normalizeClass(["uni-icons", ["uniui-" + $props.type, $props.customPrefix, $props.customPrefix ? $props.type : ""]]),
       onClick: _cache[0] || (_cache[0] = (...args) => $options._onClick && $options._onClick(...args))
     }, null, 6);
   }
-  var __easycom_0$4 = /* @__PURE__ */ _export_sfc(_sfc_main$z, [["render", _sfc_render$y], ["__scopeId", "data-v-a2e81f6e"]]);
+  var __easycom_0$4 = /* @__PURE__ */ _export_sfc(_sfc_main$A, [["render", _sfc_render$z], ["__scopeId", "data-v-a2e81f6e"]]);
   const isArray = Array.isArray;
   const isObject = (val) => val !== null && typeof val === "object";
   const defaultDelimiters = ["{", "}"];
@@ -6115,7 +6115,7 @@ var __spreadProps = (a, b) => __defProps(a, __getOwnPropDescs(b));
     "zh-Hant": zhHant
   };
   const { t } = initVueI18n(messages);
-  const _sfc_main$y = {
+  const _sfc_main$z = {
     name: "UniSearchBar",
     emits: ["input", "update:modelValue", "clear", "cancel", "confirm", "blur", "focus"],
     props: {
@@ -6242,7 +6242,7 @@ var __spreadProps = (a, b) => __defProps(a, __getOwnPropDescs(b));
       }
     }
   };
-  function _sfc_render$x(_ctx, _cache, $props, $setup, $data, $options) {
+  function _sfc_render$y(_ctx, _cache, $props, $setup, $data, $options) {
     const _component_uni_icons = resolveEasycom(vue.resolveDynamicComponent("uni-icons"), __easycom_0$4);
     return vue.openBlock(), vue.createElementBlock("view", { class: "uni-searchbar" }, [
       vue.createElementVNode("view", {
@@ -6298,8 +6298,8 @@ var __spreadProps = (a, b) => __defProps(a, __getOwnPropDescs(b));
       }, vue.toDisplayString($options.cancelTextI18n), 1)) : vue.createCommentVNode("v-if", true)
     ]);
   }
-  var uniSearchBar = /* @__PURE__ */ _export_sfc(_sfc_main$y, [["render", _sfc_render$x], ["__scopeId", "data-v-180dbe05"]]);
-  const _sfc_main$x = {
+  var uniSearchBar = /* @__PURE__ */ _export_sfc(_sfc_main$z, [["render", _sfc_render$y], ["__scopeId", "data-v-180dbe05"]]);
+  const _sfc_main$y = {
     emits: ["changeContent"],
     props: {
       historyWord: {
@@ -6340,7 +6340,7 @@ var __spreadProps = (a, b) => __defProps(a, __getOwnPropDescs(b));
       };
     }
   };
-  function _sfc_render$w(_ctx, _cache, $props, $setup, $data, $options) {
+  function _sfc_render$x(_ctx, _cache, $props, $setup, $data, $options) {
     return vue.openBlock(), vue.createElementBlock("view", { class: "keyword" }, [
       vue.createElementVNode("view", { class: "title" }, "\u70ED\u95E8\u641C\u7D22"),
       vue.createElementVNode("view", { class: "tag-list" }, [
@@ -6370,8 +6370,8 @@ var __spreadProps = (a, b) => __defProps(a, __getOwnPropDescs(b));
       ])
     ]);
   }
-  var keywords = /* @__PURE__ */ _export_sfc(_sfc_main$x, [["render", _sfc_render$w], ["__scopeId", "data-v-064d05f9"]]);
-  const _sfc_main$w = {
+  var keywords = /* @__PURE__ */ _export_sfc(_sfc_main$y, [["render", _sfc_render$x], ["__scopeId", "data-v-064d05f9"]]);
+  const _sfc_main$x = {
     components: { category: PagesTabCategoryCategory },
     props: {
       params: {
@@ -6466,7 +6466,7 @@ var __spreadProps = (a, b) => __defProps(a, __getOwnPropDescs(b));
       }
     }
   };
-  function _sfc_render$v(_ctx, _cache, $props, $setup, $data, $options) {
+  function _sfc_render$w(_ctx, _cache, $props, $setup, $data, $options) {
     const _component_category = vue.resolveComponent("category");
     return vue.openBlock(), vue.createElementBlock("view", {
       class: "down-bar row sticky-box",
@@ -6519,8 +6519,8 @@ var __spreadProps = (a, b) => __defProps(a, __getOwnPropDescs(b));
       }), 128))
     ], 32);
   }
-  var downBar = /* @__PURE__ */ _export_sfc(_sfc_main$w, [["render", _sfc_render$v], ["__scopeId", "data-v-66c7cbb7"]]);
-  const _sfc_main$v = {
+  var downBar = /* @__PURE__ */ _export_sfc(_sfc_main$x, [["render", _sfc_render$w], ["__scopeId", "data-v-66c7cbb7"]]);
+  const _sfc_main$w = {
     mixins: [MescrollMixin, MescrollMoreItemMixin],
     components: {
       "down-bar": downBar,
@@ -6629,7 +6629,7 @@ var __spreadProps = (a, b) => __defProps(a, __getOwnPropDescs(b));
       };
     }
   };
-  function _sfc_render$u(_ctx, _cache, $props, $setup, $data, $options) {
+  function _sfc_render$v(_ctx, _cache, $props, $setup, $data, $options) {
     const _component_down_bar = vue.resolveComponent("down-bar");
     const _component_course_item = resolveEasycom(vue.resolveDynamicComponent("course-item"), __easycom_0$9);
     const _component_mescroll_body = resolveEasycom(vue.resolveDynamicComponent("mescroll-body"), __easycom_1$4);
@@ -6668,8 +6668,8 @@ var __spreadProps = (a, b) => __defProps(a, __getOwnPropDescs(b));
       ])
     ], 2112);
   }
-  var courseList = /* @__PURE__ */ _export_sfc(_sfc_main$v, [["render", _sfc_render$u]]);
-  const _sfc_main$u = {
+  var courseList = /* @__PURE__ */ _export_sfc(_sfc_main$w, [["render", _sfc_render$v]]);
+  const _sfc_main$v = {
     mixins: [MescrollMixin, MescrollMoreItemMixin],
     components: {
       "down-bar": downBar,
@@ -6762,7 +6762,7 @@ var __spreadProps = (a, b) => __defProps(a, __getOwnPropDescs(b));
       };
     }
   };
-  function _sfc_render$t(_ctx, _cache, $props, $setup, $data, $options) {
+  function _sfc_render$u(_ctx, _cache, $props, $setup, $data, $options) {
     const _component_down_bar = vue.resolveComponent("down-bar");
     const _component_article_item = resolveEasycom(vue.resolveDynamicComponent("article-item"), __easycom_0$7);
     const _component_mescroll_body = resolveEasycom(vue.resolveDynamicComponent("mescroll-body"), __easycom_1$4);
@@ -6804,8 +6804,8 @@ var __spreadProps = (a, b) => __defProps(a, __getOwnPropDescs(b));
       ])
     ], 2112);
   }
-  var articleList = /* @__PURE__ */ _export_sfc(_sfc_main$u, [["render", _sfc_render$t]]);
-  const _sfc_main$t = {
+  var articleList = /* @__PURE__ */ _export_sfc(_sfc_main$v, [["render", _sfc_render$u]]);
+  const _sfc_main$u = {
     mixins: [MescrollMixin, MescrollMoreItemMixin],
     components: {
       "down-bar": downBar,
@@ -6898,7 +6898,7 @@ var __spreadProps = (a, b) => __defProps(a, __getOwnPropDescs(b));
       };
     }
   };
-  function _sfc_render$s(_ctx, _cache, $props, $setup, $data, $options) {
+  function _sfc_render$t(_ctx, _cache, $props, $setup, $data, $options) {
     const _component_down_bar = vue.resolveComponent("down-bar");
     const _component_question_item = resolveEasycom(vue.resolveDynamicComponent("question-item"), __easycom_0$6);
     const _component_mescroll_body = resolveEasycom(vue.resolveDynamicComponent("mescroll-body"), __easycom_1$4);
@@ -6940,7 +6940,7 @@ var __spreadProps = (a, b) => __defProps(a, __getOwnPropDescs(b));
       ])
     ], 2112);
   }
-  var questionList = /* @__PURE__ */ _export_sfc(_sfc_main$t, [["render", _sfc_render$s]]);
+  var questionList = /* @__PURE__ */ _export_sfc(_sfc_main$u, [["render", _sfc_render$t]]);
   const MescrollMoreMixin = {
     data() {
       return {
@@ -7005,7 +7005,7 @@ var __spreadProps = (a, b) => __defProps(a, __getOwnPropDescs(b));
     }
   };
   let webView = null;
-  const _sfc_main$s = {
+  const _sfc_main$t = {
     mixins: [MescrollMoreMixin],
     components: {
       "uni-search-bar": uniSearchBar,
@@ -7096,7 +7096,7 @@ var __spreadProps = (a, b) => __defProps(a, __getOwnPropDescs(b));
       }
     }
   };
-  function _sfc_render$r(_ctx, _cache, $props, $setup, $data, $options) {
+  function _sfc_render$s(_ctx, _cache, $props, $setup, $data, $options) {
     const _component_keywords = vue.resolveComponent("keywords");
     const _component_tab_bar = resolveEasycom(vue.resolveDynamicComponent("tab-bar"), __easycom_0$8);
     const _component_course_list = vue.resolveComponent("course-list");
@@ -7143,8 +7143,8 @@ var __spreadProps = (a, b) => __defProps(a, __getOwnPropDescs(b));
       ])) : vue.createCommentVNode("v-if", true)
     ]);
   }
-  var PagesSearchSearch = /* @__PURE__ */ _export_sfc(_sfc_main$s, [["render", _sfc_render$r]]);
-  const _sfc_main$r = {
+  var PagesSearchSearch = /* @__PURE__ */ _export_sfc(_sfc_main$t, [["render", _sfc_render$s]]);
+  const _sfc_main$s = {
     props: {
       shareDate: {
         type: Object,
@@ -7352,7 +7352,7 @@ var __spreadProps = (a, b) => __defProps(a, __getOwnPropDescs(b));
       }
     }
   };
-  function _sfc_render$q(_ctx, _cache, $props, $setup, $data, $options) {
+  function _sfc_render$r(_ctx, _cache, $props, $setup, $data, $options) {
     return vue.withDirectives((vue.openBlock(), vue.createElementBlock("view", null, [
       vue.createCommentVNode(" \u906E\u7F69\u8499\u5C42 "),
       vue.createElementVNode("view", {
@@ -7388,8 +7388,8 @@ var __spreadProps = (a, b) => __defProps(a, __getOwnPropDescs(b));
       [vue.vShow, $setup.isShow]
     ]);
   }
-  var __easycom_1$1 = /* @__PURE__ */ _export_sfc(_sfc_main$r, [["render", _sfc_render$q], ["__scopeId", "data-v-448797c4"]]);
-  const _sfc_main$q = {
+  var __easycom_1$1 = /* @__PURE__ */ _export_sfc(_sfc_main$s, [["render", _sfc_render$r], ["__scopeId", "data-v-448797c4"]]);
+  const _sfc_main$r = {
     props: {
       course: {
         type: Object,
@@ -7403,7 +7403,7 @@ var __spreadProps = (a, b) => __defProps(a, __getOwnPropDescs(b));
       };
     }
   };
-  function _sfc_render$p(_ctx, _cache, $props, $setup, $data, $options) {
+  function _sfc_render$q(_ctx, _cache, $props, $setup, $data, $options) {
     return vue.openBlock(), vue.createElementBlock("view", { class: "course-header" }, [
       vue.createElementVNode("image", {
         class: "img",
@@ -7433,8 +7433,8 @@ var __spreadProps = (a, b) => __defProps(a, __getOwnPropDescs(b));
       ])
     ]);
   }
-  var courseDetailHeader = /* @__PURE__ */ _export_sfc(_sfc_main$q, [["render", _sfc_render$p], ["__scopeId", "data-v-21516c4e"]]);
-  const _sfc_main$p = {
+  var courseDetailHeader = /* @__PURE__ */ _export_sfc(_sfc_main$r, [["render", _sfc_render$q], ["__scopeId", "data-v-21516c4e"]]);
+  const _sfc_main$q = {
     props: {
       detailUrls: {
         type: Array,
@@ -7456,7 +7456,7 @@ var __spreadProps = (a, b) => __defProps(a, __getOwnPropDescs(b));
       };
     }
   };
-  function _sfc_render$o(_ctx, _cache, $props, $setup, $data, $options) {
+  function _sfc_render$p(_ctx, _cache, $props, $setup, $data, $options) {
     return vue.openBlock(), vue.createElementBlock("view", { class: "center column" }, [
       (vue.openBlock(true), vue.createElementBlock(vue.Fragment, null, vue.renderList($props.detailUrls, (url, index) => {
         return vue.openBlock(), vue.createElementBlock("image", {
@@ -7477,8 +7477,8 @@ var __spreadProps = (a, b) => __defProps(a, __getOwnPropDescs(b));
       }, "\u5DF2\u7ECF\u5230\u8FBE\u5E95\u90E8\uFF0C\u6CA1\u6709\u66F4\u591A\u5185\u5BB9\u4E86"))
     ]);
   }
-  var courseInfo = /* @__PURE__ */ _export_sfc(_sfc_main$p, [["render", _sfc_render$o], ["__scopeId", "data-v-617cd50e"]]);
-  const _sfc_main$o = {
+  var courseInfo = /* @__PURE__ */ _export_sfc(_sfc_main$q, [["render", _sfc_render$p], ["__scopeId", "data-v-617cd50e"]]);
+  const _sfc_main$p = {
     props: {
       isBuy: Boolean,
       isFree: Number,
@@ -7505,7 +7505,7 @@ var __spreadProps = (a, b) => __defProps(a, __getOwnPropDescs(b));
       };
     }
   };
-  function _sfc_render$n(_ctx, _cache, $props, $setup, $data, $options) {
+  function _sfc_render$o(_ctx, _cache, $props, $setup, $data, $options) {
     return vue.openBlock(), vue.createElementBlock("view", { class: "course-dir" }, [
       (vue.openBlock(true), vue.createElementBlock(vue.Fragment, null, vue.renderList($props.chapterList, (chapter, index) => {
         return vue.openBlock(), vue.createElementBlock("view", { key: index }, [
@@ -7536,8 +7536,8 @@ var __spreadProps = (a, b) => __defProps(a, __getOwnPropDescs(b));
       }), 128))
     ]);
   }
-  var courseSection = /* @__PURE__ */ _export_sfc(_sfc_main$o, [["render", _sfc_render$n], ["__scopeId", "data-v-6773dd35"]]);
-  const _sfc_main$n = {
+  var courseSection = /* @__PURE__ */ _export_sfc(_sfc_main$p, [["render", _sfc_render$o], ["__scopeId", "data-v-6773dd35"]]);
+  const _sfc_main$o = {
     props: {
       desc: {
         type: String,
@@ -7545,7 +7545,7 @@ var __spreadProps = (a, b) => __defProps(a, __getOwnPropDescs(b));
       }
     }
   };
-  function _sfc_render$m(_ctx, _cache, $props, $setup, $data, $options) {
+  function _sfc_render$n(_ctx, _cache, $props, $setup, $data, $options) {
     return vue.openBlock(), vue.createElementBlock("view", null, [
       vue.createElementVNode("view", { class: "center column" }, [
         vue.createElementVNode("image", {
@@ -7557,8 +7557,8 @@ var __spreadProps = (a, b) => __defProps(a, __getOwnPropDescs(b));
       ])
     ]);
   }
-  var __easycom_0$3 = /* @__PURE__ */ _export_sfc(_sfc_main$n, [["render", _sfc_render$m], ["__scopeId", "data-v-1a4b7c72"]]);
-  const _sfc_main$m = {
+  var __easycom_0$3 = /* @__PURE__ */ _export_sfc(_sfc_main$o, [["render", _sfc_render$n], ["__scopeId", "data-v-1a4b7c72"]]);
+  const _sfc_main$n = {
     props: {
       commentList: {
         type: Array,
@@ -7566,7 +7566,7 @@ var __spreadProps = (a, b) => __defProps(a, __getOwnPropDescs(b));
       }
     }
   };
-  function _sfc_render$l(_ctx, _cache, $props, $setup, $data, $options) {
+  function _sfc_render$m(_ctx, _cache, $props, $setup, $data, $options) {
     const _component_no_data = resolveEasycom(vue.resolveDynamicComponent("no-data"), __easycom_0$3);
     return vue.openBlock(), vue.createElementBlock("view", null, [
       !$props.commentList || $props.commentList.length <= 0 ? (vue.openBlock(), vue.createBlock(_component_no_data, {
@@ -7607,8 +7607,8 @@ var __spreadProps = (a, b) => __defProps(a, __getOwnPropDescs(b));
       ]))
     ]);
   }
-  var courseComment = /* @__PURE__ */ _export_sfc(_sfc_main$m, [["render", _sfc_render$l], ["__scopeId", "data-v-7adc00a2"]]);
-  const _sfc_main$l = {
+  var courseComment = /* @__PURE__ */ _export_sfc(_sfc_main$n, [["render", _sfc_render$m], ["__scopeId", "data-v-7adc00a2"]]);
+  const _sfc_main$m = {
     props: {
       groupList: {
         type: Array,
@@ -7629,7 +7629,7 @@ var __spreadProps = (a, b) => __defProps(a, __getOwnPropDescs(b));
       };
     }
   };
-  function _sfc_render$k(_ctx, _cache, $props, $setup, $data, $options) {
+  function _sfc_render$l(_ctx, _cache, $props, $setup, $data, $options) {
     const _component_no_data = resolveEasycom(vue.resolveDynamicComponent("no-data"), __easycom_0$3);
     const _component_course_item = resolveEasycom(vue.resolveDynamicComponent("course-item"), __easycom_0$9);
     return vue.openBlock(), vue.createElementBlock("view", null, [
@@ -7672,8 +7672,8 @@ var __spreadProps = (a, b) => __defProps(a, __getOwnPropDescs(b));
       ]))
     ]);
   }
-  var coursePackage = /* @__PURE__ */ _export_sfc(_sfc_main$l, [["render", _sfc_render$k], ["__scopeId", "data-v-7b5dfa16"]]);
-  const _sfc_main$k = {
+  var coursePackage = /* @__PURE__ */ _export_sfc(_sfc_main$m, [["render", _sfc_render$l], ["__scopeId", "data-v-7b5dfa16"]]);
+  const _sfc_main$l = {
     props: {
       btnText: {
         type: String,
@@ -7690,7 +7690,7 @@ var __spreadProps = (a, b) => __defProps(a, __getOwnPropDescs(b));
       };
     }
   };
-  function _sfc_render$j(_ctx, _cache, $props, $setup, $data, $options) {
+  function _sfc_render$k(_ctx, _cache, $props, $setup, $data, $options) {
     return vue.openBlock(), vue.createElementBlock("view", {
       class: "bottom center",
       onClick: _cache[0] || (_cache[0] = (...args) => $setup.clickHandler && $setup.clickHandler(...args))
@@ -7698,8 +7698,8 @@ var __spreadProps = (a, b) => __defProps(a, __getOwnPropDescs(b));
       vue.createElementVNode("text", { class: "bottom-btn" }, vue.toDisplayString($props.btnText), 1)
     ]);
   }
-  var bottomBtn = /* @__PURE__ */ _export_sfc(_sfc_main$k, [["render", _sfc_render$j], ["__scopeId", "data-v-43a26188"]]);
-  const _sfc_main$j = {
+  var bottomBtn = /* @__PURE__ */ _export_sfc(_sfc_main$l, [["render", _sfc_render$k], ["__scopeId", "data-v-43a26188"]]);
+  const _sfc_main$k = {
     components: {
       "course-detail-header": courseDetailHeader,
       "course-info": courseInfo,
@@ -7880,7 +7880,7 @@ var __spreadProps = (a, b) => __defProps(a, __getOwnPropDescs(b));
       };
     }
   };
-  function _sfc_render$i(_ctx, _cache, $props, $setup, $data, $options) {
+  function _sfc_render$j(_ctx, _cache, $props, $setup, $data, $options) {
     const _component_course_detail_header = vue.resolveComponent("course-detail-header");
     const _component_tab_bar = resolveEasycom(vue.resolveDynamicComponent("tab-bar"), __easycom_0$8);
     const _component_course_info = vue.resolveComponent("course-info");
@@ -7980,8 +7980,8 @@ var __spreadProps = (a, b) => __defProps(a, __getOwnPropDescs(b));
       ], 32)) : vue.createCommentVNode("v-if", true)
     ]);
   }
-  var PagesCourseCourseDetails = /* @__PURE__ */ _export_sfc(_sfc_main$j, [["render", _sfc_render$i]]);
-  const _sfc_main$i = {
+  var PagesCourseCourseDetails = /* @__PURE__ */ _export_sfc(_sfc_main$k, [["render", _sfc_render$j]]);
+  const _sfc_main$j = {
     name: "UniRate",
     props: {
       isFill: {
@@ -8134,7 +8134,7 @@ var __spreadProps = (a, b) => __defProps(a, __getOwnPropDescs(b));
       }
     }
   };
-  function _sfc_render$h(_ctx, _cache, $props, $setup, $data, $options) {
+  function _sfc_render$i(_ctx, _cache, $props, $setup, $data, $options) {
     return vue.openBlock(), vue.createElementBlock("view", null, [
       vue.createElementVNode("view", {
         ref: "uni-rate",
@@ -8168,8 +8168,8 @@ var __spreadProps = (a, b) => __defProps(a, __getOwnPropDescs(b));
       ], 512)
     ]);
   }
-  var __easycom_0$2 = /* @__PURE__ */ _export_sfc(_sfc_main$i, [["render", _sfc_render$h], ["__scopeId", "data-v-b7a28ab8"]]);
-  const _sfc_main$h = {
+  var __easycom_0$2 = /* @__PURE__ */ _export_sfc(_sfc_main$j, [["render", _sfc_render$i], ["__scopeId", "data-v-b7a28ab8"]]);
+  const _sfc_main$i = {
     props: {
       comment: {
         type: Object,
@@ -8222,7 +8222,7 @@ var __spreadProps = (a, b) => __defProps(a, __getOwnPropDescs(b));
       };
     }
   };
-  function _sfc_render$g(_ctx, _cache, $props, $setup, $data, $options) {
+  function _sfc_render$h(_ctx, _cache, $props, $setup, $data, $options) {
     const _component_uni_rate = resolveEasycom(vue.resolveDynamicComponent("uni-rate"), __easycom_0$2);
     return vue.openBlock(), vue.createElementBlock("view", null, [
       vue.createCommentVNode(" \u8499\u5C42 "),
@@ -8262,8 +8262,8 @@ var __spreadProps = (a, b) => __defProps(a, __getOwnPropDescs(b));
       ])) : vue.createCommentVNode("v-if", true)
     ]);
   }
-  var __easycom_1 = /* @__PURE__ */ _export_sfc(_sfc_main$h, [["render", _sfc_render$g], ["__scopeId", "data-v-49203ec4"]]);
-  const _sfc_main$g = {
+  var __easycom_1 = /* @__PURE__ */ _export_sfc(_sfc_main$i, [["render", _sfc_render$h], ["__scopeId", "data-v-49203ec4"]]);
+  const _sfc_main$h = {
     components: {
       "course-section": courseSection
     },
@@ -8355,7 +8355,7 @@ var __spreadProps = (a, b) => __defProps(a, __getOwnPropDescs(b));
       }
     }
   };
-  function _sfc_render$f(_ctx, _cache, $props, $setup, $data, $options) {
+  function _sfc_render$g(_ctx, _cache, $props, $setup, $data, $options) {
     const _component_course_section = vue.resolveComponent("course-section");
     const _component_my_share = resolveEasycom(vue.resolveDynamicComponent("my-share"), __easycom_1$1);
     const _component_comment = resolveEasycom(vue.resolveDynamicComponent("comment"), __easycom_1);
@@ -8408,7 +8408,7 @@ var __spreadProps = (a, b) => __defProps(a, __getOwnPropDescs(b));
       }, null, 8, ["comment", "onSubmit"])
     ]);
   }
-  var PagesCourseCoursePlay = /* @__PURE__ */ _export_sfc(_sfc_main$g, [["render", _sfc_render$f]]);
+  var PagesCourseCoursePlay = /* @__PURE__ */ _export_sfc(_sfc_main$h, [["render", _sfc_render$g]]);
   const getBalance = () => {
     return request({
       url: "/pay/user/balance"
@@ -8453,7 +8453,7 @@ var __spreadProps = (a, b) => __defProps(a, __getOwnPropDescs(b));
       method: "DELETE"
     });
   };
-  const _sfc_main$f = {
+  const _sfc_main$g = {
     components: {
       "course-package": coursePackage
     },
@@ -8580,7 +8580,7 @@ var __spreadProps = (a, b) => __defProps(a, __getOwnPropDescs(b));
       this.balance = await getBalance();
     }
   };
-  function _sfc_render$e(_ctx, _cache, $props, $setup, $data, $options) {
+  function _sfc_render$f(_ctx, _cache, $props, $setup, $data, $options) {
     const _component_course_item = resolveEasycom(vue.resolveDynamicComponent("course-item"), __easycom_0$9);
     const _component_tempalte = vue.resolveComponent("tempalte");
     return vue.openBlock(), vue.createElementBlock("view", { class: "confirm-order" }, [
@@ -8689,8 +8689,8 @@ var __spreadProps = (a, b) => __defProps(a, __getOwnPropDescs(b));
       ])
     ]);
   }
-  var PagesOrderConfirmBuy = /* @__PURE__ */ _export_sfc(_sfc_main$f, [["render", _sfc_render$e]]);
-  const _sfc_main$e = {
+  var PagesOrderConfirmBuy = /* @__PURE__ */ _export_sfc(_sfc_main$g, [["render", _sfc_render$f]]);
+  const _sfc_main$f = {
     setup() {
       let { proxy } = vue.getCurrentInstance();
       let params = vue.ref({});
@@ -8777,7 +8777,7 @@ var __spreadProps = (a, b) => __defProps(a, __getOwnPropDescs(b));
       }
     }
   };
-  function _sfc_render$d(_ctx, _cache, $props, $setup, $data, $options) {
+  function _sfc_render$e(_ctx, _cache, $props, $setup, $data, $options) {
     return vue.openBlock(), vue.createElementBlock("view", null, [
       vue.createElementVNode("view", { class: "money column center" }, [
         vue.createElementVNode("text", null, "\u4F59\u989D\uFF1A"),
@@ -8821,8 +8821,8 @@ var __spreadProps = (a, b) => __defProps(a, __getOwnPropDescs(b));
       ])
     ]);
   }
-  var PagesOrderMyBalance = /* @__PURE__ */ _export_sfc(_sfc_main$e, [["render", _sfc_render$d]]);
-  const _sfc_main$d = {
+  var PagesOrderMyBalance = /* @__PURE__ */ _export_sfc(_sfc_main$f, [["render", _sfc_render$e]]);
+  const _sfc_main$e = {
     setup() {
       let { proxy } = vue.getCurrentInstance();
       let orderList = vue.ref([]);
@@ -8960,7 +8960,7 @@ var __spreadProps = (a, b) => __defProps(a, __getOwnPropDescs(b));
       };
     }
   };
-  function _sfc_render$c(_ctx, _cache, $props, $setup, $data, $options) {
+  function _sfc_render$d(_ctx, _cache, $props, $setup, $data, $options) {
     const _component_course_item = resolveEasycom(vue.resolveDynamicComponent("course-item"), __easycom_0$9);
     return vue.openBlock(), vue.createElementBlock("view", null, [
       (vue.openBlock(true), vue.createElementBlock(vue.Fragment, null, vue.renderList($setup.orderList, (item, index) => {
@@ -9109,8 +9109,8 @@ var __spreadProps = (a, b) => __defProps(a, __getOwnPropDescs(b));
       ], 32)) : vue.createCommentVNode("v-if", true)
     ]);
   }
-  var PagesOrderOrderList = /* @__PURE__ */ _export_sfc(_sfc_main$d, [["render", _sfc_render$c]]);
-  const _sfc_main$c = {
+  var PagesOrderOrderList = /* @__PURE__ */ _export_sfc(_sfc_main$e, [["render", _sfc_render$d]]);
+  const _sfc_main$d = {
     name: "UniTag",
     emits: ["click"],
     props: {
@@ -9182,7 +9182,7 @@ var __spreadProps = (a, b) => __defProps(a, __getOwnPropDescs(b));
       }
     }
   };
-  function _sfc_render$b(_ctx, _cache, $props, $setup, $data, $options) {
+  function _sfc_render$c(_ctx, _cache, $props, $setup, $data, $options) {
     return $props.text ? (vue.openBlock(), vue.createElementBlock("text", {
       key: 0,
       class: vue.normalizeClass(["uni-tag", $options.classes]),
@@ -9190,8 +9190,8 @@ var __spreadProps = (a, b) => __defProps(a, __getOwnPropDescs(b));
       onClick: _cache[0] || (_cache[0] = (...args) => $options.onClick && $options.onClick(...args))
     }, vue.toDisplayString($props.text), 7)) : vue.createCommentVNode("v-if", true);
   }
-  var __easycom_0$1 = /* @__PURE__ */ _export_sfc(_sfc_main$c, [["render", _sfc_render$b], ["__scopeId", "data-v-1516016e"]]);
-  const _sfc_main$b = {
+  var __easycom_0$1 = /* @__PURE__ */ _export_sfc(_sfc_main$d, [["render", _sfc_render$c], ["__scopeId", "data-v-1516016e"]]);
+  const _sfc_main$c = {
     components: {
       "uni-tag": __easycom_0$1
     },
@@ -9262,7 +9262,7 @@ var __spreadProps = (a, b) => __defProps(a, __getOwnPropDescs(b));
       }
     }
   };
-  function _sfc_render$a(_ctx, _cache, $props, $setup, $data, $options) {
+  function _sfc_render$b(_ctx, _cache, $props, $setup, $data, $options) {
     const _component_uni_tag = resolveEasycom(vue.resolveDynamicComponent("uni-tag"), __easycom_0$1);
     const _component_my_share = resolveEasycom(vue.resolveDynamicComponent("my-share"), __easycom_1$1);
     return vue.openBlock(), vue.createElementBlock("view", null, [
@@ -9349,7 +9349,31 @@ var __spreadProps = (a, b) => __defProps(a, __getOwnPropDescs(b));
       }, null, 8, ["shareDate"])
     ]);
   }
-  var PagesTabArticleArticleDetails = /* @__PURE__ */ _export_sfc(_sfc_main$b, [["render", _sfc_render$a]]);
+  var PagesTabArticleArticleDetails = /* @__PURE__ */ _export_sfc(_sfc_main$c, [["render", _sfc_render$b]]);
+  let BASE_URL = "https://mock.mengxuegu.com/mock/6246a1929a111d2ee2cb4f92/education";
+  const upload = (options = {}) => {
+    return new Promise((resolve, reject) => {
+      uni.uploadFile({
+        url: BASE_URL + options.url,
+        filePath: options.filePath,
+        name: options.name || "file",
+        formData: options.data || {},
+        timeout: 8e3,
+        success: (res) => {
+          formatAppLog("log", "at utils/upload.js:25", res);
+          if (res.statusCode === 200) {
+            resolve(JSON.parse(res.data));
+          } else {
+            reject(res);
+          }
+        },
+        fail: (err) => {
+          message.toast("\u8BF7\u6C42\u63A5\u53E3\u5931\u8D25", "error");
+          reject(err);
+        }
+      });
+    });
+  };
   const updateFeedback = (data2) => {
     return request({
       method: "POST",
@@ -9385,7 +9409,13 @@ var __spreadProps = (a, b) => __defProps(a, __getOwnPropDescs(b));
       data: data2
     });
   };
-  const _sfc_main$a = {
+  const uploadImg = (filePath) => {
+    return upload({
+      url: "/article/file/upload",
+      filePath
+    });
+  };
+  const _sfc_main$b = {
     props: {
       mobile: {
         type: String,
@@ -9434,7 +9464,7 @@ var __spreadProps = (a, b) => __defProps(a, __getOwnPropDescs(b));
       };
     }
   };
-  function _sfc_render$9(_ctx, _cache, $props, $setup, $data, $options) {
+  function _sfc_render$a(_ctx, _cache, $props, $setup, $data, $options) {
     return vue.openBlock(), vue.createElementBlock("view", {
       class: vue.normalizeClass(["mxg-code center", $setup.interval ? "dis" : ""]),
       onClick: _cache[0] || (_cache[0] = (...args) => $setup.sendSmsCode && $setup.sendSmsCode(...args))
@@ -9442,8 +9472,8 @@ var __spreadProps = (a, b) => __defProps(a, __getOwnPropDescs(b));
       vue.createElementVNode("text", { class: "code-btn" }, vue.toDisplayString($setup.interval ? $setup.intervalNum + "s" : "\u83B7\u53D6\u9A8C\u8BC1\u7801"), 1)
     ], 2);
   }
-  var __easycom_0 = /* @__PURE__ */ _export_sfc(_sfc_main$a, [["render", _sfc_render$9], ["__scopeId", "data-v-12e8023c"]]);
-  const _sfc_main$9 = {
+  var __easycom_0 = /* @__PURE__ */ _export_sfc(_sfc_main$b, [["render", _sfc_render$a], ["__scopeId", "data-v-12e8023c"]]);
+  const _sfc_main$a = {
     setup() {
       const { proxy } = vue.getCurrentInstance();
       const store2 = useStore();
@@ -9483,7 +9513,8 @@ var __spreadProps = (a, b) => __defProps(a, __getOwnPropDescs(b));
           token: res.access_token,
           username: res.userInfo.username,
           imageUrl: res.userInfo.imageUrl,
-          nickName: res.userInfo.nickName
+          nickName: res.userInfo.nickName,
+          sex: res.userInfo.sex
         });
         setTimeout(() => {
           proxy.navBack();
@@ -9505,7 +9536,7 @@ var __spreadProps = (a, b) => __defProps(a, __getOwnPropDescs(b));
         });
       };
       const authorization = async (authResult) => {
-        formatAppLog("log", "at pages/auth/login.vue:130", authResult);
+        formatAppLog("log", "at pages/auth/login.vue:131", authResult);
         let res = await authorizationLogin(authResult);
         uni.hideLoading();
         if (!res.mobile) {
@@ -9527,7 +9558,7 @@ var __spreadProps = (a, b) => __defProps(a, __getOwnPropDescs(b));
       };
     }
   };
-  function _sfc_render$8(_ctx, _cache, $props, $setup, $data, $options) {
+  function _sfc_render$9(_ctx, _cache, $props, $setup, $data, $options) {
     const _component_my_code = resolveEasycom(vue.resolveDynamicComponent("my-code"), __easycom_0);
     return vue.openBlock(), vue.createElementBlock("view", { class: "app" }, [
       vue.createElementVNode("text", {
@@ -9613,8 +9644,8 @@ var __spreadProps = (a, b) => __defProps(a, __getOwnPropDescs(b));
       ])
     ]);
   }
-  var PagesAuthLogin = /* @__PURE__ */ _export_sfc(_sfc_main$9, [["render", _sfc_render$8]]);
-  const _sfc_main$8 = {
+  var PagesAuthLogin = /* @__PURE__ */ _export_sfc(_sfc_main$a, [["render", _sfc_render$9]]);
+  const _sfc_main$9 = {
     components: {
       "uni-tag": __easycom_0$1
     },
@@ -9716,7 +9747,7 @@ var __spreadProps = (a, b) => __defProps(a, __getOwnPropDescs(b));
       }
     }
   };
-  function _sfc_render$7(_ctx, _cache, $props, $setup, $data, $options) {
+  function _sfc_render$8(_ctx, _cache, $props, $setup, $data, $options) {
     const _component_uni_tag = resolveEasycom(vue.resolveDynamicComponent("uni-tag"), __easycom_0$1);
     const _component_my_share = resolveEasycom(vue.resolveDynamicComponent("my-share"), __easycom_1$1);
     return vue.openBlock(), vue.createElementBlock("view", null, [
@@ -9837,8 +9868,8 @@ var __spreadProps = (a, b) => __defProps(a, __getOwnPropDescs(b));
       }, null, 8, ["shareDate"])
     ]);
   }
-  var PagesTabQuestionQuestionDetails = /* @__PURE__ */ _export_sfc(_sfc_main$8, [["render", _sfc_render$7]]);
-  var data = [
+  var PagesTabQuestionQuestionDetails = /* @__PURE__ */ _export_sfc(_sfc_main$9, [["render", _sfc_render$8]]);
+  var data$1 = [
     [
       {
         title: "\u5141\u8BB8\u975EWIFI\u4E0B\u64AD\u653E",
@@ -9864,10 +9895,10 @@ var __spreadProps = (a, b) => __defProps(a, __getOwnPropDescs(b));
       }
     ]
   ];
-  const _sfc_main$7 = {
+  const _sfc_main$8 = {
     setup() {
       let { proxy } = vue.getCurrentInstance();
-      let list = vue.ref(data);
+      let list = vue.ref(data$1);
       const changeChecked = (obj, str) => {
         let checked = uni.getStorageSync(str) || false;
         obj.checked = !obj.checked;
@@ -9896,7 +9927,7 @@ var __spreadProps = (a, b) => __defProps(a, __getOwnPropDescs(b));
       };
     }
   };
-  function _sfc_render$6(_ctx, _cache, $props, $setup, $data, $options) {
+  function _sfc_render$7(_ctx, _cache, $props, $setup, $data, $options) {
     const _component_my_list = resolveEasycom(vue.resolveDynamicComponent("my-list"), __easycom_0$5);
     return vue.openBlock(), vue.createElementBlock("view", null, [
       vue.createVNode(_component_my_list, {
@@ -9908,8 +9939,8 @@ var __spreadProps = (a, b) => __defProps(a, __getOwnPropDescs(b));
       }, null, 8, ["list", "onSetWifiPlay", "onSetWifiDownload", "onSetAutoPlay", "onClearStorage"])
     ]);
   }
-  var PagesTabMySetting = /* @__PURE__ */ _export_sfc(_sfc_main$7, [["render", _sfc_render$6]]);
-  const _sfc_main$6 = {
+  var PagesTabMySetting = /* @__PURE__ */ _export_sfc(_sfc_main$8, [["render", _sfc_render$7]]);
+  const _sfc_main$7 = {
     setup() {
       let { proxy } = vue.getCurrentInstance();
       let loading = vue.ref(false);
@@ -9957,7 +9988,7 @@ var __spreadProps = (a, b) => __defProps(a, __getOwnPropDescs(b));
       };
     }
   };
-  function _sfc_render$5(_ctx, _cache, $props, $setup, $data, $options) {
+  function _sfc_render$6(_ctx, _cache, $props, $setup, $data, $options) {
     return vue.openBlock(), vue.createElementBlock("view", { class: "feedback-box center column" }, [
       vue.createElementVNode("radio-group", {
         class: "radio-group",
@@ -10024,14 +10055,14 @@ var __spreadProps = (a, b) => __defProps(a, __getOwnPropDescs(b));
       }, "\u63D0\u4EA4", 8, ["loading", "disabled"])
     ]);
   }
-  var PagesTabMyFeedback = /* @__PURE__ */ _export_sfc(_sfc_main$6, [["render", _sfc_render$5]]);
-  const _sfc_main$5 = {
+  var PagesTabMyFeedback = /* @__PURE__ */ _export_sfc(_sfc_main$7, [["render", _sfc_render$6]]);
+  const _sfc_main$6 = {
     data() {
       return {};
     },
     methods: {}
   };
-  function _sfc_render$4(_ctx, _cache, $props, $setup, $data, $options) {
+  function _sfc_render$5(_ctx, _cache, $props, $setup, $data, $options) {
     return vue.openBlock(), vue.createElementBlock("view", null, [
       vue.createElementVNode("view", { class: "center column" }, [
         vue.createElementVNode("image", {
@@ -10056,16 +10087,26 @@ var __spreadProps = (a, b) => __defProps(a, __getOwnPropDescs(b));
       vue.createElementVNode("view", { class: "bottom" }, " Copyright \xA9 2022 mengxuegu.com All rights reserved ")
     ]);
   }
-  var PagesTabMyAbout = /* @__PURE__ */ _export_sfc(_sfc_main$5, [["render", _sfc_render$4]]);
-  const _sfc_main$4 = {
+  var PagesTabMyAbout = /* @__PURE__ */ _export_sfc(_sfc_main$6, [["render", _sfc_render$5]]);
+  const _sfc_main$5 = {
     data() {
       return {};
     }
   };
-  function _sfc_render$3(_ctx, _cache, $props, $setup, $data, $options) {
+  function _sfc_render$4(_ctx, _cache, $props, $setup, $data, $options) {
     return vue.openBlock(), vue.createElementBlock("view", null, " \u6211\u7684\u5B66\u4E60 ");
   }
-  var PagesTabMyStudy = /* @__PURE__ */ _export_sfc(_sfc_main$4, [["render", _sfc_render$3]]);
+  var PagesTabMyStudy = /* @__PURE__ */ _export_sfc(_sfc_main$5, [["render", _sfc_render$4]]);
+  const _sfc_main$4 = {
+    data() {
+      return {};
+    },
+    methods: {}
+  };
+  function _sfc_render$3(_ctx, _cache, $props, $setup, $data, $options) {
+    return vue.openBlock(), vue.createElementBlock("view", null, " \u534F\u8BAE\u5982\u4E0B\uFF1A xxxxx ");
+  }
+  var PagesPublicXieyi = /* @__PURE__ */ _export_sfc(_sfc_main$4, [["render", _sfc_render$3]]);
   const _sfc_main$3 = {
     data() {
       return {};
@@ -10073,20 +10114,10 @@ var __spreadProps = (a, b) => __defProps(a, __getOwnPropDescs(b));
     methods: {}
   };
   function _sfc_render$2(_ctx, _cache, $props, $setup, $data, $options) {
-    return vue.openBlock(), vue.createElementBlock("view", null, " \u534F\u8BAE\u5982\u4E0B\uFF1A xxxxx ");
-  }
-  var PagesPublicXieyi = /* @__PURE__ */ _export_sfc(_sfc_main$3, [["render", _sfc_render$2]]);
-  const _sfc_main$2 = {
-    data() {
-      return {};
-    },
-    methods: {}
-  };
-  function _sfc_render$1(_ctx, _cache, $props, $setup, $data, $options) {
     return vue.openBlock(), vue.createElementBlock("view", null, " \u9690\u79C1\u76F8\u5173\u653F\u7B56\u5982\u4E0B\uFF1A \u3002\u3002\u3002\u3002 ");
   }
-  var PagesPublicYinsi = /* @__PURE__ */ _export_sfc(_sfc_main$2, [["render", _sfc_render$1]]);
-  const _sfc_main$1 = {
+  var PagesPublicYinsi = /* @__PURE__ */ _export_sfc(_sfc_main$3, [["render", _sfc_render$2]]);
+  const _sfc_main$2 = {
     onLoad(option) {
       if (option.data)
         this.data = JSON.parse(option.data);
@@ -10119,26 +10150,30 @@ var __spreadProps = (a, b) => __defProps(a, __getOwnPropDescs(b));
         let res = await resetMobile({ mobile: mobile.value, code: code.value, data: data2.value });
         loading.value = false;
         uni.hideLoading();
-        if (!data2.value) {
+        if (data2.value) {
           store2.commit("saveUserInfo", {
             mobile: mobile.value,
             token: res.access_token,
             username: res.userInfo.username,
             imageUrl: res.userInfo.imageUrl,
-            nickName: res.userInfo.nickName
+            nickName: res.userInfo.nickName,
+            sex: res.userInfo.sex
           });
           proxy.$message.toast("\u7ED1\u5B9A\u6210\u529F", "success");
+          setTimeout(() => {
+            uni.switchTab({
+              url: "/pages/tab-my/my"
+            });
+          }, 1e3);
         } else {
           store2.commit("saveUserMobile", {
             mobile: mobile.value
           });
           proxy.$message.toast("\u4FEE\u6539\u6210\u529F", "success");
+          setTimeout(() => {
+            proxy.navBack();
+          }, 1e3);
         }
-        setTimeout(() => {
-          uni.switchTab({
-            url: "/pages/tab-my/my"
-          });
-        }, 1e3);
       };
       return {
         data: data2,
@@ -10149,7 +10184,7 @@ var __spreadProps = (a, b) => __defProps(a, __getOwnPropDescs(b));
       };
     }
   };
-  function _sfc_render(_ctx, _cache, $props, $setup, $data, $options) {
+  function _sfc_render$1(_ctx, _cache, $props, $setup, $data, $options) {
     const _component_my_code = resolveEasycom(vue.resolveDynamicComponent("my-code"), __easycom_0);
     return vue.openBlock(), vue.createElementBlock("view", { class: "content" }, [
       vue.createElementVNode("view", { class: "input-group" }, [
@@ -10193,7 +10228,200 @@ var __spreadProps = (a, b) => __defProps(a, __getOwnPropDescs(b));
       }, "\u63D0\u4EA4", 8, ["loading"])
     ]);
   }
-  var PagesAuthBindMobile = /* @__PURE__ */ _export_sfc(_sfc_main$1, [["render", _sfc_render]]);
+  var PagesAuthBindMobile = /* @__PURE__ */ _export_sfc(_sfc_main$2, [["render", _sfc_render$1]]);
+  var store = createStore({
+    state: {
+      mobile: "",
+      token: "",
+      username: "",
+      nickName: "",
+      imageUrl: "",
+      sex: ""
+    },
+    mutations: {
+      saveUserInfo(state, value) {
+        state.mobile = value.mobile;
+        state.token = value.token;
+        state.username = value.username;
+        state.nickName = value.nickName;
+        state.imageUrl = value.imageUrl;
+        state.sex = value.sex;
+        uni.setStorageSync("educationToken", value.token);
+        uni.setStorageSync("educationUserInfo", value);
+      },
+      loginOut(state) {
+        state.mobile = "";
+        state.token = "";
+        state.username = "";
+        state.nickName = "";
+        state.imageUrl = "";
+        state.sex = "";
+        uni.removeStorageSync("educationToken");
+        uni.removeStorageSync("educationUserInfo");
+      },
+      keepUserInfo(state) {
+        let res = uni.getStorageSync("educationUserInfo");
+        state.mobile = res.mobile;
+        state.token = res.token;
+        state.username = res.username;
+        state.nickName = res.nickName;
+        state.imageUrl = res.imageUrl;
+      },
+      saveUserMobile(state, value) {
+        let res = uni.getStorageSync("educationUserInfo");
+        state.mobile = value.mobile;
+        res.mobile = value.mobile;
+        uni.setStorageSync("educationUserInfo", res);
+      }
+    },
+    action: {},
+    getters: {},
+    modules: {}
+  });
+  const rightIcon = "iconfont icon-right";
+  const userInfo = store.state;
+  var data = () => {
+    return [
+      [
+        {
+          title: "\u5934\u50CF",
+          event: "chooseImg",
+          src: userInfo.imageUrl || "https://gimg2.baidu.com/image_search/src=http%3A%2F%2Fimg2.doubanio.com%2Fview%2Frichtext%2Flarge%2Fpublic%2Fp206989042.jpg&refer=http%3A%2F%2Fimg2.doubanio.com&app=2002&size=f9999,10000",
+          rightIcon
+        },
+        {
+          title: "\u7528\u6237\u540D",
+          event: "editUsername",
+          text: userInfo.username,
+          rightIcon
+        },
+        {
+          title: "\u624B\u673A\u53F7",
+          event: "editMobile",
+          text: userInfo.mobile,
+          rightIcon
+        }
+      ],
+      [
+        {
+          title: "\u6635\u79F0",
+          event: "editName",
+          text: userInfo.nickName,
+          rightIcon
+        },
+        {
+          title: "\u6027\u522B",
+          event: "chooseSex",
+          text: userInfo.sex ? "\u7537" : "\u5973",
+          rightIcon
+        }
+      ]
+    ];
+  };
+  const _sfc_main$1 = {
+    setup() {
+      let { proxy } = vue.getCurrentInstance();
+      let store2 = useStore();
+      let list = vue.ref(null);
+      let content = vue.ref("");
+      let isUpdate = vue.ref(false);
+      list.value = data();
+      vue.onActivated(() => {
+        list.value = data();
+      });
+      const chooseImg = (e) => {
+        uni.chooseImage({
+          count: 1,
+          sizeType: ["original", "compressed"],
+          success: async (filePaths) => {
+            await uploadImg(filePaths[0]);
+          }
+        });
+      };
+      const editUsername = (e) => {
+        proxy.$message.toast("\u7528\u6237\u540D\u65E0\u6CD5\u4FEE\u6539");
+        return;
+      };
+      const editMobile = (e) => {
+        proxy.navTo("/pages/auth/bind-mobile?title=\u4FEE\u6539\u624B\u673A");
+      };
+      const editName = (e) => {
+        isUpdate.value = true;
+        content.value = e.text;
+      };
+      const chooseSex = (e) => {
+        return;
+      };
+      const logout = async () => {
+        await proxy.$message.confirm("\u786E\u5B9A\u9000\u51FA\u767B\u5F55");
+        store2.commit("loginOut");
+        proxy.navBack();
+      };
+      let submitUpdate = () => {
+        return;
+      };
+      return {
+        list,
+        content,
+        isUpdate,
+        chooseImg,
+        editUsername,
+        editMobile,
+        editName,
+        chooseSex,
+        logout,
+        submitUpdate
+      };
+    }
+  };
+  function _sfc_render(_ctx, _cache, $props, $setup, $data, $options) {
+    const _component_my_list = resolveEasycom(vue.resolveDynamicComponent("my-list"), __easycom_0$5);
+    return vue.openBlock(), vue.createElementBlock("view", null, [
+      vue.createVNode(_component_my_list, {
+        list: $setup.list,
+        onChooseImg: $setup.chooseImg,
+        onEditUsername: $setup.editUsername,
+        onEditMobile: $setup.editMobile,
+        onEditName: $setup.editName,
+        onChooseSex: $setup.chooseSex
+      }, null, 8, ["list", "onChooseImg", "onEditUsername", "onEditMobile", "onEditName", "onChooseSex"]),
+      vue.createElementVNode("button", {
+        class: "logout-btn",
+        onClick: _cache[0] || (_cache[0] = (...args) => $setup.logout && $setup.logout(...args)),
+        type: "default"
+      }, "\u9000\u51FA\u767B\u5F55"),
+      $setup.isUpdate ? (vue.openBlock(), vue.createElementBlock("view", {
+        key: 0,
+        onClick: _cache[1] || (_cache[1] = ($event) => $setup.isUpdate = false),
+        class: "mask"
+      })) : vue.createCommentVNode("v-if", true),
+      $setup.isUpdate ? (vue.openBlock(), vue.createElementBlock("view", {
+        key: 1,
+        class: "update-box"
+      }, [
+        vue.withDirectives(vue.createElementVNode("input", {
+          "onUpdate:modelValue": _cache[2] || (_cache[2] = ($event) => $setup.content = $event),
+          class: "input",
+          focus: "",
+          maxlength: "20",
+          type: "text"
+        }, null, 512), [
+          [vue.vModelText, $setup.content]
+        ]),
+        vue.createElementVNode("view", { class: "btn" }, [
+          vue.createElementVNode("text", {
+            onClick: _cache[3] || (_cache[3] = ($event) => $setup.isUpdate = false),
+            class: "cancel"
+          }, "\u53D6\u6D88"),
+          vue.createElementVNode("text", {
+            onClick: _cache[4] || (_cache[4] = (...args) => $setup.submitUpdate && $setup.submitUpdate(...args)),
+            class: "update"
+          }, "\u5B8C\u6210")
+        ])
+      ])) : vue.createCommentVNode("v-if", true)
+    ]);
+  }
+  var PagesTabMyUserInfo = /* @__PURE__ */ _export_sfc(_sfc_main$1, [["render", _sfc_render]]);
   if (typeof Promise !== "undefined" && !Promise.prototype.finally) {
     Promise.prototype.finally = function(callback) {
       const promise = this.constructor;
@@ -10230,6 +10458,7 @@ var __spreadProps = (a, b) => __defProps(a, __getOwnPropDescs(b));
   __definePage("pages/public/xieyi", PagesPublicXieyi);
   __definePage("pages/public/yinsi", PagesPublicYinsi);
   __definePage("pages/auth/bind-mobile", PagesAuthBindMobile);
+  __definePage("pages/tab-my/user-info", PagesTabMyUserInfo);
   const _sfc_main = {
     onLaunch: function() {
       formatAppLog("log", "at App.vue:4", "App Launch");
@@ -10437,52 +10666,6 @@ var __spreadProps = (a, b) => __defProps(a, __getOwnPropDescs(b));
     __proto__: null,
     [Symbol.toStringTag]: "Module",
     HOST_H5
-  });
-  var store = createStore({
-    state: {
-      mobile: "",
-      token: "",
-      username: "",
-      nickName: "",
-      imageUrl: ""
-    },
-    mutations: {
-      saveUserInfo(state, value) {
-        state.mobile = value.mobile;
-        state.token = value.token;
-        state.username = value.username;
-        state.nickName = value.nickName;
-        state.imageUrl = value.imageUrl;
-        uni.setStorageSync("educationToken", value.token);
-        uni.setStorageSync("educationUserInfo", value);
-      },
-      removeUserInfo(state) {
-        state.mobile = "";
-        state.token = "";
-        state.username = "";
-        state.nickName = "";
-        state.imageUrl = "";
-        uni.removeStorageSync("educationToken");
-        uni.removeStorageSync("educationUserInfo");
-      },
-      keepUserInfo(state) {
-        let res = uni.getStorageSync("educationUserInfo");
-        state.mobile = res.mobile;
-        state.token = res.token;
-        state.username = res.username;
-        state.nickName = res.nickName;
-        state.imageUrl = res.imageUrl;
-      },
-      saveUserMobile(state, value) {
-        let res = uni.getStorageSync("educationUserInfo");
-        state.mobile = value.mobile;
-        res.mobile = value.mobile;
-        uni.setStorageSync("educationUserInfo", res);
-      }
-    },
-    action: {},
-    getters: {},
-    modules: {}
   });
   function createApp() {
     const app = vue.createVueApp(_sfc_main);

@@ -118,7 +118,7 @@ module.exports = {
   ".mask": {
     "": {
       "zIndex": [
-        99,
+        9,
         0,
         0,
         15

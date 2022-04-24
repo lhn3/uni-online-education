@@ -6,7 +6,8 @@ export default createStore({
 		token:'',
 		username:'',
 		nickName:'',
-		imageUrl:''
+		imageUrl:'',
+		sex:''
 	},
 	mutations:{
 		// 登陆成功保存用户信息
@@ -16,17 +17,19 @@ export default createStore({
 			state.username = value.username
 			state.nickName = value.nickName
 			state.imageUrl = value.imageUrl
+			state.sex = value.sex
 			uni.setStorageSync('educationToken',value.token)
 			uni.setStorageSync('educationUserInfo',value)
 		},
 		
 		// 退出登录清除用户信息
-		removeUserInfo(state){
+		loginOut(state){
 			state.mobile = ''
 			state.token = ''
 			state.username = ''
 			state.nickName = ''
 			state.imageUrl = ''
+			state.sex = ''
 			uni.removeStorageSync('educationToken')
 			uni.removeStorageSync('educationUserInfo')
 		},
@@ -46,6 +49,14 @@ export default createStore({
 			let res = uni.getStorageSync('educationUserInfo')
 			state.mobile = value.mobile
 			res.mobile = value.mobile
+			uni.setStorageSync('educationUserInfo',res)
+		},
+		
+		// 修改头像
+		saveUserImageUrl(state,value){
+			let res = uni.getStorageSync('educationUserInfo')
+			state.imageUrl = value.imageUrl
+			res.imageUrl = value.imageUrl
 			uni.setStorageSync('educationUserInfo',res)
 		}
 		

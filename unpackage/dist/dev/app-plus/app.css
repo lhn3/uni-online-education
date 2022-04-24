@@ -91,7 +91,7 @@ uni-image {
 }
 /* 蒙层 */
 .mask {
-	z-index: 99;
+	z-index: 9;
 	position: fixed;
 	top: 0;
 	left: 0;

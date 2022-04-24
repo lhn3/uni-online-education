@@ -1,15 +1,7 @@
-import { msg } from './util.js'
+import message from './showMessage.js'
 
-// 基础URL
-// #ifndef H5
-// 非h5端，改为自己的服务地址
-let BASE_URL = 'https://mock.mengxuegu.com/mock/5fdc6ffb5b350029c77c973a/mxg-education-app'
-// #endif
 
-// #ifdef H5
-// h5, 进行代理转发
-let BASE_URL = '/api'
-// #endif
+let BASE_URL = 'https://mock.mengxuegu.com/mock/6246a1929a111d2ee2cb4f92/education'
 
 // 上传图片
 const upload = (options = {}) => {
@@ -23,7 +15,6 @@ const upload = (options = {}) => {
 			timeout: 8000, // 8秒超时时间，单位ms
 			success: (res) => {
 				if(res.statusCode === 200) {
-					console.log('res.data', res.data)
 					// 响应的数据是json字符串，把它转成对象
 					resolve(JSON.parse(res.data))
 				}else {
@@ -32,7 +23,7 @@ const upload = (options = {}) => {
 				}
 			},
 			fail: (err) => {
-				msg('请求接口失败')
+				message.toast('请求接口失败','error')
 				reject(err)
 			},
 		})

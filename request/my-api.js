@@ -1,4 +1,5 @@
 import request from "./request.js"
+import upload from "@/utils/upload.js"
 
 //查询个人余额
 const updateFeedback = (data) => {
@@ -45,10 +46,29 @@ const resetMobile = (data) => {
 	})
 }
 
+//更新用户信息
+const updateUserInfo = (data) => {
+	return request({
+		method:'PUT',
+		url:'/system/user',
+		data
+	})
+}
+
+//上传图片接口
+const uploadImg=(filePath)=>{
+	return upload({
+		url:'/article/file/upload',
+		filePath
+	})
+}
+
 export {
 	updateFeedback,
 	getSms,
 	authLogin,
 	authorizationLogin,
-	resetMobile
+	resetMobile,
+	updateUserInfo,
+	uploadImg
 }

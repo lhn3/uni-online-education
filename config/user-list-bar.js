@@ -1,15 +1,14 @@
-import store from '@/store'
+import store from '@/store/index.js'
 
 const rightIcon = 'iconfont icon-right'
-export default () => {
-	const userInfo = store.state.userInfo
-	/* console.log('userInfo', userInfo) */
+const userInfo = store.state
+export default ()=>{
 	return [
 		[
 			{
 				title: '头像',
 				event: 'chooseImg',
-				src:  userInfo.imageUrl || '/static/logo.png',
+				src:  userInfo.imageUrl || 'https://gimg2.baidu.com/image_search/src=http%3A%2F%2Fimg2.doubanio.com%2Fview%2Frichtext%2Flarge%2Fpublic%2Fp206989042.jpg&refer=http%3A%2F%2Fimg2.doubanio.com&app=2002&size=f9999,10000',
 				rightIcon,
 			},
 			{
@@ -36,9 +35,9 @@ export default () => {
 			{
 				title: '性别',
 				event: 'chooseSex',
-				text: userInfo.sex ? '女': '男',
+				text: userInfo.sex ? '男': '女',
 				rightIcon,
 			}
 		]
 	]
-}
+} 

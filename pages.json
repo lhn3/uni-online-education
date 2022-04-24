@@ -335,7 +335,16 @@
             "path" : "pages/auth/bind-mobile",
             "style" :                                                                                    
             {
-                "navigationBarTitleText": "手机绑定",
+                "navigationBarTitleText": "",
+                "enablePullDownRefresh": false
+            }
+            
+        }
+        ,{
+            "path" : "pages/tab-my/user-info",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "个人资料",
                 "enablePullDownRefresh": false
             }
             

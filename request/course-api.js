@@ -76,6 +76,13 @@ const updateComment=(data)=>{
 	})
 }
 
+//我的学习课程
+const myCourseList=()=>{
+	return request({
+		url:'/course/course/study/list',
+	})
+}
+
 export {
 	getBanners,
 	getCategory,
@@ -86,5 +93,6 @@ export {
 	getCoursePackage,
 	getCourseIsBuy,
 	getBuyCourseSection,
-	updateComment
+	updateComment,
+	myCourseList
 }

@@ -24,14 +24,8 @@ export default createStore({
 		
 		// 退出登录清除用户信息
 		loginOut(state){
-			state.mobile = ''
 			state.token = ''
-			state.username = ''
-			state.nickName = ''
-			state.imageUrl = ''
-			state.sex = ''
 			uni.removeStorageSync('educationToken')
-			uni.removeStorageSync('educationUserInfo')
 		},
 		
 		// 刷新vuex数据持久化
@@ -44,6 +38,14 @@ export default createStore({
 			state.imageUrl = res.imageUrl
 		},
 		
+		// 修改头像
+		saveUserImageUrl(state,value){
+			let res = uni.getStorageSync('educationUserInfo')
+			state.imageUrl = value.imageUrl
+			res.imageUrl = value.imageUrl
+			uni.setStorageSync('educationUserInfo',res)
+		},
+		
 		// 修改手机号码
 		saveUserMobile(state,value){
 			let res = uni.getStorageSync('educationUserInfo')
@@ -52,13 +54,21 @@ export default createStore({
 			uni.setStorageSync('educationUserInfo',res)
 		},
 		
-		// 修改头像
-		saveUserImageUrl(state,value){
+		// 修改昵称
+		saveUserNickName(state,value){
 			let res = uni.getStorageSync('educationUserInfo')
-			state.imageUrl = value.imageUrl
-			res.imageUrl = value.imageUrl
+			state.nickName = value.nickName
+			res.nickName = value.nickName
 			uni.setStorageSync('educationUserInfo',res)
-		}
+		},
+		
+		// 修改性别
+		saveUserSex(state,value){
+			let res = uni.getStorageSync('educationUserInfo')
+			state.sex = value.sex
+			res.sex = value.sex
+			uni.setStorageSync('educationUserInfo',res)
+		},
 		
 	},
 	action:{},

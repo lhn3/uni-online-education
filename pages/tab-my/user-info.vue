@@ -9,15 +9,12 @@
 		/>
 		<button class="logout-btn" @click="logout" type="default">退出登录</button>
 		
-		<view v-if="isUpdate" @click="isUpdate = false" class="mask"></view>
-		<view v-if="isUpdate" class="update-box">
-			<input v-model="content" class="input" focus maxlength="20" type="text">
-			<view class="btn">
-				<text @click="isUpdate = false" class="cancel">取消</text>
-				<text @click="submitUpdate" class="update">完成</text>
-			</view>
-		</view>
-		
+		<!-- 输入提示框 -->
+		<uni-popup ref="inputDialog" type="dialog">
+			<uni-popup-dialog ref="inputClose"  mode="input" title="修改昵称" :value="content"
+				placeholder="请输入昵称" @confirm="changeNickName">
+			</uni-popup-dialog>
+		</uni-popup>
 	</view>
 </template>
 
@@ -33,6 +30,7 @@ export default {
 		let list = ref(null)
 		let content = ref('')
 		let isUpdate = ref(false)
+		let inputDialog = ref(null)	//昵称修改提示框
 		
 		list.value = data()
 		// 修改手机号码后回来更新数据
@@ -78,32 +76,50 @@ export default {
 		}
 		
 		// 修改昵称
+		let nickNameProxy = {}
 		const editName = (e) => {
-			isUpdate.value = true
+			inputDialog.value.open()
 			content.value = e.text
+			nickNameProxy = e			//浅拷贝
 		}
 		
 		//修改性别
 		const chooseSex = (e) => {
-			return;
+			uni.showActionSheet({
+				itemList:['女','男'],//0女,1男
+				success: async (res) => {
+					let sex = res.tapIndex?'男':'女'	//选择出的为index
+					if(sex == e.text) return;
+					uni.showLoading({mask: false})
+					await updateUserInfo({sex:res.tapIndex})
+					e.text = sex
+					store.commit('saveUserSex',{sex:res.tapIndex})
+					uni.hideLoading()
+				}
+			})
 		}
 		
 		// 退出登录
-		const logout = async ()=>{
+		const logout = async () => {
 			await proxy.$message.confirm('确定退出登录')
 			store.commit('loginOut')
 			proxy.navBack()
 		}
 		
-		//提交修改
-		let submitUpdate=()=>{
-			 
-			return;
+		//提交修改昵称
+		let changeNickName = async (value) => {
+			if(value == content.value) return;
+			uni.showLoading({mask: false})
+			await updateUserInfo({nickName:value})
+			nickNameProxy.text = value
+			store.commit('saveUserNickName',{nickName:value})
+			uni.hideLoading()
 		}
 		return{
 			list,
 			content,
 			isUpdate,
+			inputDialog,
 			
 			chooseImg,
 			editUsername,
@@ -111,7 +127,7 @@ export default {
 			editName,
 			chooseSex,
 			logout,
-			submitUpdate
+			changeNickName
 		}
 	}
 }
@@ -135,45 +151,4 @@ page {
 .button-hover {
 	background-color: $mxg-color-grey !important;
 }
-
-.update-box {
-	z-index: 10;
-	position: fixed;
-	// top: var(--window-top);
-	top:1100rpx;
-	left: 0;
-	right: 0;
-	bottom: 0;
-	background-color: #f7f7f7;
-}
-
-.input {
-	width: 100%;
-	border: $mxg-underLine;
-	height: 90rpx;
-	font-size: 35rpx;
-	padding: 0 20rpx;
-	background-color: #FFFFFF;
-}
-.btn{
-	display: flex;
-	justify-content: space-between;
-	.update{
-		display: block;
-		width: 110rpx;
-		height: 70rpx;
-		border-radius: 10rpx;
-		margin: 20rpx;
-		background-color: $mxg-color-primary;
-		line-height: 70rpx;
-		text-align: center;
-		color: #FFFFFF;
-	}
-	.cancel{
-		line-height: 70rpx;
-		color: $mxg-color-primary;
-		margin: 20rpx;
-	}
-}
-
 </style>

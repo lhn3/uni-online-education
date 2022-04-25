@@ -25,6 +25,12 @@ export default createStore({
 		// 退出登录清除用户信息
 		loginOut(state){
 			state.token = ''
+			state.mobile = ''
+			state.username = ''
+			state.nickName = ''
+			state.imageUrl = ''
+			state.sex = ''
+			uni.removeStorageSync('educationUserInfo')
 			uni.removeStorageSync('educationToken')
 		},
 		

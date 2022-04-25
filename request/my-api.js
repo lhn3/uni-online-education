@@ -14,7 +14,7 @@ const updateFeedback = (data) => {
 const getSms = (data) => {
 	return request({
 		method:"POST",
-		url:'/system/sms/code',
+		url:'/system/api/sms/code',
 		data
 	})
 }
@@ -23,7 +23,7 @@ const getSms = (data) => {
 const authLogin = (data) => {
 	return request({
 		method:"POST",
-		url:'/auth/login',
+		url:'/auth/api/login',
 		data
 	})
 }
@@ -32,7 +32,7 @@ const authLogin = (data) => {
 const authorizationLogin = (data) => {
 	return request({
 		method:"POST",
-		url:'/auth/login/provider',
+		url:'/auth/api/login/provider',
 		data
 	})
 }
@@ -41,7 +41,7 @@ const authorizationLogin = (data) => {
 const resetMobile = (data) => {
 	return request({
 		method:'PUT',
-		url:'/auth/user/mobile',
+		url:'/auth/api/user/mobile',
 		data
 	})
 }

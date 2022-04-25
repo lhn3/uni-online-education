@@ -33,8 +33,14 @@ export default {
 		let inputDialog = ref(null)	//昵称修改提示框
 		
 		list.value = data()
-		// 修改手机号码后回来更新数据
 		onActivated(()=>{
+			// 判断是否登录
+			if(!store.state.token){
+				uni.redirectTo({
+					url:'/pages/auth/login'
+				})
+			}
+			// 修改手机号码后回来更新数据
 			list.value = data()
 		})
 		

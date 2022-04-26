@@ -28,10 +28,13 @@ body {
   color: #333333;
   margin-top: 1.5625rem;
   padding: 0 0.9375rem;
+  width: 23.4375rem;
+  overflow: hidden;
 }
 .center-content p {
   text-indent: 2em;
   margin-bottom: 0.625rem;
+  width: 100%;
 }
 .atm {
   display: block;

@@ -49,9 +49,12 @@ page {
 	color: $mxg-text-color-black;
 	margin-top: 50rpx;
 	padding: 0 30rpx;
+	width: 750rpx;
+	overflow: hidden;
 	p {
 		text-indent: 2em;
 		margin-bottom: 20rpx;
+		width: 100%;
 	}
 }
 .atm{

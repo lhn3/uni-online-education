@@ -54,7 +54,7 @@ export default {
 			
 			if(tabId.value != id){
 				tabId.value=id
-				emit('changeTab',id)	
+				emit('changeTab',id,index)	
 			}
 		}
 		return{

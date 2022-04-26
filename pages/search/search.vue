@@ -12,18 +12,17 @@
 		<!-- #endif -->
 		
 		<!-- 关键字 -->
-		<keywords @changeContent="changeContent" :historyWord="historyWord" v-show="showWords"></keywords>
+		<keywords @changeContent="changeContent" :historyWord="historyWord" v-if="showWords"></keywords>
 		
+		<!-- 分类标签 -->
+		<tab-bar v-if="!showWords" :tabs="tabs" @changeTab="changeTab"></tab-bar>
 		<!-- 搜索结果 -->
-		<view v-if="!showWords">
-			<!-- 分类标签 -->
-			<tab-bar :tabs="tabs" @changeTab="changeTab"></tab-bar>
+		<block v-if="!showWords">
 			<!-- 下拉过滤 -->
-			<course-list ref="mescrollItem1" :i="1" :index="tabId" :params="params" :content="content"></course-list>
-			<article-list ref="mescrollItem2" :i="2" :index="tabId" :params="params" :content="content"></article-list>
-			<question-list ref="mescrollItem3" :i="3" :index="tabId" :params="params" :content="content"></question-list>
-			<!-- <down-bar :params="params" :downCategoty="downCategoty" @changeCategory="changeCategory"></down-bar> -->
-		</view>
+			<course-list ref="mescrollItem0" :i="0" :index="tabIndex" :params="params" :content="content"></course-list>
+			<article-list ref="mescrollItem1" :i="1" :index="tabIndex" :params="params" :content="content"></article-list>
+			<question-list ref="mescrollItem2" :i="2" :index="tabIndex" :params="params" :content="content"></question-list>
+		</block>
 	</view>
 </template>
 
@@ -54,15 +53,15 @@ export default {
 		let focuse = ref(false)//是否获取焦点，仅小程序
 		let historyWord = ref(null)//上次搜索内容
 		let showWords = ref(true)//是否显示搜索关键词
-		let tabId = ref(1)
+		let tabIndex = ref(0)
 		let tabs = ref([		//搜索结果tab栏标签
 			{id:1,name:'课程'},
 			{id:2,name:'文章'},
 			{id:3,name:'问答'},
 		])
+		let mescrollItem0=ref()
 		let mescrollItem1=ref()
 		let mescrollItem2=ref()
-		let mescrollItem3=ref()
 		//假装搜索的一整个大动作
 		const doSearch = ()=>{
 			//节流
@@ -75,7 +74,7 @@ export default {
 					historyWord.value=content.value
 					showWords.value=false
 					nextTick(()=>{
-						proxy.$refs[`mescrollItem${tabId.value}`].changeCategory()
+						proxy.$refs[`mescrollItem${tabIndex.value}`].changeCategory()
 					})
 				}
 			})
@@ -121,9 +120,9 @@ export default {
 		}
 		
 		//监听搜索到的数据切换tab
-		let changeTab=(id)=>{
+		let changeTab=(id,index)=>{
 			console.log('点击了标签：'+id)
-			tabId.value=id
+			tabIndex.value=index
 		}
 		return{
 			params,
@@ -132,17 +131,17 @@ export default {
 			historyWord,
 			showWords,
 			tabs,
-			tabId,
+			tabIndex,
+			mescrollItem0,
 			mescrollItem1,
 			mescrollItem2,
-			mescrollItem3,
 			
 			doSearch,
 			inputChange,
 			changeContent,
 			changeTab
 		}
-	},	
+	},
 	onLoad(option) {
 		// #ifdef APP-PLUS
 		webView = this.$scope.$getAppWebview();
@@ -166,5 +165,4 @@ export default {
 </script>
 
 <style lang="scss">
-
 </style>

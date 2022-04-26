@@ -40,15 +40,13 @@ import courseData from '@/mock/courseData.js';
 import {getBanners,getCategory,getCourseList} from '@/request/course-api.js'
 // 导入messcroll插件
 import MescrollMixin from "@/uni_modules/mescroll-uni/components/mescroll-uni/mescroll-mixins.js";
-import mescrollBody from "@/uni_modules/mescroll-uni/components/mescroll-body/mescroll-body.vue";
 export default {
 	mixins:[MescrollMixin],
 	components:{
 		'category-box':categoryBox,
 		'swiper-course':swiperCourse,
 		'scroll-course':scrollCourse,
-		'pay-course':payCourse,
-		'mescroll-body':mescrollBody
+		'pay-course':payCourse
 	},
 	setup(){
 		const { proxy } = getCurrentInstance();
@@ -159,6 +157,9 @@ export default {
 			upOption,
 			toSearch
 		}
+	},
+	onReachBottom(){
+		console.log(123456)
 	}
 }
 </script>

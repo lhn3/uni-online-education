@@ -10,8 +10,8 @@
 			:up="upOption"
 			@up="upCallback">
 			<!-- 数据列表 -->
-			<view style="padding: 0 20rpx;">
-				<course-item v-for="(item,index) in courseList" :item="item" :key="item.id"></course-item>
+			<view style="padding: 0 20rpx;box-sizing: border-box;">
+				<course-item v-for="item in courseList" :item="item" :key="item.id"></course-item>
 			</view>
 		</mescroll-body>
 	</view>
@@ -20,15 +20,13 @@
 <script>
 import {getCurrentInstance,ref,onBeforeMount,reactive,toRefs,onMounted,nextTick} from "vue";
 import downBar from "./down-bar.vue"
-import mescrollBody from "@/uni_modules/mescroll-uni/components/mescroll-body/mescroll-body.vue";
 import MescrollMixin from "@/uni_modules/mescroll-uni/components/mescroll-uni/mescroll-mixins.js";
 import MescrollMoreItemMixin from "@/uni_modules/mescroll-uni/components/mescroll-uni/mixins/mescroll-more-item.js";
 import {getCourseList} from '@/request/course-api.js'
 export default{
 	mixins: [MescrollMixin,MescrollMoreItemMixin], // 注意此处还需使用MescrollMoreItemMixin (必须写在MescrollMixin后面)
 	components:{
-		'down-bar':downBar,
-		'mescroll-body':mescrollBody
+		'down-bar':downBar
 	},
 	props:{
 		i: Number, // 每个tab页的专属id (除了支付宝小程序必须在这里定义, 其他平台都可不用写, 因为已在MescrollMoreItemMixin定义)
@@ -91,12 +89,12 @@ export default{
 				categoryId:null
 			})
 			// 初始化搜索内容
-			onMounted(()=>{
+			onMounted(() => {
 				if(props.content) searchDate.content=props.content;
 				
-				let paramsKeys=Object.keys(props.params)
-				let searchDateKeys=Object.keys(searchDate)
-				if(paramsKeys.length>0){
+				let paramsKeys = Object.keys(props.params)
+				let searchDateKeys = Object.keys(searchDate)
+				if(paramsKeys.length > 0){
 					//遍历params中的键与searchDate中的是否相同相同则searchDate中的数据被覆盖
 					paramsKeys.forEach(item=>{
 						if(searchDateKeys.indexOf(item) != -1){
@@ -107,24 +105,24 @@ export default{
 			})
 			
 			//监听分类切换
-			let changeCategory=(data)=>{
+			let changeCategory = (data) => {
 				//重新整合搜索内容发送请求
-				let content=props.content
-				searchDate={...searchDate,...data,content}
+				let content = props.content
+				searchDate = {...searchDate,...data,content}
 				// 调用重新加载第一页，会自动调用下拉刷新，
 				//下拉刷新在调用上拉加载更多时，会将page.num设置为1，page.size设置为10
 				proxy.mescroll.resetUpScroll()
 			}
 			
-			let upOption=ref({
+			let upOption = ref({
 				auto:false,//不自动加载
 				noMoreSize:4//列表已无数据可设置显示内容
 			})
 
 			/*上拉加载的回调: 其中page.num:当前页 从1开始, page.size:每页数据条数,默认10 */
-			let upCallback=async (page)=> {
-				let pageNum = page.num; // 页码, 默认从1开始
-				let pageSize = page.size; // 页长, 默认每页10条
+			let upCallback = async (page) => {
+				// let pageNum = page.num; // 页码, 默认从1开始
+				// let pageSize = page.size; // 页长, 默认每页10条
 				
 				console.log('整合搜索课程内容-----',searchDate)
 				console.log(`搜索课程当前第${page.num}页`,page.size)

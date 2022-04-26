@@ -3128,8 +3128,7 @@ var __spreadProps = (a, b) => __defProps(a, __getOwnPropDescs(b));
       "category-box": categoryBox,
       "swiper-course": swiperCourse,
       "scroll-course": scrollCourse,
-      "pay-course": payCourse,
-      "mescroll-body": __easycom_1$5
+      "pay-course": payCourse
     },
     setup() {
       const { proxy } = vue.getCurrentInstance();
@@ -3195,7 +3194,7 @@ var __spreadProps = (a, b) => __defProps(a, __getOwnPropDescs(b));
       const upCallback = async (page) => {
         page.num;
         page.size;
-        formatAppLog("log", "at pages/tab-index/index.vue:135", `\u5F53\u524D\u7B2C${page.num}\u9875`);
+        formatAppLog("log", "at pages/tab-index/index.vue:133", `\u5F53\u524D\u7B2C${page.num}\u9875`);
         if (page.num == 1) {
           await getPageInfo();
         } else {
@@ -3217,6 +3216,9 @@ var __spreadProps = (a, b) => __defProps(a, __getOwnPropDescs(b));
         upOption,
         toSearch
       });
+    },
+    onReachBottom() {
+      formatAppLog("log", "at pages/tab-index/index.vue:162", 123456);
     }
   };
   function _sfc_render$P(_ctx, _cache, $props, $setup, $data, $options) {
@@ -3414,7 +3416,7 @@ var __spreadProps = (a, b) => __defProps(a, __getOwnPropDescs(b));
         tabPosition();
         if (tabId.value != id) {
           tabId.value = id;
-          emit("changeTab", id);
+          emit("changeTab", id, index);
         }
       };
       return {
@@ -6603,8 +6605,7 @@ var __spreadProps = (a, b) => __defProps(a, __getOwnPropDescs(b));
   const _sfc_main$z = {
     mixins: [MescrollMixin, MescrollMoreItemMixin],
     components: {
-      "down-bar": downBar,
-      "mescroll-body": __easycom_1$5
+      "down-bar": downBar
     },
     props: {
       i: Number,
@@ -6687,10 +6688,8 @@ var __spreadProps = (a, b) => __defProps(a, __getOwnPropDescs(b));
         noMoreSize: 4
       });
       let upCallback = async (page) => {
-        page.num;
-        page.size;
-        formatAppLog("log", "at pages/search/cpns/course-list.vue:129", "\u6574\u5408\u641C\u7D22\u8BFE\u7A0B\u5185\u5BB9-----", searchDate);
-        formatAppLog("log", "at pages/search/cpns/course-list.vue:130", `\u641C\u7D22\u8BFE\u7A0B\u5F53\u524D\u7B2C${page.num}\u9875`, page.size);
+        formatAppLog("log", "at pages/search/cpns/course-list.vue:127", "\u6574\u5408\u641C\u7D22\u8BFE\u7A0B\u5185\u5BB9-----", searchDate);
+        formatAppLog("log", "at pages/search/cpns/course-list.vue:128", `\u641C\u7D22\u8BFE\u7A0B\u5F53\u524D\u7B2C${page.num}\u9875`, page.size);
         let res = await getCourseList(searchDate, page.num, page.size);
         if (page.num == 1) {
           courseList2.value = [];
@@ -6732,8 +6731,8 @@ var __spreadProps = (a, b) => __defProps(a, __getOwnPropDescs(b));
         }, {
           default: vue.withCtx(() => [
             vue.createCommentVNode(" \u6570\u636E\u5217\u8868 "),
-            vue.createElementVNode("view", { style: { "padding": "0 20rpx" } }, [
-              (vue.openBlock(true), vue.createElementBlock(vue.Fragment, null, vue.renderList($setup.courseList, (item, index) => {
+            vue.createElementVNode("view", { style: { "padding": "0 20rpx", "box-sizing": "border-box" } }, [
+              (vue.openBlock(true), vue.createElementBlock(vue.Fragment, null, vue.renderList($setup.courseList, (item) => {
                 return vue.openBlock(), vue.createBlock(_component_course_item, {
                   item,
                   key: item.id
@@ -7101,25 +7100,25 @@ var __spreadProps = (a, b) => __defProps(a, __getOwnPropDescs(b));
       let focuse = vue.ref(false);
       let historyWord = vue.ref(null);
       let showWords = vue.ref(true);
-      let tabId = vue.ref(1);
+      let tabIndex = vue.ref(0);
       let tabs = vue.ref([
         { id: 1, name: "\u8BFE\u7A0B" },
         { id: 2, name: "\u6587\u7AE0" },
         { id: 3, name: "\u95EE\u7B54" }
       ]);
+      let mescrollItem0 = vue.ref();
       let mescrollItem1 = vue.ref();
       let mescrollItem2 = vue.ref();
-      let mescrollItem3 = vue.ref();
       const doSearch = () => {
         proxy.$utils.throttle(() => {
           if ((content.value == "" || content.value == null) && Object.keys(params.value).length == 0) {
             proxy.$message.toast("\u8BF7\u8F93\u5165\u641C\u7D22\u5185\u5BB9");
           } else {
-            formatAppLog("log", "at pages/search/search.vue:73", "\u641C\u7D22\u5185\u5BB9:" + content.value);
+            formatAppLog("log", "at pages/search/search.vue:72", "\u641C\u7D22\u5185\u5BB9:" + content.value);
             historyWord.value = content.value;
             showWords.value = false;
             vue.nextTick(() => {
-              proxy.$refs[`mescrollItem${tabId.value}`].changeCategory();
+              proxy.$refs[`mescrollItem${tabIndex.value}`].changeCategory();
             });
           }
         });
@@ -7131,7 +7130,7 @@ var __spreadProps = (a, b) => __defProps(a, __getOwnPropDescs(b));
         content.value = e.text;
       });
       const inputChange = (e) => {
-        formatAppLog("log", "at pages/search/search.vue:96", "\u76D1\u542C\u8F93\u5165\u6846\u6539\u53D8", e);
+        formatAppLog("log", "at pages/search/search.vue:95", "\u76D1\u542C\u8F93\u5165\u6846\u6539\u53D8", e);
       };
       onNavigationBarSearchInputConfirmed((e) => {
         webView.setTitleNViewSearchInputFocus(false);
@@ -7142,9 +7141,9 @@ var __spreadProps = (a, b) => __defProps(a, __getOwnPropDescs(b));
         content.value = value;
         doSearch();
       };
-      let changeTab = (id) => {
-        formatAppLog("log", "at pages/search/search.vue:125", "\u70B9\u51FB\u4E86\u6807\u7B7E\uFF1A" + id);
-        tabId.value = id;
+      let changeTab = (id, index) => {
+        formatAppLog("log", "at pages/search/search.vue:124", "\u70B9\u51FB\u4E86\u6807\u7B7E\uFF1A" + id);
+        tabIndex.value = index;
       };
       return {
         params,
@@ -7153,10 +7152,10 @@ var __spreadProps = (a, b) => __defProps(a, __getOwnPropDescs(b));
         historyWord,
         showWords,
         tabs,
-        tabId,
+        tabIndex,
+        mescrollItem0,
         mescrollItem1,
         mescrollItem2,
-        mescrollItem3,
         doSearch,
         inputChange,
         changeContent,
@@ -7184,43 +7183,42 @@ var __spreadProps = (a, b) => __defProps(a, __getOwnPropDescs(b));
     const _component_question_list = vue.resolveComponent("question-list");
     return vue.openBlock(), vue.createElementBlock("view", null, [
       vue.createCommentVNode(" \u5173\u952E\u5B57 "),
-      vue.withDirectives(vue.createVNode(_component_keywords, {
+      $setup.showWords ? (vue.openBlock(), vue.createBlock(_component_keywords, {
+        key: 0,
         onChangeContent: $setup.changeContent,
         historyWord: $setup.historyWord
-      }, null, 8, ["onChangeContent", "historyWord"]), [
-        [vue.vShow, $setup.showWords]
-      ]),
+      }, null, 8, ["onChangeContent", "historyWord"])) : vue.createCommentVNode("v-if", true),
+      vue.createCommentVNode(" \u5206\u7C7B\u6807\u7B7E "),
+      !$setup.showWords ? (vue.openBlock(), vue.createBlock(_component_tab_bar, {
+        key: 1,
+        tabs: $setup.tabs,
+        onChangeTab: $setup.changeTab
+      }, null, 8, ["tabs", "onChangeTab"])) : vue.createCommentVNode("v-if", true),
       vue.createCommentVNode(" \u641C\u7D22\u7ED3\u679C "),
-      !$setup.showWords ? (vue.openBlock(), vue.createElementBlock("view", { key: 0 }, [
-        vue.createCommentVNode(" \u5206\u7C7B\u6807\u7B7E "),
-        vue.createVNode(_component_tab_bar, {
-          tabs: $setup.tabs,
-          onChangeTab: $setup.changeTab
-        }, null, 8, ["tabs", "onChangeTab"]),
+      !$setup.showWords ? (vue.openBlock(), vue.createElementBlock(vue.Fragment, { key: 2 }, [
         vue.createCommentVNode(" \u4E0B\u62C9\u8FC7\u6EE4 "),
         vue.createVNode(_component_course_list, {
-          ref: "mescrollItem1",
-          i: 1,
-          index: $setup.tabId,
+          ref: "mescrollItem0",
+          i: 0,
+          index: $setup.tabIndex,
           params: $setup.params,
           content: $setup.content
         }, null, 8, ["index", "params", "content"]),
         vue.createVNode(_component_article_list, {
-          ref: "mescrollItem2",
-          i: 2,
-          index: $setup.tabId,
+          ref: "mescrollItem1",
+          i: 1,
+          index: $setup.tabIndex,
           params: $setup.params,
           content: $setup.content
         }, null, 8, ["index", "params", "content"]),
         vue.createVNode(_component_question_list, {
-          ref: "mescrollItem3",
-          i: 3,
-          index: $setup.tabId,
+          ref: "mescrollItem2",
+          i: 2,
+          index: $setup.tabIndex,
           params: $setup.params,
           content: $setup.content
-        }, null, 8, ["index", "params", "content"]),
-        vue.createCommentVNode(' <down-bar :params="params" :downCategoty="downCategoty" @changeCategory="changeCategory"></down-bar> ')
-      ])) : vue.createCommentVNode("v-if", true)
+        }, null, 8, ["index", "params", "content"])
+      ], 64)) : vue.createCommentVNode("v-if", true)
     ]);
   }
   var PagesSearchSearch = /* @__PURE__ */ _export_sfc(_sfc_main$w, [["render", _sfc_render$v]]);
@@ -7891,10 +7889,10 @@ var __spreadProps = (a, b) => __defProps(a, __getOwnPropDescs(b));
         }
       };
       let closeVideo = () => {
-        state.freeVideo = false;
         state.videoContext.stop();
         state.videoUrl = "";
         state.videoText = "";
+        state.freeVideo = false;
       };
       return __spreadProps(__spreadValues({
         tabs,
@@ -9573,7 +9571,7 @@ var __spreadProps = (a, b) => __defProps(a, __getOwnPropDescs(b));
       let code = vue.ref("");
       let loading = vue.ref(false);
       let agreement = vue.ref(false);
-      vue.computed(() => {
+      vue.onActivated(() => {
         if (store2.state.token) {
           uni.switchTab({
             url: "/pages/tab-index/index"

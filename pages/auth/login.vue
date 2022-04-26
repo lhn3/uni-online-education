@@ -45,7 +45,7 @@
 </template>
 
 <script>
-import {getCurrentInstance,ref,reactive,computed} from "vue";
+import {getCurrentInstance,ref,reactive,computed,onActivated} from "vue";
 import {authLogin,authorizationLogin} from "@/request/my-api.js"
 import {useStore} from 'vuex'
 export default {
@@ -58,7 +58,7 @@ export default {
 		let agreement = ref(false)
 		
 		// 有登陆就重定向到个人中心页面
-		computed(()=>{
+		onActivated(()=>{
 			if(store.state.token) {
 				uni.switchTab({
 					url:'/pages/tab-index/index'

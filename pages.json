@@ -6,7 +6,7 @@
 				// "enablePullDownRefresh":true,
 				"app-plus":{
 					"scrollIndicator":"none",//不显示滚动条
-					// "bounce":"none",		//关闭回弹
+					"bounce":false,		//关闭回弹
 					"titleNView":{//自定义导航栏App、H5
 						"type":"transparent",//
 						"buttons":[//按钮
@@ -36,7 +36,7 @@
 				"navigationBarTitleText": "分类",
 				"app-plus":{
 					"scrollIndicator":"none",//不显示滚动条
-					"bounce":"none",		//关闭回弹
+					"bounce":false,		//关闭回弹
 					"titleNView":{//自定义导航栏App、H5
 						"buttons":[//按钮
 							{
@@ -119,7 +119,7 @@
                 "navigationBarTitleText": "搜索",
 				"app-plus":{
 					"scrollIndicator":"none",//不显示滚动条
-					// "bounce":"none",		//关闭回弹
+					"bounce":false,		//关闭回弹
 					"titleNView":{//自定义导航栏App、H5
 						// "autoBackButton":false,//返回按钮
 						"searchInput":{//搜索
@@ -148,7 +148,7 @@
 				"onReachBottomDistance":0,
 				"app-plus":{
 					"scrollIndicator":"none",//不显示滚动条
-					"bounce":"none",		//关闭回弹
+					"bounce":false,		//关闭回弹
 					"titleNView":{//自定义导航栏App、H5
 						"type":"transparent",//
 						"titleText":"课程详情",
@@ -172,7 +172,7 @@
 				"backgroundColor":"#FFFFFF",
 				"app-plus":{
 					"titleNView":false,
-					// "bounce":"none",		//关闭回弹
+					"bounce":false,		//关闭回弹
 					"subNVues":[
 						{
 							"id":"topVideo",

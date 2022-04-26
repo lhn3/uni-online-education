@@ -135,7 +135,7 @@ export default {
 			// 如果没有手机号码跳转到绑定手机
 			if(!res.mobile){
 				proxy.$message.toast('授权成功,请绑定手机号')
-				proxy.navTo('/pages/auth/bind-mobile?title=手机绑定&data='+JSON.stringify(res))
+				proxy.navTo('/pages/auth/bind-mobile?title=手机绑定&data='+encodeURIComponent(JSON.stringify(res)))
 			}
 		}
 		

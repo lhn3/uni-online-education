@@ -25,7 +25,7 @@ import {useStore} from 'vuex'
 import {resetMobile,updateUserInfo} from '@/request/my-api.js'
 export default {
 	onLoad(option) {
-		if(option.data) this.data = JSON.parse(option.data);
+		if(option.data) this.data = JSON.parse(decodeURIComponent(option.data));
 		if(option.title) {
 			uni.setNavigationBarTitle({
 				title: option.title

@@ -35,7 +35,7 @@ export default ()=>{
 			{
 				title: '性别',
 				event: 'chooseSex',
-				text: userInfo.sex ? '男': '女',
+				text:  userInfo.sex?'男':'女',
 				rightIcon,
 			}
 		]

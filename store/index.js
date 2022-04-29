@@ -42,6 +42,7 @@ export default createStore({
 			state.username = res.username
 			state.nickName = res.nickName
 			state.imageUrl = res.imageUrl
+			state.sex = res.sex
 		},
 		
 		// 修改头像

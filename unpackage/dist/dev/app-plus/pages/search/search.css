@@ -662,6 +662,8 @@
   margin-bottom: 1.875rem;
 }
 .keyword .tag-list uni-view[data-v-064d05f9] {
+  max-width: 5.625rem;
+  text-align: center;
   font-size: 0.78125rem;
   color: #999;
   border: 0.03125rem solid #999;

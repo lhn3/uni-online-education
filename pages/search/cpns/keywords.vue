@@ -37,7 +37,7 @@ export default {
 			//获取历史搜索
 			historyWords.value=[...uni.getStorageSync('historyWords')]
 		})
-		
+
 		//监听搜索关键字添加历史搜索
 		watch(()=>props.historyWord,(newValue)=>{
 			if(historyWords.value.indexOf(newValue) !=-1){
@@ -87,6 +87,8 @@ export default {
 		margin-top: 20rpx;
 		margin-bottom: 60rpx;
 		view {
+			max-width: 180rpx;
+			text-align: center;
 			font-size: 25rpx;
 			color: #999;
 			border: 1rpx solid #999;

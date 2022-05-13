@@ -1,6 +1,6 @@
 <template>
 	<view class="category">
-		<scroll-view class="left noScorll" scroll-y >
+		<scroll-view class="left noScorll" scroll-y :scroll-top="scrollTop">
 			<view class="title">
 				<view :class="{'activeTitle':activeTitle == item.id}" v-for="item in state" :key="item.id" @click="selectTitle(item.id,item.labelList)">
 					{{item.name}}
@@ -18,8 +18,8 @@
 </template>
 
 <script>
-import {getCurrentInstance,ref,onBeforeMount,reactive,toRefs,onMounted} from "vue";
-import { onShow,onReady,onNavigationBarButtonTap } from '@dcloudio/uni-app';
+import {getCurrentInstance,ref,onBeforeMount,reactive,toRefs,onMounted,nextTick} from "vue";
+import { onNavigationBarButtonTap } from '@dcloudio/uni-app';
 import {getCategory} from '@/request/course-api.js'
 export default {
 	props:{
@@ -34,6 +34,7 @@ export default {
 		let activeTitle = ref()
 		let labelList= ref([])
 		let activeLabel = ref()
+		let scrollTop = ref(0)
 		
 		onMounted(async ()=>{
 			let res = await getCategory()
@@ -55,6 +56,9 @@ export default {
 					activeTitle.value = res[0].id
 					labelList.value = res[0].labelList
 				}
+				nextTick(()=>{
+					scrollTop.value = (props.value.categoryId-1) * 80
+					})
 			}else{
 				activeTitle.value = res[0].id
 				labelList.value = res[0].labelList
@@ -70,15 +74,15 @@ export default {
 		const selectLabel=(item)=>{
 			if (activeLabel.value == item.id) return;
 			activeLabel.value = item.id
-			if(props.value != null){	//搜索页点击标签不跳转页面只发送事件
+			if(props.value != null){				//搜索页点击标签不跳转页面只发送事件
 				item.categoryId=activeTitle.value	//强行加一个父级id
 				emit('searchCate',item)
 			}else{
-				let params = JSON.stringify({labelId:item.id,name:item.name,categoryId:activeTitle.value}) 
+				let params = JSON.stringify({labelId:item.id,name:item.name,categoryId:activeTitle.value})
 				proxy.navTo('/pages/search/search?data='+params)
 			}
 		}
-
+		//点击搜索按钮
 		onNavigationBarButtonTap(()=>{
 			proxy.navTo('/pages/search/search')
 		})
@@ -89,7 +93,8 @@ export default {
 			labelList,
 			activeLabel,
 			selectTitle,
-			selectLabel
+			selectLabel,
+			scrollTop
 		}
 	}
 }

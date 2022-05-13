@@ -12,7 +12,7 @@
 		<!-- #endif -->
 		
 		<!-- 关键字 -->
-		<keywords @changeContent="changeContent" :historyWord="historyWord" v-if="showWords"></keywords>
+		<keywords @changeContent="changeContent" :historyWord="historyWord" v-show="showWords"></keywords>
 		
 		<!-- 分类标签 -->
 		<tab-bar v-if="!showWords" :tabs="tabs" @changeTab="changeTab"></tab-bar>

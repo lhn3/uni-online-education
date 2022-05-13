@@ -2956,6 +2956,7 @@ var __spreadProps = (a, b) => __defProps(a, __getOwnPropDescs(b));
         state.username = res.username;
         state.nickName = res.nickName;
         state.imageUrl = res.imageUrl;
+        state.sex = res.sex;
       },
       saveUserImageUrl(state, value) {
         let res = uni.getStorageSync("educationUserInfo");
@@ -3294,6 +3295,7 @@ var __spreadProps = (a, b) => __defProps(a, __getOwnPropDescs(b));
       let activeTitle = vue.ref();
       let labelList = vue.ref([]);
       let activeLabel = vue.ref();
+      let scrollTop = vue.ref(0);
       vue.onMounted(async () => {
         let res = await getCategory();
         state.value = res;
@@ -3312,6 +3314,9 @@ var __spreadProps = (a, b) => __defProps(a, __getOwnPropDescs(b));
             activeTitle.value = res[0].id;
             labelList.value = res[0].labelList;
           }
+          vue.nextTick(() => {
+            scrollTop.value = (props.value.categoryId - 1) * 80;
+          });
         } else {
           activeTitle.value = res[0].id;
           labelList.value = res[0].labelList;
@@ -3342,7 +3347,8 @@ var __spreadProps = (a, b) => __defProps(a, __getOwnPropDescs(b));
         labelList,
         activeLabel,
         selectTitle,
-        selectLabel
+        selectLabel,
+        scrollTop
       };
     }
   };
@@ -3350,7 +3356,8 @@ var __spreadProps = (a, b) => __defProps(a, __getOwnPropDescs(b));
     return vue.openBlock(), vue.createElementBlock("view", { class: "category" }, [
       vue.createElementVNode("scroll-view", {
         class: "left noScorll",
-        "scroll-y": ""
+        "scroll-y": "",
+        "scroll-top": $setup.scrollTop
       }, [
         vue.createElementVNode("view", { class: "title" }, [
           (vue.openBlock(true), vue.createElementBlock(vue.Fragment, null, vue.renderList($setup.state, (item) => {
@@ -3361,7 +3368,7 @@ var __spreadProps = (a, b) => __defProps(a, __getOwnPropDescs(b));
             }, vue.toDisplayString(item.name), 11, ["onClick"]);
           }), 128))
         ])
-      ]),
+      ], 8, ["scroll-top"]),
       vue.createElementVNode("scroll-view", {
         class: "right",
         "scroll-y": ""
@@ -7183,19 +7190,20 @@ var __spreadProps = (a, b) => __defProps(a, __getOwnPropDescs(b));
     const _component_question_list = vue.resolveComponent("question-list");
     return vue.openBlock(), vue.createElementBlock("view", null, [
       vue.createCommentVNode(" \u5173\u952E\u5B57 "),
-      $setup.showWords ? (vue.openBlock(), vue.createBlock(_component_keywords, {
-        key: 0,
+      vue.withDirectives(vue.createVNode(_component_keywords, {
         onChangeContent: $setup.changeContent,
         historyWord: $setup.historyWord
-      }, null, 8, ["onChangeContent", "historyWord"])) : vue.createCommentVNode("v-if", true),
+      }, null, 8, ["onChangeContent", "historyWord"]), [
+        [vue.vShow, $setup.showWords]
+      ]),
       vue.createCommentVNode(" \u5206\u7C7B\u6807\u7B7E "),
       !$setup.showWords ? (vue.openBlock(), vue.createBlock(_component_tab_bar, {
-        key: 1,
+        key: 0,
         tabs: $setup.tabs,
         onChangeTab: $setup.changeTab
       }, null, 8, ["tabs", "onChangeTab"])) : vue.createCommentVNode("v-if", true),
       vue.createCommentVNode(" \u641C\u7D22\u7ED3\u679C "),
-      !$setup.showWords ? (vue.openBlock(), vue.createElementBlock(vue.Fragment, { key: 2 }, [
+      !$setup.showWords ? (vue.openBlock(), vue.createElementBlock(vue.Fragment, { key: 1 }, [
         vue.createCommentVNode(" \u4E0B\u62C9\u8FC7\u6EE4 "),
         vue.createVNode(_component_course_list, {
           ref: "mescrollItem0",
@@ -7889,10 +7897,10 @@ var __spreadProps = (a, b) => __defProps(a, __getOwnPropDescs(b));
         }
       };
       let closeVideo = () => {
+        state.freeVideo = false;
         state.videoContext.stop();
         state.videoUrl = "";
         state.videoText = "";
-        state.freeVideo = false;
       };
       return __spreadProps(__spreadValues({
         tabs,
